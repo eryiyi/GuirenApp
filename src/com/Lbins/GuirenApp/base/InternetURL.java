@@ -234,7 +234,6 @@ public class InternetURL {
     //获得我的店铺收藏列表
     public static final String APP_GET_FAVOUR_DIANPU_URL = INTERNAL + "appGetDianpuFavour.do";
 
-
     public static final String OPEN_ZIMEITI_URL = INTERNAL + "saveDianpu.do";
 
     //发布商品
