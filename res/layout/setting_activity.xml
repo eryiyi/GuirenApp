@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:id="@+id/main"
+              android:background="@color/mm_main_bg"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <RelativeLayout android:layout_width="match_parent"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:background="@color/mm_main_bg_mine_top"
+                    android:layout_height="@dimen/top_title_height">
+        <TextView android:layout_width="wrap_content"
+                  android:drawablePadding="8dp"
+                  android:textSize="16sp"
+                  android:padding="6dp"
+                  android:layout_marginLeft="4dp"
+                  android:id="@+id/back"
+                  android:drawableLeft="@drawable/md_return"
+                  android:textColor="@color/white"
+                  android:layout_centerVertical="true"
+                  android:layout_height="wrap_content"/>
+        <TextView android:layout_width="wrap_content"
+                  android:text="设置"
+                  android:textSize="18sp"
+                  android:layout_centerHorizontal="true"
+                  android:layout_centerVertical="true"
+                  android:textColor="@color/white"
+                  android:layout_height="wrap_content"/>
+    </RelativeLayout>
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:orientation="horizontal"
+                  android:layout_marginTop="20dp"
+                  android:background="@drawable/btn_dark_shape"
+                  android:id="@+id/liner_updatepwr"
+                  android:layout_height="50dp">
+        <!--<ImageView android:layout_width="35dp"-->
+                   <!--android:src="@drawable/afd"-->
+                   <!--android:layout_gravity="center_vertical"-->
+                   <!--android:layout_marginLeft="8dp"-->
+                   <!--android:layout_height="wrap_content"/>-->
+        <TextView android:layout_width="wrap_content"
+                  android:text="修改密码"
+                  android:layout_marginLeft="15dp"
+                  android:layout_gravity="center_vertical"
+                  android:textColor="@color/black"
+                  android:textSize="16sp"
+                  android:layout_height="wrap_content"/>
+    </LinearLayout>
+    <View android:layout_width="match_parent"
+          android:background="@color/gray01"
+          android:layout_height="0.1dp">
+    </View>
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:orientation="horizontal"
+                  android:background="@drawable/btn_dark_shape"
+                  android:id="@+id/liner_mobile"
+                  android:layout_height="50dp">
+        <!--<ImageView android:layout_width="35dp"-->
+        <!--android:src="@drawable/afd"-->
+        <!--android:layout_gravity="center_vertical"-->
+        <!--android:layout_marginLeft="8dp"-->
+        <!--android:layout_height="wrap_content"/>-->
+        <TextView android:layout_width="wrap_content"
+                  android:text="修改手机"
+                  android:layout_marginLeft="15dp"
+                  android:layout_gravity="center_vertical"
+                  android:textColor="@color/black"
+                  android:textSize="16sp"
+                  android:layout_height="wrap_content"/>
+    </LinearLayout>
+    <View android:layout_width="match_parent"
+          android:background="@color/gray01"
+          android:layout_height="0.1dp">
+    </View>
+    <LinearLayout android:layout_width="match_parent"
+                  android:orientation="horizontal"
+                  android:background="@drawable/btn_dark_shape"
+                  android:id="@+id/liner_black"
+                  android:layout_height="50dp">
+        <!--<ImageView android:layout_width="35dp"-->
+        <!--android:src="@drawable/afd"-->
+        <!--android:layout_gravity="center_vertical"-->
+        <!--android:layout_marginLeft="8dp"-->
+        <!--android:layout_height="wrap_content"/>-->
+        <TextView android:layout_width="wrap_content"
+                  android:text="我的黑名单"
+                  android:layout_marginLeft="15dp"
+                  android:layout_gravity="center_vertical"
+                  android:textColor="@color/black"
+                  android:textSize="16sp"
+                  android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <View android:layout_width="match_parent"
+          android:background="@color/gray01"
+          android:layout_height="0.1dp">
+    </View>
+    <LinearLayout android:layout_width="match_parent"
+                  android:orientation="horizontal"
+                  android:background="@drawable/btn_dark_shape"
+                  android:id="@+id/liner_chat"
+                  android:layout_height="50dp">
+        <!--<ImageView android:layout_width="35dp"-->
+        <!--android:src="@drawable/afd"-->
+        <!--android:layout_gravity="center_vertical"-->
+        <!--android:layout_marginLeft="8dp"-->
+        <!--android:layout_height="wrap_content"/>-->
+        <TextView android:layout_width="wrap_content"
+                  android:text="聊天设置"
+                  android:layout_marginLeft="15dp"
+                  android:layout_gravity="center_vertical"
+                  android:textColor="@color/black"
+                  android:textSize="16sp"
+                  android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <View android:layout_width="match_parent"
+          android:background="@color/gray01"
+          android:layout_height="0.1dp">
+    </View>
+    <View android:layout_width="match_parent"
+          android:background="@color/gray01"
+          android:layout_height="0.1dp">
+    </View>
+    <LinearLayout android:layout_width="match_parent"
+                  android:orientation="horizontal"
+                  android:background="@drawable/btn_dark_shape"
+                  android:id="@+id/liner_help"
+                  android:layout_height="50dp">
+        <!--<ImageView android:layout_width="35dp"-->
+        <!--android:src="@drawable/afd"-->
+        <!--android:layout_gravity="center_vertical"-->
+        <!--android:layout_marginLeft="8dp"-->
+        <!--android:layout_height="wrap_content"/>-->
+        <TextView android:layout_width="wrap_content"
+                  android:text="帮助文档"
+                  android:layout_marginLeft="15dp"
+                  android:layout_gravity="center_vertical"
+                  android:textColor="@color/black"
+                  android:textSize="16sp"
+                  android:layout_height="wrap_content"/>
+    </LinearLayout>
+    <LinearLayout android:layout_width="match_parent"
+                  android:orientation="horizontal"
+
+                  android:background="@drawable/btn_dark_shape"
+                  android:layout_below="@+id/liner_one"
+                  android:id="@+id/liner_two"
+                  android:layout_height="50dp">
+        <!--<ImageView android:layout_width="35dp"-->
+        <!--android:src="@drawable/afd"-->
+        <!--android:layout_gravity="center_vertical"-->
+        <!--android:layout_marginLeft="8dp"-->
+        <!--android:layout_height="wrap_content"/>-->
+        <TextView android:layout_width="wrap_content"
+                  android:text="关于我们"
+                  android:layout_marginLeft="15dp"
+                  android:layout_gravity="center_vertical"
+                  android:textColor="@color/black"
+                  android:textSize="16sp"
+                  android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <Button android:layout_width="match_parent"
+            android:padding="12dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:text="退 出"
+            android:id="@+id/btn_quit"
+            android:textSize="16sp"
+            android:textColor="@color/white"
+            android:background="@drawable/btn_green_shape"
+            android:layout_height="wrap_content"/>
+
+</LinearLayout>

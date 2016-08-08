@@ -1,0 +1,593 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) 2013 The CCP project authors. All Rights Reserved.
+ 
+     Use of this source code is governed by a Beijing Speedtong Information Technology Co.,Ltd license
+     that can be found in the LICENSE file in the root of the web site.
+ 
+     http://www.yuntongxun.com
+ 
+     An additional intellectual property rights grant can be found
+     in the file PATENTS.  All contributing project authors may
+     be found in the AUTHORS file in the root of the source tree.
+ -->
+<resources>
+    <string-array name="emoji_code_file">
+        <item>e415</item>
+        <item>e056</item>
+        <item>e057</item>
+        <item>e414</item>
+        <item>e405</item>
+        <item>e106</item>
+        <item>e418</item>
+        <item>e417</item>
+        <item>e40d</item>
+        <item>e404</item>
+        <item>e40a</item>
+        <item>e105</item>
+        <item>e409</item>
+        <item>e40e</item>
+        <item>e402</item>
+        <item>e108</item>
+        <item>e403</item>
+        <item>e058</item>
+        <item>e407</item>
+        <item>e401</item>
+        <item>e40f</item>
+        <item>e40b</item>
+        <item>e406</item>
+        <item>e413</item>
+        <item>e411</item>
+        <item>e412</item>
+        <item>e410</item>
+        <item>e107</item>
+        <item>e059</item>
+        <item>e416</item>
+        <item>e408</item>
+        <item>e40c</item>
+        <item>e11a</item>
+        <item>e10c</item>
+        <item>e022</item>
+        <item>e023</item>
+        <item>e329</item>
+        <item>e32e</item>
+        <item>e335</item>
+        <item>e337</item>
+        <item>e336</item>
+        <item>e13c</item>
+        <item>e331</item>
+        <item>e03e</item>
+        <item>e11d</item>
+        <item>e05a</item>
+        <item>e00e</item>
+        <item>e421</item>
+        <item>e00d</item>
+        <item>e011</item>
+        <item>e22e</item>
+        <item>e22f</item>
+        <item>e231</item>
+        <item>e230</item>
+        <item>e00f</item>
+        <item>e14c</item>
+        <item>e111</item>
+        <item>e425</item>
+        <item>e001</item>
+        <item>e002</item>
+        <item>e005</item>
+        <item>e004</item>
+        <item>e04e</item>
+        <item>e11c</item>
+        <item>e003</item>
+        <item>e04a</item>
+        <item>e04b</item>
+        <item>e049</item>
+        <item>e048</item>
+        <item>e04c</item>
+        <item>e13d</item>
+        <item>e43e</item>
+        <item>e04f</item>
+        <item>e052</item>
+        <item>e053</item>
+        <item>e524</item>
+        <item>e52c</item>
+        <item>e52a</item>
+        <item>e531</item>
+        <item>e050</item>
+        <item>e527</item>
+        <item>e051</item>
+        <item>e10b</item>
+        <item>e52b</item>
+        <item>e52f</item>
+        <item>e109</item>
+        <item>e01a</item>
+        <item>e52d</item>
+        <item>e521</item>
+        <item>e52e</item>
+        <item>e055</item>
+        <item>e525</item>
+        <item>e10a</item>
+        <item>e522</item>
+        <item>e054</item>
+        <item>e520</item>
+        <item>e032</item>
+        <item>e303</item>
+        <item>e307</item>
+        <item>e308</item>
+        <item>e437</item>
+        <item>e445</item>
+        <item>e11b</item>
+        <item>e448</item>
+        <item>e033</item>
+        <item>e112</item>
+        <item>e325</item>
+        <item>e312</item>
+        <item>e310</item>
+        <item>e126</item>
+        <item>e008</item>
+        <item>e03d</item>
+        <item>e00c</item>
+        <item>e12a</item>
+        <item>e009</item>
+        <item>e145</item>
+        <item>e144</item>
+        <item>e03f</item>
+        <item>e116</item>
+        <item>e10f</item>
+        <item>e101</item>
+        <item>e13f</item>
+        <item>e12f</item>
+        <item>e311</item>
+        <item>e113</item>
+        <item>e30f</item>
+        <item>e42b</item>
+        <item>e42a</item>
+        <item>e018</item>
+        <item>e016</item>
+        <item>e014</item>
+        <item>e131</item>
+        <item>e12b</item>
+        <item>e03c</item>
+        <item>e041</item>
+        <item>e322</item>
+        <item>e10e</item>
+        <item>e43c</item>
+        <item>e323</item>
+        <item>e31c</item>
+        <item>e034</item>
+        <item>e035</item>
+        <item>e045</item>
+        <item>e047</item>
+        <item>e30c</item>
+        <item>e044</item>
+        <item>e120</item>
+        <item>e33b</item>
+        <item>e33f</item>
+        <item>e344</item>
+        <item>e340</item>
+        <item>e147</item>
+        <item>e33a</item>
+        <item>e34b</item>
+        <item>e345</item>
+        <item>e01d</item>
+        <item>e10d</item>
+        <item>e136</item>
+        <item>e435</item>
+        <item>e252</item>
+        <item>e132</item>
+        <item>e138</item>
+        <item>e139</item>
+        <item>e332</item>
+        <item>e333</item>
+        <item>e24e</item>
+        <item>e24f</item>
+        <item>e537</item>
+        <item>e41d</item>
+    </string-array>
+    <string-array name="emoji_code">
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+        <item></item>
+    </string-array>
+    <string-array name="group_join_model">
+        <item>默认直接加入</item>
+        <item>需要身份验证</item>
+    </string-array>
+    <string-array name="chat_menu">
+        <item>删除</item>
+        <item>复制消息</item>
+    </string-array>
+    <string-array name="chat_call">
+        <item>音频聊天</item>
+        <item>视频聊天</item>
+        <item>落地通话</item>
+        <item>回拨通话</item>
+    </string-array>
+    <string-array name="Codec_call">
+        <item>Codec_iLBC</item>
+        <item>Codec_G729</item>
+        <item>Codec_PCMU</item>
+        <item>Codec_PCMA</item>
+        <item>Codec_H264</item>
+        <item>Codec_SILK8K</item>
+        <item>Codec_AMR</item>
+        <item>Codec_VP8</item>
+        <item>Codec_SILK16K</item>
+    </string-array>
+    <string-array name="take_chat_arr">
+        <item>拍照</item>
+        <item>录制小视频</item>
+    </string-array>
+    <string-array name="take_chat_fire_msg">
+        <item>拍照</item>
+        <item>选择相册</item>
+    </string-array>
+    <string-array name="meeting_control">
+        <item>IP加入会议</item>
+        <item>解散会议</item>
+        <item>管理会议</item>
+    </string-array>
+    <string-array name="meeting_type">
+        <item>自动删除房间</item>
+        <item>不自动删除房间</item>
+    </string-array>
+    <string-array name="meeting_tone_type">
+        <item>没有提示音有背景音</item>
+        <item>全部提示音</item>
+        <item>无提示音无背景音</item>
+    </string-array>
+    <string-array name="create_group_type_code">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>50</item>
+    </string-array>
+    
+    <string-array name="create_group_type_content">
+        <item>同学</item>
+        <item>朋友</item>
+        <item>同事</item>
+        <item>亲友</item>
+        <item>闺蜜</item>
+        <item>粉丝</item>
+        <item>基友</item>
+        <item>驴友</item>
+        <item>出国</item>
+        <item>家政</item>
+        <item>小区</item>
+        <item>比赛</item>
+        <item>其他</item>
+    </string-array>
+    <string-array name="change_voice_arr">
+        <item>原生</item>
+        <item>萝莉</item>
+        <item>大叔</item>
+        <item>惊悚</item>
+        <item>搞怪</item>
+        <item>空灵</item>
+        
+    </string-array>
+
+    <declare-styleable name="CircleImageView">
+        <attr name="border_width" format="dimension"/>
+        <attr name="border_color" format="color"/>
+    </declare-styleable>
+
+    <attr name="attrIconCall" format="reference" />
+    <attr name="CCPactionMenuTextAppearance" format="reference" />
+    <!-- Color for text that appears within action menu items. -->
+    <attr name="CCPactionMenuTextColor" format="color|reference" />
+    <declare-styleable name="MaskLayout">
+        <attr name="foreground" format="reference" />
+        <attr name="content_margin" format="dimension" />
+        <attr name="content_marginLeft" format="dimension" />
+        <attr name="content_marginRight" format="dimension" />
+        <attr name="content_marginTop" format="dimension" />
+        <attr name="content_marginBottom" format="dimension" />
+    </declare-styleable>
+    <declare-styleable name="AppPanel">
+        <attr name="dot_count" format="dimension" />
+        <attr name="dot_selected" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="form_input">
+        <attr name="form_layout" format="reference" />
+        <attr name="form_title" format="string" />
+        <attr name="form_hint" format="string" />
+    </declare-styleable>
+    <attr name="attrBgSelectedLetter" format="reference" />
+
+    <declare-styleable name="setting_info">
+        <attr name="item_titleText" format="string" />
+        <attr name="item_detailText" format="string" />
+        <attr name="item_accessoryType">
+            <enum name="none" value="0" />
+            <enum name="arrow" value="1" />
+            <enum name="switchbutton" value="2" />
+            <enum name="radio" value="3" />
+        </attr>
+        <attr name="item_showDivider" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="PullToRefresh">
+        <!-- A drawable to use as the background of the Refreshable View -->
+        <attr name="ptrRefreshableViewBackground" format="reference|color"/>
+
+        <!-- A drawable to use as the background of the Header and Footer Loading Views -->
+        <attr name="ptrHeaderBackground" format="reference|color"/>
+
+        <!-- Text Color of the Header and Footer Loading Views -->
+        <attr name="ptrHeaderTextColor" format="reference|color"/>
+
+        <!-- Text Color of the Header and Footer Loading Views Sub Header -->
+        <attr name="ptrHeaderSubTextColor" format="reference|color"/>
+
+        <!-- Mode of Pull-to-Refresh that should be used -->
+        <attr name="ptrMode">
+            <flag name="disabled" value="0x0"/>
+            <flag name="pullFromStart" value="0x1"/>
+            <flag name="pullFromEnd" value="0x2"/>
+            <flag name="both" value="0x3"/>
+            <flag name="manualOnly" value="0x4"/>
+
+            <!-- These last two are depreacted -->
+            <flag name="pullDownFromTop" value="0x1"/>
+            <flag name="pullUpFromBottom" value="0x2"/>
+        </attr>
+
+        <!-- Whether the Indicator overlay(s) should be used -->
+        <attr name="ptrShowIndicator" format="reference|boolean"/>
+
+        <!-- Drawable to use as Loading Indicator. Changes both Header and Footer. -->
+        <attr name="ptrDrawable" format="reference"/>
+
+        <!-- Drawable to use as Loading Indicator in the Header View. Overrides value set in ptrDrawable. -->
+        <attr name="ptrDrawableStart" format="reference"/>
+
+        <!-- Drawable to use as Loading Indicator in the Footer View. Overrides value set in ptrDrawable. -->
+        <attr name="ptrDrawableEnd" format="reference"/>
+
+        <!-- Whether Android's built-in Over Scroll should be utilised for Pull-to-Refresh. -->
+        <attr name="ptrOverScroll" format="reference|boolean"/>
+
+        <!-- Base text color, typeface, size, and style for Header and Footer Loading Views -->
+        <attr name="ptrHeaderTextAppearance" format="reference"/>
+
+        <!-- Base text color, typeface, size, and style for Header and Footer Loading Views Sub Header -->
+        <attr name="ptrSubHeaderTextAppearance" format="reference"/>
+
+        <!-- Style of Animation should be used displayed when pulling. -->
+        <attr name="ptrAnimationStyle">
+            <flag name="rotate" value="0x0"/>
+            <flag name="flip" value="0x1"/>
+        </attr>
+
+        <!-- Whether the user can scroll while the View is Refreshing -->
+        <attr name="ptrScrollingWhileRefreshingEnabled" format="reference|boolean"/>
+
+        <!--
+        	Whether PullToRefreshListView has it's extras enabled. This allows the user to be
+        	able to scroll while refreshing, and behaves better. It acheives this by adding
+        	Header and/or Footer Views to the ListView.
+        -->
+        <attr name="ptrListViewExtrasEnabled" format="reference|boolean"/>
+
+        <!--
+        	Whether the Drawable should be continually rotated as you pull. This only
+        	takes effect when using the 'Rotate' Animation Style.
+        -->
+        <attr name="ptrRotateDrawableWhilePulling" format="reference|boolean"/>
+
+        <!-- BELOW HERE ARE DEPRECEATED. DO NOT USE. -->
+        <attr name="ptrAdapterViewBackground" format="reference|color"/>
+        <attr name="ptrDrawableTop" format="reference"/>
+        <attr name="ptrDrawableBottom" format="reference"/>
+
+    </declare-styleable>
+
+    <declare-styleable name="Emojicon">
+        <attr name="emojiconSize" format="dimension"/>
+        <attr name="emojiconTextStart" format="integer"/>
+        <attr name="emojiconTextLength" format="integer"/>
+        <attr name="emojiconUseSystemDefault" format="boolean"/>
+    </declare-styleable>
+    <declare-styleable name="SwipeBackLayout">
+        <attr name="edge_size" format="dimension"/>
+        <attr name="edge_flag">
+            <enum name="left" value="0" />
+            <enum name="right" value="1" />
+            <enum name="bottom" value="2" />
+            <enum name="all" value="3" />
+        </attr>
+        <attr name="shadow_left" format="reference"/>
+        <attr name="shadow_right" format="reference"/>
+        <attr name="shadow_bottom" format="reference"/>
+    </declare-styleable>
+
+    <attr name="SwipeBackLayoutStyle" format="reference"/>
+    <declare-styleable name="call_control">
+        <attr name="call_direct">
+            <enum name="incoming" value="0" />
+            <enum name="outgoing" value="1" />
+            <enum name="inCall" value="2"/>
+        </attr>
+    </declare-styleable>
+    <declare-styleable name="SpinnerView">
+        <attr name="Spinner_item" format="reference" />
+        <attr name="Spinner_DropDownTitle" format="reference" />
+    </declare-styleable>
+
+</resources>

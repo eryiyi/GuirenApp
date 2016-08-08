@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:background="@color/white"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:id="@+id/top_liner"
+            android:layout_height="@dimen/top_title_height"
+            android:background="@color/mm_main_bg_mine_top"
+            android:gravity="center_vertical"
+            >
+        <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:id="@+id/back"
+                android:paddingLeft="10dp"
+                android:src="@drawable/md_return"
+                android:paddingRight="10dp"
+                />
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:text="购买邀请码"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:id="@+id/goods_detail_title"/>
+    </RelativeLayout>
+        <RelativeLayout android:layout_width="match_parent"
+                      android:layout_height="match_parent">
+            <LinearLayout android:layout_width="match_parent"
+                          android:orientation="horizontal"
+                          android:padding="25dp"
+                          android:layout_marginTop="25dp"
+                          android:id="@+id/liner_one"
+                          android:gravity="center"
+                          android:layout_height="wrap_content">
+                <TextView android:layout_width="wrap_content"
+                          android:text="1"
+                          android:id="@+id/number"
+                          android:textSize="35sp"
+                          android:textColor="@color/textColor"
+                          android:layout_height="wrap_content"/>
+                <ImageView android:layout_width="wrap_content"
+                           android:src="@drawable/chahao"
+                           android:layout_marginLeft="15dp"
+                           android:layout_marginRight="15dp"
+                           android:layout_height="wrap_content"/>
+                <TextView android:layout_width="wrap_content"
+                          android:text="20元"
+                          android:id="@+id/money"
+                          android:textSize="35sp"
+                          android:textColor="@color/green_card"
+                          android:layout_height="wrap_content"/>
+            </LinearLayout>
+            <LinearLayout android:layout_width="match_parent"
+                          android:orientation="horizontal"
+                          android:gravity="center"
+                          android:id="@+id/liner_two"
+                          android:layout_marginTop="15dp"
+                          android:layout_below="@+id/liner_one"
+                          android:layout_height="wrap_content">
+                <TextView android:layout_width="wrap_content"
+                          android:text="总计："
+                          android:textColor="@color/textColor"
+                          android:textSize="25sp"
+                          android:layout_marginRight="15dp"
+                          android:layout_height="wrap_content"/>
+                <TextView android:layout_width="wrap_content"
+                          android:text="20"
+                          android:textSize="25sp"
+                          android:id="@+id/order_count"
+                          android:textColor="@color/red"
+                          android:layout_marginLeft="25dp"
+                          android:layout_marginRight="15dp"
+                          android:layout_height="wrap_content"/>
+                <TextView android:layout_width="wrap_content"
+                          android:text="元"
+                          android:textSize="25sp"
+                          android:textColor="@color/textColor"
+                          android:layout_height="wrap_content"/>
+            </LinearLayout>
+            <TextView android:layout_width="match_parent"
+                      android:layout_below="@+id/liner_two"
+                      android:gravity="center"
+                      android:padding="8dp"
+                      android:id="@+id/msg"
+                      android:layout_marginTop="25dp"
+                      android:layout_marginRight="25dp"
+                      android:layout_marginLeft="25dp"
+                      android:textColor="@color/textColortwo"
+                      android:text="购买邀请码，邀请朋友注册。"
+                      android:layout_height="wrap_content"/>
+
+            <LinearLayout android:layout_width="match_parent"
+                          android:gravity="center"
+                          android:layout_marginTop="15dp"
+                          android:padding="12dp"
+                          android:layout_below="@+id/msg"
+                          android:orientation="horizontal"
+                          android:layout_height="wrap_content">
+                <Button android:layout_width="wrap_content"
+                        android:onClick="goToPayAliy"
+                        android:layout_marginRight="8dp"
+                        android:background="@drawable/btn_pay_aliy_shape"
+                        android:layout_height="wrap_content"/>
+
+                <Button android:layout_width="wrap_content"
+                        android:onClick="goToPayWeixin"
+                        android:background="@drawable/btn_pay_weixin_shape"
+                        android:layout_height="wrap_content"/>
+            </LinearLayout>
+        </RelativeLayout>
+</LinearLayout>

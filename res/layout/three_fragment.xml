@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:background="@color/mm_main_bg"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <RelativeLayout android:layout_width="match_parent"
+                    android:background="@color/mm_main_bg_mine_top"
+                    android:layout_height="@dimen/topbar_height">
+        <TextView android:layout_width="wrap_content"
+                  android:text="喜讯"
+                  android:textColor="@color/white"
+                  android:textSize="18sp"
+                  android:layout_centerInParent="true"
+                  android:gravity="center"
+                  android:layout_height="wrap_content"/>
+        <Button
+                android:id="@+id/home_write"
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="onTopMenuPopupButtonClick"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="15dip"
+                android:layout_centerVertical="true"
+                android:background="@drawable/icon_talk"
+                />
+    </RelativeLayout>
+    <RelativeLayout android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+        <ImageView android:layout_width="wrap_content"
+                   android:id="@+id/no_record"
+                   android:src="@drawable/no_data"
+                   android:layout_centerInParent="true"
+                   android:layout_height="wrap_content"/>
+
+        <com.Lbins.GuirenApp.library.PullToRefreshListView
+                android:id="@+id/lstv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:cacheColorHint="#00000000"
+                android:divider="@null"
+                android:dividerHeight="8dp"
+                android:fadingEdge="none"
+                android:layout_marginLeft="15dp"
+                android:scrollbars="none"
+                android:layout_marginRight="15dp"
+                android:fastScrollEnabled="false"
+                android:footerDividersEnabled="false"
+                android:headerDividersEnabled="false"
+                android:smoothScrollbar="true"/>
+    </RelativeLayout>
+
+</LinearLayout>

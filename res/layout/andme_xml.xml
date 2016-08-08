@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="fill_parent"
+              android:background="#FFFFFF"
+              android:layout_height="fill_parent"
+              android:orientation="vertical">
+
+    <!-- head开始 -->
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/topbar_height"
+            android:id="@+id/relate_one"
+            android:background="@color/mm_main_bg_mine_top"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="5dp"
+            >
+        <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:id="@+id/andme_xml_back"
+                android:paddingLeft="10dp"
+                android:src="@drawable/md_return"
+                />
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="与我相关"
+                android:gravity="center_vertical"
+                android:layout_centerHorizontal="true"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:id="@+id/title"
+                />
+    </RelativeLayout>
+    <!-- head结束 -->
+    <RelativeLayout android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:layout_height="wrap_content">
+
+        <ImageView android:layout_width="match_parent"
+                   android:src="@drawable/no_data"
+                   android:id="@+id/search_null"
+                   android:visibility="gone"
+                   android:layout_centerInParent="true"
+                   android:layout_height="wrap_content"/>
+        <com.Lbins.GuirenApp.library.PullToRefreshListView
+                android:id="@+id/andme_lstv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:cacheColorHint="#00000000"
+                android:divider="@color/divider_color"
+                android:dividerHeight="0.5dp"
+                android:fadingEdge="none"
+                android:fastScrollEnabled="false"
+                android:footerDividersEnabled="false"
+                android:headerDividersEnabled="false"
+                android:smoothScrollbar="true"/>
+    </RelativeLayout>
+
+</LinearLayout>

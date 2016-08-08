@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:padding="8dp"
+              android:background="@drawable/zhuye_item_select">
+
+            <com.Lbins.GuirenApp.widget.CircleImageView
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:id="@+id/comment_photo"
+                    android:src="@drawable/ic_launcher"/>
+
+            <LinearLayout android:layout_width="match_parent"
+                          android:orientation="horizontal"
+                          android:id="@+id/liner_one"
+                          android:layout_toRightOf="@+id/comment_photo"
+                          android:layout_height="wrap_content">
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:layout_weight="1"
+                          android:singleLine="true"
+                          android:gravity="center_vertical"
+                          android:textSize="14sp"
+                          android:layout_marginLeft="8dp"
+                          android:text="111111"
+                          android:textColor="@color/textColor"
+                          android:id="@+id/comment_nickname"/>
+
+                <TextView android:layout_width="wrap_content"
+                          android:text="1#"
+                          android:textSize="14sp"
+                          android:gravity="center_vertical"
+                          android:layout_alignParentRight="true"
+                          android:id="@+id/floor_comment"
+                          android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:textSize="14sp"
+                      android:layout_toRightOf="@+id/comment_photo"
+                      android:layout_below="@+id/liner_one"
+                      android:layout_marginLeft="8dp"
+                      android:text="22222"
+                      android:id="@+id/comment_time"/>
+
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text="评论人"
+                      android:layout_toRightOf="@+id/comment_photo"
+                      android:layout_marginLeft="8dp"
+                      android:layout_below="@+id/comment_photo"
+                      android:paddingTop="6dp"
+                      android:textSize="14sp"
+                      android:textColor="@color/textColortwo"
+                      android:id="@+id/comment_f_nickname"/>
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/comment_f_nickname"
+                    android:text="sdfdasf"
+                    android:layout_toRightOf="@+id/comment_photo"
+                    android:textSize="14dp"
+                    android:layout_marginLeft="8dp"
+                    android:textColor="@color/textColor"
+                    android:paddingTop="3dp"
+                    android:id="@+id/comment_content"/>
+</RelativeLayout>

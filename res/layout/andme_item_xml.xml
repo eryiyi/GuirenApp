@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/zhuye_item_select"
+                android:padding="8dp">
+    <ImageView
+            android:layout_width="45dp"
+            android:id="@+id/andme_item_cover"
+            android:src="@drawable/default_avatar"
+            android:layout_height="45dp"/>
+    <TextView android:layout_width="wrap_content"
+              android:textSize="18sp"
+              android:text="昵称"
+              android:id="@+id/andme_item_nickname"
+              android:layout_marginLeft="8dp"
+              android:layout_marginTop="8dp"
+              android:singleLine="true"
+              android:ellipsize="end"
+              android:maxEms="7"
+              android:layout_toRightOf="@+id/andme_item_cover"
+              android:textColor="@color/textColor"
+              android:layout_height="wrap_content"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:textSize="14sp"
+            android:text="nininini你"
+            android:textColor="@color/textColor"
+            android:layout_marginLeft="5dp"
+            android:ellipsize="end"
+            android:maxLines="5"
+            android:layout_below="@+id/andme_item_cover"
+            android:id="@+id/andme_item_cont"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:text="shijian"
+            android:layout_marginTop="12dp"
+            android:gravity="right"
+            android:layout_alignParentRight="true"
+            android:id="@+id/andme_item_dateline"/>
+</RelativeLayout>
+
+

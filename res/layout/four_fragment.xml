@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:background="#ebebeb"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <RelativeLayout android:layout_width="match_parent"
+                    android:background="@color/mm_main_bg_mine_top"
+                    android:layout_height="@dimen/topbar_height">
+        <TextView android:layout_width="wrap_content"
+                  android:text="发现"
+                  android:textColor="@color/white"
+                  android:textSize="18sp"
+                  android:layout_centerInParent="true"
+                  android:gravity="center"
+                  android:layout_height="wrap_content"/>
+        <TextView android:layout_width="wrap_content"
+                  android:text="消息"
+                  android:id="@+id/msg"
+                  android:visibility="gone"
+                  android:padding="15dp"
+                  android:textColor="@color/white"
+                  android:layout_alignParentRight="true"
+                  android:layout_centerVertical="true"
+                  android:layout_height="wrap_content"/>
+    </RelativeLayout>
+
+    <com.Lbins.GuirenApp.widget.ReboundScrollView android:layout_width="match_parent"
+                                                  android:layout_height="match_parent">
+        <LinearLayout android:layout_width="match_parent"
+                      android:orientation="vertical"
+                      android:layout_height="match_parent">
+            <LinearLayout android:layout_width="match_parent"
+                          android:orientation="horizontal"
+                          android:layout_marginTop="20dp"
+                          android:background="@drawable/btn_dark_shape"
+                          android:layout_below="@+id/liner_one"
+                          android:id="@+id/liner_two"
+                          android:layout_height="50dp">
+                <ImageView android:layout_width="35dp"
+                           android:src="@drawable/afd"
+                           android:layout_gravity="center_vertical"
+                           android:layout_marginLeft="8dp"
+                           android:layout_height="wrap_content"/>
+                <TextView android:layout_width="wrap_content"
+                          android:text="贵人录"
+                          android:layout_marginLeft="15dp"
+                          android:layout_gravity="center_vertical"
+                          android:textColor="@color/black"
+                          android:textSize="16sp"
+                          android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+
+            <LinearLayout android:layout_width="match_parent"
+                          android:orientation="horizontal"
+                          android:id="@+id/liner_find"
+                          android:layout_marginTop="20dp"
+                          android:background="@drawable/btn_dark_shape"
+                          android:layout_height="50dp">
+                <ImageView android:layout_width="35dp"
+                           android:src="@drawable/afd2"
+                           android:layout_marginLeft="8dp"
+                           android:layout_gravity="center_vertical"
+                           android:layout_height="wrap_content"/>
+                <TextView android:layout_width="wrap_content"
+                          android:text="贵人动态"
+                          android:layout_marginLeft="15dp"
+                          android:layout_gravity="center_vertical"
+                          android:textColor="@color/black"
+                          android:textSize="16sp"
+                          android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="match_parent"
+                          android:orientation="horizontal"
+                          android:id="@+id/liner_news"
+                          android:layout_marginTop="20dp"
+                          android:background="@drawable/btn_dark_shape"
+                          android:layout_height="50dp">
+                <ImageView android:layout_width="35dp"
+                           android:src="@drawable/logo_thepaper"
+                           android:layout_marginLeft="8dp"
+                           android:layout_gravity="center_vertical"
+                           android:layout_height="wrap_content"/>
+                <TextView android:layout_width="wrap_content"
+                          android:text="澎湃新闻"
+                          android:layout_marginLeft="15dp"
+                          android:layout_gravity="center_vertical"
+                          android:textColor="@color/black"
+                          android:textSize="16sp"
+                          android:layout_height="wrap_content"/>
+            </LinearLayout>
+            <LinearLayout android:layout_width="match_parent"
+                          android:orientation="horizontal"
+                          android:id="@+id/liner_baike"
+                          android:layout_marginTop="20dp"
+                          android:background="@drawable/btn_dark_shape"
+                          android:layout_height="50dp">
+                <ImageView android:layout_width="35dp"
+                           android:src="@drawable/qiubai_icon"
+                           android:layout_marginLeft="8dp"
+                           android:layout_gravity="center_vertical"
+                           android:layout_height="wrap_content"/>
+                <TextView android:layout_width="wrap_content"
+                          android:text="糗事百科"
+                          android:layout_marginLeft="15dp"
+                          android:layout_gravity="center_vertical"
+                          android:textColor="@color/black"
+                          android:textSize="16sp"
+                          android:layout_height="wrap_content"/>
+            </LinearLayout>
+            <LinearLayout android:layout_width="match_parent"
+                          android:orientation="horizontal"
+                          android:id="@+id/liner_zmt"
+                          android:layout_marginTop="20dp"
+                          android:background="@drawable/btn_dark_shape"
+                          android:layout_height="50dp">
+                <ImageView android:layout_width="35dp"
+                           android:src="@drawable/agg"
+                           android:layout_marginLeft="8dp"
+                           android:layout_gravity="center_vertical"
+                           android:layout_height="wrap_content"/>
+                <TextView android:layout_width="wrap_content"
+                          android:text="自媒体商城"
+                          android:layout_marginLeft="15dp"
+                          android:layout_gravity="center_vertical"
+                          android:textColor="@color/black"
+                          android:textSize="16sp"
+                          android:layout_height="wrap_content"/>
+            </LinearLayout>
+            <RelativeLayout android:layout_width="match_parent"
+                            android:layout_marginTop="20dp"
+                            android:visibility="gone"
+                            android:layout_height="wrap_content">
+                <LinearLayout android:layout_width="match_parent"
+                              android:orientation="horizontal"
+                              android:id="@+id/liner_one"
+                              android:background="@drawable/btn_dark_shape"
+                              android:layout_height="wrap_content">
+                    <ImageView android:layout_width="35dp"
+                               android:src="@drawable/afg"
+                               android:layout_marginLeft="8dp"
+                               android:layout_height="wrap_content"/>
+                    <TextView android:layout_width="wrap_content"
+                              android:text="扫一扫"
+                              android:layout_marginLeft="15dp"
+                              android:layout_gravity="center_vertical"
+                              android:textColor="@color/black"
+                              android:textSize="16sp"
+                              android:layout_height="wrap_content"/>
+                </LinearLayout>
+
+            </RelativeLayout>
+            <RelativeLayout android:layout_width="match_parent"
+                            android:layout_marginTop="20dp"
+                            android:visibility="gone"
+                            android:layout_height="wrap_content">
+                <LinearLayout android:layout_width="match_parent"
+                              android:orientation="horizontal"
+                              android:id="@+id/liner_five"
+                              android:background="@drawable/btn_dark_shape"
+                              android:layout_height="wrap_content">
+                    <ImageView android:layout_width="35dp"
+                               android:src="@drawable/afd"
+                               android:layout_marginLeft="8dp"
+                               android:layout_height="wrap_content"/>
+                    <TextView android:layout_width="wrap_content"
+                              android:text="附近人脉"
+                              android:layout_marginLeft="15dp"
+                              android:layout_gravity="center_vertical"
+                              android:textColor="@color/black"
+                              android:textSize="16sp"
+                              android:layout_height="wrap_content"/>
+                </LinearLayout>
+
+            </RelativeLayout>
+            <RelativeLayout android:layout_width="match_parent"
+                            android:layout_marginTop="20dp"
+                            android:visibility="gone"
+                            android:layout_height="wrap_content">
+                <LinearLayout android:layout_width="match_parent"
+                              android:orientation="horizontal"
+                              android:id="@+id/liner_three"
+                              android:background="@drawable/btn_dark_shape"
+                              android:layout_height="wrap_content">
+                    <ImageView android:layout_width="35dp"
+                               android:src="@drawable/agg"
+                               android:layout_marginLeft="8dp"
+                               android:layout_height="wrap_content"/>
+                    <TextView android:layout_width="wrap_content"
+                              android:text="购物"
+                              android:layout_marginLeft="15dp"
+                              android:layout_gravity="center_vertical"
+                              android:textColor="@color/black"
+                              android:textSize="16sp"
+                              android:layout_height="wrap_content"/>
+                </LinearLayout>
+                <LinearLayout android:layout_width="match_parent"
+                              android:orientation="horizontal"
+                              android:background="@drawable/btn_dark_shape"
+                              android:layout_marginTop="0.1dp"
+                              android:layout_below="@+id/liner_three"
+                              android:id="@+id/liner_four"
+                              android:layout_height="wrap_content">
+                    <ImageView android:layout_width="35dp"
+                               android:src="@drawable/avn"
+                               android:layout_marginLeft="8dp"
+                               android:layout_height="wrap_content"/>
+                    <TextView android:layout_width="wrap_content"
+                              android:text="游戏"
+                              android:layout_marginLeft="15dp"
+                              android:layout_gravity="center_vertical"
+                              android:textColor="@color/black"
+                              android:textSize="16sp"
+                              android:layout_height="wrap_content"/>
+                </LinearLayout>
+            </RelativeLayout>
+        </LinearLayout>
+    </com.Lbins.GuirenApp.widget.ReboundScrollView>
+
+</LinearLayout>

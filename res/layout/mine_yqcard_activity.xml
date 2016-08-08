@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="fill_parent"
+              android:id="@+id/main"
+              android:background="@color/white"
+              android:layout_height="fill_parent"
+              android:orientation="vertical">
+        <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/top_title_height"
+                android:background="@color/mm_main_bg_mine_top">
+
+            <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:gravity="center"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginRight="50dp"
+                    android:orientation="horizontal">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="8dip"
+                        android:text="邀请码"
+                        android:id="@+id/part_news_title"
+                        android:singleLine="true"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"/>
+            </LinearLayout>
+            <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:id="@+id/menu"
+                    android:paddingLeft="10dp"
+                    android:src="@drawable/md_return"
+                    android:paddingRight="10dp"/>
+            <TextView android:layout_width="wrap_content"
+                      android:text="购买"
+                      android:id="@+id/btn_goumai"
+                      android:layout_alignParentRight="true"
+                      android:textColor="@color/white"
+                      android:layout_marginRight="8dp"
+                      android:padding="8dp"
+                      android:layout_centerVertical="true"
+                      android:layout_height="wrap_content"/>
+        </RelativeLayout>
+    <RelativeLayout android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+        <ImageView android:layout_width="wrap_content"
+                   android:id="@+id/no_record"
+                   android:src="@drawable/no_data"
+                   android:layout_centerInParent="true"
+                   android:layout_height="wrap_content"/>
+
+        <com.Lbins.GuirenApp.library.PullToRefreshListView
+                android:id="@+id/lstv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:cacheColorHint="#00000000"
+                android:divider="@drawable/home_item_shadow"
+                android:dividerHeight="0.5dp"
+                android:fadingEdge="none"
+                android:fastScrollEnabled="false"
+                android:footerDividersEnabled="false"
+                android:headerDividersEnabled="false"
+                android:smoothScrollbar="true"/>
+    </RelativeLayout>
+
+
+</LinearLayout>

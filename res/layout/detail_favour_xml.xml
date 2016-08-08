@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="fill_parent"
+                android:background="@color/white"
+              android:layout_height="fill_parent">
+        <!-- head开始 -->
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/top_title_height"
+                android:id="@+id/liner_one"
+                android:background="@color/mm_main_bg_mine_top"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="5dp">
+            <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:id="@+id/detail_favour_back"
+                    android:paddingLeft="10dp"
+                    android:src="@drawable/md_return"
+                    android:paddingRight="10dp"/>
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_centerInParent="true"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:text="赞"
+                    android:id="@+id/detail_favour_title"/>
+        </RelativeLayout>
+        <!-- head结束 -->
+        <com.Lbins.GuirenApp.library.PullToRefreshListView
+                android:id="@+id/detail_favour_lstv"
+                android:layout_below="@+id/liner_one"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:cacheColorHint="#00000000"
+                android:divider="#19000000"
+                android:dividerHeight="1dp"
+                android:fadingEdge="none"
+                android:fastScrollEnabled="false"
+                android:footerDividersEnabled="false"
+                android:headerDividersEnabled="false"
+                android:smoothScrollbar="true"/>
+
+</RelativeLayout>

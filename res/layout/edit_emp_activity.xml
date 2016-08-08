@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:id="@+id/main"
+              android:background="@color/mm_main_bg"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <RelativeLayout android:layout_width="match_parent"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:background="@color/mm_main_bg_mine_top"
+                    android:layout_height="@dimen/top_title_height">
+        <TextView android:layout_width="wrap_content"
+                  android:drawableLeft="@drawable/md_return"
+                  android:drawablePadding="8dp"
+                  android:textSize="16sp"
+                  android:padding="6dp"
+                  android:layout_marginLeft="8dp"
+                  android:id="@+id/back"
+                  android:textColor="@color/white"
+                  android:layout_centerVertical="true"
+                  android:layout_height="wrap_content"/>
+        <TextView android:layout_width="wrap_content"
+                  android:text="编辑"
+                  android:textSize="18sp"
+                  android:layout_centerHorizontal="true"
+                  android:layout_centerVertical="true"
+                  android:textColor="@color/white"
+                  android:layout_height="wrap_content"/>
+    </RelativeLayout>
+
+    <com.Lbins.GuirenApp.widget.ReboundScrollView android:layout_width="match_parent"
+                                                  android:layout_height="match_parent">
+        <LinearLayout android:layout_width="match_parent"
+                      android:orientation="vertical"
+                      android:layout_height="match_parent">
+
+        <EditText android:layout_width="match_parent"
+                  android:layout_marginLeft="25dp"
+                  android:layout_marginRight="25dp"
+                  android:layout_marginTop="6dp"
+                  android:paddingLeft="15dp"
+                  android:drawablePadding="8dp"
+                  android:textSize="14sp"
+                  android:singleLine="true"
+                  android:id="@+id/nickname"
+                  android:hint="姓名"
+                  android:background="@color/white"
+                  android:layout_height="35dp">
+        </EditText>
+
+            <RelativeLayout android:layout_width="match_parent"
+                            android:background="@color/white"
+                            android:padding="12dp"
+                            android:layout_marginTop="6dp"
+                            android:layout_marginLeft="25dp"
+                            android:layout_marginRight="25dp"
+                            android:layout_height="wrap_content">
+                <TextView android:layout_width="wrap_content"
+                          android:text="性别"
+                          android:layout_centerVertical="true"
+                          android:textSize="16sp"
+                          android:textColor="@color/text_color"
+                          android:layout_height="wrap_content"/>
+
+                <com.Lbins.GuirenApp.widget.SexRadioGroup
+                        android:layout_width="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingLeft="10dp"
+                        android:id="@+id/segment_text">
+                    <RadioButton android:id="@+id/button_one"
+                                 android:layout_width="wrap_content"
+                                 android:layout_height="wrap_content"
+                                 android:minWidth="40dip"
+                                 android:minHeight="30dip"
+                                 android:text="男"
+                                 android:textAppearance="?android:attr/textAppearanceSmall"
+                                 android:button="@null"
+                                 android:gravity="center"
+                                 android:textColor="@color/radio_colors"/>
+                    <RadioButton android:id="@+id/button_two"
+                                 android:minWidth="40dip"
+                                 android:minHeight="30dip"
+                                 android:text="女"
+                                 android:button="@null"
+                                 android:gravity="center"
+                                 android:layout_width="wrap_content"
+                                 android:layout_height="wrap_content"
+                                 android:textAppearance="?android:attr/textAppearanceSmall"
+                                 android:textColor="@color/radio_colors"/>
+                </com.Lbins.GuirenApp.widget.SexRadioGroup>
+
+            </RelativeLayout>
+
+            <EditText android:layout_width="match_parent"
+                      android:layout_marginLeft="25dp"
+                      android:layout_marginRight="25dp"
+                      android:layout_marginTop="6dp"
+                      android:paddingLeft="15dp"
+                      android:drawablePadding="8dp"
+                      android:textSize="14sp"
+                      android:singleLine="true"
+                      android:id="@+id/email"
+                      android:hint="邮箱"
+                      android:background="@color/white"
+                      android:layout_height="35dp">
+            </EditText>
+            <EditText android:layout_width="match_parent"
+                      android:layout_marginLeft="25dp"
+                      android:layout_marginRight="25dp"
+                      android:layout_marginTop="6dp"
+                      android:paddingLeft="15dp"
+                      android:drawablePadding="8dp"
+                      android:textSize="14sp"
+                      android:singleLine="true"
+                      android:id="@+id/qq"
+                      android:hint="QQ"
+                      android:background="@color/white"
+                      android:layout_height="35dp">
+            </EditText>
+            <EditText android:layout_width="match_parent"
+                      android:layout_marginLeft="25dp"
+                      android:layout_marginRight="25dp"
+                      android:layout_marginTop="6dp"
+                      android:paddingLeft="15dp"
+                      android:drawablePadding="8dp"
+                      android:textSize="14sp"
+                      android:singleLine="true"
+                      android:id="@+id/weixin"
+                      android:hint="微信"
+                      android:background="@color/white"
+                      android:layout_height="35dp">
+            </EditText>
+            <EditText android:layout_width="match_parent"
+                      android:layout_marginLeft="25dp"
+                      android:layout_marginRight="25dp"
+                      android:layout_marginTop="6dp"
+                      android:paddingLeft="15dp"
+                      android:drawablePadding="8dp"
+                      android:textSize="14sp"
+                      android:singleLine="true"
+                      android:id="@+id/company"
+                      android:hint="单位"
+                      android:background="@color/white"
+                      android:layout_height="35dp">
+            </EditText>
+            <EditText android:layout_width="match_parent"
+                      android:layout_marginLeft="25dp"
+                      android:layout_marginRight="25dp"
+                      android:layout_marginTop="6dp"
+                      android:paddingLeft="15dp"
+                      android:drawablePadding="8dp"
+                      android:textSize="14sp"
+                      android:singleLine="true"
+                      android:id="@+id/techang"
+                      android:hint="特长"
+                      android:background="@color/white"
+                      android:layout_height="35dp">
+            </EditText>
+            <EditText android:layout_width="match_parent"
+                      android:layout_marginLeft="25dp"
+                      android:layout_marginRight="25dp"
+                      android:layout_marginTop="6dp"
+                      android:paddingLeft="15dp"
+                      android:drawablePadding="8dp"
+                      android:textSize="14sp"
+                      android:singleLine="true"
+                      android:id="@+id/xingqu"
+                      android:hint="兴趣"
+                      android:background="@color/white"
+                      android:layout_height="35dp">
+            </EditText>
+            <EditText android:layout_width="match_parent"
+                      android:layout_marginLeft="25dp"
+                      android:layout_marginRight="25dp"
+                      android:layout_marginTop="6dp"
+                      android:paddingLeft="15dp"
+                      android:drawablePadding="8dp"
+                      android:textSize="14sp"
+                      android:singleLine="true"
+                      android:id="@+id/age"
+                      android:numeric="integer"
+                      android:hint="年龄"
+                      android:background="@color/white"
+                      android:layout_height="35dp">
+            </EditText>
+            <EditText android:layout_width="match_parent"
+                      android:layout_marginLeft="25dp"
+                      android:layout_marginRight="25dp"
+                      android:layout_marginTop="6dp"
+                      android:paddingLeft="15dp"
+                      android:drawablePadding="8dp"
+                      android:textSize="14sp"
+                      android:singleLine="true"
+                      android:id="@+id/mm_emp_native"
+                      android:hint="籍贯"
+                      android:background="@color/white"
+                      android:layout_height="35dp">
+            </EditText>
+            <EditText android:layout_width="match_parent"
+                      android:layout_marginLeft="25dp"
+                      android:layout_marginRight="25dp"
+                      android:layout_marginTop="6dp"
+                      android:paddingLeft="15dp"
+                      android:drawablePadding="8dp"
+                      android:textSize="14sp"
+                      android:singleLine="true"
+                      android:id="@+id/mm_emp_motto"
+                      android:hint="签名"
+                      android:background="@color/white"
+                      android:layout_height="35dp">
+            </EditText>
+            <LinearLayout android:layout_width="match_parent"
+                          android:orientation="horizontal"
+                          android:layout_marginTop="6dp"
+                          android:id="@+id/liner_one"
+                          android:padding="15dp"
+                          android:layout_marginLeft="25dp"
+                          android:layout_marginRight="25dp"
+                          android:background="@drawable/btn_dark_shape"
+                          android:layout_height="wrap_content">
+
+                <TextView android:layout_width="wrap_content"
+                          android:text="点击选择行业"
+                          android:layout_gravity="center_vertical"
+                          android:textColor="@color/text_color"
+                          android:textSize="16sp"
+                          android:id="@+id/select_hy"
+                          android:layout_height="wrap_content"/>
+            </LinearLayout>
+            <com.Lbins.GuirenApp.widget.CustomerSpinner
+                    android:background="@drawable/login_edit_bg"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginRight="25dp"
+                    android:paddingLeft="15dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_alignParentRight="true"
+                    android:id="@+id/mm_emp_provinceId"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp">
+
+            </com.Lbins.GuirenApp.widget.CustomerSpinner>
+            <com.Lbins.GuirenApp.widget.CustomerSpinner
+                    android:background="@drawable/login_edit_bg"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginRight="25dp"
+                    android:layout_marginTop="6dp"
+                    android:paddingLeft="15dp"
+                    android:layout_alignParentRight="true"
+                    android:id="@+id/mm_emp_cityId"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp">
+
+            </com.Lbins.GuirenApp.widget.CustomerSpinner>
+            <com.Lbins.GuirenApp.widget.CustomerSpinner
+                    android:background="@drawable/login_edit_bg"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginRight="25dp"
+                    android:layout_marginTop="6dp"
+                    android:paddingLeft="15dp"
+                    android:layout_alignParentRight="true"
+                    android:id="@+id/mm_emp_countryId"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp">
+            </com.Lbins.GuirenApp.widget.CustomerSpinner>
+            <EditText android:layout_width="match_parent"
+                      android:layout_marginLeft="25dp"
+                      android:layout_marginRight="25dp"
+                      android:layout_marginTop="6dp"
+                      android:paddingLeft="15dp"
+                      android:drawablePadding="8dp"
+                      android:textSize="14sp"
+                      android:singleLine="true"
+                      android:id="@+id/jianjie"
+                      android:hint="个人简介"
+                      android:background="@color/white"
+                      android:layout_height="35dp">
+            </EditText>
+
+            <Button android:layout_width="match_parent"
+                    android:padding="12dp"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:text="确  认"
+                    android:id="@+id/sign_in_button"
+                    android:textSize="16sp"
+                    android:textColor="@color/white"
+                    android:background="@drawable/btn_green_shape"
+                    android:layout_height="wrap_content"/>
+
+c        </LinearLayout>
+    </com.Lbins.GuirenApp.widget.ReboundScrollView>
+</LinearLayout>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:padding="8dp"
+                android:background="@drawable/zhuye_item_select"
+                android:layout_height="wrap_content">
+
+    <ImageView android:layout_width="140dp"
+               android:layout_height="100dp"
+               android:scaleType="centerCrop"
+               android:id="@+id/item_cover"/>
+
+    <TextView android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:singleLine="true"
+              android:layout_marginTop="5dp"
+              android:layout_marginRight="50dp"
+              android:text="名名称名称名称名称名称名称名称名称名称名称名称名称名称名称名称称"
+              android:textColor="@color/red"
+              android:textSize="16sp"
+              android:layout_marginLeft="6dp"
+              android:layout_toRightOf="@+id/item_cover"
+              android:id="@+id/item_title"/>
+
+    <RelativeLayout android:layout_width="match_parent"
+                    android:id="@+id/liner_one"
+                    android:layout_marginLeft="6dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_toRightOf="@+id/item_cover"
+                    android:layout_below="@+id/item_title"
+                    android:layout_height="wrap_content">
+        <com.Lbins.GuirenApp.widget.CircleImageView
+                android:src="@drawable/default_avatar"
+                android:layout_width="30dp"
+                android:id="@+id/head"
+                android:layout_height="30dp"/>
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="掌柜的"
+                  android:layout_toRightOf="@+id/head"
+                  android:gravity="center_vertical"
+                  android:layout_marginTop="5dp"
+                  android:textColor="@color/textColor"
+                  android:singleLine="true"
+                  android:textSize="16sp"
+                  android:layout_marginLeft="8dp"
+                  android:id="@+id/item_nickname"/>
+    </RelativeLayout>
+    <LinearLayout android:layout_width="match_parent"
+                    android:layout_toRightOf="@+id/item_cover"
+                    android:layout_below="@+id/liner_one"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    android:layout_height="wrap_content">
+        <TextView android:layout_width="wrap_content"
+                  android:layout_weight="1"
+                  android:layout_height="wrap_content"
+                  android:layout_marginLeft="8dp"
+                  android:gravity="center_vertical"
+                  android:textColor="@color/textColor"
+                  android:singleLine="true"
+                  android:textSize="16sp"
+                  android:id="@+id/item_address"/>
+        <TextView android:layout_width="wrap_content"
+                  android:text="120"
+                   android:layout_height="wrap_content"
+                   android:layout_marginRight="3dp"
+                   android:textSize="14sp"
+                   android:textColor="@color/black"
+                   android:id="@+id/item_location"/>
+    </LinearLayout>
+
+
+</RelativeLayout>

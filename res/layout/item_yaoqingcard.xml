@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:padding="6dp"
+                android:background="@drawable/zhuye_item_select"
+                android:layout_height="wrap_content">
+   <RelativeLayout android:layout_width="match_parent"
+                   android:padding="15dp"
+                   android:id="@+id/relate"
+                   android:background="@drawable/btn_style_green_card"
+                   android:layout_height="wrap_content">
+       <TextView android:layout_width="wrap_content"
+                 android:text="ASFSDFD1254AFKLF001"
+                 android:textColor="@color/white"
+                 android:textSize="18sp"
+                 android:id="@+id/card_number"
+                 android:gravity="center"
+                 android:layout_height="wrap_content"/>
+       <TextView android:layout_width="wrap_content"
+                 android:text="点击分享"
+                 android:id="@+id/card_btn"
+                 android:layout_centerVertical="true"
+                 android:layout_alignParentRight="true"
+                 android:textColor="@color/white"
+                 android:layout_height="wrap_content"/>
+   </RelativeLayout>
+</LinearLayout>

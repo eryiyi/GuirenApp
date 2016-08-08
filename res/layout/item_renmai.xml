@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:background="@drawable/zhuye_item_select"
+              android:layout_width="wrap_content"
+              android:gravity="center"
+              android:layout_gravity="center_vertical"
+              android:layout_height="wrap_content">
+
+    <LinearLayout android:layout_width="wrap_content"
+                  android:orientation="vertical"
+                  android:id="@+id/liner_one"
+                  android:layout_centerInParent="true"
+                  android:gravity="center"
+                  android:padding="6dp"
+                  android:layout_height="wrap_content">
+        <com.Lbins.GuirenApp.widget.CircleImageView
+                android:layout_width="50dp"
+                android:id="@+id/item_head"
+                android:src="@drawable/default_avatar"
+                android:layout_height="50dp"/>
+        <TextView android:layout_width="wrap_content"
+                  android:text="name"
+                  android:textSize="14sp"
+                  android:layout_marginTop="3dp"
+                  android:singleLine="true"
+                  android:textColor="@color/blue"
+                  android:layout_below="@+id/item_head"
+                  android:id="@+id/name"
+                  android:layout_height="wrap_content"/>
+        <ImageView android:layout_width="wrap_content"
+                   android:id="@+id/item_line"
+                   android:src="@drawable/blue_right"
+                   android:layout_centerVertical="true"
+                   android:layout_toRightOf="@+id/liner_one"
+                   android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+
+</RelativeLayout>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="fill_parent"
+              android:id="@+id/main"
+              android:layout_height="fill_parent"
+              android:orientation="vertical">
+
+    <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:clickable="true"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+        <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/top_title_height"
+                android:background="@color/mm_main_bg_mine_top">
+
+            <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:gravity="center"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginRight="50dp"
+                    android:orientation="horizontal">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="8dip"
+                        android:text="贵人"
+                        android:id="@+id/title"
+                        android:singleLine="true"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"/>
+            </LinearLayout>
+            <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:id="@+id/menu"
+                    android:paddingLeft="10dp"
+                    android:src="@drawable/md_return"
+                    android:paddingRight="10dp"/>
+            <TextView android:layout_width="wrap_content"
+                       android:id="@+id/close"
+                       android:text="关闭"
+                       android:textColor="@color/white"
+                       android:gravity="center_vertical"
+                       android:layout_marginLeft="15dp"
+                       android:paddingLeft="15dp"
+                       android:paddingRight="10dp"
+                       android:layout_centerVertical="true"
+                       android:layout_toRightOf="@+id/menu"
+                       android:layout_height="match_parent"/>
+
+        </RelativeLayout>
+
+        <LinearLayout android:layout_width="match_parent"
+                      android:orientation="vertical"
+                      android:layout_weight="1"
+                      android:paddingBottom="5dp"
+                      android:layout_height="match_parent">
+            <WebView
+                    android:id="@+id/detail_webview"
+                    android:layout_width="match_parent"
+                    android:scrollbars="none"
+                    android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

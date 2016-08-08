@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:id="@+id/main"
+              android:layout_width="match_parent"
+              android:background="@color/detail_back"
+              android:layout_height="match_parent">
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/topbar_height"
+            android:background="@color/mm_main_bg_mine_top"
+            android:gravity="center_vertical"
+            >
+        <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:id="@+id/detail_goods_back"
+                android:paddingLeft="10dp"
+                android:src="@drawable/md_return"
+                android:paddingRight="10dp"
+                />
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:singleLine="true"
+                android:text="商品详情"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:id="@+id/goods_detail_title"/>
+        <Button
+                android:id="@+id/detail_goods_item"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dip"
+                android:paddingRight="5dp"
+                android:layout_centerVertical="true"
+                android:background="@drawable/icons_others_menu"
+                android:onClick="onTopMenuPopupButtonClick"/>
+    </RelativeLayout>
+    <RelativeLayout android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent">
+        <WebView
+                android:id="@+id/webview"
+                android:layout_width="match_parent"
+                android:scrollbars="none"
+                android:layout_height="wrap_content"/>
+        <!--<ImageView android:layout_width="wrap_content"-->
+                   <!--android:src="@drawable/icon_type_jian"-->
+                   <!--android:id="@+id/top"-->
+                   <!--android:visibility="gone"-->
+                   <!--android:layout_alignParentRight="true"-->
+                   <!--android:layout_centerVertical="true"-->
+                   <!--android:layout_marginRight="20dp"-->
+                   <!--android:layout_height="wrap_content"/>-->
+        <!--<TextView android:layout_width="match_parent"-->
+                  <!--android:text="查看评论"-->
+                  <!--android:padding="8dp"-->
+                  <!--android:id="@+id/select_comment"-->
+                  <!--android:textColor="@color/black_text_color"-->
+                  <!--android:layout_alignParentBottom="true"-->
+                  <!--android:layout_height="wrap_content"/>-->
+
+    </RelativeLayout>
+
+    <!--<com.liangxun.yuejiula.library.PullToRefreshListView-->
+            <!--android:id="@+id/lstv"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:cacheColorHint="#00000000"-->
+            <!--android:divider="#e9e9e9"-->
+            <!--android:dividerHeight="0.5dp"-->
+            <!--android:fadingEdge="none"-->
+            <!--android:fastScrollEnabled="false"-->
+            <!--android:footerDividersEnabled="false"-->
+            <!--android:headerDividersEnabled="false"-->
+            <!--android:smoothScrollbar="true"/>-->
+
+    <View android:layout_width="match_parent"
+          android:layout_height="0.5dp"
+          android:background="#d1d1d1"/>
+
+    <!--<LinearLayout android:layout_width="match_parent"-->
+                  <!--android:layout_height="50dp"-->
+                  <!--android:gravity="center"-->
+                  <!--android:background="@color/dark_gray">-->
+        <!--<TextView android:layout_width="0dp"-->
+                  <!--android:text="收藏"-->
+                  <!--android:visibility="gone"-->
+                  <!--android:id="@+id/button_favour"-->
+                  <!--android:layout_weight="0.5"-->
+                  <!--android:padding="5dp"-->
+                  <!--android:textColor="@color/white"-->
+                  <!--android:gravity="center"-->
+                  <!--android:drawableTop="@drawable/favour_n"-->
+                  <!--android:layout_height="match_parent"/>-->
+        <!--<View android:layout_width="1dp"-->
+              <!--android:background="@color/white"-->
+              <!--android:layout_height="wrap_content"></View>-->
+        <!--<TextView android:layout_width="0dp"-->
+                  <!--android:drawableTop="@drawable/mine_cart"-->
+                  <!--android:layout_height="match_parent"-->
+                  <!--android:text="购物车"-->
+                  <!--android:padding="5dp"-->
+                  <!--android:id="@+id/foot_goods"-->
+                  <!--android:gravity="center"-->
+                  <!--android:layout_weight="0.6"-->
+                  <!--android:textColor="@color/white"-->
+                <!--/>-->
+        <!--<Button android:layout_width="0dp"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:text="加入购物车"-->
+                <!--android:background="@drawable/button_selector_red_one"-->
+                <!--android:id="@+id/foot_cart"-->
+                <!--android:gravity="center"-->
+                <!--android:layout_weight="1"-->
+                <!--android:textSize="16sp"-->
+                <!--android:textColor="@color/white"-->
+                <!--/>-->
+        <!--<Button android:layout_width="0dp"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:text="马上买"-->
+                <!--android:visibility="gone"-->
+                <!--android:background="@drawable/button_selector_yellow_one"-->
+                <!--android:id="@+id/foot_order"-->
+                <!--android:gravity="center"-->
+                <!--android:layout_weight="1"-->
+                <!--android:textSize="16dp"-->
+                <!--android:textColor="@color/white"-->
+                <!--/>-->
+    <!--</LinearLayout>-->
+
+</LinearLayout>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+       android:shape="rectangle">
+
+    <solid android:color="#7f364653"/>
+    <!--<stroke android:width="2.0dip" android:color="#b4ffffff" android:dashWidth="3.0dip" android:dashGap="0.0dip" />-->
+    <padding android:left="7.0dip" android:top="7.0dip" android:right="7.0dip" android:bottom="7.0dip" />
+    <corners android:radius="0dp"/>
+
+</shape>
+
+<!--<span style="font-size:18px;"><?xml version="1.0" encoding="UTF-8"?>-->
+<!--&lt;!&ndash; 半透明圆角背景 &ndash;&gt;-->
+<!--<shape android:shape="rectangle"-->
+       <!--xmlns:android="http://schemas.android.com/apk/res/android">-->
+    <!--<solid android:color="#b4000000" />-->
+    <!--<stroke android:width="2.0dip" android:color="#b4ffffff" android:dashWidth="3.0dip" android:dashGap="0.0dip" />-->
+    <!--<padding android:left="7.0dip" android:top="7.0dip" android:right="7.0dip" android:bottom="7.0dip" />-->
+    <!--<corners android:radius="8.0dip" />-->
+<!--</shape></span-->

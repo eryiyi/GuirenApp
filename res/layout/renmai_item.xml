@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:background="@drawable/zhuye_item_select"
+                android:layout_height="wrap_content">
+
+    <ImageView
+            android:layout_width="65dp"
+            android:src="@drawable/default_avatar"
+            android:scaleType="fitXY"
+            android:id="@+id/home_viewed_item_cover"
+            android:layout_height="65dp"/>
+
+    <TextView
+            android:id="@+id/home_viewed_item_name"
+            android:layout_width="wrap_content"
+            android:layout_marginRight="88dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/blue"
+            android:textSize="14sp"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="8dp"
+            android:layout_toRightOf="@+id/home_viewed_item_cover"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:text="令狐冲"/>
+
+    <TextView
+            android:id="@+id/home_viewed_item_time"
+            android:layout_width="wrap_content"
+            android:text="查看人脉"
+            android:visibility="gone"
+            android:padding="6dp"
+            android:background="@color/mm_top_bg"
+            android:layout_marginRight="15dp"
+            android:gravity="center|right"
+            android:layout_marginTop="15dp"
+            android:layout_alignParentRight="true"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="13sp"/>
+
+    <TextView
+            android:id="@+id/home_item_school"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:layout_marginTop="1dp"
+            android:layout_toRightOf="@+id/home_viewed_item_cover"
+            android:textSize="13sp"
+            android:layout_marginLeft="8dp"
+            android:layout_below="@+id/home_viewed_item_name"
+            android:textColor="@color/textColor"
+            android:text="滨州学院"
+            android:drawablePadding="8dip"/>
+
+    <TextView android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginLeft="8dp"
+              android:layout_toRightOf="@+id/home_viewed_item_cover"
+              android:text="hagnyhe"
+              android:layout_marginTop="1dp"
+              android:id="@+id/home_viewed_item_cont"
+              android:textSize="13dp"
+              android:layout_below="@+id/home_item_school"
+              android:textColor="@color/textColor"/>
+
+</RelativeLayout>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:id="@+id/main"
+              android:orientation="vertical"
+              android:background="@color/white">
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/topbar_height"
+            android:background="@color/mm_main_bg_mine_top"
+            android:gravity="center_vertical"
+            >
+        <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:id="@+id/back"
+                android:paddingLeft="10dp"
+                android:src="@drawable/md_return"
+                android:paddingRight="10dp"
+                />
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textColor="@color/white"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:singleLine="true"
+                android:text="关于"
+                android:layout_marginLeft="45dp"
+                android:layout_marginRight="45dp"
+                android:id="@+id/detail_title"
+                />
+        <TextView android:layout_width="wrap_content"
+                   android:layout_height="match_parent"
+                   android:text="分享"
+                   android:visibility="gone"
+                   android:textSize="16sp"
+                   android:gravity="center_vertical"
+                   android:textColor="@color/white"
+                   android:layout_alignParentRight="true"
+                   android:paddingLeft="10dp"
+                   android:paddingRight="15dp"
+                   android:id="@+id/share"
+                />
+    </RelativeLayout>
+    <LinearLayout android:layout_width="match_parent"
+                  android:orientation="vertical"
+                  android:layout_weight="1"
+                  android:layout_height="wrap_content">
+        <ImageView android:layout_width="80dp"
+                   android:layout_gravity="center_horizontal"
+                   android:src="@drawable/ic_launcher"
+                   android:id="@+id/head"
+                   android:layout_marginTop="25dp"
+                   android:layout_height="80dp"/>
+        <TextView android:layout_width="wrap_content"
+                  android:text="贵人"
+                  android:layout_marginTop="15dp"
+                  android:textSize="16sp"
+                  android:textColor="@color/textColor"
+                  android:layout_gravity="center_horizontal"
+                  android:layout_height="wrap_content"/>
+        <TextView android:layout_width="wrap_content"
+                  android:text="V1.0"
+                  android:layout_marginTop="6dp"
+                  android:textSize="12sp"
+                  android:id="@+id/version"
+                  android:layout_gravity="center_horizontal"
+                  android:textColor="@color/blue"
+                  android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+
+    <TextView android:layout_width="wrap_content"
+              android:gravity="center"
+              android:padding="15dp"
+              android:textColor="@color/textColortwo"
+              android:textSize="12sp"
+              android:lineSpacingMultiplier="1.2"
+              android:text="山东贵人网络科技有限公司 版权所有 \nCopyright 2015-2022 Guiren All Right Reserved"
+              android:layout_gravity="center_horizontal"
+              android:layout_height="wrap_content"/>
+</LinearLayout>
