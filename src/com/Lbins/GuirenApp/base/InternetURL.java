@@ -251,4 +251,7 @@ public class InternetURL {
     //微信统一下单notify_url
     public static final String WEIXIN_NOTIFY_URL = INTERNAL + "orderSaveWxFk.do";
 
+    //获得价格表单
+    public static final String GET_MOENY_JIAGE_URL = INTERNAL + "getMoneyJiage.do";
+
 }

@@ -13,18 +13,18 @@ import android.widget.Toast;
 import com.Lbins.GuirenApp.R;
 import com.Lbins.GuirenApp.base.BaseActivity;
 import com.Lbins.GuirenApp.base.InternetURL;
+import com.Lbins.GuirenApp.data.MoneyJiageObjData;
 import com.Lbins.GuirenApp.data.OrderInfoAndSignDATA;
+import com.Lbins.GuirenApp.data.RecordDATA;
 import com.Lbins.GuirenApp.data.SuccessData;
+import com.Lbins.GuirenApp.module.MoneyJiageObj;
 import com.Lbins.GuirenApp.module.Order;
 import com.Lbins.GuirenApp.order.OrderInfoAndSign;
 import com.Lbins.GuirenApp.order.PayResult;
 import com.Lbins.GuirenApp.util.StringUtil;
 import com.Lbins.GuirenApp.weixin.Util;
 import com.alipay.sdk.app.PayTask;
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
+import com.android.volley.*;
 import com.android.volley.toolbox.StringRequest;
 import com.tencent.mm.sdk.modelpay.PayReq;
 import com.tencent.mm.sdk.openapi.IWXAPI;
@@ -32,7 +32,9 @@ import com.tencent.mm.sdk.openapi.WXAPIFactory;
 import org.json.JSONObject;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -100,9 +102,10 @@ public class OrderMakeActivity extends BaseActivity implements View.OnClickListe
         initView();
 
         //微信支付
-
         // 通过WXAPIFactory工厂，获取IWXAPI的实例
         api = WXAPIFactory.createWXAPI(this, InternetURL.WEIXIN_APPID, false);
+        //获得价格表单
+        getMoney();
     }
 
     private void initView() {
@@ -124,13 +127,13 @@ public class OrderMakeActivity extends BaseActivity implements View.OnClickListe
         }
     }
 
-    //计算金额总的
-    void toCalculate(){
-        DecimalFormat df = new DecimalFormat("0.00");
-        Double doublePrices = 0.0;
-        doublePrices = doublePrices + Double.parseDouble(number.getText().toString()) * Double.parseDouble(money.getText().toString());
-        order_count.setText(df.format(doublePrices).toString());
-    }
+//    //计算金额总的
+//    void toCalculate(){
+//        DecimalFormat df = new DecimalFormat("0.00");
+//        Double doublePrices = 0.0;
+//        doublePrices = doublePrices + Double.parseDouble(number.getText().toString()) * Double.parseDouble(money.getText().toString());
+//        order_count.setText(df.format(doublePrices).toString());
+//    }
 
     //传order给服务器
     private void sendOrderToServer(final Order order) {
@@ -364,5 +367,64 @@ public class OrderMakeActivity extends BaseActivity implements View.OnClickListe
             Log.e("PAY_GET", "异常："+e.getMessage());
             Toast.makeText(OrderMakeActivity.this, "异常："+e.getMessage(), Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private List<MoneyJiageObj> list = new ArrayList<MoneyJiageObj>();
+    private void getMoney() {
+        StringRequest request = new StringRequest(
+                Request.Method.POST,
+                InternetURL.GET_MOENY_JIAGE_URL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String s) {
+                        if (StringUtil.isJson(s)) {
+                            MoneyJiageObjData data = getGson().fromJson(s, MoneyJiageObjData.class);
+                            if (Integer.parseInt(data.getCode()) == 200) {
+                                list.clear();
+                                list.addAll(data.getData());
+                                for(MoneyJiageObj moneyJiageObj : list){
+                                   if("0".equals(moneyJiageObj.getIstype())){
+                                       money.setText(moneyJiageObj.getMoney_jiage());
+                                   }
+                                }
+                            } else {
+                                Toast.makeText(OrderMakeActivity.this, R.string.get_data_error, Toast.LENGTH_SHORT).show();
+                            }
+                        } else {
+                            Toast.makeText(OrderMakeActivity.this, R.string.get_data_error, Toast.LENGTH_SHORT).show();
+                        }
+                        if(progressDialog != null){
+                            progressDialog.dismiss();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        if(progressDialog != null){
+                            progressDialog.dismiss();
+                        }
+                        Toast.makeText(OrderMakeActivity.this, R.string.get_data_error, Toast.LENGTH_SHORT).show();
+                    }
+                }
+        ) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                return params;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Content-Type", "application/x-www-form-urlencoded");
+                return params;
+            }
+        };
+
+        request.setRetryPolicy(new DefaultRetryPolicy(10000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        getRequestQueue().add(request);
     }
 }
