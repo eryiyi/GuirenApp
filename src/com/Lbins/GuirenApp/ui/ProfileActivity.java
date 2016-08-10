@@ -490,6 +490,9 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
             case R.id.guirenlu:
             {
                 //贵人录
+                Intent intent = new Intent(ProfileActivity.this, TongxunluActivityT.class);
+                intent.putExtra("mm_emp_id", mm_emp_id);
+                startActivity(intent);
             }
                 break;
         }

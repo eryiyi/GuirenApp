@@ -122,7 +122,7 @@ public class ThreeFragment extends BaseFragment implements View.OnClickListener 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                XixunObj xixunObj = recordList.get(position-1);
+                XixunObj xixunObj = recordList.get(position-2);
                 Intent intentV = new Intent(getActivity(), ProfileActivity.class);
                 intentV.putExtra("mm_emp_id", xixunObj.getMm_emp_id());
                 startActivity(intentV);
