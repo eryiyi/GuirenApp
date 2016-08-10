@@ -4,28 +4,16 @@ package com.Lbins.GuirenApp.wxapi;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Toast;
 import com.Lbins.GuirenApp.R;
 import com.Lbins.GuirenApp.base.ActivityTack;
 import com.Lbins.GuirenApp.base.BaseActivity;
-import com.Lbins.GuirenApp.base.InternetURL;
-import com.Lbins.GuirenApp.data.SuccessData;
 import com.Lbins.GuirenApp.ui.OrderMakeActivity;
-import com.Lbins.GuirenApp.util.StringUtil;
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
 import com.tencent.mm.sdk.constants.ConstantsAPI;
 import com.tencent.mm.sdk.modelbase.BaseReq;
 import com.tencent.mm.sdk.modelbase.BaseResp;
 import com.tencent.mm.sdk.openapi.IWXAPI;
 import com.tencent.mm.sdk.openapi.IWXAPIEventHandler;
 import com.tencent.mm.sdk.openapi.WXAPIFactory;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class WXPayEntryActivity extends BaseActivity implements IWXAPIEventHandler {
 	

@@ -14,7 +14,6 @@ import android.widget.TextView;
 import com.Lbins.GuirenApp.GuirenApplication;
 import com.Lbins.GuirenApp.R;
 import com.Lbins.GuirenApp.face.FaceConversionUtil;
-import com.Lbins.GuirenApp.huanxin.Constant;
 import com.Lbins.GuirenApp.module.Record;
 import com.Lbins.GuirenApp.ui.GalleryUrlActivity;
 import com.Lbins.GuirenApp.util.Constants;

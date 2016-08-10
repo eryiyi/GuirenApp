@@ -14,7 +14,6 @@ import com.Lbins.GuirenApp.R;
 import com.Lbins.GuirenApp.adapter.ItemRenshiAdapter;
 import com.Lbins.GuirenApp.base.BaseFragment;
 import com.Lbins.GuirenApp.base.InternetURL;
-import com.Lbins.GuirenApp.data.EmpsData;
 import com.Lbins.GuirenApp.data.EmpsRmData;
 import com.Lbins.GuirenApp.library.PullToRefreshBase;
 import com.Lbins.GuirenApp.library.PullToRefreshGridView;

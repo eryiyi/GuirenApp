@@ -44,15 +44,12 @@ import com.hyphenate.chat.EMConversation;
 import com.hyphenate.chat.EMMessage;
 import com.hyphenate.easeui.utils.EaseCommonUtils;
 import com.hyphenate.util.EMLog;
-import com.tencent.mm.sdk.constants.Build;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import android.os.Environment;
-import java.io.File;
 
 
 public class MainActivity extends BaseActivity implements View.OnClickListener ,Runnable{
