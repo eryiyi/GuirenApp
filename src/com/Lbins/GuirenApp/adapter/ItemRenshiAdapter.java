@@ -63,7 +63,6 @@ public class ItemRenshiAdapter extends BaseAdapter {
         if (cell != null) {
             imageLoader.displayImage(cell.getMm_emp_cover(), holder.item_head, GuirenApplication.txOptions, animateFirstListener);
             holder.name.setText(cell.getMm_emp_nickname());
-            holder.name.setText(cell.getMm_emp_nickname() + cell.getTop_number());
             if(position == (records.size()-1)){
                 //如果是最后一个
                 holder.item_line.setVisibility(View.GONE);

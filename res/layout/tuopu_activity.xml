@@ -83,14 +83,15 @@
             </RelativeLayout>
 
             <ImageView android:layout_width="1dp"
+                       android:visibility="gone"
                        android:layout_gravity="center"
                        android:background="@color/gray01"
                        android:layout_height="40dp"/>
 
             <RelativeLayout android:layout_width="0dp"
                             android:layout_weight="1"
-                            android:visibility="gone"
                             android:padding="6dp"
+                            android:visibility="gone"
                             android:layout_gravity="center"
                             android:id="@+id/foot_liner_three"
                             android:layout_height="wrap_content">
@@ -98,7 +99,7 @@
                           android:id="@+id/foot_three"
                           android:textSize="18sp"
                           android:layout_centerHorizontal="true"
-                          android:text="信用线路"
+                          android:text="最短线路"
                           android:textColor="@color/textColortwo"
                           android:gravity="center"
                           android:layout_height="match_parent"/>

@@ -100,7 +100,7 @@ public class TuopuFragmentThree extends BaseFragment {
                             EmpsRmData data = getGson().fromJson(s, EmpsRmData.class);
                             if (Integer.parseInt(data.getCode()) == 200) {
                                 lists.clear();
-                                lists.addAll(data.getData()[1]);
+                                lists.addAll(data.getData()[2]);
                                 lstv1.onRefreshComplete();
                                 adapter.notifyDataSetChanged();
                             } else {

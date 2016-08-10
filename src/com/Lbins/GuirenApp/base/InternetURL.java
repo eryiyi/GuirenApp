@@ -1,8 +1,8 @@
 package com.Lbins.GuirenApp.base;
 
 public class InternetURL {
-    public static final String INTERNAL = "http://smilekyle.xicp.net:42765/";
-//    public static final String INTERNAL = "http://120.27.108.66:80/";
+//    public static final String INTERNAL = "http://smilekyle.xicp.net:42765/";
+    public static final String INTERNAL = "http://120.27.108.66:80/";
     public static final String QINIU_URL =  "http://7xt74j.com1.z0.glb.clouddn.com/";
 
     public static final String WEIXIN_APPID = "wx4da8b73a07135cd1";
