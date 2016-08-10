@@ -1,5 +1,9 @@
 package com.Lbins.GuirenApp.ui;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -14,17 +18,17 @@ import android.widget.Toast;
 import com.Lbins.GuirenApp.R;
 import com.Lbins.GuirenApp.base.BaseActivity;
 import com.Lbins.GuirenApp.base.InternetURL;
-import com.Lbins.GuirenApp.data.MoneyJiageObjData;
-import com.Lbins.GuirenApp.data.OrderInfoAndSignDATA;
-import com.Lbins.GuirenApp.data.RecordDATA;
-import com.Lbins.GuirenApp.data.SuccessData;
+import com.Lbins.GuirenApp.data.*;
 import com.Lbins.GuirenApp.module.MoneyJiageObj;
 import com.Lbins.GuirenApp.module.Order;
+import com.Lbins.GuirenApp.module.Record;
+import com.Lbins.GuirenApp.module.WxPayObj;
 import com.Lbins.GuirenApp.order.OrderInfoAndSign;
 import com.Lbins.GuirenApp.order.PayResult;
+import com.Lbins.GuirenApp.util.Constants;
 import com.Lbins.GuirenApp.util.MD5;
 import com.Lbins.GuirenApp.util.StringUtil;
-import com.Lbins.GuirenApp.weixin.Util;
+import com.Lbins.GuirenApp.wxpay.Util;
 import com.alipay.sdk.app.PayTask;
 import com.android.volley.*;
 import com.android.volley.toolbox.StringRequest;
@@ -106,7 +110,7 @@ public class OrderMakeActivity extends BaseActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.order_make_activity);
         initView();
-
+        registerBoradcastReceiver();
         //微信支付
         // 通过WXAPIFactory工厂，获取IWXAPI的实例
         api = WXAPIFactory.createWXAPI(this, InternetURL.WEIXIN_APPID, false);
@@ -114,6 +118,8 @@ public class OrderMakeActivity extends BaseActivity implements View.OnClickListe
         getMoney();
         toCalculate();
     }
+
+//    pay_wx_success
 
     private void initView() {
         back = (ImageView) this.findViewById(R.id.back);
@@ -337,7 +343,7 @@ public class OrderMakeActivity extends BaseActivity implements View.OnClickListe
 
 
     String xmlStr = "";
-
+    WxPayObj wxPayObj;
     public void goToPayWeixin(View view){
         // 将该app注册到微信
         api.registerApp(InternetURL.WEIXIN_APPID);
@@ -359,10 +365,14 @@ public class OrderMakeActivity extends BaseActivity implements View.OnClickListe
                             @Override
                             public void onResponse(String s) {
                                 if (StringUtil.isJson(s)) {
-                                    SuccessData data = getGson().fromJson(s, SuccessData.class);
+                                    WxPayObjData data = getGson().fromJson(s, WxPayObjData.class);
                                     if (Integer.parseInt(data.getCode()) == 200) {
                                         //我们服务端已经生成订单，微信支付统一下单
-                                        xmlStr = data.getData();
+                                        wxPayObj = data.getData();
+                                        if(wxPayObj != null){
+                                            xmlStr =wxPayObj.getXmlStr();
+                                            out_trade_no = wxPayObj.getOut_trade_no();
+                                        }
                                         // 启动一个线程
                                         new Thread(OrderMakeActivity.this).start();
                                     } else {
@@ -421,7 +431,6 @@ public class OrderMakeActivity extends BaseActivity implements View.OnClickListe
                     case XmlPullParser.START_TAG:
 
                         if("xml".equals(nodeName)==false){
-                            //实例化student对象
                             xml.put(nodeName,parser.nextText());
                         }
                         break;
@@ -547,5 +556,32 @@ public class OrderMakeActivity extends BaseActivity implements View.OnClickListe
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         getRequestQueue().add(request);
+    }
+
+    //广播接收动作
+    private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if(action.equals("pay_wx_success")){
+                //
+                updateMineOrder();
+            }
+        }
+
+    };
+
+    //注册广播
+    public void registerBoradcastReceiver() {
+        IntentFilter myIntentFilter = new IntentFilter();
+        myIntentFilter.addAction("pay_wx_success");
+        //注册广播
+        registerReceiver(mBroadcastReceiver, myIntentFilter);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(mBroadcastReceiver);
     }
 }

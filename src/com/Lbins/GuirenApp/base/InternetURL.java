@@ -244,7 +244,7 @@ public class InternetURL {
     //更新背景图
     public static final String UPDATE_BG_URL = INTERNAL + "updateMineBg.do";
     //分享邀请码页面
-    public static final String SHARE_YAOQING_CARD_URL = INTERNAL + "shareYaoqingCard.do";
+    public static final String SHARE_YAOQING_CARD_URL = INTERNAL + "html/download.html";
 
     //更新订单状态
     public static final String UPDATE_ORDER_TOSERVER = INTERNAL + "orderUpdate.do";

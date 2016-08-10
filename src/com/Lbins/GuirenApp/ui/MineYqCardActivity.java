@@ -49,7 +49,7 @@ public class MineYqCardActivity  extends BaseActivity implements View.OnClickLis
         initView();
         initData();
     }
-
+    YaoqingCard record;
     void initView(){
         this.findViewById(R.id.menu).setOnClickListener(this);
         btn_goumai = (TextView) this.findViewById(R.id.btn_goumai);
@@ -65,9 +65,10 @@ public class MineYqCardActivity  extends BaseActivity implements View.OnClickLis
                         DateUtils.FORMAT_SHOW_TIME | DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_ABBREV_ALL);
 
                 refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
-                IS_REFRESH = true;
-                pageIndex = 1;
-                initData();
+                listView.onRefreshComplete();
+//                IS_REFRESH = true;
+//                pageIndex = 1;
+//                initData();
             }
 
             @Override
@@ -76,40 +77,27 @@ public class MineYqCardActivity  extends BaseActivity implements View.OnClickLis
                         DateUtils.FORMAT_SHOW_TIME | DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_ABBREV_ALL);
 
                 refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
-                IS_REFRESH = false;
-                pageIndex++;
-                initData();
+                listView.onRefreshComplete();
+//                IS_REFRESH = false;
+//                pageIndex++;
+//                initData();
             }
         });
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                YaoqingCard record = recordList.get(position - 1);
+                record  = recordList.get(position - 1);
                 if("0".equals(record.getIs_use())){
-                    //否
-//                    holder.card_btn.setText("已使用");
+                    share();
                 }else {
-//                    holder.card_btn.setText("点击分享给好友");
-                    share(record);
+                    showMsg(MineYqCardActivity.this, "邀请码已经使用！换个试试");
                 }
             }
         });
     }
 
-//    private String guiren_card_id;
-//    private String guiren_card_num;
-//    private String mm_emp_id;
-//    private String is_use;
-//    private String y_mm_emp_id;
-//    private String mm_emp_nickname;
-//    private String mm_emp_mobile;
-//    private String mm_emp_nickname_y;
-//    private String mm_emp_mobile_y;
-
-    YaoqingCard recordVOT = null;
-    void share(YaoqingCard recordVO) {
-        recordVOT = recordVO;
+    void share() {
         new ShareAction(MineYqCardActivity.this).setDisplayList(SHARE_MEDIA.QQ, SHARE_MEDIA.QZONE, SHARE_MEDIA.WEIXIN, SHARE_MEDIA.WEIXIN_CIRCLE)
                 .setShareboardclickCallback(shareBoardlistener)
                 .open();
@@ -120,12 +108,12 @@ public class MineYqCardActivity  extends BaseActivity implements View.OnClickLis
         @Override
         public void onclick(SnsPlatform snsPlatform, SHARE_MEDIA share_media) {
             UMImage image = new UMImage(MineYqCardActivity.this, R.drawable.ic_launcher);
-            String title = recordVOT.getMm_emp_nickname_y() +"邀请您加入贵人，邀请码：";
-            String content = (recordVOT.getGuiren_card_num()==null?"":"暂无");
+            String title =  (record.getMm_emp_nickname()==null?"":record.getMm_emp_nickname()) +"邀请您加入贵人" ;
+            String content = "邀请码：" + record.getGuiren_card_num();
             new ShareAction(MineYqCardActivity.this).setPlatform(share_media).setCallback(umShareListener)
                     .withText(content)
                     .withTitle(title)
-                    .withTargetUrl((InternetURL.SHARE_YAOQING_CARD_URL + "?id=" + recordVOT.getGuiren_card_id()))
+                    .withTargetUrl((InternetURL.SHARE_YAOQING_CARD_URL + "?id=" + record.getGuiren_card_id()))
                     .withMedia(image)
                     .share();
         }
@@ -166,9 +154,9 @@ public class MineYqCardActivity  extends BaseActivity implements View.OnClickLis
                         if (StringUtil.isJson(s)) {
                             YaoqingCardData data = getGson().fromJson(s, YaoqingCardData.class);
                             if (Integer.parseInt(data.getCode()) == 200) {
-                                if (IS_REFRESH) {
+//                                if (IS_REFRESH) {
                                     recordList.clear();
-                                }
+//                                }
                                 recordList.addAll(data.getData());
                                 listView.onRefreshComplete();
                                 if(recordList.size() > 0){

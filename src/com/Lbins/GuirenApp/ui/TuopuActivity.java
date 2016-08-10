@@ -12,7 +12,6 @@ import com.Lbins.GuirenApp.base.BaseActivity;
 import com.Lbins.GuirenApp.fragment.TuopuFragmentOne;
 import com.Lbins.GuirenApp.fragment.TuopuFragmentThree;
 import com.Lbins.GuirenApp.fragment.TuopuFragmentTwo;
-import com.Lbins.GuirenApp.util.HttpUtils;
 
 /**
  * Created by zhl on 2016/6/13.
@@ -115,16 +114,7 @@ public class TuopuActivity extends BaseActivity implements View.OnClickListener 
     boolean isMobileNet, isWifiNet;
     @Override
     public void onClick(View view) {
-        try {
-            isMobileNet = HttpUtils.isMobileDataEnable(getApplicationContext());
-            isWifiNet = HttpUtils.isWifiDataEnable(getApplicationContext());
-            if (!isMobileNet && !isWifiNet) {
-                Toast.makeText(this, R.string.net_work_error, Toast.LENGTH_SHORT).show();
-                return;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
         switchFragment(view.getId());
     }
 

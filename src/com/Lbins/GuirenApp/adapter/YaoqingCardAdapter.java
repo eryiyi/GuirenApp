@@ -66,8 +66,7 @@ public class YaoqingCardAdapter extends BaseAdapter {
         final YaoqingCard cell = records.get(position);//获得元素
         if (cell != null) {
             holder.card_number.setText(cell.getGuiren_card_num());
-            if("0".equals(cell.getIs_use())){
-                //否
+            if("1".equals(cell.getIs_use())){
                 holder.card_btn.setText("已使用");
                 holder.relate.setBackground(mContext.getResources().getDrawable(R.drawable.btn_style_gray_card));
             }else {

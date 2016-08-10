@@ -66,7 +66,8 @@ public class WXPayEntryActivity extends BaseActivity implements IWXAPIEventHandl
 				//说明支付成功
 				showMsg(WXPayEntryActivity.this, "支付成功");
 				//调用逻辑处理
-				updateMineOrder();
+				Intent intent1 = new Intent("pay_wx_success");
+				sendBroadcast(intent1);
 				ActivityTack.getInstanse().popUntilActivity(OrderMakeActivity.class);
 			}else {
 				//支付失败
@@ -83,46 +84,4 @@ public class WXPayEntryActivity extends BaseActivity implements IWXAPIEventHandl
 //		}
 	}
 
-	void updateMineOrder(){
-		StringRequest request = new StringRequest(
-				Request.Method.POST,
-				InternetURL.UPDATE_ORDER_TOSERVER,
-				new Response.Listener<String>() {
-					@Override
-					public void onResponse(String s) {
-						if (StringUtil.isJson(s)) {
-							SuccessData data = getGson().fromJson(s, SuccessData.class);
-							if (Integer.parseInt(data.getCode()) == 200) {
-								Toast.makeText(WXPayEntryActivity.this, R.string.order_success, Toast.LENGTH_SHORT).show();
-							} else {
-								Toast.makeText(WXPayEntryActivity.this, R.string.order_error_one, Toast.LENGTH_SHORT).show();
-							}
-						} else {
-							Toast.makeText(WXPayEntryActivity.this, R.string.order_error_one, Toast.LENGTH_SHORT).show();
-						}
-					}
-				},
-				new Response.ErrorListener() {
-					@Override
-					public void onErrorResponse(VolleyError volleyError) {
-						Toast.makeText(WXPayEntryActivity.this, R.string.order_error_one, Toast.LENGTH_SHORT).show();
-					}
-				}
-		) {
-			@Override
-			protected Map<String, String> getParams() throws AuthFailureError {
-				Map<String, String> params = new HashMap<String, String>();
-				params.put("trade_no",  OrderMakeActivity.out_trade_no);
-				return params;
-			}
-
-			@Override
-			public Map<String, String> getHeaders() throws AuthFailureError {
-				Map<String, String> params = new HashMap<String, String>();
-				params.put("Content-Type", "application/x-www-form-urlencoded");
-				return params;
-			}
-		};
-		getRequestQueue().add(request);
-	}
 }

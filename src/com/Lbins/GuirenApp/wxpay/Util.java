@@ -1,4 +1,4 @@
-package com.Lbins.GuirenApp.weixin;
+package com.Lbins.GuirenApp.wxpay;
 
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
@@ -150,7 +150,7 @@ public class Util {
 		} 
 	}  
 
-	private static HttpClient getNewHttpClient() {
+	private static HttpClient getNewHttpClient() { 
 	   try { 
 	       KeyStore trustStore = KeyStore.getInstance(KeyStore.getDefaultType());
 	       trustStore.load(null, null); 
@@ -162,15 +162,15 @@ public class Util {
 	       HttpProtocolParams.setVersion(params, HttpVersion.HTTP_1_1);
 	       HttpProtocolParams.setContentCharset(params, HTTP.UTF_8);
 
-	       SchemeRegistry registry = new SchemeRegistry();
-	       registry.register(new Scheme("http", PlainSocketFactory.getSocketFactory(), 80));
-	       registry.register(new Scheme("https", sf, 443));
+	       SchemeRegistry registry = new SchemeRegistry(); 
+	       registry.register(new Scheme("http", PlainSocketFactory.getSocketFactory(), 80)); 
+	       registry.register(new Scheme("https", sf, 443)); 
 
-	       ClientConnectionManager ccm = new ThreadSafeClientConnManager(params, registry);
+	       ClientConnectionManager ccm = new ThreadSafeClientConnManager(params, registry); 
 
-	       return new DefaultHttpClient(ccm, params);
+	       return new DefaultHttpClient(ccm, params); 
 	   } catch (Exception e) {
-	       return new DefaultHttpClient();
+	       return new DefaultHttpClient(); 
 	   } 
 	}
 	

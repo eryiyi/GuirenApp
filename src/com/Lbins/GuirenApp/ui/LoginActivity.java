@@ -22,7 +22,6 @@ import com.Lbins.GuirenApp.data.EmpData;
 import com.Lbins.GuirenApp.huanxin.DemoHelper;
 import com.Lbins.GuirenApp.huanxin.db.DemoDBManager;
 import com.Lbins.GuirenApp.module.Emp;
-import com.Lbins.GuirenApp.util.HttpUtils;
 import com.Lbins.GuirenApp.util.StringUtil;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -91,16 +90,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
     @Override
     public void onClick(View v) {
-        try {
-            isMobileNet = HttpUtils.isMobileDataEnable(getApplicationContext());
-            isWifiNet = HttpUtils.isWifiDataEnable(getApplicationContext());
-            if (!isMobileNet && !isWifiNet) {
-                Toast.makeText(this, R.string.net_work_error, Toast.LENGTH_SHORT).show();
-                return;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
         switch (v.getId()){
             case R.id.btn_reg:
                 //注册
