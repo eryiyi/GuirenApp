@@ -254,4 +254,6 @@ public class InternetURL {
     //获得价格表单
     public static final String GET_MOENY_JIAGE_URL = INTERNAL + "getMoneyJiage.do";
 
+    public static final String SEND_ORDER_TOSERVER_WX = INTERNAL + "orderSaveWx.do";
+
 }

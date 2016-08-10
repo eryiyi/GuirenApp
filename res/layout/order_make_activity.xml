@@ -32,7 +32,8 @@
                 android:id="@+id/goods_detail_title"/>
     </RelativeLayout>
         <RelativeLayout android:layout_width="match_parent"
-                      android:layout_height="match_parent">
+                        android:layout_weight="1"
+                      android:layout_height="wrap_content">
             <LinearLayout android:layout_width="match_parent"
                           android:orientation="horizontal"
                           android:padding="25dp"
@@ -52,8 +53,13 @@
                            android:layout_marginRight="15dp"
                            android:layout_height="wrap_content"/>
                 <TextView android:layout_width="wrap_content"
-                          android:text="20元"
+                          android:text="20"
                           android:id="@+id/money"
+                          android:textSize="35sp"
+                          android:textColor="@color/green_card"
+                          android:layout_height="wrap_content"/>
+                <TextView android:layout_width="wrap_content"
+                          android:text="元"
                           android:textSize="35sp"
                           android:textColor="@color/green_card"
                           android:layout_height="wrap_content"/>
@@ -72,7 +78,6 @@
                           android:layout_marginRight="15dp"
                           android:layout_height="wrap_content"/>
                 <TextView android:layout_width="wrap_content"
-                          android:text="20"
                           android:textSize="25sp"
                           android:id="@+id/order_count"
                           android:textColor="@color/red"
@@ -96,24 +101,25 @@
                       android:textColor="@color/textColortwo"
                       android:text="购买邀请码，邀请朋友注册。"
                       android:layout_height="wrap_content"/>
-
-            <LinearLayout android:layout_width="match_parent"
-                          android:gravity="center"
-                          android:layout_marginTop="15dp"
-                          android:padding="12dp"
-                          android:layout_below="@+id/msg"
-                          android:orientation="horizontal"
-                          android:layout_height="wrap_content">
-                <Button android:layout_width="wrap_content"
-                        android:onClick="goToPayAliy"
-                        android:layout_marginRight="8dp"
-                        android:background="@drawable/btn_pay_aliy_shape"
-                        android:layout_height="wrap_content"/>
-
-                <Button android:layout_width="wrap_content"
-                        android:onClick="goToPayWeixin"
-                        android:background="@drawable/btn_pay_weixin_shape"
-                        android:layout_height="wrap_content"/>
-            </LinearLayout>
         </RelativeLayout>
+
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:gravity="center"
+                  android:padding="15dp"
+                  android:orientation="horizontal"
+                  android:layout_height="wrap_content">
+        <Button android:layout_width="0dp"
+                android:layout_weight="1"
+                android:onClick="goToPayAliy"
+                android:layout_marginRight="8dp"
+                android:background="@drawable/btn_pay_aliy_shape"
+                android:layout_height="wrap_content"/>
+
+        <Button android:layout_width="0dp"
+                android:layout_weight="1"
+                android:onClick="goToPayWeixin"
+                android:background="@drawable/btn_pay_weixin_shape"
+                android:layout_height="wrap_content"/>
+    </LinearLayout>
 </LinearLayout>

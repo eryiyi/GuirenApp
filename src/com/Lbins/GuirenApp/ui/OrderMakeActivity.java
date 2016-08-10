@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
 import android.util.Log;
+import android.util.Xml;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -21,6 +22,7 @@ import com.Lbins.GuirenApp.module.MoneyJiageObj;
 import com.Lbins.GuirenApp.module.Order;
 import com.Lbins.GuirenApp.order.OrderInfoAndSign;
 import com.Lbins.GuirenApp.order.PayResult;
+import com.Lbins.GuirenApp.util.MD5;
 import com.Lbins.GuirenApp.util.StringUtil;
 import com.Lbins.GuirenApp.weixin.Util;
 import com.alipay.sdk.app.PayTask;
@@ -29,20 +31,21 @@ import com.android.volley.toolbox.StringRequest;
 import com.tencent.mm.sdk.modelpay.PayReq;
 import com.tencent.mm.sdk.openapi.IWXAPI;
 import com.tencent.mm.sdk.openapi.WXAPIFactory;
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONObject;
+import org.xmlpull.v1.XmlPullParser;
 
+import java.io.StringReader;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by Administrator on 2015/8/2.
  * 生成订单
  */
-public class OrderMakeActivity extends BaseActivity implements View.OnClickListener {
-    private String out_trade_no;
+public class OrderMakeActivity extends BaseActivity implements View.OnClickListener,Runnable {
+    public static String out_trade_no;
 
     //---------------------------------支付开始----------------------------------------
     private static final int SDK_PAY_FLAG = 1;
@@ -94,6 +97,9 @@ public class OrderMakeActivity extends BaseActivity implements View.OnClickListe
     private TextView order_count;//价格合计
     private TextView number;
     private TextView money;
+    //微信支付
+    // IWXAPI 是第三方app和微信通信的openapi接口
+    private IWXAPI api;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,6 +112,7 @@ public class OrderMakeActivity extends BaseActivity implements View.OnClickListe
         api = WXAPIFactory.createWXAPI(this, InternetURL.WEIXIN_APPID, false);
         //获得价格表单
         getMoney();
+        toCalculate();
     }
 
     private void initView() {
@@ -128,12 +135,12 @@ public class OrderMakeActivity extends BaseActivity implements View.OnClickListe
     }
 
 //    //计算金额总的
-//    void toCalculate(){
-//        DecimalFormat df = new DecimalFormat("0.00");
-//        Double doublePrices = 0.0;
-//        doublePrices = doublePrices + Double.parseDouble(number.getText().toString()) * Double.parseDouble(money.getText().toString());
-//        order_count.setText(df.format(doublePrices).toString());
-//    }
+    void toCalculate(){
+        DecimalFormat df = new DecimalFormat("0.00");
+        Double doublePrices = 0.0;
+        doublePrices = doublePrices + Double.parseDouble(number.getText().toString()) * Double.parseDouble(money.getText().toString());
+        order_count.setText(df.format(doublePrices).toString());
+    }
 
     //传order给服务器
     private void sendOrderToServer(final Order order) {
@@ -295,7 +302,7 @@ public class OrderMakeActivity extends BaseActivity implements View.OnClickListe
                 @Override
                 protected Map<String, String> getParams() throws AuthFailureError {
                     Map<String, String> params = new HashMap<String, String>();
-                    params.put("out_trade_no",  out_trade_no);
+                    params.put("trade_no",  out_trade_no);
                     return params;
                 }
 
@@ -318,8 +325,8 @@ public class OrderMakeActivity extends BaseActivity implements View.OnClickListe
             //先传值给服务端
             Order order = new Order();
             order.setGoods_count(number.getText().toString());
-//            order.setPayable_amount(order_count.getText().toString());
-            order.setPayable_amount("0.01");
+            order.setPayable_amount(order_count.getText().toString());
+            order.setTrade_type("0");//trade_type  0支付宝 1微信支付
             order.setEmp_id(getGson().fromJson(getSp().getString("mm_emp_id", ""), String.class));
             if(order!=null ) {
                 //传值给服务端
@@ -328,46 +335,159 @@ public class OrderMakeActivity extends BaseActivity implements View.OnClickListe
         }
     }
 
-    //微信支付
-    // IWXAPI 是第三方app和微信通信的openapi接口
-    private IWXAPI api;
+
+    String xmlStr = "";
 
     public void goToPayWeixin(View view){
-        String url = "http://wxpay.weixin.qq.com/pub_v2/app/app_pay.php?plat=android";
-        Toast.makeText(OrderMakeActivity.this, "获取订单中...", Toast.LENGTH_SHORT).show();
-        try{
-            byte[] buf = Util.httpGet(url);
-            if (buf != null && buf.length > 0) {
-                String content = new String(buf);
-                Log.e("get server pay params:", content);
-                JSONObject json = new JSONObject(content);
-                if(null != json && !json.has("retcode") ){
-                    PayReq req = new PayReq();
-                    //req.appId = "wxf8b4f85f3a794e77";  // 测试用appId
-                    req.appId			= json.getString("appid");
-                    req.partnerId		= json.getString("partnerid");
-                    req.prepayId		= json.getString("prepayid");
-                    req.nonceStr		= json.getString("noncestr");
-                    req.timeStamp		= json.getString("timestamp");
-                    req.packageValue	= json.getString("package");
-                    req.sign			= json.getString("sign");
-                    req.extData			= "app data"; // optional
-                    Toast.makeText(OrderMakeActivity.this, "正常调起支付", Toast.LENGTH_SHORT).show();
-                    // 在支付之前，如果应用没有注册到微信，应该先调用IWXMsg.registerApp将应用注册到微信
-                    api.sendReq(req);
-                }else{
-                    Log.d("PAY_GET", "返回错误"+json.getString("retmsg"));
-                    Toast.makeText(OrderMakeActivity.this, "返回错误"+json.getString("retmsg"), Toast.LENGTH_SHORT).show();
-                }
-            }else{
-                Log.d("PAY_GET", "服务器请求错误");
-                Toast.makeText(OrderMakeActivity.this, "服务器请求错误", Toast.LENGTH_SHORT).show();
+        // 将该app注册到微信
+        api.registerApp(InternetURL.WEIXIN_APPID);
+        if (StringUtil.isNullOrEmpty(order_count.getText().toString()) || order_count == null) {
+            showMsg(OrderMakeActivity.this, getResources().getString(R.string.please_select));
+        } else {
+            //先传值给服务端
+            final Order order = new Order();
+            order.setGoods_count(number.getText().toString());
+            order.setPayable_amount(order_count.getText().toString());
+            order.setTrade_type("1");//trade_type  0支付宝 1微信支付
+            order.setEmp_id(getGson().fromJson(getSp().getString("mm_emp_id", ""), String.class));
+            if(order!=null ){
+                //传值给服务端
+                StringRequest request = new StringRequest(
+                        Request.Method.POST,
+                        InternetURL.SEND_ORDER_TOSERVER_WX,
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String s) {
+                                if (StringUtil.isJson(s)) {
+                                    SuccessData data = getGson().fromJson(s, SuccessData.class);
+                                    if (Integer.parseInt(data.getCode()) == 200) {
+                                        //我们服务端已经生成订单，微信支付统一下单
+                                        xmlStr = data.getData();
+                                        // 启动一个线程
+                                        new Thread(OrderMakeActivity.this).start();
+                                    } else {
+                                        Toast.makeText(OrderMakeActivity.this, R.string.order_error_one, Toast.LENGTH_SHORT).show();
+                                        finish();
+                                    }
+                                } else {
+                                    Toast.makeText(OrderMakeActivity.this, R.string.order_error_one, Toast.LENGTH_SHORT).show();
+                                    finish();
+                                }
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError volleyError) {
+                                Toast.makeText(OrderMakeActivity.this, R.string.order_error_one, Toast.LENGTH_SHORT).show();
+                                finish();
+                            }
+                        }
+                ) {
+                    @Override
+                    protected Map<String, String> getParams() throws AuthFailureError {
+                        Map<String, String> params = new HashMap<String, String>();
+                        params.put("emp_id", order.getEmp_id());
+                        params.put("payable_amount", order.getPayable_amount());
+                        params.put("goods_count", order.getGoods_count());
+                        params.put("trade_type", order.getTrade_type());
+                        return params;
+                    }
+
+                    @Override
+                    public Map<String, String> getHeaders() throws AuthFailureError {
+                        Map<String, String> params = new HashMap<String, String>();
+                        params.put("Content-Type", "application/x-www-form-urlencoded");
+                        return params;
+                    }
+                };
+                getRequestQueue().add(request);
             }
-        }catch(Exception e){
-            Log.e("PAY_GET", "异常："+e.getMessage());
-            Toast.makeText(OrderMakeActivity.this, "异常："+e.getMessage(), Toast.LENGTH_SHORT).show();
+
         }
     }
+    public Map<String,String> decodeXml(String content) {
+        try {
+            Map<String, String> xml = new HashMap<String, String>();
+            XmlPullParser parser = Xml.newPullParser();
+            parser.setInput(new StringReader(content));
+            int event = parser.getEventType();
+            while (event != XmlPullParser.END_DOCUMENT) {
+
+                String nodeName=parser.getName();
+                switch (event) {
+                    case XmlPullParser.START_DOCUMENT:
+
+                        break;
+                    case XmlPullParser.START_TAG:
+
+                        if("xml".equals(nodeName)==false){
+                            //实例化student对象
+                            xml.put(nodeName,parser.nextText());
+                        }
+                        break;
+                    case XmlPullParser.END_TAG:
+                        break;
+                }
+                event = parser.next();
+            }
+
+            return xml;
+        } catch (Exception e) {
+            Log.e("orion",e.toString());
+        }
+        return null;
+    }
+
+    @Override
+    public void run() {
+        String url = String.format("https://api.mch.weixin.qq.com/pay/unifiedorder");
+        byte[] buf = Util.httpPost(url, xmlStr);
+        String content = new String(buf);
+        Map<String,String> xmlMap=decodeXml(content);
+        PayReq req = new PayReq();
+
+        req.appId			= xmlMap.get("appid");
+        req.partnerId		=  xmlMap.get("mch_id");
+        req.prepayId		= xmlMap.get("prepay_id");
+        req.nonceStr		= xmlMap.get("nonce_str");
+        req.packageValue			= " Sign=WXPay";
+        req.timeStamp = String.valueOf(genTimeStamp());
+
+        List<NameValuePair> signParams = new LinkedList<NameValuePair>();
+        signParams.add(new BasicNameValuePair("appid", req.appId));
+        signParams.add(new BasicNameValuePair("noncestr", req.nonceStr));
+        signParams.add(new BasicNameValuePair("package", req.packageValue));
+        signParams.add(new BasicNameValuePair("partnerid", req.partnerId));
+        signParams.add(new BasicNameValuePair("prepayid", req.prepayId));
+        signParams.add(new BasicNameValuePair("timestamp", req.timeStamp));
+
+        req.sign = genAppSign(signParams).toUpperCase();
+
+        api.sendReq(req);
+    }
+
+    private long genTimeStamp() {
+        return System.currentTimeMillis() / 1000;
+    }
+    StringBuffer sb=new StringBuffer();;
+
+    private String genAppSign(List<NameValuePair> params) {
+        StringBuilder sb = new StringBuilder();
+
+        for (int i = 0; i < params.size(); i++) {
+            sb.append(params.get(i).getName());
+            sb.append('=');
+            sb.append(params.get(i).getValue());
+            sb.append('&');
+        }
+        sb.append("key=");
+        sb.append(InternetURL.WX_API_KEY);
+
+        this.sb.append("sign str\n"+sb.toString()+"\n\n");
+        String appSign = MD5.getMessageDigest(sb.toString().getBytes());
+        return appSign;
+    }
+
 
     private List<MoneyJiageObj> list = new ArrayList<MoneyJiageObj>();
     private void getMoney() {
@@ -387,6 +507,7 @@ public class OrderMakeActivity extends BaseActivity implements View.OnClickListe
                                        money.setText(moneyJiageObj.getMoney_jiage());
                                    }
                                 }
+                                toCalculate();
                             } else {
                                 Toast.makeText(OrderMakeActivity.this, R.string.get_data_error, Toast.LENGTH_SHORT).show();
                             }
