@@ -116,15 +116,30 @@
                   android:textSize="16sp"
                   android:layout_height="wrap_content"/>
     </LinearLayout>
+    <View android:layout_width="match_parent"
+          android:background="@color/gray01"
+          android:layout_height="0.1dp">
+    </View>
 
+    <LinearLayout android:layout_width="match_parent"
+                  android:orientation="horizontal"
+                  android:id="@+id/liner_version"
+                  android:background="@drawable/btn_dark_shape"
+                  android:layout_height="50dp">
+        <TextView android:layout_width="wrap_content"
+                  android:text="更新版本"
+                  android:id="@+id/check_version"
+                  android:layout_marginLeft="15dp"
+                  android:layout_gravity="center_vertical"
+                  android:textColor="@color/black"
+                  android:textSize="16sp"
+                  android:layout_height="wrap_content"/>
+    </LinearLayout>
     <View android:layout_width="match_parent"
           android:background="@color/gray01"
           android:layout_height="0.1dp">
     </View>
-    <View android:layout_width="match_parent"
-          android:background="@color/gray01"
-          android:layout_height="0.1dp">
-    </View>
+
     <LinearLayout android:layout_width="match_parent"
                   android:orientation="horizontal"
                   android:background="@drawable/btn_dark_shape"
@@ -143,6 +158,10 @@
                   android:textSize="16sp"
                   android:layout_height="wrap_content"/>
     </LinearLayout>
+    <View android:layout_width="match_parent"
+          android:background="@color/gray01"
+          android:layout_height="0.1dp">
+    </View>
     <LinearLayout android:layout_width="match_parent"
                   android:orientation="horizontal"
 
@@ -170,7 +189,7 @@
             android:layout_marginBottom="8dp"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
-            android:text="退 出"
+            android:text="退  出"
             android:id="@+id/btn_quit"
             android:textSize="16sp"
             android:textColor="@color/white"

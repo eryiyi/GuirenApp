@@ -45,7 +45,7 @@ public class ConversationListFragment extends EaseConversationListFragment{
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                MyEMConversation conversation = conversationListView.getItem(position);
+                MyEMConversation conversation = conversationListView.getItem(position-1);
                 String username = conversation.getEmConversation().getUserName();
                 if (username.equals(EMClient.getInstance().getCurrentUser()))
                     Toast.makeText(getActivity(), R.string.Cant_chat_with_yourself, Toast.LENGTH_SHORT).show();

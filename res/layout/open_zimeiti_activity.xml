@@ -125,7 +125,7 @@
                     android:layout_marginBottom="8dp"
                     android:layout_marginLeft="30dp"
                     android:layout_marginRight="30dp"
-                    android:text="登 录"
+                    android:text="确  定"
                     android:id="@+id/sign_in_button"
                     android:textSize="16sp"
                     android:textColor="@color/white"

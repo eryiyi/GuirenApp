@@ -1,8 +1,8 @@
 package com.Lbins.GuirenApp.base;
 
 public class InternetURL {
-//    public static final String INTERNAL = "http://smilekyle.xicp.net:42765/";
-    public static final String INTERNAL = "http://120.27.108.66:80/";
+    public static final String INTERNAL = "http://smilekyle.xicp.net:42765/";
+//    public static final String INTERNAL = "http://www.shandongguiren.com/";
     public static final String QINIU_URL =  "http://7xt74j.com1.z0.glb.clouddn.com/";
 
     public static final String WEIXIN_APPID = "wx4da8b73a07135cd1";
@@ -256,4 +256,7 @@ public class InternetURL {
 
     public static final String SEND_ORDER_TOSERVER_WX = INTERNAL + "orderSaveWx.do";
 
+
+    //判断版本号
+    public static final String CHECK_VERSION_CODE_URL = INTERNAL + "getVersionCode.do";
 }

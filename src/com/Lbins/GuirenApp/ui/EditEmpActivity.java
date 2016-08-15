@@ -62,24 +62,24 @@ public class EditEmpActivity extends BaseActivity implements View.OnClickListene
     private TextView select_hy;//行业
     HangYeType record1;//所选择的行业类别
     //省市县
-    private CustomerSpinner province;
-    private CustomerSpinner city;
-    private CustomerSpinner country;
-    private List<ProvinceObj> provinces = new ArrayList<ProvinceObj>();//省
-    private ArrayList<String> provinceNames = new ArrayList<String>();//省份名称
-    private List<CityObj> citys = new ArrayList<CityObj>();//市
-    private ArrayList<String> cityNames = new ArrayList<String>();//市名称
-    private List<CountryObj> countrys = new ArrayList<CountryObj>();//区
-    private ArrayList<String> countrysNames = new ArrayList<String>();//区名称
-    ArrayAdapter<String> ProvinceAdapter;
-    ArrayAdapter<String> cityAdapter;
-    ArrayAdapter<String> countryAdapter;
-    private String provinceName = "";
-    private String cityName = "";
-    private String countryName = "";
-    private String provinceCode = "";
-    private String cityCode = "";
-    private String countryCode = "";
+//    private CustomerSpinner province;
+//    private CustomerSpinner city;
+//    private CustomerSpinner country;
+//    private List<ProvinceObj> provinces = new ArrayList<ProvinceObj>();//省
+//    private ArrayList<String> provinceNames = new ArrayList<String>();//省份名称
+//    private List<CityObj> citys = new ArrayList<CityObj>();//市
+//    private ArrayList<String> cityNames = new ArrayList<String>();//市名称
+//    private List<CountryObj> countrys = new ArrayList<CountryObj>();//区
+//    private ArrayList<String> countrysNames = new ArrayList<String>();//区名称
+//    ArrayAdapter<String> ProvinceAdapter;
+//    ArrayAdapter<String> cityAdapter;
+//    ArrayAdapter<String> countryAdapter;
+//    private String provinceName = "";
+//    private String cityName = "";
+//    private String countryName = "";
+//    private String provinceCode = "";
+//    private String cityCode = "";
+//    private String countryCode = "";
 
     private Resources res;
     private String mm_hangye_id= "";
@@ -114,95 +114,95 @@ public class EditEmpActivity extends BaseActivity implements View.OnClickListene
 
         nickname.setText(getGson().fromJson(getSp().getString("mm_emp_nickname", ""), String.class));
 
-        ProvinceAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, provinceNames);
-        ProvinceAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        province = (CustomerSpinner) findViewById(R.id.mm_emp_provinceId);
-        province.setAdapter(ProvinceAdapter);
-        province.setList(provinceNames);
-        province.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                citys.clear();
-                cityNames.clear();
-                cityNames.add(getResources().getString(R.string.select_city));
-                cityAdapter.notifyDataSetChanged();
-                ProvinceObj province = null;
-                if (provinces != null && position > 0) {
-                    province = provinces.get(position - 1);
-                    provinceName = province.getProvince();
-                    provinceCode = province.getProvinceID();
-                } else if (provinces != null) {
-                    province = provinces.get(position);
-                    provinceName = province.getProvince();
-                    provinceCode = province.getProvinceID();
-                }
-                try {
-                    getCitys();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
-        });
-
-        cityAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, cityNames);
-        cityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        city = (CustomerSpinner) findViewById(R.id.mm_emp_cityId);
-        city.setAdapter(cityAdapter);
-        city.setList(cityNames);
-        city.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (position > 0) {
-                    countrys.clear();
-                    countrysNames.clear();
-                    countrysNames.add(getResources().getString(R.string.select_area));
-                    CityObj city = citys.get(position - 1);
-                    cityName = city.getCity();
-                    cityCode = city.getCityID();
-                    try {
-                        getArea();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                } else {
-                    country.setEnabled(true);
-                    countrysNames.clear();
-                    countrysNames.add(res.getString(R.string.select_area));
-                    countrys.clear();
-                    countryAdapter.notifyDataSetChanged();
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
-        countryAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, countrysNames);
-        countryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        country = (CustomerSpinner) findViewById(R.id.mm_emp_countryId);
-        country.setAdapter(countryAdapter);
-        country.setList(countrysNames);
-        country.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (position != 0) {
-                    CountryObj country = countrys.get(position - 1);
-                    countryCode = country.getAreaID();
-                    countryName = country.getArea();
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
+//        ProvinceAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, provinceNames);
+//        ProvinceAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        province = (CustomerSpinner) findViewById(R.id.mm_emp_provinceId);
+//        province.setAdapter(ProvinceAdapter);
+//        province.setList(provinceNames);
+//        province.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                citys.clear();
+//                cityNames.clear();
+//                cityNames.add(getResources().getString(R.string.select_city));
+//                cityAdapter.notifyDataSetChanged();
+//                ProvinceObj province = null;
+//                if (provinces != null && position > 0) {
+//                    province = provinces.get(position - 1);
+//                    provinceName = province.getProvince();
+//                    provinceCode = province.getProvinceID();
+//                } else if (provinces != null) {
+//                    province = provinces.get(position);
+//                    provinceName = province.getProvince();
+//                    provinceCode = province.getProvinceID();
+//                }
+//                try {
+//                    getCitys();
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> parent) {
+//            }
+//        });
+//
+//        cityAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, cityNames);
+//        cityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        city = (CustomerSpinner) findViewById(R.id.mm_emp_cityId);
+//        city.setAdapter(cityAdapter);
+//        city.setList(cityNames);
+//        city.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                if (position > 0) {
+//                    countrys.clear();
+//                    countrysNames.clear();
+//                    countrysNames.add(getResources().getString(R.string.select_area));
+//                    CityObj city = citys.get(position - 1);
+//                    cityName = city.getCity();
+//                    cityCode = city.getCityID();
+//                    try {
+//                        getArea();
+//                    } catch (Exception e) {
+//                        e.printStackTrace();
+//                    }
+//                } else {
+//                    country.setEnabled(true);
+//                    countrysNames.clear();
+//                    countrysNames.add(res.getString(R.string.select_area));
+//                    countrys.clear();
+//                    countryAdapter.notifyDataSetChanged();
+//                }
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> parent) {
+//
+//            }
+//        });
+//
+//        countryAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, countrysNames);
+//        countryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        country = (CustomerSpinner) findViewById(R.id.mm_emp_countryId);
+//        country.setAdapter(countryAdapter);
+//        country.setList(countrysNames);
+//        country.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                if (position != 0) {
+//                    CountryObj country = countrys.get(position - 1);
+//                    countryCode = country.getAreaID();
+//                    countryName = country.getArea();
+//                }
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> parent) {
+//
+//            }
+//        });
 
 
         if(!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("mm_emp_sex", ""), String.class))){
@@ -268,12 +268,10 @@ public class EditEmpActivity extends BaseActivity implements View.OnClickListene
         }
         mm_hangye_id = getGson().fromJson(getSp().getString("mm_hangye_id", ""), String.class);
         select_hy.setText(getGson().fromJson(getSp().getString("mm_hangye_name", ""), String.class));
-        provinceCode = getGson().fromJson(getSp().getString("mm_emp_provinceId", ""), String.class);
-        cityCode = getGson().fromJson(getSp().getString("mm_emp_cityId", ""), String.class);
-        countryCode = getGson().fromJson(getSp().getString("mm_emp_countryId", ""), String.class);
-
-
-        getProvince();
+//        provinceCode = getGson().fromJson(getSp().getString("mm_emp_provinceId", ""), String.class);
+//        cityCode = getGson().fromJson(getSp().getString("mm_emp_cityId", ""), String.class);
+//        countryCode = getGson().fromJson(getSp().getString("mm_emp_countryId", ""), String.class);
+//        getProvince();
     }
 
     public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -287,188 +285,188 @@ public class EditEmpActivity extends BaseActivity implements View.OnClickListene
     }
 
     //获得省份
-    public void getProvince() {
-        StringRequest request = new StringRequest(
-                Request.Method.POST,
-                InternetURL.GET_PROVINCE_URL,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String s) {
-                        if (StringUtil.isJson(s)) {
-                            try {
-                                JSONObject jo = new JSONObject(s);
-                                String code1 = jo.getString("code");
-                                if (Integer.parseInt(code1) == 200) {
-                                    provinceNames.add(res.getString(R.string.select_province));
-                                    ProvinceData data = getGson().fromJson(s, ProvinceData.class);
-                                    provinces = data.getData();
-                                    if (provinces != null) {
-                                        for (int i = 0; i < provinces.size(); i++) {
-                                            provinceNames.add(provinces.get(i).getProvince());
-                                        }
-                                    }
-                                    ProvinceAdapter.notifyDataSetChanged();
-                                }
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                        } else {
-                            Toast.makeText(EditEmpActivity.this, R.string.get_data_error, Toast.LENGTH_SHORT).show();
-                        }
-                        if (progressDialog != null) {
-                            progressDialog.dismiss();
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError volleyError) {
-                        if (progressDialog != null) {
-                            progressDialog.dismiss();
-                        }
-                        Toast.makeText(EditEmpActivity.this, R.string.get_data_error, Toast.LENGTH_SHORT).show();
-                    }
-                }
-        ) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("is_use", "1");
-                return params;
-            }
-
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("Content-Type", "application/x-www-form-urlencoded");
-                return params;
-            }
-        };
-        getRequestQueue().add(request);
-    }
-
-    //获得城市
-    public void getCitys() {
-        StringRequest request = new StringRequest(
-                Request.Method.POST,
-                InternetURL.GET_CITY_URL,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String s) {
-                        if (StringUtil.isJson(s)) {
-                            try {
-                                JSONObject jo = new JSONObject(s);
-                                String code1 = jo.getString("code");
-                                if (Integer.parseInt(code1) == 200) {
-                                    CityData data = getGson().fromJson(s, CityData.class);
-                                    citys = data.getData();
-                                    if (citys != null) {
-                                        for (int i = 0; i < citys.size(); i++) {
-                                            cityNames.add(citys.get(i).getCity());
-                                        }
-                                    }
-                                    cityAdapter.notifyDataSetChanged();
-                                }
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                        } else {
-                            Toast.makeText(EditEmpActivity.this, R.string.get_data_error, Toast.LENGTH_SHORT).show();
-                        }
-                        if (progressDialog != null) {
-                            progressDialog.dismiss();
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError volleyError) {
-                        if (progressDialog != null) {
-                            progressDialog.dismiss();
-                        }
-                        Toast.makeText(EditEmpActivity.this, R.string.get_data_error, Toast.LENGTH_SHORT).show();
-                    }
-                }
-        ) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
-//                params.put("access_token", getGson().fromJson(getSp().getString("access_token", ""), String.class));
-                params.put("father", provinceCode);
-                params.put("is_use", "1");
-                return params;
-            }
-
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("Content-Type", "application/x-www-form-urlencoded");
-                return params;
-            }
-        };
-        getRequestQueue().add(request);
-    }
-
-    //获得地区
-    public void getArea() {
-        StringRequest request = new StringRequest(
-                Request.Method.POST,
-                InternetURL.GET_COUNTRY_URL,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String s) {
-                        if (StringUtil.isJson(s)) {
-                            try {
-                                JSONObject jo = new JSONObject(s);
-                                String code1 = jo.getString("code");
-                                if (Integer.parseInt(code1) == 200) {
-                                    CountrysData data = getGson().fromJson(s, CountrysData.class);
-                                    countrys = data.getData();
-                                    if (countrys != null) {
-                                        for (int i = 0; i < countrys.size(); i++) {
-                                            countrysNames.add(countrys.get(i).getArea());
-                                        }
-                                    }
-                                    countryAdapter.notifyDataSetChanged();
-                                }
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                        } else {
-                            Toast.makeText(EditEmpActivity.this, R.string.get_data_error, Toast.LENGTH_SHORT).show();
-                        }
-                        if (progressDialog != null) {
-                            progressDialog.dismiss();
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError volleyError) {
-                        if (progressDialog != null) {
-                            progressDialog.dismiss();
-                        }
-                        Toast.makeText(EditEmpActivity.this, R.string.get_data_error, Toast.LENGTH_SHORT).show();
-                    }
-                }
-        ) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("father", cityCode);
-                params.put("is_use", "1");
-                return params;
-            }
-
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("Content-Type", "application/x-www-form-urlencoded");
-                return params;
-            }
-        };
-        getRequestQueue().add(request);
-    }
+//    public void getProvince() {
+//        StringRequest request = new StringRequest(
+//                Request.Method.POST,
+//                InternetURL.GET_PROVINCE_URL,
+//                new Response.Listener<String>() {
+//                    @Override
+//                    public void onResponse(String s) {
+//                        if (StringUtil.isJson(s)) {
+//                            try {
+//                                JSONObject jo = new JSONObject(s);
+//                                String code1 = jo.getString("code");
+//                                if (Integer.parseInt(code1) == 200) {
+//                                    provinceNames.add(res.getString(R.string.select_province));
+//                                    ProvinceData data = getGson().fromJson(s, ProvinceData.class);
+//                                    provinces = data.getData();
+//                                    if (provinces != null) {
+//                                        for (int i = 0; i < provinces.size(); i++) {
+//                                            provinceNames.add(provinces.get(i).getProvince());
+//                                        }
+//                                    }
+//                                    ProvinceAdapter.notifyDataSetChanged();
+//                                }
+//                            } catch (Exception e) {
+//                                e.printStackTrace();
+//                            }
+//                        } else {
+//                            Toast.makeText(EditEmpActivity.this, R.string.get_data_error, Toast.LENGTH_SHORT).show();
+//                        }
+//                        if (progressDialog != null) {
+//                            progressDialog.dismiss();
+//                        }
+//                    }
+//                },
+//                new Response.ErrorListener() {
+//                    @Override
+//                    public void onErrorResponse(VolleyError volleyError) {
+//                        if (progressDialog != null) {
+//                            progressDialog.dismiss();
+//                        }
+//                        Toast.makeText(EditEmpActivity.this, R.string.get_data_error, Toast.LENGTH_SHORT).show();
+//                    }
+//                }
+//        ) {
+//            @Override
+//            protected Map<String, String> getParams() throws AuthFailureError {
+//                Map<String, String> params = new HashMap<String, String>();
+//                params.put("is_use", "1");
+//                return params;
+//            }
+//
+//            @Override
+//            public Map<String, String> getHeaders() throws AuthFailureError {
+//                Map<String, String> params = new HashMap<String, String>();
+//                params.put("Content-Type", "application/x-www-form-urlencoded");
+//                return params;
+//            }
+//        };
+//        getRequestQueue().add(request);
+//    }
+//
+//    //获得城市
+//    public void getCitys() {
+//        StringRequest request = new StringRequest(
+//                Request.Method.POST,
+//                InternetURL.GET_CITY_URL,
+//                new Response.Listener<String>() {
+//                    @Override
+//                    public void onResponse(String s) {
+//                        if (StringUtil.isJson(s)) {
+//                            try {
+//                                JSONObject jo = new JSONObject(s);
+//                                String code1 = jo.getString("code");
+//                                if (Integer.parseInt(code1) == 200) {
+//                                    CityData data = getGson().fromJson(s, CityData.class);
+//                                    citys = data.getData();
+//                                    if (citys != null) {
+//                                        for (int i = 0; i < citys.size(); i++) {
+//                                            cityNames.add(citys.get(i).getCity());
+//                                        }
+//                                    }
+//                                    cityAdapter.notifyDataSetChanged();
+//                                }
+//                            } catch (Exception e) {
+//                                e.printStackTrace();
+//                            }
+//                        } else {
+//                            Toast.makeText(EditEmpActivity.this, R.string.get_data_error, Toast.LENGTH_SHORT).show();
+//                        }
+//                        if (progressDialog != null) {
+//                            progressDialog.dismiss();
+//                        }
+//                    }
+//                },
+//                new Response.ErrorListener() {
+//                    @Override
+//                    public void onErrorResponse(VolleyError volleyError) {
+//                        if (progressDialog != null) {
+//                            progressDialog.dismiss();
+//                        }
+//                        Toast.makeText(EditEmpActivity.this, R.string.get_data_error, Toast.LENGTH_SHORT).show();
+//                    }
+//                }
+//        ) {
+//            @Override
+//            protected Map<String, String> getParams() throws AuthFailureError {
+//                Map<String, String> params = new HashMap<String, String>();
+////                params.put("access_token", getGson().fromJson(getSp().getString("access_token", ""), String.class));
+//                params.put("father", provinceCode);
+//                params.put("is_use", "1");
+//                return params;
+//            }
+//
+//            @Override
+//            public Map<String, String> getHeaders() throws AuthFailureError {
+//                Map<String, String> params = new HashMap<String, String>();
+//                params.put("Content-Type", "application/x-www-form-urlencoded");
+//                return params;
+//            }
+//        };
+//        getRequestQueue().add(request);
+//    }
+//
+//    //获得地区
+//    public void getArea() {
+//        StringRequest request = new StringRequest(
+//                Request.Method.POST,
+//                InternetURL.GET_COUNTRY_URL,
+//                new Response.Listener<String>() {
+//                    @Override
+//                    public void onResponse(String s) {
+//                        if (StringUtil.isJson(s)) {
+//                            try {
+//                                JSONObject jo = new JSONObject(s);
+//                                String code1 = jo.getString("code");
+//                                if (Integer.parseInt(code1) == 200) {
+//                                    CountrysData data = getGson().fromJson(s, CountrysData.class);
+//                                    countrys = data.getData();
+//                                    if (countrys != null) {
+//                                        for (int i = 0; i < countrys.size(); i++) {
+//                                            countrysNames.add(countrys.get(i).getArea());
+//                                        }
+//                                    }
+//                                    countryAdapter.notifyDataSetChanged();
+//                                }
+//                            } catch (Exception e) {
+//                                e.printStackTrace();
+//                            }
+//                        } else {
+//                            Toast.makeText(EditEmpActivity.this, R.string.get_data_error, Toast.LENGTH_SHORT).show();
+//                        }
+//                        if (progressDialog != null) {
+//                            progressDialog.dismiss();
+//                        }
+//                    }
+//                },
+//                new Response.ErrorListener() {
+//                    @Override
+//                    public void onErrorResponse(VolleyError volleyError) {
+//                        if (progressDialog != null) {
+//                            progressDialog.dismiss();
+//                        }
+//                        Toast.makeText(EditEmpActivity.this, R.string.get_data_error, Toast.LENGTH_SHORT).show();
+//                    }
+//                }
+//        ) {
+//            @Override
+//            protected Map<String, String> getParams() throws AuthFailureError {
+//                Map<String, String> params = new HashMap<String, String>();
+//                params.put("father", cityCode);
+//                params.put("is_use", "1");
+//                return params;
+//            }
+//
+//            @Override
+//            public Map<String, String> getHeaders() throws AuthFailureError {
+//                Map<String, String> params = new HashMap<String, String>();
+//                params.put("Content-Type", "application/x-www-form-urlencoded");
+//                return params;
+//            }
+//        };
+//        getRequestQueue().add(request);
+//    }
 
 
 
@@ -533,12 +531,12 @@ public class EditEmpActivity extends BaseActivity implements View.OnClickListene
                                     save("mm_hangye_id" , mm_hangye_id);
                                     save("mm_hangye_name" , select_hy.getText().toString());
 
-                                    save("mm_emp_provinceId" , provinceCode);
-                                    save("mm_emp_cityId" , cityCode);
-                                    save("mm_emp_countryId" , countryCode);
-                                    save("provinceName", provinceName);
-                                    save("cityName", cityName);
-                                    save("areaName", countryName);
+//                                    save("mm_emp_provinceId" , provinceCode);
+//                                    save("mm_emp_cityId" , cityCode);
+//                                    save("mm_emp_countryId" , countryCode);
+//                                    save("provinceName", provinceName);
+//                                    save("cityName", cityName);
+//                                    save("areaName", countryName);
 
                                     //通知性别更换
                                     Intent intent1 = new Intent("update_profile_success");
@@ -611,9 +609,14 @@ public class EditEmpActivity extends BaseActivity implements View.OnClickListene
                 }
 
                 params.put("mm_hangye_id" , mm_hangye_id);
-                params.put("mm_emp_provinceId", provinceCode);
-                params.put("mm_emp_cityId", cityCode);
-                params.put("mm_emp_countryId", countryCode);
+
+                params.put("mm_emp_provinceId", getGson().fromJson(getSp().getString("mm_emp_provinceId", ""), String.class));
+                params.put("mm_emp_cityId", getGson().fromJson(getSp().getString("mm_emp_cityId", ""), String.class));
+                params.put("mm_emp_countryId", getGson().fromJson(getSp().getString("mm_emp_countryId", ""), String.class));
+
+//        provinceCode = getGson().fromJson(getSp().getString("mm_emp_provinceId", ""), String.class);
+//        cityCode = getGson().fromJson(getSp().getString("mm_emp_cityId", ""), String.class);
+//        countryCode = getGson().fromJson(getSp().getString("mm_emp_countryId", ""), String.class);
 
                 return params;
             }

@@ -206,7 +206,9 @@ public class FiveFragment extends BaseFragment implements View.OnClickListener {
                 @Override
                 public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
                     super.onLoadingComplete(imageUri, view, loadedImage);
-                    view.findViewById(R.id.scorv).setBackground(imageView.getDrawable());
+                    if(imageView != null ){
+                        view.findViewById(R.id.scorv).setBackground(imageView.getDrawable());
+                    }
                 }
             });
         }else {

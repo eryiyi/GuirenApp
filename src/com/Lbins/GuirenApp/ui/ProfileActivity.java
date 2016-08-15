@@ -81,6 +81,7 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
     ImageLoader imageLoader = ImageLoader.getInstance();//图片加载类
 
     private LinearLayout liner_bottom;
+    private TextView guirenwang;
 
     Emp emp;
     @Override
@@ -106,6 +107,7 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
         head = (ImageView) headLiner.findViewById(R.id.head);
         sex = (ImageView) headLiner.findViewById(R.id.sex);
         nickname = (TextView) headLiner.findViewById(R.id.nickname);
+        guirenwang = (TextView) headLiner.findViewById(R.id.guirenwang);
         mm_emp_native = (TextView) headLiner.findViewById(R.id.mm_emp_native);
         mm_emp_motto = (TextView) headLiner.findViewById(R.id.mm_emp_motto);
         hangyename = (TextView) headLiner.findViewById(R.id.hangyename);
@@ -317,8 +319,10 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
 
                                 if(emp.getMm_emp_id().equals(getGson().fromJson(getSp().getString("mm_emp_id", ""), String.class))){
                                     liner_bottom.setVisibility(View.GONE);
+                                    guirenwang.setVisibility(View.GONE);
                                 }else {
                                     liner_bottom.setVisibility(View.VISIBLE);
+                                    guirenwang.setVisibility(View.VISIBLE);
                                 }
                                 if("1".equals(emp.getMm_emp_sex())){
                                     sex.setImageDrawable(getResources().getDrawable(R.drawable.icon_sex_female));

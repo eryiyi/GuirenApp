@@ -234,6 +234,7 @@
             <com.Lbins.GuirenApp.widget.CustomerSpinner
                     android:background="@drawable/login_edit_bg"
                     android:layout_marginLeft="25dp"
+                    android:visibility="gone"
                     android:layout_marginRight="25dp"
                     android:paddingLeft="15dp"
                     android:layout_marginTop="6dp"
@@ -248,6 +249,7 @@
                     android:layout_marginLeft="25dp"
                     android:layout_marginRight="25dp"
                     android:layout_marginTop="6dp"
+                    android:visibility="gone"
                     android:paddingLeft="15dp"
                     android:layout_alignParentRight="true"
                     android:id="@+id/mm_emp_cityId"
@@ -261,6 +263,7 @@
                     android:layout_marginRight="25dp"
                     android:layout_marginTop="6dp"
                     android:paddingLeft="15dp"
+                    android:visibility="gone"
                     android:layout_alignParentRight="true"
                     android:id="@+id/mm_emp_countryId"
                     android:layout_width="match_parent"

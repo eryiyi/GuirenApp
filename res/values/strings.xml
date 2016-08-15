@@ -995,5 +995,9 @@
     <string name="share_success">分享成功啦</string>
     <string name="share_error">分享失败啦</string>
     <string name="share_cancel">分享取消了</string>
+    <string name="check_new_version">检查中...</string>
+    <string name="version_name">"检查版本"</string>
+    <string name="can_not_find_version_name">"没有最新版本信息"</string>
+
 
 </resources>
