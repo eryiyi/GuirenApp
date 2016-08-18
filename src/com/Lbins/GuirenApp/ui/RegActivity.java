@@ -31,6 +31,7 @@ import com.Lbins.GuirenApp.module.ProvinceObj;
 import com.Lbins.GuirenApp.receiver.SMSBroadcastReceiver;
 import com.Lbins.GuirenApp.util.Constants;
 import com.Lbins.GuirenApp.util.StringUtil;
+import com.Lbins.GuirenApp.widget.CustomProgressDialog;
 import com.Lbins.GuirenApp.widget.CustomerSpinner;
 import com.Lbins.GuirenApp.widget.SexRadioGroup;
 import com.android.volley.AuthFailureError;
@@ -819,7 +820,8 @@ public class RegActivity extends BaseActivity implements View.OnClickListener,Ra
 //                    return;
 //                }
 
-                progressDialog = new ProgressDialog(RegActivity.this);
+                progressDialog = new CustomProgressDialog(RegActivity.this, "正在加载中",R.anim.custom_dialog_frame);
+                progressDialog.setCancelable(true);
                 progressDialog.setIndeterminate(true);
                 progressDialog.show();
                 reg();

@@ -1,6 +1,5 @@
 package com.Lbins.GuirenApp.ui;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -42,7 +41,7 @@ import java.util.Map;
  * Time: 10:36
  * 类的功能、说明写在此处.
  */
-public class PublishCommentAcitvity extends BaseActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
+public class PublishVideoCommentAcitvity extends BaseActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
     private ImageView publis_comment_back;//返回
     private TextView publish_comment_run;//发布
     private String cont;
@@ -175,7 +174,7 @@ public class PublishCommentAcitvity extends BaseActivity implements View.OnClick
                     Toast.makeText(this, R.string.pk_cont_length, Toast.LENGTH_SHORT).show();
                     return;
                 }
-                progressDialog = new CustomProgressDialog(PublishCommentAcitvity.this, "正在加载中",R.anim.custom_dialog_frame);
+                progressDialog = new CustomProgressDialog(PublishVideoCommentAcitvity.this, "正在加载中",R.anim.custom_dialog_frame);
                 progressDialog.setCancelable(true);
                 progressDialog.setIndeterminate(true);
                 progressDialog.show();
@@ -211,7 +210,7 @@ public class PublishCommentAcitvity extends BaseActivity implements View.OnClick
     private void publish_comment() {
         StringRequest request = new StringRequest(
                 Request.Method.POST,
-                InternetURL.PUBLISH_COMMENT_RECORD,
+                InternetURL.PUBLISH_VIDEO_COMMENT_RECORD,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String s) {
@@ -221,13 +220,10 @@ public class PublishCommentAcitvity extends BaseActivity implements View.OnClick
                         if (StringUtil.isJson(s)) {
                             SuccessData data = getGson().fromJson(s, SuccessData.class);
                             if (Integer.parseInt(data.getCode()) == 200) {
-                                Toast.makeText(PublishCommentAcitvity.this, R.string.comment_success, Toast.LENGTH_SHORT).show();
+                                Toast.makeText(PublishVideoCommentAcitvity.this, R.string.comment_success, Toast.LENGTH_SHORT).show();
                                 //调用广播，刷新详细页评论
-                                Intent intent1 = new Intent(Constants.SEND_COMMENT_SUCCESS);
-                                Intent intent2 = new Intent(Constants.SEND_COMMENT_RECORD_SUCCESS);
-                                intent2.putExtra("recordId", record_uuid);
+                                Intent intent1 = new Intent(Constants.SEND_COMMENT_SUCCESS_VIDEO);
                                 sendBroadcast(intent1);
-                                sendBroadcast(intent2);
                                 finish();
                             }
                         }
@@ -241,7 +237,7 @@ public class PublishCommentAcitvity extends BaseActivity implements View.OnClick
                             progressDialog.dismiss();
                         }
                         publish_comment_run.setClickable(true);
-                        Toast.makeText(PublishCommentAcitvity.this, R.string.comment_error_one, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(PublishVideoCommentAcitvity.this, R.string.comment_error_one, Toast.LENGTH_SHORT).show();
                     }
                 }
         ) {
@@ -249,7 +245,7 @@ public class PublishCommentAcitvity extends BaseActivity implements View.OnClick
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("recordId", record_uuid);
-                params.put("sendEmpId", sendEmpId);//信息所有者
+                params.put("sendEmpId", "");//信息所有者
                 params.put("fplempid", fplempid);//父评论的信息所有者
                 params.put("empId", emp_id);
                 params.put("fplid", father_uuid);
@@ -312,7 +308,7 @@ public class PublishCommentAcitvity extends BaseActivity implements View.OnClick
         faceAdapters = new ArrayList<FaceAdapter>();
         for (int i = 0; i < emojis.size(); i++) {
             GridView view = new GridView(this);
-            FaceAdapter adapter = new FaceAdapter(PublishCommentAcitvity.this, emojis.get(i));
+            FaceAdapter adapter = new FaceAdapter(PublishVideoCommentAcitvity.this, emojis.get(i));
             view.setAdapter(adapter);
             faceAdapters.add(adapter);
             view.setOnItemClickListener(this);

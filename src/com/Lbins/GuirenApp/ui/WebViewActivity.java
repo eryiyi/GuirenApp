@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.Lbins.GuirenApp.R;
 import com.Lbins.GuirenApp.base.BaseActivity;
 import com.Lbins.GuirenApp.util.StringUtil;
+import com.Lbins.GuirenApp.widget.CustomProgressDialog;
 
 /**
  * Created by Administrator on 2015/5/14.
@@ -30,8 +31,8 @@ public class WebViewActivity extends BaseActivity implements View.OnClickListene
         strurl = getIntent().getExtras().getString("strurl");
         strname = getIntent().getExtras().getString("strname");
 
-        progressDialog = new ProgressDialog(WebViewActivity.this );
-        progressDialog.setCancelable(false);
+        progressDialog = new CustomProgressDialog(WebViewActivity.this, "正在加载中",R.anim.custom_dialog_frame);
+        progressDialog.setCancelable(true);
         progressDialog.setIndeterminate(true);
         progressDialog.show();
         initView();

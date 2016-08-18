@@ -21,6 +21,7 @@ import com.Lbins.GuirenApp.data.HangYeTypeDara;
 import com.Lbins.GuirenApp.fragment.Fragment_pro_type;
 import com.Lbins.GuirenApp.module.HangYeType;
 import com.Lbins.GuirenApp.util.StringUtil;
+import com.Lbins.GuirenApp.widget.CustomProgressDialog;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -63,16 +64,9 @@ public class SelectHyActivity extends BaseActivity implements View.OnClickListen
         initView();
         //获得大类
         progressShow = true;
-        pd = new ProgressDialog(SelectHyActivity.this);
-        pd.setCanceledOnTouchOutside(false);
-        pd.setOnCancelListener(new DialogInterface.OnCancelListener() {
-
-            @Override
-            public void onCancel(DialogInterface dialog) {
-                progressShow = false;
-            }
-        });
-        pd.setMessage(getString(R.string.please_wait));
+        pd = new CustomProgressDialog(SelectHyActivity.this, "正在加载中",R.anim.custom_dialog_frame);
+        pd.setCancelable(true);
+        pd.setIndeterminate(true);
         pd.show();
         getBigType();
     }

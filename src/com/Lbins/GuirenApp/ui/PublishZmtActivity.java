@@ -23,6 +23,7 @@ import com.Lbins.GuirenApp.base.BaseActivity;
 import com.Lbins.GuirenApp.base.InternetURL;
 import com.Lbins.GuirenApp.data.RecordSingleDATA;
 import com.Lbins.GuirenApp.util.*;
+import com.Lbins.GuirenApp.widget.CustomProgressDialog;
 import com.Lbins.GuirenApp.widget.NoScrollGridView;
 import com.Lbins.GuirenApp.widget.PublishPopWindow;
 import com.Lbins.GuirenApp.widget.SelectPhoTwoPopWindow;
@@ -149,8 +150,8 @@ public class PublishZmtActivity extends BaseActivity implements View.OnClickList
                     showMsg(PublishZmtActivity.this, "请选择图片");
                     return;
                 } else {
-                    progressDialog = new ProgressDialog(PublishZmtActivity.this);
-                    progressDialog.setCancelable(false);
+                    progressDialog = new CustomProgressDialog(PublishZmtActivity.this, "正在加载中",R.anim.custom_dialog_frame);
+                    progressDialog.setCancelable(true);
                     progressDialog.setIndeterminate(true);
                     progressDialog.show();
                     for (int i = 0; i < dataList.size(); i++) {

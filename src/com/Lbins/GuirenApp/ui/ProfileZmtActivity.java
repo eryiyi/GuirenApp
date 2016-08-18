@@ -30,6 +30,7 @@ import com.Lbins.GuirenApp.module.ManagerInfo;
 import com.Lbins.GuirenApp.module.Record;
 import com.Lbins.GuirenApp.util.Constants;
 import com.Lbins.GuirenApp.util.StringUtil;
+import com.Lbins.GuirenApp.widget.CustomProgressDialog;
 import com.Lbins.GuirenApp.widget.DeletePopWindow;
 import com.android.volley.*;
 import com.android.volley.toolbox.StringRequest;
@@ -92,8 +93,8 @@ public class ProfileZmtActivity extends BaseActivity implements View.OnClickList
         }else {
             add.setVisibility(View.VISIBLE);
         }
-        progressDialog = new ProgressDialog(ProfileZmtActivity.this);
-        progressDialog.setCancelable(false);
+        progressDialog = new CustomProgressDialog(ProfileZmtActivity.this, "正在加载中",R.anim.custom_dialog_frame);
+        progressDialog.setCancelable(true);
         progressDialog.setIndeterminate(true);
         progressDialog.show();
         initData();

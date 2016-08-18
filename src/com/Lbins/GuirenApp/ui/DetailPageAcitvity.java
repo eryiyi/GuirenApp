@@ -33,6 +33,7 @@ import com.Lbins.GuirenApp.module.Record;
 import com.Lbins.GuirenApp.util.Constants;
 import com.Lbins.GuirenApp.util.PicUtil;
 import com.Lbins.GuirenApp.util.StringUtil;
+import com.Lbins.GuirenApp.widget.CustomProgressDialog;
 import com.Lbins.GuirenApp.widget.DeletePopWindow;
 import com.Lbins.GuirenApp.widget.PictureGridview;
 import com.android.volley.AuthFailureError;
@@ -350,8 +351,8 @@ public class DetailPageAcitvity extends BaseActivity implements View.OnClickList
                 startActivity(comment);
                 break;
             case R.id.detail_like_liner://点赞
-                progressDialog = new ProgressDialog(this);
-                progressDialog.setCancelable(false);
+                progressDialog = new CustomProgressDialog(DetailPageAcitvity.this, "正在加载中",R.anim.custom_dialog_frame);
+                progressDialog.setCancelable(true);
                 progressDialog.setIndeterminate(true);
                 progressDialog.show();
                 detail_like_liner.setClickable(false);

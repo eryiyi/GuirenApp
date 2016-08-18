@@ -10,6 +10,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.Toast;
 import com.Lbins.GuirenApp.GuirenApplication;
+import com.Lbins.GuirenApp.widget.CustomProgressDialog;
 import com.android.volley.RequestQueue;
 import com.google.gson.Gson;
 import com.hyphenate.easeui.ui.EaseBaseActivity;
@@ -26,7 +27,7 @@ public class BaseActivity extends EaseBaseActivity {
      */
     protected int mScreenWidth;
     protected int mScreenHeight;
-    public ProgressDialog progressDialog;
+     public CustomProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

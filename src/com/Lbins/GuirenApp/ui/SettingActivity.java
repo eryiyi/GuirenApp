@@ -21,6 +21,7 @@ import com.Lbins.GuirenApp.huanxin.DemoHelper;
 import com.Lbins.GuirenApp.huanxin.ui.BlacklistActivity;
 import com.Lbins.GuirenApp.module.VersionUpdateObj;
 import com.Lbins.GuirenApp.util.StringUtil;
+import com.Lbins.GuirenApp.widget.CustomProgressDialog;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -126,8 +127,9 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
                 //版本更新
                 Resources res = getBaseContext().getResources();
                 String message = res.getString(R.string.check_new_version).toString();
-                progressDialog = new ProgressDialog(SettingActivity.this);
-                progressDialog.setMessage(message);
+                progressDialog = new CustomProgressDialog(SettingActivity.this, "正在加载中",R.anim.custom_dialog_frame);
+                progressDialog.setCancelable(true);
+                progressDialog.setIndeterminate(true);
                 progressDialog.show();
                 initData();
             }

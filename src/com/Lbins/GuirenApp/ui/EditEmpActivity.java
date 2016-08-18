@@ -21,6 +21,7 @@ import com.Lbins.GuirenApp.module.HangYeType;
 import com.Lbins.GuirenApp.module.ProvinceObj;
 import com.Lbins.GuirenApp.util.Constants;
 import com.Lbins.GuirenApp.util.StringUtil;
+import com.Lbins.GuirenApp.widget.CustomProgressDialog;
 import com.Lbins.GuirenApp.widget.CustomerSpinner;
 import com.Lbins.GuirenApp.widget.SexRadioGroup;
 import com.android.volley.AuthFailureError;
@@ -489,7 +490,8 @@ public class EditEmpActivity extends BaseActivity implements View.OnClickListene
                     showMsg(EditEmpActivity.this, "请输入公司");
                     return;
                 }
-                progressDialog = new ProgressDialog(EditEmpActivity.this);
+                progressDialog = new CustomProgressDialog(EditEmpActivity.this, "正在加载中",R.anim.custom_dialog_frame);
+                progressDialog.setCancelable(true);
                 progressDialog.setIndeterminate(true);
                 progressDialog.show();
                 edit();

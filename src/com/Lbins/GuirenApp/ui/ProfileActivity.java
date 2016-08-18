@@ -31,6 +31,7 @@ import com.Lbins.GuirenApp.module.EmpRelateObj;
 import com.Lbins.GuirenApp.module.Record;
 import com.Lbins.GuirenApp.util.Constants;
 import com.Lbins.GuirenApp.util.StringUtil;
+import com.Lbins.GuirenApp.widget.CustomProgressDialog;
 import com.android.volley.*;
 import com.android.volley.toolbox.StringRequest;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -93,8 +94,8 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
         res = this.getResources();
         this.findViewById(R.id.back).setOnClickListener(this);
         initView();
-        progressDialog = new ProgressDialog(ProfileActivity.this);
-        progressDialog.setCancelable(false);
+        progressDialog = new CustomProgressDialog(ProfileActivity.this, "正在加载中",R.anim.custom_dialog_frame);
+        progressDialog.setCancelable(true);
         progressDialog.setIndeterminate(true);
         progressDialog.show();
         initData();
@@ -511,8 +512,8 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
         jubao_sure.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                progressDialog = new ProgressDialog(ProfileActivity.this );
-                progressDialog.setCancelable(false);
+                progressDialog = new CustomProgressDialog(ProfileActivity.this, "正在加载中",R.anim.custom_dialog_frame);
+                progressDialog.setCancelable(true);
                 progressDialog.setIndeterminate(true);
                 progressDialog.show();
                 saveRelate();

@@ -24,6 +24,7 @@ import com.Lbins.GuirenApp.library.PullToRefreshListView;
 import com.Lbins.GuirenApp.module.*;
 import com.Lbins.GuirenApp.util.Constants;
 import com.Lbins.GuirenApp.util.StringUtil;
+import com.Lbins.GuirenApp.widget.CustomProgressDialog;
 import com.Lbins.GuirenApp.widget.MyAlertDialog;
 import com.android.volley.*;
 import com.android.volley.toolbox.StringRequest;
@@ -78,8 +79,8 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
 //        mm_hangye_id = getGson().fromJson(getSp().getString("mm_hangye_id", ""), String.class);
 //        mm_emp_cityId = getGson().fromJson(getSp().getString("mm_emp_cityId", ""), String.class);
         initView();
-        progressDialog = new ProgressDialog(SearchActivity.this );
-        progressDialog.setCancelable(false);
+        progressDialog = new CustomProgressDialog(SearchActivity.this, "正在加载中",R.anim.custom_dialog_frame);
+        progressDialog.setCancelable(true);
         progressDialog.setIndeterminate(true);
         progressDialog.show();
         initData();
@@ -111,8 +112,8 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
                                 mm_hangye_name = "点击切换行业";
                                 btn_one.setText(mm_hangye_name);
                                 keyStr = input_edittext.getText().toString();
-                                progressDialog = new ProgressDialog(SearchActivity.this );
-                                progressDialog.setCancelable(false);
+                                progressDialog = new CustomProgressDialog(SearchActivity.this, "正在加载中",R.anim.custom_dialog_frame);
+                                progressDialog.setCancelable(true);
                                 progressDialog.setIndeterminate(true);
                                 progressDialog.show();
                                 initData();
@@ -125,8 +126,8 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
                         mm_hangye_id = hangYeType.getMm_hangye_id();
                         mm_hangye_name = hangYeType.getMm_hangye_name();
                         keyStr = input_edittext.getText().toString();
-                        progressDialog = new ProgressDialog(SearchActivity.this );
-                        progressDialog.setCancelable(false);
+                        progressDialog = new CustomProgressDialog(SearchActivity.this, "正在加载中",R.anim.custom_dialog_frame);
+                        progressDialog.setCancelable(true);
                         progressDialog.setIndeterminate(true);
                         progressDialog.show();
                         initData();
@@ -149,8 +150,8 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
                                 mm_emp_countryName = "点击切换地区";
                                 btn_two.setText(mm_emp_countryName);
                                 keyStr = input_edittext.getText().toString();
-                                progressDialog = new ProgressDialog(SearchActivity.this );
-                                progressDialog.setCancelable(false);
+                                progressDialog = new CustomProgressDialog(SearchActivity.this, "正在加载中",R.anim.custom_dialog_frame);
+                                progressDialog.setCancelable(true);
                                 progressDialog.setIndeterminate(true);
                                 progressDialog.show();
                                 initData();
@@ -163,8 +164,8 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
                         mm_emp_countryId = countryObj.getAreaID();
                         mm_emp_countryName = countryObj.getArea();
                         keyStr = input_edittext.getText().toString();
-                        progressDialog = new ProgressDialog(SearchActivity.this );
-                        progressDialog.setCancelable(false);
+                        progressDialog = new CustomProgressDialog(SearchActivity.this, "正在加载中",R.anim.custom_dialog_frame);
+                        progressDialog.setCancelable(true);
                         progressDialog.setIndeterminate(true);
                         progressDialog.show();
                         initData();
@@ -176,8 +177,8 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
             case R.id.no_record:
                 IS_REFRESH = true;
                 pageIndex = 1;
-                progressDialog = new ProgressDialog(SearchActivity.this );
-                progressDialog.setCancelable(false);
+                progressDialog = new CustomProgressDialog(SearchActivity.this, "正在加载中",R.anim.custom_dialog_frame);
+                progressDialog.setCancelable(true);
                 progressDialog.setIndeterminate(true);
                 progressDialog.show();
                 initData();
@@ -187,8 +188,8 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
                 break;
             case R.id.btn_search:
                 keyStr = input_edittext.getText().toString();
-                progressDialog = new ProgressDialog(SearchActivity.this );
-                progressDialog.setCancelable(false);
+                progressDialog = new CustomProgressDialog(SearchActivity.this, "正在加载中",R.anim.custom_dialog_frame);
+                progressDialog.setCancelable(true);
                 progressDialog.setIndeterminate(true);
                 progressDialog.show();
                 initData();
@@ -501,8 +502,8 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
                 HangYeType hangYeType = (HangYeType) intent.getExtras().get("hangYeType");
                 mm_hangye_id = hangYeType.getMm_hangye_id();
                 btn_one.setText(hangYeType.getMm_hangye_name() );
-                progressDialog = new ProgressDialog(SearchActivity.this );
-                progressDialog.setCancelable(false);
+                progressDialog = new CustomProgressDialog(SearchActivity.this, "正在加载中",R.anim.custom_dialog_frame);
+                progressDialog.setCancelable(true);
                 progressDialog.setIndeterminate(true);
                 progressDialog.show();
                 IS_REFRESH = true;
@@ -513,8 +514,8 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
                 CountryObj hangYeType = (CountryObj) intent.getExtras().get("countryObj");
                 mm_emp_countryId = hangYeType.getAreaID();
                 btn_two.setText(hangYeType.getArea());
-                progressDialog = new ProgressDialog(SearchActivity.this );
-                progressDialog.setCancelable(false);
+                progressDialog = new CustomProgressDialog(SearchActivity.this, "正在加载中",R.anim.custom_dialog_frame);
+                progressDialog.setCancelable(true);
                 progressDialog.setIndeterminate(true);
                 progressDialog.show();
                 IS_REFRESH = true;

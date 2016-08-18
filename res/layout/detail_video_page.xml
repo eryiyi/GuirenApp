@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:id="@+id/main"
+              android:orientation="vertical"
+              android:background="@color/white">
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/topbar_height"
+            android:background="@color/mm_main_bg_mine_top"
+            android:gravity="center_vertical"
+            >
+
+        <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:id="@+id/detail_back"
+                android:paddingLeft="10dp"
+                android:src="@drawable/md_return"
+                android:paddingRight="10dp"
+                />
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textColor="@color/white"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:singleLine="true"
+                android:text="视频详情"
+                android:layout_marginLeft="45dp"
+                android:layout_marginRight="45dp"
+                android:id="@+id/detail_title"
+                />
+        <ImageView android:layout_width="wrap_content"
+                   android:layout_height="match_parent"
+                   android:src="@drawable/icons_others_share"
+                   android:layout_alignParentRight="true"
+                   android:paddingLeft="10dp"
+                   android:paddingRight="15dp"
+                   android:id="@+id/detail_share"
+                />
+    </RelativeLayout>
+
+    <!--<com.liangxun.yuejiula.widget.ContentListView-->
+            <!--android:id="@+id/detail_lstv"-->
+            <!--android:layout_weight="1"-->
+            <!--android:divider="#00d1d1d1"-->
+            <!--android:dividerHeight="1dp"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"/>-->
+
+    <com.Lbins.GuirenApp.library.PullToRefreshListView
+            android:id="@+id/lstv"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:cacheColorHint="#00000000"
+            android:dividerHeight="1dp"
+            android:divider="#00d1d1d1"
+            android:fadingEdge="none"
+            android:fastScrollEnabled="false"
+            android:footerDividersEnabled="false"
+            android:headerDividersEnabled="false"
+            android:smoothScrollbar="true"/>
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="40dp"
+                  android:gravity="center"
+                  android:background="#ffffff">
+
+        <LinearLayout android:layout_width="wrap_content"
+                      android:layout_height="match_parent"
+                      android:layout_weight="1"
+                      android:gravity="center"
+                      android:clickable="true"
+                      android:background="@drawable/zhuye_item_select"
+                      android:id="@+id/detail_like_liner">
+            <ImageView android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:src="@drawable/icon_little_f_good"/>
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text="赞"
+                      android:textSize="14dp"
+                      android:textColor="#7d7d7d"
+                      android:layout_marginLeft="5dp"/>
+        </LinearLayout>
+
+        <ImageView android:layout_width="0.5dp"
+                   android:layout_height="20dp"
+                   android:background="#d1d1d1"
+                   android:layout_margin="3dp"/>
+
+        <LinearLayout android:layout_width="wrap_content"
+                      android:layout_height="match_parent"
+                      android:layout_weight="1"
+                      android:gravity="center"
+                      android:background="@drawable/zhuye_item_select"
+                      android:clickable="true"
+                      android:id="@+id/detail_comment_liner">
+            <ImageView android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:src="@drawable/icon_little_f_comment"/>
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text="评论"
+                      android:textSize="14dp"
+                      android:textColor="#7d7d7d"
+                      android:layout_marginLeft="5dp"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

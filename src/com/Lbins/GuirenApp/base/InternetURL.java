@@ -262,4 +262,21 @@ public class InternetURL {
 
     //动态页面
     public static final String SHARE_RECORD_URL = INTERNAL + "viewRecord.do";
+
+    //视频列表
+    public static final String GET_VIDEOS_URL = INTERNAL +  "listVideosApp.do";
+
+    //视频分享
+    public static final String SHARE_VIDEOS = INTERNAL +  "viewVideos.do";
+
+    //查询videos评论
+    public static final String GET_VIDEOS_PL_URL = INTERNAL +  "listVideosCommentApp.do";
+    //查询videos赞
+    public static final String GET_VIDEOS_FAVOUR_URL =  INTERNAL + "appVideosListZan.do";
+
+    //添加评论
+    public static final String PUBLISH_VIDEO_COMMENT_RECORD =  INTERNAL +  "appVideosSaveComment.do";
+    //添加赞
+    public static final String PUBLISH_VIDEO_FAVOUR_RECORD =  INTERNAL +  "appVideoZanSave.do";
+
 }

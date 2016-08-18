@@ -21,6 +21,7 @@ import com.Lbins.GuirenApp.base.BaseActivity;
 import com.Lbins.GuirenApp.base.InternetURL;
 import com.Lbins.GuirenApp.util.CompressPhotoUtil;
 import com.Lbins.GuirenApp.util.StringUtil;
+import com.Lbins.GuirenApp.widget.CustomProgressDialog;
 import com.Lbins.GuirenApp.widget.SelectPhoPopWindow;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -96,8 +97,8 @@ public class OpenZimeitiActivity extends BaseActivity implements View.OnClickLis
                     showMsg(OpenZimeitiActivity.this, "请完善信息");
                     return;
                 }
-                progressDialog = new ProgressDialog(OpenZimeitiActivity.this);
-                progressDialog.setCancelable(false);
+                progressDialog = new CustomProgressDialog(OpenZimeitiActivity.this, "正在加载中",R.anim.custom_dialog_frame);
+                progressDialog.setCancelable(true);
                 progressDialog.setIndeterminate(true);
                 progressDialog.show();
                 uploadCover();

@@ -30,6 +30,7 @@ import com.Lbins.GuirenApp.face.FaceAdapter;
 import com.Lbins.GuirenApp.face.FaceConversionUtil;
 import com.Lbins.GuirenApp.face.ViewPagerAdapter;
 import com.Lbins.GuirenApp.util.*;
+import com.Lbins.GuirenApp.widget.CustomProgressDialog;
 import com.Lbins.GuirenApp.widget.NoScrollGridView;
 import com.Lbins.GuirenApp.widget.PublishPopWindow;
 import com.Lbins.GuirenApp.widget.SelectPhoTwoPopWindow;
@@ -433,8 +434,8 @@ public class PublishPicActivity extends BaseActivity implements View.OnClickList
                         }
                     }
                 }
-                progressDialog = new ProgressDialog(PublishPicActivity.this);
-                progressDialog.setCancelable(false);
+                progressDialog = new CustomProgressDialog(PublishPicActivity.this, "正在加载中",R.anim.custom_dialog_frame);
+                progressDialog.setCancelable(true);
                 progressDialog.setIndeterminate(true);
                 progressDialog.show();
                 //检查有没有选择图片

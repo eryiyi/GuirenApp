@@ -22,6 +22,7 @@ import com.Lbins.GuirenApp.huanxin.DemoHelper;
 import com.Lbins.GuirenApp.huanxin.db.DemoDBManager;
 import com.Lbins.GuirenApp.module.Emp;
 import com.Lbins.GuirenApp.util.StringUtil;
+import com.Lbins.GuirenApp.widget.CustomProgressDialog;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -116,7 +117,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                     showMsg(LoginActivity.this, getResources().getString(R.string.error_login_two));
                     return;
                 }
-                progressDialog = new ProgressDialog(LoginActivity.this);
+                progressDialog = new CustomProgressDialog(LoginActivity.this, "正在加载中",R.anim.custom_dialog_frame);
+                progressDialog.setCancelable(true);
                 progressDialog.setIndeterminate(true);
                 progressDialog.show();
                 loginData();

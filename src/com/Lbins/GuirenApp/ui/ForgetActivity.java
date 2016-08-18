@@ -21,6 +21,7 @@ import com.Lbins.GuirenApp.base.BaseActivity;
 import com.Lbins.GuirenApp.base.InternetURL;
 import com.Lbins.GuirenApp.receiver.SMSBroadcastReceiver;
 import com.Lbins.GuirenApp.util.StringUtil;
+import com.Lbins.GuirenApp.widget.CustomProgressDialog;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -153,7 +154,8 @@ public class ForgetActivity extends BaseActivity implements View.OnClickListener
                     showMsg(ForgetActivity.this, getResources().getString(R.string.pwr_error_six));
                     return;
                 }
-                progressDialog = new ProgressDialog(ForgetActivity.this);
+                progressDialog = new CustomProgressDialog(ForgetActivity.this, "正在加载中",R.anim.custom_dialog_frame);
+                progressDialog.setCancelable(true);
                 progressDialog.setIndeterminate(true);
                 progressDialog.show();
                 SMSSDK.submitVerificationCode("86", phString, code.getText().toString());

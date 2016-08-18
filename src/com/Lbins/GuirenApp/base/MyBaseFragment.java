@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.SharedPreferences;
 import android.support.v4.app.Fragment;
 import com.Lbins.GuirenApp.GuirenApplication;
+import com.Lbins.GuirenApp.widget.CustomProgressDialog;
 import com.android.volley.RequestQueue;
 import com.google.gson.Gson;
 
@@ -11,7 +12,7 @@ import com.google.gson.Gson;
  * Created by liuzwei on 2015/1/17.
  */
 public class MyBaseFragment extends Fragment {
-    public ProgressDialog progressDialog;
+    public CustomProgressDialog progressDialog;
 
     /**
      * 获取当前Application
