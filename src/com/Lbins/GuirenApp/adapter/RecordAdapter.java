@@ -120,7 +120,7 @@ public class RecordAdapter extends BaseAdapter {
 
             if(Constants.ZMT_TYPE.equals(cell.getMm_msg_type())){
                 holder.home_viewed_item_type.setVisibility(View.VISIBLE);
-                holder.home_viewed_item_type.setText("来自自媒体");
+                holder.home_viewed_item_type.setText("自媒体");
             }
             if (!StringUtil.isNullOrEmpty(cell.getMm_msg_content())) {
                 holder.home_viewed_item_cont.setVisibility(View.VISIBLE);
@@ -139,32 +139,36 @@ public class RecordAdapter extends BaseAdapter {
             if (cell.getMm_msg_type().equals(Constants.MOOD_TYPE) || cell.getMm_msg_type().equals(Constants.RECORD_TYPE)|| cell.getMm_msg_type().equals(Constants.ZMT_TYPE)) {
                 //说说
                 if (!StringUtil.isNullOrEmpty(cell.getMm_msg_picurl())) {
-                    //说明有图片
                     final String[] picUrls = cell.getMm_msg_picurl().split(",");//图片链接切割
                     if (picUrls.length > 0) {
                         //有多张图
-                        holder.gridview_detail_picture.setVisibility(View.VISIBLE);
                         holder.gridview_detail_picture.setAdapter(new ImageGridViewAdapter(picUrls, mContext));
-//                        if(picUrls.length ==1){
-//                            //如果只有1张图片
-//                            holder.gridview_detail_picture.setClickable(true);
-//                            holder.gridview_detail_picture.setPressed(true);
-//                            holder.gridview_detail_picture.setEnabled(true);
-//                        }else {
+                        if(picUrls.length ==1){
+                            //如果只有1张图片
+                            holder.gridview_detail_picture.setClickable(false);
+                            holder.gridview_detail_picture.setPressed(false);
+                            holder.gridview_detail_picture.setEnabled(false);
+                            holder.gridview_detail_picture.setVisibility(View.GONE);
+                            holder.home_photo_item_photo.setVisibility(View.VISIBLE);
+                            imageLoader.displayImage(picUrls[0], holder.home_photo_item_photo, GuirenApplication.options, animateFirstListener);
+                        }else {
                             holder.gridview_detail_picture.setClickable(true);
                             holder.gridview_detail_picture.setPressed(true);
                             holder.gridview_detail_picture.setEnabled(true);
-//                        }
-                        holder.gridview_detail_picture.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                            @Override
-                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                Intent intent = new Intent(mContext, GalleryUrlActivity.class);
-                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
-                                intent.putExtra(Constants.IMAGE_URLS, picUrls);
-                                intent.putExtra(Constants.IMAGE_POSITION, position);
-                                mContext.startActivity(intent);
-                            }
-                        });
+                            holder.gridview_detail_picture.setVisibility(View.VISIBLE);
+                            holder.home_photo_item_photo.setVisibility(View.GONE);
+                            holder.gridview_detail_picture.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                @Override
+                                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                    Intent intent = new Intent(mContext, GalleryUrlActivity.class);
+                                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+                                    intent.putExtra(Constants.IMAGE_URLS, picUrls);
+                                    intent.putExtra(Constants.IMAGE_POSITION, position);
+                                    mContext.startActivity(intent);
+                                }
+                            });
+                        }
+
                     }
                 }
             }

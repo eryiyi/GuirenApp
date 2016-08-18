@@ -259,7 +259,7 @@ public class DetailPageAcitvity extends BaseActivity implements View.OnClickList
         //说说并且图片要有
         if ( !StringUtil.isNullOrEmpty(record.getMm_msg_picurl())) {
             final String[] pics;
-//            if (record.getMm_msg_picurl().contains(",")) {
+            if (record.getMm_msg_picurl().contains(",")) {
                 //对账图片
                 pics = record.getMm_msg_picurl().split(",");
                 if(pics != null && pics.length >0){
@@ -271,18 +271,21 @@ public class DetailPageAcitvity extends BaseActivity implements View.OnClickList
                         }
                     });
                     detail_grideview.setVisibility(View.VISIBLE);
+                    picone.setVisibility(View.GONE);
                 }
-//                else{
-//                    picone.setVisibility(View.VISIBLE);
-//                    imageLoader.displayImage(pics[0], picone, GuirenApplication.options, animateFirstListener);
-//                }
+                else{
+                    detail_grideview.setVisibility(View.GONE);
+                    picone.setVisibility(View.VISIBLE);
+                    imageLoader.displayImage(pics[0], picone, GuirenApplication.options, animateFirstListener);
+                }
 
-//            } else {
-//                //单一图片
-//                pics = new String[]{record.getMm_msg_picurl()};
-//                picone.setVisibility(View.VISIBLE);
-//                imageLoader.displayImage(pics[0], picone, GuirenApplication.options, animateFirstListener);
-//            }
+            } else {
+                //单一图片
+                pics = new String[]{record.getMm_msg_picurl()};
+                detail_grideview.setVisibility(View.GONE);
+                picone.setVisibility(View.VISIBLE);
+                imageLoader.displayImage(pics[0], picone, GuirenApplication.options, animateFirstListener);
+            }
 
 //            picone.setOnClickListener(new View.OnClickListener() {
 //                @Override
