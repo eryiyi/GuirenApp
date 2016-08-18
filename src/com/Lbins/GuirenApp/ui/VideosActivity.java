@@ -55,7 +55,6 @@ public class VideosActivity extends BaseActivity implements View.OnClickListener
 
 //    String shareUrl = InternetURL.SHARE_VIDEOS;
 
-
     private String time_is = "1";
     private String favour_is = "0";
 

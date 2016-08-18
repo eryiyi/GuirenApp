@@ -36,9 +36,15 @@ import com.android.volley.toolbox.StringRequest;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
+import com.umeng.socialize.ShareAction;
+import com.umeng.socialize.UMShareAPI;
+import com.umeng.socialize.UMShareListener;
 import com.umeng.socialize.bean.RequestType;
+import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.media.UMImage;
 import com.umeng.socialize.media.UMVideo;
+import com.umeng.socialize.shareboard.SnsPlatform;
+import com.umeng.socialize.utils.ShareBoardlistener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -184,7 +190,7 @@ public class DetailVideosActivity extends BaseActivity implements View.OnClickLi
                 break;
             case R.id.detail_share://分享按钮
             {
-                //todo
+                share();
             }
                 break;
             case R.id.detail_comment_liner://评论
@@ -221,7 +227,7 @@ public class DetailVideosActivity extends BaseActivity implements View.OnClickLi
     private void loadData() {
         StringRequest request = new StringRequest(
                 Request.Method.POST,
-                getGson().fromJson(getSp().getString("select_big_area", ""), String.class) +  InternetURL.GET_VIDEOS_PL_URL,
+                InternetURL.GET_VIDEOS_PL_URL,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String s) {
@@ -364,7 +370,7 @@ public class DetailVideosActivity extends BaseActivity implements View.OnClickLi
     private void zan_click(final Videos record) {
         StringRequest request = new StringRequest(
                 Request.Method.POST,
-                getGson().fromJson(getSp().getString("select_big_area", ""), String.class) +  InternetURL.PUBLISH_VIDEO_FAVOUR_RECORD,
+                InternetURL.PUBLISH_VIDEO_FAVOUR_RECORD,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String s) {
@@ -460,5 +466,48 @@ public class DetailVideosActivity extends BaseActivity implements View.OnClickLi
         unregisterReceiver(mBroadcastReceiver);
     }
 
+    void share() {
+        new ShareAction(DetailVideosActivity.this).setDisplayList(SHARE_MEDIA.QQ, SHARE_MEDIA.QZONE, SHARE_MEDIA.WEIXIN, SHARE_MEDIA.WEIXIN_CIRCLE)
+                .setShareboardclickCallback(shareBoardlistener)
+                .open();
+    }
 
+    private ShareBoardlistener shareBoardlistener = new ShareBoardlistener() {
+
+        @Override
+        public void onclick(SnsPlatform snsPlatform, SHARE_MEDIA share_media) {
+            UMImage image = new UMImage(DetailVideosActivity.this, record.getPicUrl());
+            String title =  getGson().fromJson(getSp().getString("mm_emp_nickname", ""), String.class)+"邀您免费看电影" ;
+            String content = record.getTitle()+record.getContent();
+            new ShareAction(DetailVideosActivity.this).setPlatform(share_media).setCallback(umShareListener)
+                    .withText(content)
+                    .withTitle(title)
+                    .withTargetUrl((InternetURL.SHARE_VIDEOS + "?id=" + record.getId()))
+                    .withMedia(image)
+                    .share();
+        }
+    };
+
+    private UMShareListener umShareListener = new UMShareListener() {
+        @Override
+        public void onResult(SHARE_MEDIA platform) {
+            Toast.makeText(DetailVideosActivity.this, platform + getResources().getString(R.string.share_success), Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onError(SHARE_MEDIA platform, Throwable t) {
+            Toast.makeText(DetailVideosActivity.this, platform + getResources().getString(R.string.share_error), Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onCancel(SHARE_MEDIA platform) {
+            Toast.makeText(DetailVideosActivity.this, platform + getResources().getString(R.string.share_cancel), Toast.LENGTH_SHORT).show();
+        }
+    };
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        UMShareAPI.get(DetailVideosActivity.this).onActivityResult(requestCode, resultCode, data);
+    }
 }

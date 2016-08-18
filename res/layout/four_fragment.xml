@@ -112,6 +112,25 @@
             </LinearLayout>
             <LinearLayout android:layout_width="match_parent"
                           android:orientation="horizontal"
+                          android:id="@+id/liner_movie"
+                          android:layout_marginTop="20dp"
+                          android:background="@drawable/btn_dark_shape"
+                          android:layout_height="50dp">
+                <ImageView android:layout_width="35dp"
+                           android:src="@drawable/qiubai_icon"
+                           android:layout_marginLeft="8dp"
+                           android:layout_gravity="center_vertical"
+                           android:layout_height="wrap_content"/>
+                <TextView android:layout_width="wrap_content"
+                          android:text="电影推荐"
+                          android:layout_marginLeft="15dp"
+                          android:layout_gravity="center_vertical"
+                          android:textColor="@color/black"
+                          android:textSize="16sp"
+                          android:layout_height="wrap_content"/>
+            </LinearLayout>
+            <LinearLayout android:layout_width="match_parent"
+                          android:orientation="horizontal"
                           android:id="@+id/liner_zmt"
                           android:layout_marginTop="20dp"
                           android:background="@drawable/btn_dark_shape"

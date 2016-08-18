@@ -9,10 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 import com.Lbins.GuirenApp.R;
 import com.Lbins.GuirenApp.base.BaseFragment;
-import com.Lbins.GuirenApp.ui.FindActivity;
-import com.Lbins.GuirenApp.ui.TongxunluActivity;
-import com.Lbins.GuirenApp.ui.WebViewActivity;
-import com.Lbins.GuirenApp.ui.ZimeitiActivity;
+import com.Lbins.GuirenApp.ui.*;
 
 /**
  * Created by zhl on 2016/5/6.
@@ -40,6 +37,7 @@ public class FourFragment extends BaseFragment implements View.OnClickListener {
         view.findViewById(R.id.liner_news).setOnClickListener(this);//游戏
         view.findViewById(R.id.liner_baike).setOnClickListener(this);//游戏
         view.findViewById(R.id.liner_zmt).setOnClickListener(this);//自媒体
+        view.findViewById(R.id.liner_movie).setOnClickListener(this);//电影
         return view;
     }
 
@@ -100,6 +98,12 @@ public class FourFragment extends BaseFragment implements View.OnClickListener {
            {
                //自媒体
                Intent intent = new Intent(getActivity(), ZimeitiActivity.class);
+               startActivity(intent);
+           }
+               break;
+           case R.id.liner_movie:
+           {
+               Intent intent = new Intent(getActivity(), VideosActivity.class);
                startActivity(intent);
            }
                break;

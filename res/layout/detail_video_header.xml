@@ -30,7 +30,7 @@
                     android:id="@+id/title"/>
 
             <RelativeLayout android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="200dp"
                             android:layout_marginTop="12dp"
                             android:id="@+id/detail_content_relayout"
                             android:gravity="center">
@@ -41,6 +41,7 @@
                         android:scaleType="centerCrop"
                         android:src="@drawable/video_fail"
                         android:minHeight="200dp"
+                        android:maxHeight="200dp"
                         android:layout_centerHorizontal="true"/>
 
                 <ImageView

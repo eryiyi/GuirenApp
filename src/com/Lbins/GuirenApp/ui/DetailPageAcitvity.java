@@ -426,7 +426,6 @@ public class DetailPageAcitvity extends BaseActivity implements View.OnClickList
 
         @Override
         public void onclick(SnsPlatform snsPlatform, SHARE_MEDIA share_media) {
-//            UMImage image = new UMImage(DetailPageAcitvity.this, R.drawable.ic_launcher);
             UMImage image = new UMImage(DetailPageAcitvity.this, record.getMm_emp_cover());
             String title =  record.getMm_emp_nickname()+"邀请您加入贵人" ;
             String content = record.getMm_msg_content()==null?"贵人，无处不在":record.getMm_msg_content();

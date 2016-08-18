@@ -270,7 +270,7 @@ public class InternetURL {
     public static final String SHARE_VIDEOS = INTERNAL +  "viewVideos.do";
 
     //查询videos评论
-    public static final String GET_VIDEOS_PL_URL = INTERNAL +  "listVideosCommentApp.do";
+    public static final String GET_VIDEOS_PL_URL = INTERNAL +  "listVideosComment.do";
     //查询videos赞
     public static final String GET_VIDEOS_FAVOUR_URL =  INTERNAL + "appVideosListZan.do";
 
