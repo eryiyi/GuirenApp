@@ -164,7 +164,7 @@ public class DemoHelper {
         //you need apply & set your own id if you want to use google cloud messaging.
         options.setGCMNumber("324169311137");
         //you need apply & set your own id if you want to use Mi push notification
-        options.setMipushConfig("2882303761517426801", "5381742660801");
+        options.setMipushConfig("2882303761517502340", "5671750229340");
         //you need apply & set your own id if you want to use Huawei push notification
         options.setHuaweiPushAppId("10492024");
         

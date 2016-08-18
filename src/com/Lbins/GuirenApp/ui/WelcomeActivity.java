@@ -257,7 +257,7 @@ public class WelcomeActivity extends BaseActivity implements Runnable ,AMapLocat
     }
 
 
-    public void saveAccount(Emp emp) {
+    public void saveAccount(final Emp emp) {
         //登录成功，绑定百度云推送
 //        if (StringUtil.isNullOrEmpty(emp.getUserId())) {
             //进行绑定
@@ -330,8 +330,11 @@ public class WelcomeActivity extends BaseActivity implements Runnable ,AMapLocat
                 EMClient.getInstance().chatManager().loadAllConversations();
 
                 // update current user's display name for APNs
-                boolean updatenick = EMClient.getInstance().updateCurrentUserNick(
-                        GuirenApplication.currentUserNick.trim());
+//                boolean updatenick = EMClient.getInstance().updateCurrentUserNick(
+//                        GuirenApplication.currentUserNick.trim());
+
+                boolean updatenick = EMClient.getInstance().updateCurrentUserNick(emp.getMm_emp_nickname());
+
                 if (!updatenick) {
                     Log.e("LoginActivity", "update current user nick fail");
                 }

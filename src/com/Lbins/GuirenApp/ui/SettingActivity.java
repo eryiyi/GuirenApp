@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.Lbins.GuirenApp.R;
+import com.Lbins.GuirenApp.base.ActivityTack;
 import com.Lbins.GuirenApp.base.BaseActivity;
 import com.Lbins.GuirenApp.base.InternetURL;
 import com.Lbins.GuirenApp.data.VersionUpdateObjData;
@@ -231,7 +232,8 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
                 runOnUiThread(new Runnable() {
                     public void run() {
                         finish();
-                        startActivity(new Intent(SettingActivity.this, com.Lbins.GuirenApp.ui.LoginActivity.class));
+//                        startActivity(new Intent(SettingActivity.this, com.Lbins.GuirenApp.ui.LoginActivity.class));
+                        ActivityTack.getInstanse().exit(SettingActivity.this);
                     }
                 });
             }

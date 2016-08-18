@@ -407,6 +407,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener ,
 
         @Override
         public void onMessageReceived(List<EMMessage> messages) {
+            //顶部消息通知
             // notify new message
             for (EMMessage message : messages) {
                 DemoHelper.getInstance().getNotifier().onNewMsg(message);
@@ -538,23 +539,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener ,
         broadcastManager.unregisterReceiver(broadcastReceiver);
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
 
-        if (conflictBuilder != null) {
-            conflictBuilder.create().dismiss();
-            conflictBuilder = null;
-        }
-        unregisterBroadcastReceiver();
-
-        try {
-            unregisterReceiver(internalDebugReceiver);
-        } catch (Exception e) {
-        }
-        unregisterReceiver(mBroadcastReceiver);
-
-    }
 
     /**
      * update unread message count
@@ -767,7 +752,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener ,
                             public void run() {
                                 finish();
                                 startActivity(new Intent(MainActivity.this, LoginActivity.class));
-
                             }
                         });
                     }
@@ -1016,4 +1000,21 @@ public class MainActivity extends BaseActivity implements View.OnClickListener ,
         registerReceiver(mBroadcastReceiver, myIntentFilter);
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        if (conflictBuilder != null) {
+            conflictBuilder.create().dismiss();
+            conflictBuilder = null;
+        }
+        unregisterBroadcastReceiver();
+
+        try {
+            unregisterReceiver(internalDebugReceiver);
+        } catch (Exception e) {
+        }
+        unregisterReceiver(mBroadcastReceiver);
+
+    }
 }
