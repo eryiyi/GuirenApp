@@ -259,4 +259,7 @@ public class InternetURL {
 
     //判断版本号
     public static final String CHECK_VERSION_CODE_URL = INTERNAL + "getVersionCode.do";
+
+    //动态页面
+    public static final String SHARE_RECORD_URL = INTERNAL + "viewRecord.do";
 }

@@ -42,6 +42,13 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
+import com.umeng.socialize.ShareAction;
+import com.umeng.socialize.UMShareAPI;
+import com.umeng.socialize.UMShareListener;
+import com.umeng.socialize.bean.SHARE_MEDIA;
+import com.umeng.socialize.media.UMImage;
+import com.umeng.socialize.shareboard.SnsPlatform;
+import com.umeng.socialize.utils.ShareBoardlistener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -326,7 +333,9 @@ public class DetailPageAcitvity extends BaseActivity implements View.OnClickList
                 finish();
                 break;
             case R.id.detail_share://分享按钮
-//                mController.openShare(this, false);
+            {
+                share();
+            }
                 break;
             case R.id.detail_report_liner://举报
                 showJubao();
@@ -404,6 +413,55 @@ public class DetailPageAcitvity extends BaseActivity implements View.OnClickList
 
         }
     }
+
+
+    void share() {
+        new ShareAction(DetailPageAcitvity.this).setDisplayList(SHARE_MEDIA.QQ, SHARE_MEDIA.QZONE, SHARE_MEDIA.WEIXIN, SHARE_MEDIA.WEIXIN_CIRCLE)
+                .setShareboardclickCallback(shareBoardlistener)
+                .open();
+    }
+
+    private ShareBoardlistener shareBoardlistener = new ShareBoardlistener() {
+
+        @Override
+        public void onclick(SnsPlatform snsPlatform, SHARE_MEDIA share_media) {
+//            UMImage image = new UMImage(DetailPageAcitvity.this, R.drawable.ic_launcher);
+            UMImage image = new UMImage(DetailPageAcitvity.this, record.getMm_emp_cover());
+            String title =  record.getMm_emp_nickname()+"邀请您加入贵人" ;
+            String content = record.getMm_msg_content()==null?"贵人，无处不在":record.getMm_msg_content();
+            new ShareAction(DetailPageAcitvity.this).setPlatform(share_media).setCallback(umShareListener)
+                    .withText(content)
+                    .withTitle(title)
+                    .withTargetUrl((InternetURL.SHARE_RECORD_URL + "?id=" + record.getMm_msg_id()))
+                    .withMedia(image)
+                    .share();
+        }
+    };
+
+    private UMShareListener umShareListener = new UMShareListener() {
+        @Override
+        public void onResult(SHARE_MEDIA platform) {
+            Toast.makeText(DetailPageAcitvity.this, platform + getResources().getString(R.string.share_success), Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onError(SHARE_MEDIA platform, Throwable t) {
+            Toast.makeText(DetailPageAcitvity.this, platform + getResources().getString(R.string.share_error), Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onCancel(SHARE_MEDIA platform) {
+            Toast.makeText(DetailPageAcitvity.this, platform + getResources().getString(R.string.share_cancel), Toast.LENGTH_SHORT).show();
+        }
+    };
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        /** attention to this below ,must add this**/
+        UMShareAPI.get(DetailPageAcitvity.this).onActivityResult(requestCode, resultCode, data);
+    }
+
 
     private void loadData() {
         StringRequest request = new StringRequest(
