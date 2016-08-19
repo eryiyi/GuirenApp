@@ -16,6 +16,7 @@ import com.Lbins.GuirenApp.base.InternetURL;
 import com.Lbins.GuirenApp.data.SuccessData;
 import com.Lbins.GuirenApp.module.PaopaoGoods;
 import com.Lbins.GuirenApp.util.Constants;
+import com.Lbins.GuirenApp.util.GuirenHttpUtils;
 import com.Lbins.GuirenApp.util.StringUtil;
 import com.Lbins.GuirenApp.widget.DeletePopWindow;
 import com.Lbins.GuirenApp.widget.GoodsTelPopWindow;
@@ -151,12 +152,23 @@ public class DetailGoodsActivity extends BaseActivity implements
         //显示窗口
         deleteWindow.showAtLocation(DetailGoodsActivity.this.findViewById(R.id.main), Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
     }
-
+    boolean isMobileNet, isWifiNet;
     //为弹出窗口实现监听类
     private View.OnClickListener itemsOnClickOne = new View.OnClickListener() {
 
         public void onClick(View v) {
             deleteWindow.dismiss();
+            //判断是否有网
+            try {
+                isMobileNet = GuirenHttpUtils.isMobileDataEnable(DetailGoodsActivity.this);
+                isWifiNet = GuirenHttpUtils.isWifiDataEnable(DetailGoodsActivity.this);
+                if (!isMobileNet && !isWifiNet) {
+                    showMsg(DetailGoodsActivity.this, "请检查网络链接");
+                    return;
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             switch (v.getId()) {
                 case R.id.btn_sure:
                     delete();

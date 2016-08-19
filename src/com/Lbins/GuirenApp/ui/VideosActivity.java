@@ -15,13 +15,16 @@ import com.Lbins.GuirenApp.adapter.ItemVideosAdapter;
 import com.Lbins.GuirenApp.adapter.OnClickContentItemListener;
 import com.Lbins.GuirenApp.base.BaseActivity;
 import com.Lbins.GuirenApp.base.InternetURL;
+import com.Lbins.GuirenApp.dao.DBHelper;
 import com.Lbins.GuirenApp.data.RecordDATA;
 import com.Lbins.GuirenApp.data.VideosData;
 import com.Lbins.GuirenApp.library.PullToRefreshBase;
 import com.Lbins.GuirenApp.library.PullToRefreshListView;
+import com.Lbins.GuirenApp.module.Record;
 import com.Lbins.GuirenApp.module.VideoPlayer;
 import com.Lbins.GuirenApp.module.Videos;
 import com.Lbins.GuirenApp.util.Constants;
+import com.Lbins.GuirenApp.util.GuirenHttpUtils;
 import com.Lbins.GuirenApp.util.StringUtil;
 import com.Lbins.GuirenApp.widget.CustomProgressDialog;
 import com.android.volley.AuthFailureError;
@@ -58,6 +61,9 @@ public class VideosActivity extends BaseActivity implements View.OnClickListener
     private String time_is = "1";
     private String favour_is = "0";
 
+    boolean isMobileNet, isWifiNet;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,12 +71,26 @@ public class VideosActivity extends BaseActivity implements View.OnClickListener
         setContentView(R.layout.videos_activity);
         emp_id = getGson().fromJson(getSp().getString("mm_emp_id", ""), String.class);
         initView();
-        progressDialog =  new CustomProgressDialog(VideosActivity.this, "正在加载中", R.anim.custom_dialog_frame);
 
-        progressDialog.setCancelable(true);
-        progressDialog.setIndeterminate(true);
-        progressDialog.show();
-        initData();
+        //判断是否有网
+        try {
+            isMobileNet = GuirenHttpUtils.isMobileDataEnable(VideosActivity.this);
+            isWifiNet = GuirenHttpUtils.isWifiDataEnable(VideosActivity.this);
+            if (!isMobileNet && !isWifiNet) {
+                list.addAll(DBHelper.getInstance(VideosActivity.this).getVideos());
+                adapter.notifyDataSetChanged();
+            }else {
+                progressDialog =  new CustomProgressDialog(VideosActivity.this, "正在加载中", R.anim.custom_dialog_frame);
+                progressDialog.setCancelable(true);
+                progressDialog.setIndeterminate(true);
+                progressDialog.show();
+                initData();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
     }
 
     private void initView() {
@@ -86,7 +106,18 @@ public class VideosActivity extends BaseActivity implements View.OnClickListener
                 refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
                 IS_REFRESH = true;
                 pageIndex = 1;
-                initData();
+                //判断是否有网
+                try {
+                    isMobileNet = GuirenHttpUtils.isMobileDataEnable(VideosActivity.this);
+                    isWifiNet = GuirenHttpUtils.isWifiDataEnable(VideosActivity.this);
+                    if (!isMobileNet && !isWifiNet) {
+                        lstv.onRefreshComplete();
+                    }else {
+                        initData();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override
@@ -97,7 +128,18 @@ public class VideosActivity extends BaseActivity implements View.OnClickListener
                 refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
                 IS_REFRESH = false;
                 pageIndex++;
-                initData();
+                //判断是否有网
+                try {
+                    isMobileNet = GuirenHttpUtils.isMobileDataEnable(VideosActivity.this);
+                    isWifiNet = GuirenHttpUtils.isWifiDataEnable(VideosActivity.this);
+                    if (!isMobileNet && !isWifiNet) {
+                        lstv.onRefreshComplete();
+                    }else {
+                        initData();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
         lstv.setAdapter(adapter);
@@ -117,6 +159,17 @@ public class VideosActivity extends BaseActivity implements View.OnClickListener
 
     @Override
     public void onClick(View view) {
+        //判断是否有网
+        try {
+            isMobileNet = GuirenHttpUtils.isMobileDataEnable(VideosActivity.this);
+            isWifiNet = GuirenHttpUtils.isWifiDataEnable(VideosActivity.this);
+            if (!isMobileNet && !isWifiNet) {
+                showMsg(VideosActivity.this, "请检查网络链接");
+                return;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         switch (view.getId()){
             case R.id.liner_one:
                 progressDialog = new CustomProgressDialog(VideosActivity.this, "正在加载中",R.anim.custom_dialog_frame);
@@ -148,6 +201,17 @@ public class VideosActivity extends BaseActivity implements View.OnClickListener
     Videos tmpVideos;
     @Override
     public void onClickContentItem(int position, int flag, Object object) {
+        //判断是否有网
+        try {
+            isMobileNet = GuirenHttpUtils.isMobileDataEnable(VideosActivity.this);
+            isWifiNet = GuirenHttpUtils.isWifiDataEnable(VideosActivity.this);
+            if (!isMobileNet && !isWifiNet) {
+                showMsg(VideosActivity.this, "请检查网络链接");
+                return;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         tmpVideos = list.get(position);
         tmpId = position;
         switch (flag){
@@ -272,6 +336,16 @@ public class VideosActivity extends BaseActivity implements View.OnClickListener
                                 list.addAll(data.getData());
                                 lstv.onRefreshComplete();
                                 adapter.notifyDataSetChanged();
+
+                                //处理数据，需要的话保存到数据库
+                                if (data != null && data.getData() != null) {
+                                    DBHelper dbHelper = DBHelper.getInstance(VideosActivity.this);
+                                    for (Videos videos : data.getData()) {
+                                        if (dbHelper.getVideosById(videos.getId()) == null) {
+                                            DBHelper.getInstance(VideosActivity.this).saveVideos(videos);
+                                        }
+                                    }
+                                }
                             } else {
                                 Toast.makeText(VideosActivity.this, R.string.get_data_error, Toast.LENGTH_SHORT).show();
                             }
@@ -281,7 +355,6 @@ public class VideosActivity extends BaseActivity implements View.OnClickListener
                         if (progressDialog != null) {
                             progressDialog.dismiss();
                         }
-
                     }
                 },
                 new Response.ErrorListener() {
@@ -313,9 +386,6 @@ public class VideosActivity extends BaseActivity implements View.OnClickListener
         getRequestQueue().add(request);
     }
 
-    public void back(View view){
-        finish();
-    }
 
     //广播接收动作
     private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
@@ -342,6 +412,10 @@ public class VideosActivity extends BaseActivity implements View.OnClickListener
     public void onDestroy() {
         super.onDestroy();
         unregisterReceiver(mBroadcastReceiver);
+    }
+
+    public void back(View view){
+        finish();
     }
 
 }

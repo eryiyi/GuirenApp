@@ -20,6 +20,7 @@ import com.Lbins.GuirenApp.R;
 import com.Lbins.GuirenApp.adapter.*;
 import com.Lbins.GuirenApp.base.BaseActivity;
 import com.Lbins.GuirenApp.base.InternetURL;
+import com.Lbins.GuirenApp.dao.DBHelper;
 import com.Lbins.GuirenApp.data.CommentContentDATA;
 import com.Lbins.GuirenApp.data.FavoursDATA;
 import com.Lbins.GuirenApp.data.RecordDATA;
@@ -31,6 +32,7 @@ import com.Lbins.GuirenApp.module.CommentContent;
 import com.Lbins.GuirenApp.module.Favour;
 import com.Lbins.GuirenApp.module.Record;
 import com.Lbins.GuirenApp.util.Constants;
+import com.Lbins.GuirenApp.util.GuirenHttpUtils;
 import com.Lbins.GuirenApp.util.PicUtil;
 import com.Lbins.GuirenApp.util.StringUtil;
 import com.Lbins.GuirenApp.widget.CustomProgressDialog;
@@ -116,6 +118,8 @@ public class DetailPageAcitvity extends BaseActivity implements View.OnClickList
 //    private DeletePopWindow deleteWindow;
 
     private DeletePopWindow deleteWindow;
+    boolean isMobileNet, isWifiNet;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -128,6 +132,23 @@ public class DetailPageAcitvity extends BaseActivity implements View.OnClickList
         emp_id = getGson().fromJson(getSp().getString("mm_emp_id", ""), String.class);
         initView();
         initData();
+        //判断是否有网
+        try {
+            isMobileNet = GuirenHttpUtils.isMobileDataEnable(DetailPageAcitvity.this);
+            isWifiNet = GuirenHttpUtils.isWifiDataEnable(DetailPageAcitvity.this);
+            if (!isMobileNet && !isWifiNet) {
+            }else {
+                progressDialog =  new CustomProgressDialog(DetailPageAcitvity.this, "正在加载中", R.anim.custom_dialog_frame);
+                progressDialog.setCancelable(true);
+                progressDialog.setIndeterminate(true);
+                progressDialog.show();
+                loadData();
+                getFavour();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
 
         detail_grideview.setSelector(new ColorDrawable(Color.TRANSPARENT));
         gridView.setSelector(new ColorDrawable(Color.TRANSPARENT));
@@ -155,7 +176,7 @@ public class DetailPageAcitvity extends BaseActivity implements View.OnClickList
 //            detail_delete_liner.setVisibility(View.VISIBLE);
 //            detail_report_liner.setVisibility(View.GONE);
 //        }
-        detail_delete_liner.setVisibility(View.VISIBLE);
+//        detail_delete_liner.setVisibility(View.VISIBLE);
         detail_report_liner.setVisibility(View.GONE);
         detail_photo = (ImageView) commentLayout.findViewById(R.id.detail_photo);
         detail_photo.setOnClickListener(this);
@@ -199,7 +220,18 @@ public class DetailPageAcitvity extends BaseActivity implements View.OnClickList
                 refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
                 IS_REFRESH = true;
                 pageIndex = 1;
-                loadData();
+                //判断是否有网
+                try {
+                    isMobileNet = GuirenHttpUtils.isMobileDataEnable(DetailPageAcitvity.this);
+                    isWifiNet = GuirenHttpUtils.isWifiDataEnable(DetailPageAcitvity.this);
+                    if (!isMobileNet && !isWifiNet) {
+                        detail_lstv.onRefreshComplete();
+                    }else {
+                        loadData();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override
@@ -210,7 +242,19 @@ public class DetailPageAcitvity extends BaseActivity implements View.OnClickList
                 refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
                 IS_REFRESH = false;
                 pageIndex++;
-                loadData();
+                //判断是否有网
+                try {
+                    isMobileNet = GuirenHttpUtils.isMobileDataEnable(DetailPageAcitvity.this);
+                    isWifiNet = GuirenHttpUtils.isWifiDataEnable(DetailPageAcitvity.this);
+                    if (!isMobileNet && !isWifiNet) {
+                        detail_lstv.onRefreshComplete();
+                    }else {
+                        loadData();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
             }
         });
 
@@ -311,8 +355,7 @@ public class DetailPageAcitvity extends BaseActivity implements View.OnClickList
 //        }
         //广告
 //        getSmallAd();
-        loadData();
-        getFavour();
+
 
     }
 
@@ -329,6 +372,17 @@ public class DetailPageAcitvity extends BaseActivity implements View.OnClickList
 
     @Override
     public void onClick(View v) {
+        //判断是否有网
+        try {
+            isMobileNet = GuirenHttpUtils.isMobileDataEnable(DetailPageAcitvity.this);
+            isWifiNet = GuirenHttpUtils.isWifiDataEnable(DetailPageAcitvity.this);
+            if (!isMobileNet && !isWifiNet) {
+                showMsg(DetailPageAcitvity.this, "请检查网络链接");
+                return;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         switch (v.getId()) {
             case R.id.detail_back://返回按钮
                 finish();
@@ -486,11 +540,17 @@ public class DetailPageAcitvity extends BaseActivity implements View.OnClickList
                         } else {
                             Toast.makeText(DetailPageAcitvity.this, R.string.get_data_error, Toast.LENGTH_SHORT).show();
                         }
+                        if (progressDialog != null) {
+                            progressDialog.dismiss();
+                        }
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
+                        if (progressDialog != null) {
+                            progressDialog.dismiss();
+                        }
                         Toast.makeText(DetailPageAcitvity.this, R.string.get_data_error, Toast.LENGTH_SHORT).show();
                     }
                 }
@@ -562,11 +622,17 @@ public class DetailPageAcitvity extends BaseActivity implements View.OnClickList
                         } else {
                             Toast.makeText(DetailPageAcitvity.this, R.string.get_data_error, Toast.LENGTH_SHORT).show();
                         }
+                        if (progressDialog != null) {
+                            progressDialog.dismiss();
+                        }
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
+                        if (progressDialog != null) {
+                            progressDialog.dismiss();
+                        }
                         Toast.makeText(DetailPageAcitvity.this, R.string.get_data_error, Toast.LENGTH_SHORT).show();
                     }
                 }
@@ -592,6 +658,17 @@ public class DetailPageAcitvity extends BaseActivity implements View.OnClickList
 
     @Override
     public void onClickContentItem(int position, int flag, Object object) {
+        //判断是否有网
+        try {
+            isMobileNet = GuirenHttpUtils.isMobileDataEnable(DetailPageAcitvity.this);
+            isWifiNet = GuirenHttpUtils.isWifiDataEnable(DetailPageAcitvity.this);
+            if (!isMobileNet && !isWifiNet) {
+                showMsg(DetailPageAcitvity.this, "请检查网络链接");
+                return;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         comt = commentContents.get(position);
         switch (flag) {
             case 1:
@@ -761,10 +838,30 @@ public class DetailPageAcitvity extends BaseActivity implements View.OnClickList
             if (action.equals(Constants.SEND_COMMENT_SUCCESS)) {
                 //刷新内容
                 pageIndex = 1;
-                loadData();
+                //判断是否有网
+                try {
+                    isMobileNet = GuirenHttpUtils.isMobileDataEnable(DetailPageAcitvity.this);
+                    isWifiNet = GuirenHttpUtils.isWifiDataEnable(DetailPageAcitvity.this);
+                    if (!isMobileNet && !isWifiNet) {
+                    }else {
+                        loadData();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
             if (action.equals(Constants.SEND_FAVOUR_SUCCESS)) {
-                getFavour();
+                //判断是否有网
+                try {
+                    isMobileNet = GuirenHttpUtils.isMobileDataEnable(DetailPageAcitvity.this);
+                    isWifiNet = GuirenHttpUtils.isWifiDataEnable(DetailPageAcitvity.this);
+                    if (!isMobileNet && !isWifiNet) {
+                    }else {
+                        getFavour();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         }
 

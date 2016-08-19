@@ -16,12 +16,15 @@ import com.Lbins.GuirenApp.adapter.OnClickContentItemListener;
 import com.Lbins.GuirenApp.adapter.RecordAdapter;
 import com.Lbins.GuirenApp.base.BaseActivity;
 import com.Lbins.GuirenApp.base.InternetURL;
+import com.Lbins.GuirenApp.dao.DBHelper;
 import com.Lbins.GuirenApp.data.RecordDATA;
 import com.Lbins.GuirenApp.library.PullToRefreshBase;
 import com.Lbins.GuirenApp.library.PullToRefreshListView;
 import com.Lbins.GuirenApp.module.Record;
 import com.Lbins.GuirenApp.util.Constants;
+import com.Lbins.GuirenApp.util.GuirenHttpUtils;
 import com.Lbins.GuirenApp.util.StringUtil;
+import com.Lbins.GuirenApp.widget.CustomProgressDialog;
 import com.android.volley.*;
 import com.android.volley.toolbox.StringRequest;
 
@@ -43,6 +46,7 @@ public class MinePhotoActivity extends BaseActivity implements View.OnClickListe
     private static boolean IS_REFRESH = true;
     private List<Record> recordList = new ArrayList<Record>();
     Record recordtmp;//转换用
+    boolean isMobileNet, isWifiNet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +69,18 @@ public class MinePhotoActivity extends BaseActivity implements View.OnClickListe
                 refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
                 IS_REFRESH = true;
                 pageIndex = 1;
-                initData();
+                //判断是否有网
+                try {
+                    isMobileNet = GuirenHttpUtils.isMobileDataEnable(MinePhotoActivity.this);
+                    isWifiNet = GuirenHttpUtils.isWifiDataEnable(MinePhotoActivity.this);
+                    if (!isMobileNet && !isWifiNet) {
+                        lstv.onRefreshComplete();
+                    }else {
+                        initData();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override
@@ -76,7 +91,18 @@ public class MinePhotoActivity extends BaseActivity implements View.OnClickListe
                 refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
                 IS_REFRESH = false;
                 pageIndex++;
-                initData();
+                //判断是否有网
+                try {
+                    isMobileNet = GuirenHttpUtils.isMobileDataEnable(MinePhotoActivity.this);
+                    isWifiNet = GuirenHttpUtils.isWifiDataEnable(MinePhotoActivity.this);
+                    if (!isMobileNet && !isWifiNet) {
+                        lstv.onRefreshComplete();
+                    }else {
+                        initData();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
         lstv.setAdapter(adapter);
@@ -92,10 +118,27 @@ public class MinePhotoActivity extends BaseActivity implements View.OnClickListe
                         startActivity(detail);
                     }
                 }
-
             }
         });
-        initData();
+
+
+        //判断是否有网
+        try {
+            isMobileNet = GuirenHttpUtils.isMobileDataEnable(MinePhotoActivity.this);
+            isWifiNet = GuirenHttpUtils.isWifiDataEnable(MinePhotoActivity.this);
+            if (!isMobileNet && !isWifiNet) {
+                showMsg(MinePhotoActivity.this ,"请检查您网络链接");
+            }else {
+                progressDialog = new CustomProgressDialog(MinePhotoActivity.this, "正在加载中",R.anim.custom_dialog_frame);
+                progressDialog.setCancelable(true);
+                progressDialog.setIndeterminate(true);
+                progressDialog.show();
+                initData();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     private void initData() {
@@ -176,6 +219,17 @@ public class MinePhotoActivity extends BaseActivity implements View.OnClickListe
     }
     @Override
     public void onClickContentItem(int position, int flag, Object object) {
+        //判断是否有网
+        try {
+            isMobileNet = GuirenHttpUtils.isMobileDataEnable(MinePhotoActivity.this);
+            isWifiNet = GuirenHttpUtils.isWifiDataEnable(MinePhotoActivity.this);
+            if (!isMobileNet && !isWifiNet) {
+                showMsg(MinePhotoActivity.this, "请检查网络链接");
+                return;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         record = recordList.get(position);
         switch (flag) {
             case 1:

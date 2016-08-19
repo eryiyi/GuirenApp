@@ -13,7 +13,9 @@ import com.Lbins.GuirenApp.data.YaoqingCardData;
 import com.Lbins.GuirenApp.library.PullToRefreshBase;
 import com.Lbins.GuirenApp.library.PullToRefreshListView;
 import com.Lbins.GuirenApp.module.YaoqingCard;
+import com.Lbins.GuirenApp.util.GuirenHttpUtils;
 import com.Lbins.GuirenApp.util.StringUtil;
+import com.Lbins.GuirenApp.widget.CustomProgressDialog;
 import com.android.volley.*;
 import com.android.volley.toolbox.StringRequest;
 import com.umeng.socialize.ShareAction;
@@ -39,14 +41,30 @@ public class MineYqCardActivity  extends BaseActivity implements View.OnClickLis
     private int pageIndex = 1;
     private static boolean IS_REFRESH = true;
     private List<YaoqingCard> recordList = new ArrayList<YaoqingCard>();
-
+    boolean isMobileNet, isWifiNet;
     private TextView btn_goumai;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mine_yqcard_activity);
         initView();
-        initData();
+        //判断是否有网
+        try {
+            isMobileNet = GuirenHttpUtils.isMobileDataEnable(MineYqCardActivity.this);
+            isWifiNet = GuirenHttpUtils.isWifiDataEnable(MineYqCardActivity.this);
+            if (!isMobileNet && !isWifiNet) {
+                showMsg(MineYqCardActivity.this ,"请检查您网络链接");
+            }else {
+                progressDialog = new CustomProgressDialog(MineYqCardActivity.this, "正在加载中",R.anim.custom_dialog_frame);
+                progressDialog.setCancelable(true);
+                progressDialog.setIndeterminate(true);
+                progressDialog.show();
+                initData();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
     YaoqingCard record;
     void initView(){
@@ -210,6 +228,17 @@ public class MineYqCardActivity  extends BaseActivity implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
+        //判断是否有网
+        try {
+            isMobileNet = GuirenHttpUtils.isMobileDataEnable(MineYqCardActivity.this);
+            isWifiNet = GuirenHttpUtils.isWifiDataEnable(MineYqCardActivity.this);
+            if (!isMobileNet && !isWifiNet) {
+                showMsg(MineYqCardActivity.this, "请检查网络链接");
+                return;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         switch (v.getId()){
             case R.id.menu:
                 finish();

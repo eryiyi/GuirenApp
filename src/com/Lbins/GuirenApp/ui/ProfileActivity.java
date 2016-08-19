@@ -1,7 +1,6 @@
 package com.Lbins.GuirenApp.ui;
 
 import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -19,6 +18,7 @@ import com.Lbins.GuirenApp.adapter.OnClickContentItemListener;
 import com.Lbins.GuirenApp.adapter.RecordAdapter;
 import com.Lbins.GuirenApp.base.BaseActivity;
 import com.Lbins.GuirenApp.base.InternetURL;
+import com.Lbins.GuirenApp.dao.DBHelper;
 import com.Lbins.GuirenApp.data.EmpData;
 import com.Lbins.GuirenApp.data.EmpRelateObjData;
 import com.Lbins.GuirenApp.data.RecordDATA;
@@ -30,6 +30,7 @@ import com.Lbins.GuirenApp.module.Emp;
 import com.Lbins.GuirenApp.module.EmpRelateObj;
 import com.Lbins.GuirenApp.module.Record;
 import com.Lbins.GuirenApp.util.Constants;
+import com.Lbins.GuirenApp.util.GuirenHttpUtils;
 import com.Lbins.GuirenApp.util.StringUtil;
 import com.Lbins.GuirenApp.widget.CustomProgressDialog;
 import com.android.volley.*;
@@ -85,6 +86,10 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
     private TextView guirenwang;
 
     Emp emp;
+
+    boolean isMobileNet, isWifiNet;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,12 +99,30 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
         res = this.getResources();
         this.findViewById(R.id.back).setOnClickListener(this);
         initView();
-        progressDialog = new CustomProgressDialog(ProfileActivity.this, "正在加载中",R.anim.custom_dialog_frame);
-        progressDialog.setCancelable(true);
-        progressDialog.setIndeterminate(true);
-        progressDialog.show();
-        initData();
-        getData();
+        //判断是否有网
+        try {
+            isMobileNet = GuirenHttpUtils.isMobileDataEnable(ProfileActivity.this);
+            isWifiNet = GuirenHttpUtils.isWifiDataEnable(ProfileActivity.this);
+            if (!isMobileNet && !isWifiNet) {
+                recordList.addAll(DBHelper.getInstance(ProfileActivity.this).getRecordListByEmpId(mm_emp_id));
+                adapter.notifyDataSetChanged();
+                emp = DBHelper.getInstance(ProfileActivity.this).getEmpByEmpId(mm_emp_id);
+                if(emp != null){
+                    initMine();
+                }
+            }else {
+                progressDialog = new CustomProgressDialog(ProfileActivity.this, "正在加载中",R.anim.custom_dialog_frame);
+                progressDialog.setCancelable(true);
+                progressDialog.setIndeterminate(true);
+                progressDialog.show();
+                initData();
+                getData();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
 
     }
 
@@ -147,7 +170,18 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
                 refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
                 IS_REFRESH = true;
                 pageIndex = 1;
-                initData();
+                //判断是否有网
+                try {
+                    isMobileNet = GuirenHttpUtils.isMobileDataEnable(ProfileActivity.this);
+                    isWifiNet = GuirenHttpUtils.isWifiDataEnable(ProfileActivity.this);
+                    if (!isMobileNet && !isWifiNet) {
+                        lstv.onRefreshComplete();
+                    }else {
+                        initData();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override
@@ -158,7 +192,18 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
                 refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
                 IS_REFRESH = false;
                 pageIndex++;
-                initData();
+                //判断是否有网
+                try {
+                    isMobileNet = GuirenHttpUtils.isMobileDataEnable(ProfileActivity.this);
+                    isWifiNet = GuirenHttpUtils.isWifiDataEnable(ProfileActivity.this);
+                    if (!isMobileNet && !isWifiNet) {
+                        lstv.onRefreshComplete();
+                    }else {
+                        initData();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
         lstv.setAdapter(adapter);
@@ -197,6 +242,15 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
                                 recordList.addAll(data.getData());
                                 lstv.onRefreshComplete();
                                 adapter.notifyDataSetChanged();
+                                //处理数据，需要的话保存到数据库
+                                if (data != null && data.getData() != null) {
+                                    DBHelper dbHelper = DBHelper.getInstance(ProfileActivity.this);
+                                    for (Record record1 : data.getData()) {
+                                        if (dbHelper.getRecordById(record1.getMm_msg_id()) == null) {
+                                            DBHelper.getInstance(ProfileActivity.this).saveRecord(record1);
+                                        }
+                                    }
+                                }
                             } else {
                                 Toast.makeText(ProfileActivity.this, R.string.get_data_error, Toast.LENGTH_SHORT).show();
                             }
@@ -254,83 +308,11 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
                             EmpData data = getGson().fromJson(s, EmpData.class);
                             if (Integer.parseInt(data.getCode()) == 200) {
                                 emp = data.getData();
+                                if(emp != null){
+                                    initMine();
+                                }
                                 //查询两者之间的关系
                                 getRelate();
-                                imageLoader.displayImage(emp.getMm_emp_cover(), head, GuirenApplication.txOptions, animateFirstListener);
-                                nickname.setText(emp.getMm_emp_nickname());
-                                hangyename.setText(emp.getMm_hangye_name());
-                                if(!StringUtil.isNullOrEmpty(emp.getMm_emp_email())){
-                                    email.setText(emp.getMm_emp_email());
-                                }else {
-                                    email.setText("暂未填写");
-                                }
-                                if(!StringUtil.isNullOrEmpty(emp.getMm_emp_qq())){
-                                    qq.setText(emp.getMm_emp_qq());
-                                }else {
-                                    qq.setText("暂未填写");
-                                }
-                                if(!StringUtil.isNullOrEmpty(emp.getMm_emp_weixin())){
-                                    weixin.setText(emp.getMm_emp_weixin());
-                                }else {
-                                    weixin.setText("暂未填写");
-                                }
-                                if(!StringUtil.isNullOrEmpty(emp.getMm_emp_age())){
-                                    age.setText(emp.getMm_emp_age());
-                                }else {
-                                    age.setText("暂未填写");
-                                }
-                                if(!StringUtil.isNullOrEmpty(emp.getProvinceName()) || !StringUtil.isNullOrEmpty(emp.getCityName()) ||!StringUtil.isNullOrEmpty(emp.getAreaName()) ){
-                                    address.setText(emp.getProvinceName() +  emp.getCityName() + emp.getAreaName());
-                                }else {
-                                    address.setText("暂未填写");
-                                }
-                                if(!StringUtil.isNullOrEmpty(emp.getMm_emp_company())){
-                                    company.setText(emp.getMm_emp_company());
-                                }else{
-                                    company.setText("暂未填写");
-                                }
-
-                                if(!StringUtil.isNullOrEmpty(emp.getMm_emp_techang())){
-                                    techang.setText(emp.getMm_emp_techang());
-                                }else{
-                                    techang.setText("暂未填写");
-                                }
-                                if(!StringUtil.isNullOrEmpty(emp.getMm_emp_xingqu())){
-                                    xingqu.setText(emp.getMm_emp_xingqu());
-                                }else{
-                                    xingqu.setText("暂未填写");
-                                }
-                                if(!StringUtil.isNullOrEmpty(emp.getMm_emp_detail())){
-                                    jianjie.setText(emp.getMm_emp_detail());
-                                }else{
-                                    jianjie.setText("暂未填写");
-                                }
-
-                                if(!StringUtil.isNullOrEmpty(emp.getMm_emp_native())){
-                                    mm_emp_native.setText(emp.getMm_emp_native());
-                                }else{
-                                    mm_emp_native.setText("暂未填写");
-                                }
-
-                                if(!StringUtil.isNullOrEmpty(emp.getMm_emp_motto())){
-                                    mm_emp_motto.setText("签名："+emp.getMm_emp_motto());
-                                }else{
-                                    mm_emp_motto.setText("签名：暂未填写");
-                                }
-
-                                if(emp.getMm_emp_id().equals(getGson().fromJson(getSp().getString("mm_emp_id", ""), String.class))){
-                                    liner_bottom.setVisibility(View.GONE);
-                                    guirenwang.setVisibility(View.GONE);
-                                }else {
-                                    liner_bottom.setVisibility(View.VISIBLE);
-                                    guirenwang.setVisibility(View.VISIBLE);
-                                }
-                                if("1".equals(emp.getMm_emp_sex())){
-                                    sex.setImageDrawable(getResources().getDrawable(R.drawable.icon_sex_female));
-                                }else {
-                                    sex.setImageDrawable(getResources().getDrawable(R.drawable.icon_sex_male));
-                                }
-
                             } else {
                                 Toast.makeText(ProfileActivity.this, R.string.get_data_error, Toast.LENGTH_SHORT).show();
                             }
@@ -373,9 +355,96 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
         getRequestQueue().add(request);
     }
 
+    void initMine(){
+        imageLoader.displayImage(emp.getMm_emp_cover(), head, GuirenApplication.txOptions, animateFirstListener);
+        nickname.setText(emp.getMm_emp_nickname());
+        hangyename.setText(emp.getMm_hangye_name());
+        if(!StringUtil.isNullOrEmpty(emp.getMm_emp_email())){
+            email.setText(emp.getMm_emp_email());
+        }else {
+            email.setText("暂未填写");
+        }
+        if(!StringUtil.isNullOrEmpty(emp.getMm_emp_qq())){
+            qq.setText(emp.getMm_emp_qq());
+        }else {
+            qq.setText("暂未填写");
+        }
+        if(!StringUtil.isNullOrEmpty(emp.getMm_emp_weixin())){
+            weixin.setText(emp.getMm_emp_weixin());
+        }else {
+            weixin.setText("暂未填写");
+        }
+        if(!StringUtil.isNullOrEmpty(emp.getMm_emp_age())){
+            age.setText(emp.getMm_emp_age());
+        }else {
+            age.setText("暂未填写");
+        }
+        if(!StringUtil.isNullOrEmpty(emp.getProvinceName()) || !StringUtil.isNullOrEmpty(emp.getCityName()) ||!StringUtil.isNullOrEmpty(emp.getAreaName()) ){
+            address.setText(emp.getProvinceName() +  emp.getCityName() + emp.getAreaName());
+        }else {
+            address.setText("暂未填写");
+        }
+        if(!StringUtil.isNullOrEmpty(emp.getMm_emp_company())){
+            company.setText(emp.getMm_emp_company());
+        }else{
+            company.setText("暂未填写");
+        }
+
+        if(!StringUtil.isNullOrEmpty(emp.getMm_emp_techang())){
+            techang.setText(emp.getMm_emp_techang());
+        }else{
+            techang.setText("暂未填写");
+        }
+        if(!StringUtil.isNullOrEmpty(emp.getMm_emp_xingqu())){
+            xingqu.setText(emp.getMm_emp_xingqu());
+        }else{
+            xingqu.setText("暂未填写");
+        }
+        if(!StringUtil.isNullOrEmpty(emp.getMm_emp_detail())){
+            jianjie.setText(emp.getMm_emp_detail());
+        }else{
+            jianjie.setText("暂未填写");
+        }
+
+        if(!StringUtil.isNullOrEmpty(emp.getMm_emp_native())){
+            mm_emp_native.setText(emp.getMm_emp_native());
+        }else{
+            mm_emp_native.setText("暂未填写");
+        }
+
+        if(!StringUtil.isNullOrEmpty(emp.getMm_emp_motto())){
+            mm_emp_motto.setText("签名："+emp.getMm_emp_motto());
+        }else{
+            mm_emp_motto.setText("签名：暂未填写");
+        }
+
+        if(emp.getMm_emp_id().equals(getGson().fromJson(getSp().getString("mm_emp_id", ""), String.class))){
+            liner_bottom.setVisibility(View.GONE);
+            guirenwang.setVisibility(View.GONE);
+        }else {
+            liner_bottom.setVisibility(View.VISIBLE);
+            guirenwang.setVisibility(View.VISIBLE);
+        }
+        if("1".equals(emp.getMm_emp_sex())){
+            sex.setImageDrawable(getResources().getDrawable(R.drawable.icon_sex_female));
+        }else {
+            sex.setImageDrawable(getResources().getDrawable(R.drawable.icon_sex_male));
+        }
+    }
 
     @Override
     public void onClickContentItem(int position, int flag, Object object) {
+        //判断是否有网
+        try {
+            isMobileNet = GuirenHttpUtils.isMobileDataEnable(ProfileActivity.this);
+            isWifiNet = GuirenHttpUtils.isWifiDataEnable(ProfileActivity.this);
+            if (!isMobileNet && !isWifiNet) {
+                showMsg(ProfileActivity.this, "请检查网络链接");
+                return;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         record = recordList.get(position);
         switch (flag) {
             case 1:
@@ -452,6 +521,16 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
 
     @Override
     public void onClick(View v) {
+        try {
+            isMobileNet = GuirenHttpUtils.isMobileDataEnable(ProfileActivity.this);
+            isWifiNet = GuirenHttpUtils.isWifiDataEnable(ProfileActivity.this);
+            if (!isMobileNet && !isWifiNet) {
+                showMsg(ProfileActivity.this, "请检查网络链接");
+                return;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         switch (v.getId()){
             case R.id.back:
                 finish();

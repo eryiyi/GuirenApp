@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.Lbins.GuirenApp.base.BaseActivity;
 import com.Lbins.GuirenApp.base.InternetURL;
+import com.Lbins.GuirenApp.dao.DBHelper;
 import com.Lbins.GuirenApp.data.*;
 import com.Lbins.GuirenApp.face.FaceConversionUtil;
 import com.Lbins.GuirenApp.fragment.FiveFragment;
@@ -148,6 +149,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener ,
 
         //获取配置信息  省 市 县
         new Thread(MainActivity.this).start();
+
 
 
     }

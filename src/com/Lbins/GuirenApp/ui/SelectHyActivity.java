@@ -20,6 +20,7 @@ import com.Lbins.GuirenApp.base.InternetURL;
 import com.Lbins.GuirenApp.data.HangYeTypeDara;
 import com.Lbins.GuirenApp.fragment.Fragment_pro_type;
 import com.Lbins.GuirenApp.module.HangYeType;
+import com.Lbins.GuirenApp.util.GuirenHttpUtils;
 import com.Lbins.GuirenApp.util.StringUtil;
 import com.Lbins.GuirenApp.widget.CustomProgressDialog;
 import com.android.volley.AuthFailureError;
@@ -52,8 +53,11 @@ public class SelectHyActivity extends BaseActivity implements View.OnClickListen
     private int currentItem=0;
     private ShopAdapter shopAdapter;
 
-    ProgressDialog pd = null;
+
     private boolean progressShow;
+
+    boolean isMobileNet, isWifiNet;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,12 +67,21 @@ public class SelectHyActivity extends BaseActivity implements View.OnClickListen
         inflaters=LayoutInflater.from(this);
         initView();
         //获得大类
-        progressShow = true;
-        pd = new CustomProgressDialog(SelectHyActivity.this, "正在加载中",R.anim.custom_dialog_frame);
-        pd.setCancelable(true);
-        pd.setIndeterminate(true);
-        pd.show();
-        getBigType();
+        try {
+            isMobileNet = GuirenHttpUtils.isMobileDataEnable(SelectHyActivity.this);
+            isWifiNet = GuirenHttpUtils.isWifiDataEnable(SelectHyActivity.this);
+            if (!isMobileNet && !isWifiNet) {
+                showMsg(SelectHyActivity.this ,"请检查您网络链接");
+            }else {
+                progressDialog = new CustomProgressDialog(SelectHyActivity.this, "正在加载中",R.anim.custom_dialog_frame);
+                progressDialog.setCancelable(true);
+                progressDialog.setIndeterminate(true);
+                progressDialog.show();
+                getBigType();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     public void back(View view){finish();}
 
@@ -119,8 +132,8 @@ public class SelectHyActivity extends BaseActivity implements View.OnClickListen
         shop_pager.setAdapter(shopAdapter);
         shop_pager.setOnPageChangeListener(onPageChangeListener);
 
-        if (pd != null && pd.isShowing()) {
-            pd.dismiss();
+        if (progressDialog != null && progressDialog.isShowing()) {
+            progressDialog.dismiss();
         }
     }
 
@@ -273,16 +286,16 @@ public class SelectHyActivity extends BaseActivity implements View.OnClickListen
                         } else {
                             Toast.makeText(SelectHyActivity.this, R.string.get_data_error, Toast.LENGTH_SHORT).show();
                         }
-                        if (pd != null && pd.isShowing()) {
-                            pd.dismiss();
+                        if (progressDialog != null && progressDialog.isShowing()) {
+                            progressDialog.dismiss();
                         }
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
-                        if (pd != null && pd.isShowing()) {
-                            pd.dismiss();
+                        if (progressDialog != null && progressDialog.isShowing()) {
+                            progressDialog.dismiss();
                         }
                         Toast.makeText(SelectHyActivity.this, R.string.get_data_error, Toast.LENGTH_SHORT).show();
                     }

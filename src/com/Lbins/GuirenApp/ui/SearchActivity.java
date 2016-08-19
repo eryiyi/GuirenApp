@@ -23,6 +23,7 @@ import com.Lbins.GuirenApp.library.PullToRefreshBase;
 import com.Lbins.GuirenApp.library.PullToRefreshListView;
 import com.Lbins.GuirenApp.module.*;
 import com.Lbins.GuirenApp.util.Constants;
+import com.Lbins.GuirenApp.util.GuirenHttpUtils;
 import com.Lbins.GuirenApp.util.StringUtil;
 import com.Lbins.GuirenApp.widget.CustomProgressDialog;
 import com.Lbins.GuirenApp.widget.MyAlertDialog;
@@ -65,7 +66,7 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
 
     private String mm_hangye_name;
     private String mm_emp_countryName;
-
+    boolean isMobileNet, isWifiNet;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,11 +80,22 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
 //        mm_hangye_id = getGson().fromJson(getSp().getString("mm_hangye_id", ""), String.class);
 //        mm_emp_cityId = getGson().fromJson(getSp().getString("mm_emp_cityId", ""), String.class);
         initView();
-        progressDialog = new CustomProgressDialog(SearchActivity.this, "正在加载中",R.anim.custom_dialog_frame);
-        progressDialog.setCancelable(true);
-        progressDialog.setIndeterminate(true);
-        progressDialog.show();
-        initData();
+        //判断是否有网
+        try {
+            isMobileNet = GuirenHttpUtils.isMobileDataEnable(SearchActivity.this);
+            isWifiNet = GuirenHttpUtils.isWifiDataEnable(SearchActivity.this);
+            if (!isMobileNet && !isWifiNet) {
+                showMsg(SearchActivity.this ,"请检查您网络链接");
+            }else {
+                progressDialog = new CustomProgressDialog(SearchActivity.this, "正在加载中",R.anim.custom_dialog_frame);
+                progressDialog.setCancelable(true);
+                progressDialog.setIndeterminate(true);
+                progressDialog.show();
+                initData();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         this.findViewById(R.id.back).setOnClickListener(this);
         if(!StringUtil.isNullOrEmpty(mm_hangye_name)){
             btn_one.setText(mm_hangye_name);
@@ -97,6 +109,17 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
 
     @Override
     public void onClick(View view) {
+        //判断是否有网
+        try {
+            isMobileNet = GuirenHttpUtils.isMobileDataEnable(SearchActivity.this);
+            isWifiNet = GuirenHttpUtils.isWifiDataEnable(SearchActivity.this);
+            if (!isMobileNet && !isWifiNet) {
+                showMsg(SearchActivity.this, "请检查网络链接");
+                return;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         switch (view.getId()){
             case R.id.btn_one:
             {
@@ -112,11 +135,22 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
                                 mm_hangye_name = "点击切换行业";
                                 btn_one.setText(mm_hangye_name);
                                 keyStr = input_edittext.getText().toString();
-                                progressDialog = new CustomProgressDialog(SearchActivity.this, "正在加载中",R.anim.custom_dialog_frame);
-                                progressDialog.setCancelable(true);
-                                progressDialog.setIndeterminate(true);
-                                progressDialog.show();
-                                initData();
+                                //判断是否有网
+                                try {
+                                    isMobileNet = GuirenHttpUtils.isMobileDataEnable(SearchActivity.this);
+                                    isWifiNet = GuirenHttpUtils.isWifiDataEnable(SearchActivity.this);
+                                    if (!isMobileNet && !isWifiNet) {
+                                        showMsg(SearchActivity.this ,"请检查您网络链接");
+                                    }else {
+                                        progressDialog = new CustomProgressDialog(SearchActivity.this, "正在加载中",R.anim.custom_dialog_frame);
+                                        progressDialog.setCancelable(true);
+                                        progressDialog.setIndeterminate(true);
+                                        progressDialog.show();
+                                        initData();
+                                    }
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
                             }
                         });
                 dialog1.setPositiveButton("确定", new View.OnClickListener() {
@@ -126,11 +160,22 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
                         mm_hangye_id = hangYeType.getMm_hangye_id();
                         mm_hangye_name = hangYeType.getMm_hangye_name();
                         keyStr = input_edittext.getText().toString();
-                        progressDialog = new CustomProgressDialog(SearchActivity.this, "正在加载中",R.anim.custom_dialog_frame);
-                        progressDialog.setCancelable(true);
-                        progressDialog.setIndeterminate(true);
-                        progressDialog.show();
-                        initData();
+                        //判断是否有网
+                        try {
+                            isMobileNet = GuirenHttpUtils.isMobileDataEnable(SearchActivity.this);
+                            isWifiNet = GuirenHttpUtils.isWifiDataEnable(SearchActivity.this);
+                            if (!isMobileNet && !isWifiNet) {
+                                showMsg(SearchActivity.this ,"请检查您网络链接");
+                            }else {
+                                progressDialog = new CustomProgressDialog(SearchActivity.this, "正在加载中",R.anim.custom_dialog_frame);
+                                progressDialog.setCancelable(true);
+                                progressDialog.setIndeterminate(true);
+                                progressDialog.show();
+                                initData();
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                     }
                 });
                 dialog1.show();
@@ -150,11 +195,22 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
                                 mm_emp_countryName = "点击切换地区";
                                 btn_two.setText(mm_emp_countryName);
                                 keyStr = input_edittext.getText().toString();
-                                progressDialog = new CustomProgressDialog(SearchActivity.this, "正在加载中",R.anim.custom_dialog_frame);
-                                progressDialog.setCancelable(true);
-                                progressDialog.setIndeterminate(true);
-                                progressDialog.show();
-                                initData();
+                                //判断是否有网
+                                try {
+                                    isMobileNet = GuirenHttpUtils.isMobileDataEnable(SearchActivity.this);
+                                    isWifiNet = GuirenHttpUtils.isWifiDataEnable(SearchActivity.this);
+                                    if (!isMobileNet && !isWifiNet) {
+                                        showMsg(SearchActivity.this ,"请检查您网络链接");
+                                    }else {
+                                        progressDialog = new CustomProgressDialog(SearchActivity.this, "正在加载中",R.anim.custom_dialog_frame);
+                                        progressDialog.setCancelable(true);
+                                        progressDialog.setIndeterminate(true);
+                                        progressDialog.show();
+                                        initData();
+                                    }
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
                             }
                         });
                 dialog1.setPositiveButton("确定", new View.OnClickListener() {
@@ -164,11 +220,22 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
                         mm_emp_countryId = countryObj.getAreaID();
                         mm_emp_countryName = countryObj.getArea();
                         keyStr = input_edittext.getText().toString();
-                        progressDialog = new CustomProgressDialog(SearchActivity.this, "正在加载中",R.anim.custom_dialog_frame);
-                        progressDialog.setCancelable(true);
-                        progressDialog.setIndeterminate(true);
-                        progressDialog.show();
-                        initData();
+                        //判断是否有网
+                        try {
+                            isMobileNet = GuirenHttpUtils.isMobileDataEnable(SearchActivity.this);
+                            isWifiNet = GuirenHttpUtils.isWifiDataEnable(SearchActivity.this);
+                            if (!isMobileNet && !isWifiNet) {
+                                showMsg(SearchActivity.this ,"请检查您网络链接");
+                            }else {
+                                progressDialog = new CustomProgressDialog(SearchActivity.this, "正在加载中",R.anim.custom_dialog_frame);
+                                progressDialog.setCancelable(true);
+                                progressDialog.setIndeterminate(true);
+                                progressDialog.show();
+                                initData();
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                     }
                 });
                 dialog1.show();
@@ -177,22 +244,44 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
             case R.id.no_record:
                 IS_REFRESH = true;
                 pageIndex = 1;
-                progressDialog = new CustomProgressDialog(SearchActivity.this, "正在加载中",R.anim.custom_dialog_frame);
-                progressDialog.setCancelable(true);
-                progressDialog.setIndeterminate(true);
-                progressDialog.show();
-                initData();
+                //判断是否有网
+                try {
+                    isMobileNet = GuirenHttpUtils.isMobileDataEnable(SearchActivity.this);
+                    isWifiNet = GuirenHttpUtils.isWifiDataEnable(SearchActivity.this);
+                    if (!isMobileNet && !isWifiNet) {
+                        showMsg(SearchActivity.this ,"请检查您网络链接");
+                    }else {
+                        progressDialog = new CustomProgressDialog(SearchActivity.this, "正在加载中",R.anim.custom_dialog_frame);
+                        progressDialog.setCancelable(true);
+                        progressDialog.setIndeterminate(true);
+                        progressDialog.show();
+                        initData();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 break;
             case R.id.back:
                 finish();
                 break;
             case R.id.btn_search:
                 keyStr = input_edittext.getText().toString();
-                progressDialog = new CustomProgressDialog(SearchActivity.this, "正在加载中",R.anim.custom_dialog_frame);
-                progressDialog.setCancelable(true);
-                progressDialog.setIndeterminate(true);
-                progressDialog.show();
-                initData();
+                //判断是否有网
+                try {
+                    isMobileNet = GuirenHttpUtils.isMobileDataEnable(SearchActivity.this);
+                    isWifiNet = GuirenHttpUtils.isWifiDataEnable(SearchActivity.this);
+                    if (!isMobileNet && !isWifiNet) {
+                        showMsg(SearchActivity.this ,"请检查您网络链接");
+                    }else {
+                        progressDialog = new CustomProgressDialog(SearchActivity.this, "正在加载中",R.anim.custom_dialog_frame);
+                        progressDialog.setCancelable(true);
+                        progressDialog.setIndeterminate(true);
+                        progressDialog.show();
+                        initData();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 break;
         }
     }
@@ -376,7 +465,18 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
                 refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
                 IS_REFRESH = true;
                 pageIndex = 1;
-                initData();
+                //判断是否有网
+                try {
+                    isMobileNet = GuirenHttpUtils.isMobileDataEnable(SearchActivity.this);
+                    isWifiNet = GuirenHttpUtils.isWifiDataEnable(SearchActivity.this);
+                    if (!isMobileNet && !isWifiNet) {
+                        listView.onRefreshComplete();
+                    }else {
+                        initData();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override
@@ -387,7 +487,18 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
                 refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
                 IS_REFRESH = false;
                 pageIndex++;
-                initData();
+                //判断是否有网
+                try {
+                    isMobileNet = GuirenHttpUtils.isMobileDataEnable(SearchActivity.this);
+                    isWifiNet = GuirenHttpUtils.isWifiDataEnable(SearchActivity.this);
+                    if (!isMobileNet && !isWifiNet) {
+                        listView.onRefreshComplete();
+                    }else {
+                        initData();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
         listView.setAdapter(adapter);
@@ -488,7 +599,6 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
         switch (flag){
             case 1:
                 //查看我和他的人脉关系
-                Toast.makeText(SearchActivity.this,"功能尚未开发，敬请期待",Toast.LENGTH_LONG).show();
                 break;
         }
     }
@@ -502,25 +612,47 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
                 HangYeType hangYeType = (HangYeType) intent.getExtras().get("hangYeType");
                 mm_hangye_id = hangYeType.getMm_hangye_id();
                 btn_one.setText(hangYeType.getMm_hangye_name() );
-                progressDialog = new CustomProgressDialog(SearchActivity.this, "正在加载中",R.anim.custom_dialog_frame);
-                progressDialog.setCancelable(true);
-                progressDialog.setIndeterminate(true);
-                progressDialog.show();
                 IS_REFRESH = true;
                 pageIndex = 1;
-                initData();
+                //判断是否有网
+                try {
+                    isMobileNet = GuirenHttpUtils.isMobileDataEnable(SearchActivity.this);
+                    isWifiNet = GuirenHttpUtils.isWifiDataEnable(SearchActivity.this);
+                    if (!isMobileNet && !isWifiNet) {
+                        showMsg(SearchActivity.this ,"请检查您网络链接");
+                    }else {
+                        progressDialog = new CustomProgressDialog(SearchActivity.this, "正在加载中",R.anim.custom_dialog_frame);
+                        progressDialog.setCancelable(true);
+                        progressDialog.setIndeterminate(true);
+                        progressDialog.show();
+                        initData();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
             if(action.equals(Constants.SEND_SELECT_AREA_SUCCESS)){
                 CountryObj hangYeType = (CountryObj) intent.getExtras().get("countryObj");
                 mm_emp_countryId = hangYeType.getAreaID();
                 btn_two.setText(hangYeType.getArea());
-                progressDialog = new CustomProgressDialog(SearchActivity.this, "正在加载中",R.anim.custom_dialog_frame);
-                progressDialog.setCancelable(true);
-                progressDialog.setIndeterminate(true);
-                progressDialog.show();
                 IS_REFRESH = true;
                 pageIndex = 1;
-                initData();
+                //判断是否有网
+                try {
+                    isMobileNet = GuirenHttpUtils.isMobileDataEnable(SearchActivity.this);
+                    isWifiNet = GuirenHttpUtils.isWifiDataEnable(SearchActivity.this);
+                    if (!isMobileNet && !isWifiNet) {
+                        showMsg(SearchActivity.this ,"请检查您网络链接");
+                    }else {
+                        progressDialog = new CustomProgressDialog(SearchActivity.this, "正在加载中",R.anim.custom_dialog_frame);
+                        progressDialog.setCancelable(true);
+                        progressDialog.setIndeterminate(true);
+                        progressDialog.show();
+                        initData();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
 
         }

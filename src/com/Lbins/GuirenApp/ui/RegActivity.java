@@ -30,6 +30,7 @@ import com.Lbins.GuirenApp.module.HangYeType;
 import com.Lbins.GuirenApp.module.ProvinceObj;
 import com.Lbins.GuirenApp.receiver.SMSBroadcastReceiver;
 import com.Lbins.GuirenApp.util.Constants;
+import com.Lbins.GuirenApp.util.GuirenHttpUtils;
 import com.Lbins.GuirenApp.util.StringUtil;
 import com.Lbins.GuirenApp.widget.CustomProgressDialog;
 import com.Lbins.GuirenApp.widget.CustomerSpinner;
@@ -110,7 +111,7 @@ public class RegActivity extends BaseActivity implements View.OnClickListener,Ra
     private RadioButton button_two;
 
     private String sex_selected = "";
-
+    boolean isMobileNet, isWifiNet;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -153,7 +154,25 @@ public class RegActivity extends BaseActivity implements View.OnClickListener,Ra
                 }
             }
         });
-        getProvince();
+
+
+        //判断是否有网
+        try {
+            isMobileNet = GuirenHttpUtils.isMobileDataEnable(RegActivity.this);
+            isWifiNet = GuirenHttpUtils.isWifiDataEnable(RegActivity.this);
+            if (!isMobileNet && !isWifiNet) {
+                showMsg(RegActivity.this ,"请检查您网络链接");
+            }else {
+                progressDialog = new CustomProgressDialog(RegActivity.this, "正在加载中",R.anim.custom_dialog_frame);
+                progressDialog.setCancelable(true);
+                progressDialog.setIndeterminate(true);
+                progressDialog.show();
+                getProvince();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
 

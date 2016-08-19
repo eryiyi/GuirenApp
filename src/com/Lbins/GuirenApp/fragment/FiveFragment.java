@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import com.Lbins.GuirenApp.GuirenApplication;
 import com.Lbins.GuirenApp.R;
 import com.Lbins.GuirenApp.adapter.AnimateFirstDisplayListener;
@@ -25,6 +26,7 @@ import com.Lbins.GuirenApp.base.BaseFragment;
 import com.Lbins.GuirenApp.base.InternetURL;
 import com.Lbins.GuirenApp.ui.*;
 import com.Lbins.GuirenApp.util.CompressPhotoUtil;
+import com.Lbins.GuirenApp.util.GuirenHttpUtils;
 import com.Lbins.GuirenApp.util.StringUtil;
 import com.Lbins.GuirenApp.widget.SelectPhoPopWindow;
 import com.android.volley.AuthFailureError;
@@ -215,10 +217,21 @@ public class FiveFragment extends BaseFragment implements View.OnClickListener {
             view.findViewById(R.id.scorv).setBackground(res.getDrawable(R.drawable.bg_one));
         }
     }
-
+    boolean isMobileNet, isWifiNet;
     private String typeCover;
     @Override
     public void onClick(View view) {
+        //判断是否有网
+        try {
+            isMobileNet = GuirenHttpUtils.isMobileDataEnable(getActivity());
+            isWifiNet = GuirenHttpUtils.isWifiDataEnable(getActivity());
+            if (!isMobileNet && !isWifiNet) {
+                Toast.makeText(getActivity(), "请检查网络链接", Toast.LENGTH_SHORT).show();
+                return;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
        switch (view.getId()){
            case R.id.edit:
            {
@@ -373,8 +386,8 @@ public class FiveFragment extends BaseFragment implements View.OnClickListener {
         intent.putExtra("crop", "true");
         intent.putExtra("aspectX", 1);
         intent.putExtra("aspectY", 1);
-        intent.putExtra("outputX", 150);
-        intent.putExtra("outputY", 150);
+        intent.putExtra("outputX", 300);
+        intent.putExtra("outputY", 300);
         intent.putExtra("return-data", true);
         startActivityForResult(intent, 3);
     }

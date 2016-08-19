@@ -275,7 +275,7 @@ public class GuirenApplication extends Application  {
 //                                    if (flag) {
 //                                        //已经存在了 不需要插入了
 //                                    } else {
-                                        DBHelper.getInstance(applicationContext).saveRecord(emp);
+                                        DBHelper.getInstance(applicationContext).saveEmp(emp);
 //                                    }
                                 }
                             } catch (JSONException e) {

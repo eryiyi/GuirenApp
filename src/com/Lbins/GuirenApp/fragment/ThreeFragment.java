@@ -21,6 +21,7 @@ import com.Lbins.GuirenApp.adapter.ItemXixunAdapter;
 import com.Lbins.GuirenApp.adapter.OnClickContentItemListener;
 import com.Lbins.GuirenApp.base.BaseFragment;
 import com.Lbins.GuirenApp.base.InternetURL;
+import com.Lbins.GuirenApp.dao.DBHelper;
 import com.Lbins.GuirenApp.data.AdObjData;
 import com.Lbins.GuirenApp.data.XixunObjData;
 import com.Lbins.GuirenApp.library.PullToRefreshBase;
@@ -29,6 +30,7 @@ import com.Lbins.GuirenApp.module.AdObj;
 import com.Lbins.GuirenApp.module.XixunObj;
 import com.Lbins.GuirenApp.ui.ProfileActivity;
 import com.Lbins.GuirenApp.ui.WebViewActivity;
+import com.Lbins.GuirenApp.util.GuirenHttpUtils;
 import com.Lbins.GuirenApp.util.StringUtil;
 import com.android.volley.*;
 import com.android.volley.toolbox.StringRequest;
@@ -65,6 +67,8 @@ public class ThreeFragment extends BaseFragment implements View.OnClickListener 
     private List<AdObj> listsAd = new ArrayList<AdObj>();
     private LinearLayout headLiner;
 
+    boolean isMobileNet, isWifiNet;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -78,8 +82,27 @@ public class ThreeFragment extends BaseFragment implements View.OnClickListener 
         res = getActivity().getResources();
         emp_id = getGson().fromJson(getSp().getString("mm_emp_id", ""), String.class);
         initView();
-        initData();
-        getAd();
+        //判断是否有网
+        try {
+            isMobileNet = GuirenHttpUtils.isMobileDataEnable(getActivity());
+            isWifiNet = GuirenHttpUtils.isWifiDataEnable(getActivity());
+            if (!isMobileNet && !isWifiNet) {
+                recordList.addAll(DBHelper.getInstance(getActivity()).getXixunList());
+                if(recordList.size() > 0){
+                    no_collections.setVisibility(View.GONE);
+                    listView.setVisibility(View.VISIBLE);
+                }else {
+                    no_collections.setVisibility(View.VISIBLE);
+                    listView.setVisibility(View.GONE);
+                }
+                adapter.notifyDataSetChanged();
+            }else {
+                initData();
+                getAd();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return view;
     }
 
@@ -104,7 +127,18 @@ public class ThreeFragment extends BaseFragment implements View.OnClickListener 
                 refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
                 IS_REFRESH = true;
                 pageIndex = 1;
-                initData();
+                //判断是否有网
+                try {
+                    isMobileNet = GuirenHttpUtils.isMobileDataEnable(getActivity());
+                    isWifiNet = GuirenHttpUtils.isWifiDataEnable(getActivity());
+                    if (!isMobileNet && !isWifiNet) {
+                        listView.onRefreshComplete();
+                    }else {
+                        initData();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override
@@ -115,7 +149,18 @@ public class ThreeFragment extends BaseFragment implements View.OnClickListener 
                 refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
                 IS_REFRESH = false;
                 pageIndex++;
-                initData();
+                //判断是否有网
+                try {
+                    isMobileNet = GuirenHttpUtils.isMobileDataEnable(getActivity());
+                    isWifiNet = GuirenHttpUtils.isWifiDataEnable(getActivity());
+                    if (!isMobileNet && !isWifiNet) {
+                        listView.onRefreshComplete();
+                    }else {
+                        initData();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
         listView.setAdapter(adapter);
@@ -132,6 +177,16 @@ public class ThreeFragment extends BaseFragment implements View.OnClickListener 
     }
     @Override
     public void onClick(View view) {
+        //判断是否有网
+        try {
+            isMobileNet = GuirenHttpUtils.isMobileDataEnable(getActivity());
+            isWifiNet = GuirenHttpUtils.isWifiDataEnable(getActivity());
+            if (!isMobileNet && !isWifiNet) {
+                return;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
        switch (view.getId()){
            case R.id.no_record:
                IS_REFRESH = true;
@@ -164,6 +219,18 @@ public class ThreeFragment extends BaseFragment implements View.OnClickListener 
                                     listView.setVisibility(View.GONE);
                                 }
                                 adapter.notifyDataSetChanged();
+
+                                //处理数据，需要的话保存到数据库
+                                if (data != null && data.getData() != null) {
+                                    DBHelper dbHelper = DBHelper.getInstance(getActivity());
+                                    for (XixunObj xixunObj : data.getData()) {
+                                        if (dbHelper.getXixunObjById(xixunObj.getGuiren_xixun_id()) != null) {
+                                            //已经存在了 不需要插入了
+                                        } else {
+                                            DBHelper.getInstance(getActivity()).saveXixunObj(xixunObj);
+                                        }
+                                    }
+                                }
                             } else {
                                 Toast.makeText(getActivity(), R.string.get_data_error, Toast.LENGTH_SHORT).show();
                             }
@@ -416,6 +483,16 @@ public class ThreeFragment extends BaseFragment implements View.OnClickListener 
 
     @Override
     public void onClickContentItem(int position, int flag, Object object) {
+        //判断是否有网
+        try {
+            isMobileNet = GuirenHttpUtils.isMobileDataEnable(getActivity());
+            isWifiNet = GuirenHttpUtils.isWifiDataEnable(getActivity());
+            if (!isMobileNet && !isWifiNet) {
+                return;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         String str = (String) object;
         if ("000".equals(str)) {
             switch (flag) {

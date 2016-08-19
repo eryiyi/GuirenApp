@@ -18,7 +18,6 @@
                     android:src="@drawable/default_avatar"
                     android:layout_height="60dp"/>
             <TextView android:layout_width="wrap_content"
-                      android:text="张三"
                       android:singleLine="true"
                       android:layout_marginLeft="8dp"
                       android:layout_marginTop="8dp"
@@ -28,7 +27,6 @@
                       android:textColor="@color/text_color"
                       android:layout_height="wrap_content"/>
             <TextView android:layout_width="wrap_content"
-                      android:text="计算机行业"
                       android:layout_toRightOf="@+id/head"
                       android:layout_marginLeft="8dp"
                       android:textSize="15sp"
@@ -46,7 +44,6 @@
                        android:layout_height="20dp"/>
 
             <TextView android:layout_width="wrap_content"
-                      android:text="签名：一只特立独行的狗"
                       android:layout_marginLeft="8dp"
                       android:textSize="14sp"
                       android:layout_marginTop="5dp"
@@ -106,7 +103,6 @@
                           android:textColor="@color/textColortwo"
                           android:layout_height="wrap_content"/>
                 <TextView android:layout_width="wrap_content"
-                          android:text="826321978@qq.com"
                           android:id="@+id/email"
                           android:layout_marginTop="5dp"
                           android:textColor="@color/text_color"
@@ -124,7 +120,6 @@
                           android:textColor="@color/textColortwo"
                           android:layout_height="wrap_content"/>
                 <TextView android:layout_width="wrap_content"
-                          android:text="82632"
                           android:id="@+id/qq"
                           android:layout_marginTop="5dp"
                           android:textColor="@color/text_color"
@@ -142,7 +137,6 @@
                           android:textColor="@color/textColortwo"
                           android:layout_height="wrap_content"/>
                 <TextView android:layout_width="wrap_content"
-                          android:text="86541645.."
                           android:id="@+id/weixin"
                           android:layout_marginTop="5dp"
                           android:textColor="@color/text_color"
@@ -160,7 +154,6 @@
                           android:textColor="@color/textColortwo"
                           android:layout_height="wrap_content"/>
                 <TextView android:layout_width="wrap_content"
-                          android:text="86541645.."
                           android:id="@+id/age"
                           android:layout_marginTop="5dp"
                           android:textColor="@color/text_color"
@@ -178,7 +171,6 @@
                           android:textColor="@color/textColortwo"
                           android:layout_height="wrap_content"/>
                 <TextView android:layout_width="wrap_content"
-                          android:text="山东惠民.."
                           android:id="@+id/company"
                           android:layout_marginTop="5dp"
                           android:textColor="@color/text_color"
@@ -196,7 +188,6 @@
                           android:textColor="@color/textColortwo"
                           android:layout_height="wrap_content"/>
                 <TextView android:layout_width="wrap_content"
-                          android:text="山东惠民.."
                           android:id="@+id/techang"
                           android:layout_marginTop="5dp"
                           android:textColor="@color/text_color"
@@ -214,7 +205,6 @@
                           android:textColor="@color/textColortwo"
                           android:layout_height="wrap_content"/>
                 <TextView android:layout_width="wrap_content"
-                          android:text="山东惠民.."
                           android:id="@+id/aihao"
                           android:layout_marginTop="5dp"
                           android:textColor="@color/text_color"
@@ -232,7 +222,6 @@
                           android:textColor="@color/textColortwo"
                           android:layout_height="wrap_content"/>
                 <TextView android:layout_width="wrap_content"
-                          android:text="山东惠民.."
                           android:id="@+id/address"
                           android:layout_marginTop="5dp"
                           android:textColor="@color/text_color"
@@ -251,7 +240,6 @@
                           android:textColor="@color/textColortwo"
                           android:layout_height="wrap_content"/>
                 <TextView android:layout_width="wrap_content"
-                          android:text="山东惠民.."
                           android:id="@+id/mm_emp_native"
                           android:layout_marginTop="5dp"
                           android:textColor="@color/text_color"
@@ -270,7 +258,6 @@
                           android:textColor="@color/textColortwo"
                           android:layout_height="wrap_content"/>
                 <TextView android:layout_width="wrap_content"
-                          android:text="山东惠民.."
                           android:id="@+id/jianjie"
                           android:layout_marginTop="5dp"
                           android:textColor="@color/text_color"

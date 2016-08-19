@@ -12,6 +12,7 @@ import com.Lbins.GuirenApp.base.BaseActivity;
 import com.Lbins.GuirenApp.base.InternetURL;
 import com.Lbins.GuirenApp.data.RelateDATA;
 import com.Lbins.GuirenApp.module.Relate;
+import com.Lbins.GuirenApp.util.GuirenHttpUtils;
 import com.Lbins.GuirenApp.util.StringUtil;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -63,9 +64,20 @@ public class DetailRelateActivity extends BaseActivity implements View.OnClickLi
         nickname.setText(relate.getEmpName());
         content.setText(relate.getCont());
     }
-
+    boolean isMobileNet, isWifiNet;
     @Override
     public void onClick(View v) {
+        //判断是否有网
+        try {
+            isMobileNet = GuirenHttpUtils.isMobileDataEnable(DetailRelateActivity.this);
+            isWifiNet = GuirenHttpUtils.isWifiDataEnable(DetailRelateActivity.this);
+            if (!isMobileNet && !isWifiNet) {
+                showMsg(DetailRelateActivity.this, "请检查网络链接");
+                return;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         switch (v.getId()){
             case R.id.back:
                 finish();

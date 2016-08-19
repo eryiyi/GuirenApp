@@ -13,11 +13,15 @@ import com.Lbins.GuirenApp.R;
 import com.Lbins.GuirenApp.adapter.ItemDianpuAdapter;
 import com.Lbins.GuirenApp.base.BaseActivity;
 import com.Lbins.GuirenApp.base.InternetURL;
+import com.Lbins.GuirenApp.dao.DBHelper;
 import com.Lbins.GuirenApp.data.DianpuData;
 import com.Lbins.GuirenApp.library.PullToRefreshBase;
 import com.Lbins.GuirenApp.library.PullToRefreshListView;
 import com.Lbins.GuirenApp.module.EmpDianpu;
+import com.Lbins.GuirenApp.module.Record;
+import com.Lbins.GuirenApp.util.GuirenHttpUtils;
 import com.Lbins.GuirenApp.util.StringUtil;
+import com.Lbins.GuirenApp.widget.CustomProgressDialog;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -42,13 +46,40 @@ public class ZimeitiActivity extends BaseActivity implements View.OnClickListene
     private ImageView no_record;
     private String emp_id = "";//当前登陆者UUID
 
+
+    boolean isMobileNet, isWifiNet;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dianpu_fragment);
         emp_id = getGson().fromJson(getSp().getString("mm_emp_id", ""), String.class);
         initView();
-        initData();
+        //判断是否有网
+        try {
+            isMobileNet = GuirenHttpUtils.isMobileDataEnable(ZimeitiActivity.this);
+            isWifiNet = GuirenHttpUtils.isWifiDataEnable(ZimeitiActivity.this);
+            if (!isMobileNet && !isWifiNet) {
+                listgoods.addAll(DBHelper.getInstance(ZimeitiActivity.this).getDianpus());
+                if(listgoods.size() > 0){
+                    no_record.setVisibility(View.GONE);
+                    lstv.setVisibility(View.VISIBLE);
+                }else {
+                    no_record.setVisibility(View.VISIBLE);
+                    lstv.setVisibility(View.GONE);
+                }
+                adapter.notifyDataSetChanged();
+            }else {
+                progressDialog = new CustomProgressDialog(ZimeitiActivity.this, "正在加载中",R.anim.custom_dialog_frame);
+                progressDialog.setCancelable(true);
+                progressDialog.setIndeterminate(true);
+                progressDialog.show();
+                initData();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void initView() {
@@ -66,7 +97,18 @@ public class ZimeitiActivity extends BaseActivity implements View.OnClickListene
                 refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
                 IS_REFRESH = true;
                 pageIndex = 1;
-                initData();
+                //判断是否有网
+                try {
+                    isMobileNet = GuirenHttpUtils.isMobileDataEnable(ZimeitiActivity.this);
+                    isWifiNet = GuirenHttpUtils.isWifiDataEnable(ZimeitiActivity.this);
+                    if (!isMobileNet && !isWifiNet) {
+                        lstv.onRefreshComplete();
+                    }else {
+                        initData();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override
@@ -77,7 +119,18 @@ public class ZimeitiActivity extends BaseActivity implements View.OnClickListene
                 refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
                 IS_REFRESH = false;
                 pageIndex++;
-                initData();
+                //判断是否有网
+                try {
+                    isMobileNet = GuirenHttpUtils.isMobileDataEnable(ZimeitiActivity.this);
+                    isWifiNet = GuirenHttpUtils.isWifiDataEnable(ZimeitiActivity.this);
+                    if (!isMobileNet && !isWifiNet) {
+                        lstv.onRefreshComplete();
+                    }else {
+                        initData();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
         lstv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -124,6 +177,15 @@ public class ZimeitiActivity extends BaseActivity implements View.OnClickListene
                                 listgoods.addAll(data.getData());
                                 adapter.notifyDataSetChanged();
                                 lstv.onRefreshComplete();
+                                //处理数据，需要的话保存到数据库
+                                if (data != null && data.getData() != null) {
+                                    DBHelper dbHelper = DBHelper.getInstance(ZimeitiActivity.this);
+                                    for (EmpDianpu empDianpu : data.getData()) {
+                                        if (dbHelper.getEmpDianpuById(empDianpu.getMm_emp_id()) == null) {
+                                            DBHelper.getInstance(ZimeitiActivity.this).saveDianpu(empDianpu);
+                                        }
+                                    }
+                                }
                             } else {
                                 Toast.makeText(ZimeitiActivity.this, R.string.get_data_error, Toast.LENGTH_SHORT).show();
                             }
@@ -137,11 +199,17 @@ public class ZimeitiActivity extends BaseActivity implements View.OnClickListene
                             no_record.setVisibility(View.GONE);
                             lstv.setVisibility(View.VISIBLE);
                         }
+                        if(progressDialog != null){
+                            progressDialog.dismiss();
+                        }
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
+                        if(progressDialog != null){
+                            progressDialog.dismiss();
+                        }
                         Toast.makeText(ZimeitiActivity.this, R.string.get_data_error, Toast.LENGTH_SHORT).show();
                     }
                 }

@@ -21,6 +21,7 @@ import com.Lbins.GuirenApp.data.EmpData;
 import com.Lbins.GuirenApp.huanxin.DemoHelper;
 import com.Lbins.GuirenApp.huanxin.db.DemoDBManager;
 import com.Lbins.GuirenApp.module.Emp;
+import com.Lbins.GuirenApp.util.GuirenHttpUtils;
 import com.Lbins.GuirenApp.util.StringUtil;
 import com.Lbins.GuirenApp.widget.CustomProgressDialog;
 import com.android.volley.AuthFailureError;
@@ -34,6 +35,7 @@ import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
+import com.tencent.open.utils.HttpUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -90,7 +92,16 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
     @Override
     public void onClick(View v) {
-
+        try {
+            isMobileNet = GuirenHttpUtils.isMobileDataEnable(getApplicationContext());
+            isWifiNet = GuirenHttpUtils.isWifiDataEnable(getApplicationContext());
+            if (!isMobileNet && !isWifiNet) {
+                Toast.makeText(this, R.string.net_work_error, Toast.LENGTH_SHORT).show();
+                return;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         switch (v.getId()){
             case R.id.btn_reg:
                 //注册

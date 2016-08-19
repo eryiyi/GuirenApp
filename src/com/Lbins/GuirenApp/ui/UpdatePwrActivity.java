@@ -6,6 +6,7 @@ import android.widget.EditText;
 import com.Lbins.GuirenApp.R;
 import com.Lbins.GuirenApp.base.BaseActivity;
 import com.Lbins.GuirenApp.base.InternetURL;
+import com.Lbins.GuirenApp.util.GuirenHttpUtils;
 import com.Lbins.GuirenApp.util.StringUtil;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -37,8 +38,20 @@ public class UpdatePwrActivity extends BaseActivity implements View.OnClickListe
         this.findViewById(R.id.back).setOnClickListener(this);
     }
 
+    boolean isMobileNet, isWifiNet;
     @Override
     public void onClick(View v) {
+        //判断是否有网
+        try {
+            isMobileNet = GuirenHttpUtils.isMobileDataEnable(UpdatePwrActivity.this);
+            isWifiNet = GuirenHttpUtils.isWifiDataEnable(UpdatePwrActivity.this);
+            if (!isMobileNet && !isWifiNet) {
+                showMsg(UpdatePwrActivity.this, "请检查网络链接");
+                return;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         switch (v.getId()){
             case R.id.btn_sure:
                 //确定修改

@@ -26,6 +26,7 @@ import com.Lbins.GuirenApp.module.Favour;
 import com.Lbins.GuirenApp.module.VideoPlayer;
 import com.Lbins.GuirenApp.module.Videos;
 import com.Lbins.GuirenApp.util.Constants;
+import com.Lbins.GuirenApp.util.GuirenHttpUtils;
 import com.Lbins.GuirenApp.util.StringUtil;
 import com.Lbins.GuirenApp.widget.CustomProgressDialog;
 import com.android.volley.AuthFailureError;
@@ -85,6 +86,7 @@ public class DetailVideosActivity extends BaseActivity implements View.OnClickLi
     private String emp_id = "";//当前登陆者UUID
 
 //    String shareUrl = InternetURL.SHARE_VIDEOS;
+    boolean isMobileNet, isWifiNet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,6 +98,23 @@ public class DetailVideosActivity extends BaseActivity implements View.OnClickLi
         emp_id = getGson().fromJson(getSp().getString("mm_emp_id", ""), String.class);
         initView();
         initData();
+
+        //判断是否有网
+        try {
+            isMobileNet = GuirenHttpUtils.isMobileDataEnable(DetailVideosActivity.this);
+            isWifiNet = GuirenHttpUtils.isWifiDataEnable(DetailVideosActivity.this);
+            if (!isMobileNet && !isWifiNet) {
+            }else {
+                progressDialog =  new CustomProgressDialog(DetailVideosActivity.this, "正在加载中", R.anim.custom_dialog_frame);
+                progressDialog.setCancelable(true);
+                progressDialog.setIndeterminate(true);
+                progressDialog.show();
+                loadData();
+                getFavour();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -117,7 +136,18 @@ public class DetailVideosActivity extends BaseActivity implements View.OnClickLi
                 refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
                 IS_REFRESH = true;
                 pageIndex = 1;
-                initData();
+                //判断是否有网
+                try {
+                    isMobileNet = GuirenHttpUtils.isMobileDataEnable(DetailVideosActivity.this);
+                    isWifiNet = GuirenHttpUtils.isWifiDataEnable(DetailVideosActivity.this);
+                    if (!isMobileNet && !isWifiNet) {
+                        detail_lstv.onRefreshComplete();
+                    }else {
+                        loadData();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override
@@ -128,7 +158,18 @@ public class DetailVideosActivity extends BaseActivity implements View.OnClickLi
                 refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
                 IS_REFRESH = false;
                 pageIndex++;
-                initData();
+                //判断是否有网
+                try {
+                    isMobileNet = GuirenHttpUtils.isMobileDataEnable(DetailVideosActivity.this);
+                    isWifiNet = GuirenHttpUtils.isWifiDataEnable(DetailVideosActivity.this);
+                    if (!isMobileNet && !isWifiNet) {
+                        detail_lstv.onRefreshComplete();
+                    }else {
+                        loadData();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -177,13 +218,21 @@ public class DetailVideosActivity extends BaseActivity implements View.OnClickLi
         imageLoader.displayImage(record.getPicUrl(), picone, GuirenApplication.options, animateFirstListener);
         title.setText(record.getTitle() == null ? "" : record.getTitle());
         content.setText(record.getContent()==null?"":record.getContent());
-        loadData();
-        getFavour();
-
     }
 
     @Override
     public void onClick(View v) {
+        //判断是否有网
+        try {
+            isMobileNet = GuirenHttpUtils.isMobileDataEnable(DetailVideosActivity.this);
+            isWifiNet = GuirenHttpUtils.isWifiDataEnable(DetailVideosActivity.this);
+            if (!isMobileNet && !isWifiNet) {
+                showMsg(DetailVideosActivity.this, "请检查网络链接");
+                return;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         switch (v.getId()) {
             case R.id.detail_back://返回按钮
                 finish();
@@ -246,11 +295,17 @@ public class DetailVideosActivity extends BaseActivity implements View.OnClickLi
                         } else {
                             Toast.makeText(DetailVideosActivity.this, R.string.get_data_error, Toast.LENGTH_SHORT).show();
                         }
+                        if (progressDialog != null) {
+                            progressDialog.dismiss();
+                        }
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
+                        if (progressDialog != null) {
+                            progressDialog.dismiss();
+                        }
                         Toast.makeText(DetailVideosActivity.this, R.string.get_data_error, Toast.LENGTH_SHORT).show();
                     }
                 }
@@ -351,6 +406,17 @@ public class DetailVideosActivity extends BaseActivity implements View.OnClickLi
     CommentContent comt;
     @Override
     public void onClickContentItem(int position, int flag, Object object) {
+        //判断是否有网
+        try {
+            isMobileNet = GuirenHttpUtils.isMobileDataEnable(DetailVideosActivity.this);
+            isWifiNet = GuirenHttpUtils.isWifiDataEnable(DetailVideosActivity.this);
+            if (!isMobileNet && !isWifiNet) {
+                showMsg(DetailVideosActivity.this, "请检查网络链接");
+                return;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         comt = commentContents.get(position);
         switch (flag) {
             case 1:
@@ -442,10 +508,30 @@ public class DetailVideosActivity extends BaseActivity implements View.OnClickLi
                 //刷新内容
                 IS_REFRESH = true;
                 pageIndex = 1;
-                loadData();
+                //判断是否有网
+                try {
+                    isMobileNet = GuirenHttpUtils.isMobileDataEnable(DetailVideosActivity.this);
+                    isWifiNet = GuirenHttpUtils.isWifiDataEnable(DetailVideosActivity.this);
+                    if (!isMobileNet && !isWifiNet) {
+                    }else {
+                        loadData();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
             if (action.equals(Constants.SEND_FAVOUR_SUCCESS_VIDEO)) {
-                getFavour();
+                //判断是否有网
+                try {
+                    isMobileNet = GuirenHttpUtils.isMobileDataEnable(DetailVideosActivity.this);
+                    isWifiNet = GuirenHttpUtils.isWifiDataEnable(DetailVideosActivity.this);
+                    if (!isMobileNet && !isWifiNet) {
+                    }else {
+                        getFavour();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         }
 

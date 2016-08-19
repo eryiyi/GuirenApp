@@ -19,6 +19,7 @@ import com.Lbins.GuirenApp.R;
 import com.Lbins.GuirenApp.base.BaseActivity;
 import com.Lbins.GuirenApp.base.InternetURL;
 import com.Lbins.GuirenApp.receiver.SMSBroadcastReceiver;
+import com.Lbins.GuirenApp.util.GuirenHttpUtils;
 import com.Lbins.GuirenApp.util.StringUtil;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -99,8 +100,20 @@ public class UpdateMobileActivity extends BaseActivity implements View.OnClickLi
         });
     }
 
+    boolean isMobileNet, isWifiNet;
     @Override
     public void onClick(View v) {
+        //判断是否有网
+        try {
+            isMobileNet = GuirenHttpUtils.isMobileDataEnable(UpdateMobileActivity.this);
+            isWifiNet = GuirenHttpUtils.isWifiDataEnable(UpdateMobileActivity.this);
+            if (!isMobileNet && !isWifiNet) {
+                showMsg(UpdateMobileActivity.this, "请检查网络链接");
+                return;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         switch (v.getId()){
             case R.id.btn_code:
                 //验证码

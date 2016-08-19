@@ -17,7 +17,9 @@ import com.Lbins.GuirenApp.library.PullToRefreshBase;
 import com.Lbins.GuirenApp.library.PullToRefreshListView;
 import com.Lbins.GuirenApp.module.CityObj;
 import com.Lbins.GuirenApp.module.ProvinceObj;
+import com.Lbins.GuirenApp.util.GuirenHttpUtils;
 import com.Lbins.GuirenApp.util.StringUtil;
+import com.Lbins.GuirenApp.widget.CustomProgressDialog;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -42,6 +44,9 @@ public class SelectCityActivity extends BaseActivity implements View.OnClickList
     private static boolean IS_REFRESH = true;
     private List<CityObj> recordList = new ArrayList<CityObj>();
     ProvinceObj province;
+
+    boolean isMobileNet, isWifiNet;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,7 +92,22 @@ public class SelectCityActivity extends BaseActivity implements View.OnClickList
                 finish();
             }
         });
-        initData();
+        //判断是否有网
+        try {
+            isMobileNet = GuirenHttpUtils.isMobileDataEnable(SelectCityActivity.this);
+            isWifiNet = GuirenHttpUtils.isWifiDataEnable(SelectCityActivity.this);
+            if (!isMobileNet && !isWifiNet) {
+                showMsg(SelectCityActivity.this ,"请检查您网络链接");
+            }else {
+                progressDialog = new CustomProgressDialog(SelectCityActivity.this, "正在加载中",R.anim.custom_dialog_frame);
+                progressDialog.setCancelable(true);
+                progressDialog.setIndeterminate(true);
+                progressDialog.show();
+                initData();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

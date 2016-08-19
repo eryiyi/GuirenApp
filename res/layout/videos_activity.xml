@@ -16,7 +16,7 @@
                 android:padding="8dip"
                 android:id="@+id/title"
                 android:layout_centerInParent="true"
-                android:text="电影分享"
+                android:text="电影推荐"
                 android:textColor="@color/white"
                 android:textSize="18sp"/>
 
@@ -25,7 +25,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_centerVertical="true"
-                android:id="@+id/findpwrone_back"
+                android:id="@+id/back"
+                android:onClick="back"
                 android:paddingLeft="10dp"
                 android:src="@drawable/md_return"
                 android:paddingRight="10dp"

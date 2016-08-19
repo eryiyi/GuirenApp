@@ -249,7 +249,7 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHe
     @Override
     public void onAvatarClick(String username) {
         //handling when user click avatar
-        Emp emp = DBHelper.getInstance(getActivity()).getRecord(username);
+        Emp emp = DBHelper.getInstance(getActivity()).getEmpById(username);
         if(emp != null){
             Intent intent = new Intent(getActivity(), ProfileActivity.class);
             intent.putExtra("mm_emp_id", emp.getMm_emp_id());

@@ -20,6 +20,7 @@ import com.Lbins.GuirenApp.module.CountryObj;
 import com.Lbins.GuirenApp.module.HangYeType;
 import com.Lbins.GuirenApp.module.ProvinceObj;
 import com.Lbins.GuirenApp.util.Constants;
+import com.Lbins.GuirenApp.util.GuirenHttpUtils;
 import com.Lbins.GuirenApp.util.StringUtil;
 import com.Lbins.GuirenApp.widget.CustomProgressDialog;
 import com.Lbins.GuirenApp.widget.CustomerSpinner;
@@ -470,9 +471,20 @@ public class EditEmpActivity extends BaseActivity implements View.OnClickListene
 //    }
 
 
-
+    boolean isMobileNet, isWifiNet;
     @Override
     public void onClick(View v) {
+        //判断是否有网
+        try {
+            isMobileNet = GuirenHttpUtils.isMobileDataEnable(EditEmpActivity.this);
+            isWifiNet = GuirenHttpUtils.isWifiDataEnable(EditEmpActivity.this);
+            if (!isMobileNet && !isWifiNet) {
+                showMsg(EditEmpActivity.this, "请检查网络链接");
+                return;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         switch (v.getId()){
             case R.id.back:
                 finish();

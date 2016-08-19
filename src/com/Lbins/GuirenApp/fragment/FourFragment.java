@@ -10,6 +10,7 @@ import android.widget.Toast;
 import com.Lbins.GuirenApp.R;
 import com.Lbins.GuirenApp.base.BaseFragment;
 import com.Lbins.GuirenApp.ui.*;
+import com.Lbins.GuirenApp.util.GuirenHttpUtils;
 
 /**
  * Created by zhl on 2016/5/6.
@@ -17,6 +18,7 @@ import com.Lbins.GuirenApp.ui.*;
 public class FourFragment extends BaseFragment implements View.OnClickListener {
     private View view;
     private Resources res;
+    boolean isMobileNet, isWifiNet;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -77,21 +79,43 @@ public class FourFragment extends BaseFragment implements View.OnClickListener {
                break;
            case R.id.liner_news:
            {
-               //今日头条
-               Intent intent = new Intent(getActivity(), WebViewActivity.class);
-//               intent.putExtra("strurl", "http://m.yidianzixun.com/");
-               intent.putExtra("strurl", "http://m.thepaper.cn/");
-               intent.putExtra("strname", "澎湃新闻");
-               startActivity(intent);
+               //判断是否有网
+               try {
+                   isMobileNet = GuirenHttpUtils.isMobileDataEnable(getActivity());
+                   isWifiNet = GuirenHttpUtils.isWifiDataEnable(getActivity());
+                   if (!isMobileNet && !isWifiNet) {
+                       Toast.makeText(getActivity(), "请检查网络链接", Toast.LENGTH_SHORT).show();
+                   }else {               //今日头条
+                       Intent intent = new Intent(getActivity(), WebViewActivity.class);
+                       intent.putExtra("strurl", "http://m.thepaper.cn/");
+                       intent.putExtra("strname", "澎湃新闻");
+                       startActivity(intent);
+
+                   }
+               } catch (Exception e) {
+                   e.printStackTrace();
+               }
+
            }
                break;
            case R.id.liner_baike:
            {
-               //糗事百科
-               Intent intent = new Intent(getActivity(), WebViewActivity.class);
-               intent.putExtra("strurl", "http://www.qiushibaike.com/");
-               intent.putExtra("strname", "糗事");
-               startActivity(intent);
+               //判断是否有网
+               try {
+                   isMobileNet = GuirenHttpUtils.isMobileDataEnable(getActivity());
+                   isWifiNet = GuirenHttpUtils.isWifiDataEnable(getActivity());
+                   if (!isMobileNet && !isWifiNet) {
+                       Toast.makeText(getActivity(), "请检查网络链接", Toast.LENGTH_SHORT).show();
+                   }else {               //今日头条
+                       //糗事百科
+                       Intent intent = new Intent(getActivity(), WebViewActivity.class);
+                       intent.putExtra("strurl", "http://www.qiushibaike.com/");
+                       intent.putExtra("strname", "糗事");
+                       startActivity(intent);
+                   }
+               } catch (Exception e) {
+                   e.printStackTrace();
+               }
            }
                break;
            case R.id.liner_zmt:

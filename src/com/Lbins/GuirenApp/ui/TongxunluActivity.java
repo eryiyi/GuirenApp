@@ -14,7 +14,9 @@ import com.Lbins.GuirenApp.base.BaseActivity;
 import com.Lbins.GuirenApp.base.InternetURL;
 import com.Lbins.GuirenApp.data.EmpRelateObjData;
 import com.Lbins.GuirenApp.module.EmpRelateObj;
+import com.Lbins.GuirenApp.util.GuirenHttpUtils;
 import com.Lbins.GuirenApp.util.StringUtil;
+import com.Lbins.GuirenApp.widget.CustomProgressDialog;
 import com.Lbins.GuirenApp.widget.PingYinUtil;
 import com.Lbins.GuirenApp.widget.PinyinComparator;
 import com.Lbins.GuirenApp.widget.SideBar;
@@ -40,13 +42,29 @@ public class TongxunluActivity extends BaseActivity implements View.OnClickListe
      */
     private static List<EmpRelateObj> nicks = new ArrayList<EmpRelateObj>();
 
+    boolean isMobileNet, isWifiNet;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mWindowManager = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
         setContentView(R.layout.tongxunlu_activity);
         initView();
-        getData();
+        try {
+            isMobileNet = GuirenHttpUtils.isMobileDataEnable(TongxunluActivity.this);
+            isWifiNet = GuirenHttpUtils.isWifiDataEnable(TongxunluActivity.this);
+            if (!isMobileNet && !isWifiNet) {
+                showMsg(TongxunluActivity.this ,"请检查您网络链接");
+            }else {
+                progressDialog = new CustomProgressDialog(TongxunluActivity.this, "正在加载中",R.anim.custom_dialog_frame);
+                progressDialog.setCancelable(true);
+                progressDialog.setIndeterminate(true);
+                progressDialog.show();
+                getData();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     void getData(){
@@ -68,11 +86,17 @@ public class TongxunluActivity extends BaseActivity implements View.OnClickListe
                         }else {
                             showMsg(TongxunluActivity.this, getResources().getString(R.string.get_data_error));
                         }
+                        if (progressDialog != null) {
+                            progressDialog.dismiss();
+                        }
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
+                        if (progressDialog != null) {
+                            progressDialog.dismiss();
+                        }
                         showMsg(TongxunluActivity.this, getResources().getString(R.string.get_data_error));
                     }
                 }

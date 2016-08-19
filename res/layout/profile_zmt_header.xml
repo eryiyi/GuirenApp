@@ -22,7 +22,6 @@
                     android:src="@drawable/default_avatar"
                     android:layout_height="60dp"/>
             <TextView android:layout_width="wrap_content"
-                      android:text="张三"
                       android:visibility="gone"
                       android:singleLine="true"
                       android:layout_marginLeft="8dp"
@@ -72,7 +71,6 @@
                           android:textColor="@color/textColortwo"
                           android:layout_height="wrap_content"/>
                 <TextView android:layout_width="wrap_content"
-                          android:text="82632"
                           android:id="@+id/company_person"
                           android:layout_marginTop="5dp"
                           android:textColor="@color/text_color"
@@ -90,7 +88,6 @@
                           android:textColor="@color/textColortwo"
                           android:layout_height="wrap_content"/>
                 <TextView android:layout_width="wrap_content"
-                          android:text="86541645.."
                           android:id="@+id/company_tel"
                           android:layout_marginTop="5dp"
                           android:textColor="@color/text_color"
@@ -108,7 +105,6 @@
                           android:textColor="@color/textColortwo"
                           android:layout_height="wrap_content"/>
                 <TextView android:layout_width="wrap_content"
-                          android:text="86541645.."
                           android:id="@+id/company_address"
                           android:layout_marginTop="5dp"
                           android:textColor="@color/text_color"
@@ -126,7 +122,6 @@
                           android:textColor="@color/textColortwo"
                           android:layout_height="wrap_content"/>
                 <TextView android:layout_width="wrap_content"
-                          android:text="山东惠民.."
                           android:id="@+id/company_detail"
                           android:layout_marginTop="5dp"
                           android:textColor="@color/text_color"

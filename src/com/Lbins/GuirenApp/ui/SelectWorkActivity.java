@@ -15,7 +15,9 @@ import com.Lbins.GuirenApp.base.InternetURL;
 import com.Lbins.GuirenApp.data.HangYeTypeDara;
 import com.Lbins.GuirenApp.module.HangYeType;
 import com.Lbins.GuirenApp.util.Constants;
+import com.Lbins.GuirenApp.util.GuirenHttpUtils;
 import com.Lbins.GuirenApp.util.StringUtil;
+import com.Lbins.GuirenApp.widget.CustomProgressDialog;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -35,6 +37,7 @@ public class SelectWorkActivity extends BaseActivity {
     private GridView gridView;
     private WorkAdapter adapter;
     private List<HangYeType> lists = new ArrayList<HangYeType>();
+    boolean isMobileNet, isWifiNet;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,7 +58,21 @@ public class SelectWorkActivity extends BaseActivity {
                 finish();
             }
         });
-        getBigType();
+        try {
+            isMobileNet = GuirenHttpUtils.isMobileDataEnable(SelectWorkActivity.this);
+            isWifiNet = GuirenHttpUtils.isWifiDataEnable(SelectWorkActivity.this);
+            if (!isMobileNet && !isWifiNet) {
+                showMsg(SelectWorkActivity.this ,"请检查您网络链接");
+            }else {
+                progressDialog = new CustomProgressDialog(SelectWorkActivity.this, "正在加载中",R.anim.custom_dialog_frame);
+                progressDialog.setCancelable(true);
+                progressDialog.setIndeterminate(true);
+                progressDialog.show();
+                getBigType();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     //获得类别
@@ -84,13 +101,18 @@ public class SelectWorkActivity extends BaseActivity {
                         } else {
                             Toast.makeText(SelectWorkActivity.this, R.string.get_data_error, Toast.LENGTH_SHORT).show();
                         }
+                        if (progressDialog != null) {
+                            progressDialog.dismiss();
+                        }
 
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
-
+                        if (progressDialog != null) {
+                            progressDialog.dismiss();
+                        }
                         Toast.makeText(SelectWorkActivity.this, R.string.get_data_error, Toast.LENGTH_SHORT).show();
                     }
                 }

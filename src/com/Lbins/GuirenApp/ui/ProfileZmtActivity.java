@@ -19,6 +19,7 @@ import com.Lbins.GuirenApp.adapter.OnClickContentItemListener;
 import com.Lbins.GuirenApp.adapter.RecordAdapter;
 import com.Lbins.GuirenApp.base.BaseActivity;
 import com.Lbins.GuirenApp.base.InternetURL;
+import com.Lbins.GuirenApp.dao.DBHelper;
 import com.Lbins.GuirenApp.data.EmpData;
 import com.Lbins.GuirenApp.data.ManagerInfoData;
 import com.Lbins.GuirenApp.data.RecordDATA;
@@ -29,6 +30,7 @@ import com.Lbins.GuirenApp.module.Emp;
 import com.Lbins.GuirenApp.module.ManagerInfo;
 import com.Lbins.GuirenApp.module.Record;
 import com.Lbins.GuirenApp.util.Constants;
+import com.Lbins.GuirenApp.util.GuirenHttpUtils;
 import com.Lbins.GuirenApp.util.StringUtil;
 import com.Lbins.GuirenApp.widget.CustomProgressDialog;
 import com.Lbins.GuirenApp.widget.DeletePopWindow;
@@ -79,6 +81,10 @@ public class ProfileZmtActivity extends BaseActivity implements View.OnClickList
 
     Emp emp;
     ManagerInfo managerInfo;
+
+    boolean isMobileNet, isWifiNet;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,13 +99,36 @@ public class ProfileZmtActivity extends BaseActivity implements View.OnClickList
         }else {
             add.setVisibility(View.VISIBLE);
         }
-        progressDialog = new CustomProgressDialog(ProfileZmtActivity.this, "正在加载中",R.anim.custom_dialog_frame);
-        progressDialog.setCancelable(true);
-        progressDialog.setIndeterminate(true);
-        progressDialog.show();
-        initData();
-        getData();
-        getDataM();
+
+        //判断是否有网
+        try {
+            isMobileNet = GuirenHttpUtils.isMobileDataEnable(ProfileZmtActivity.this);
+            isWifiNet = GuirenHttpUtils.isWifiDataEnable(ProfileZmtActivity.this);
+            if (!isMobileNet && !isWifiNet) {
+//                recordList.addAll(DBHelper.getInstance(ProfileZmtActivity.this).getRecordList());
+//                adapter.notifyDataSetChanged();
+                List<Emp> emps = DBHelper.getInstance(ProfileZmtActivity.this).getEmpList();
+                emp = DBHelper.getInstance(ProfileZmtActivity.this).getEmpByEmpId(mm_emp_id);
+                if(emp != null){
+                    initMine();
+                }
+                managerInfo = DBHelper.getInstance(ProfileZmtActivity.this).getManagerInfoByEmpId(mm_emp_id);
+                if(managerInfo != null){
+                    initMineManager();
+                }
+            }else {
+                progressDialog = new CustomProgressDialog(ProfileZmtActivity.this, "正在加载中",R.anim.custom_dialog_frame);
+                progressDialog.setCancelable(true);
+                progressDialog.setIndeterminate(true);
+                progressDialog.show();
+                initData();
+                getData();
+                getDataM();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     void initView(){
@@ -135,7 +164,19 @@ public class ProfileZmtActivity extends BaseActivity implements View.OnClickList
                 refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
                 IS_REFRESH = true;
                 pageIndex = 1;
-                initData();
+                //判断是否有网
+                try {
+                    isMobileNet = GuirenHttpUtils.isMobileDataEnable(ProfileZmtActivity.this);
+                    isWifiNet = GuirenHttpUtils.isWifiDataEnable(ProfileZmtActivity.this);
+                    if (!isMobileNet && !isWifiNet) {
+                        lstv.onRefreshComplete();
+                    }else {
+                        initData();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
             }
 
             @Override
@@ -146,7 +187,18 @@ public class ProfileZmtActivity extends BaseActivity implements View.OnClickList
                 refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
                 IS_REFRESH = false;
                 pageIndex++;
-                initData();
+                //判断是否有网
+                try {
+                    isMobileNet = GuirenHttpUtils.isMobileDataEnable(ProfileZmtActivity.this);
+                    isWifiNet = GuirenHttpUtils.isWifiDataEnable(ProfileZmtActivity.this);
+                    if (!isMobileNet && !isWifiNet) {
+                        lstv.onRefreshComplete();
+                    }else {
+                        initData();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
         lstv.setAdapter(adapter);
@@ -182,6 +234,7 @@ public class ProfileZmtActivity extends BaseActivity implements View.OnClickList
                                 recordList.addAll(data.getData());
                                 lstv.onRefreshComplete();
                                 adapter.notifyDataSetChanged();
+
                             } else {
                                 Toast.makeText(ProfileZmtActivity.this, R.string.get_data_error, Toast.LENGTH_SHORT).show();
                             }
@@ -229,6 +282,16 @@ public class ProfileZmtActivity extends BaseActivity implements View.OnClickList
 
     @Override
     public void onClickContentItem(int position, int flag, Object object) {
+        //判断是否有网
+        try {
+            isMobileNet = GuirenHttpUtils.isMobileDataEnable(ProfileZmtActivity.this);
+            isWifiNet = GuirenHttpUtils.isWifiDataEnable(ProfileZmtActivity.this);
+            if (!isMobileNet && !isWifiNet) {
+               return;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         record = recordList.get(position);
         switch (flag) {
             case 1:
@@ -450,8 +513,10 @@ public class ProfileZmtActivity extends BaseActivity implements View.OnClickList
                             EmpData data = getGson().fromJson(s, EmpData.class);
                             if (Integer.parseInt(data.getCode()) == 200) {
                                 emp = data.getData();
-                                imageLoader.displayImage(emp.getMm_emp_cover(), head, GuirenApplication.txOptions, animateFirstListener);
-                                nickname.setText(emp.getMm_emp_nickname());
+                                if(DBHelper.getInstance(ProfileZmtActivity.this).getEmpById(emp.getHxusername()) == null){
+                                    DBHelper.getInstance(ProfileZmtActivity.this).saveEmp(emp);
+                                }
+                                initMine();
                             } else {
                                 Toast.makeText(ProfileZmtActivity.this, R.string.get_data_error, Toast.LENGTH_SHORT).show();
                             }
@@ -494,6 +559,11 @@ public class ProfileZmtActivity extends BaseActivity implements View.OnClickList
         getRequestQueue().add(request);
     }
 
+    void initMine(){
+        imageLoader.displayImage(emp.getMm_emp_cover(), head, GuirenApplication.txOptions, animateFirstListener);
+        nickname.setText(emp.getMm_emp_nickname());
+    }
+
     private void getDataM() {
         StringRequest request = new StringRequest(
                 Request.Method.POST,
@@ -505,12 +575,12 @@ public class ProfileZmtActivity extends BaseActivity implements View.OnClickList
                             ManagerInfoData data = getGson().fromJson(s, ManagerInfoData.class);
                             if (Integer.parseInt(data.getCode()) == 200) {
                                 managerInfo = data.getData();
-                                company_person.setText(managerInfo.getCompany_person());
-                                company_tel.setText(managerInfo.getCompany_tel());
-                                company_address.setText(managerInfo.getCompany_address());
-                                company_detail.setText(managerInfo.getCompany_detail());
-                                imageLoader.displayImage(managerInfo.getCompany_pic(), pic_bg, GuirenApplication.options, animateFirstListener);
-                                title.setText(managerInfo.getCompany_name());
+                                if(managerInfo != null){
+                                    if(DBHelper.getInstance(ProfileZmtActivity.this).getManagerInfoById(managerInfo.getId()) == null){
+                                        DBHelper.getInstance(ProfileZmtActivity.this).saveManagerInfo(managerInfo);
+                                    }
+                                }
+                                initMineManager();
                             } else {
                                 Toast.makeText(ProfileZmtActivity.this, R.string.get_data_error, Toast.LENGTH_SHORT).show();
                             }
@@ -551,6 +621,15 @@ public class ProfileZmtActivity extends BaseActivity implements View.OnClickList
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         getRequestQueue().add(request);
+    }
+
+    void initMineManager(){
+        company_person.setText(managerInfo.getCompany_person());
+        company_tel.setText(managerInfo.getCompany_tel());
+        company_address.setText(managerInfo.getCompany_address());
+        company_detail.setText(managerInfo.getCompany_detail());
+        imageLoader.displayImage(managerInfo.getCompany_pic(), pic_bg, GuirenApplication.options, animateFirstListener);
+        title.setText(managerInfo.getCompany_name());
     }
 
     @Override

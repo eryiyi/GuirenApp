@@ -2,7 +2,8 @@ package com.Lbins.GuirenApp.dao;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
-import com.Lbins.GuirenApp.module.Emp;
+import com.Lbins.GuirenApp.data.ManagerInfoData;
+import com.Lbins.GuirenApp.module.*;
 import de.greenrobot.dao.query.QueryBuilder;
 
 import java.util.List;
@@ -14,9 +15,15 @@ public class DBHelper {
     private static Context mContext;
     private static DBHelper instance;
     private static DaoMaster.DevOpenHelper helper;
-    private EmpDao testDao;
     private static SQLiteDatabase db;
     private static DaoMaster daoMaster;
+
+    private EmpDao empDao;
+    private EmpDianpuDao empDianpuDao;
+    private RecordDao recordDao;
+    private VideosDao videosDao;
+    private XixunObjDao xixunObjDao;
+    private ManagerInfoDao managerInfoDao;
 
     private DBHelper() {
     }
@@ -30,94 +37,66 @@ public class DBHelper {
             helper = new DaoMaster.DevOpenHelper(context, "guiren_hm_db_t", null);
             db = helper.getWritableDatabase();
             daoMaster = new DaoMaster(db);
-            instance.testDao = daoMaster.newSession().getEmpDao();
+            instance.empDao = daoMaster.newSession().getEmpDao();
+            instance.empDianpuDao = daoMaster.newSession().getEmpDianpuDao();
+            instance.recordDao = daoMaster.newSession().getRecordDao();
+            instance.videosDao = daoMaster.newSession().getVideosDao();
+            instance.xixunObjDao = daoMaster.newSession().getXixunObjDao();
+            instance.managerInfoDao = daoMaster.newSession().getManagerInfoDao();
         }
         return instance;
     }
 
     /**
-     * 插入数据
+     * 插入会员信息
      *
      * @param test
      */
-    public void addShoppingToTable(Emp test) {
-        testDao.insert(test);
+    public void addEmp(Emp test) {
+        empDao.insert(test);
     }
 
-    //查询是否存在该商品
+    //查询是否存在该会员信息
     public boolean isSaved(String ID) {
-        QueryBuilder<Emp> qb = testDao.queryBuilder();
+        QueryBuilder<Emp> qb = empDao.queryBuilder();
         qb.where(EmpDao.Properties.Hxusername.eq(ID));
         qb.buildCount().count();
         return qb.buildCount().count() > 0 ? true : false;
     }
 
-    //批量插入数据
-    public void saveTestList(List<Emp> tests) {
-        testDao.insertOrReplaceInTx(tests);
-    }
-
-    /**
-     * 查询所有的购物车
-     *
-     * @return
-     */
-    public List<Emp> getShoppingList() {
-        return testDao.loadAll();
-    }
-
-    /**
-     * 插入或是更新数据
-     *
-     * @param test
-     * @return
-     */
-    public long saveShopping(Emp test) {
-        return testDao.insertOrReplace(test);
-    }
 
     /**
      * 更新数据
      *
-     * @param test
+     * @param emp
      */
-    public void updateTest(Emp test) {
-        testDao.update(test);
-    }
-
-//    /**
-//     * 获得所有收藏的题
-//     * @return
-//     */
-//    public List<ShoppingCart> getFavourTest(){
-//        QueryBuilder qb = testDao.queryBuilder();
-//        qb.where(ShoppingCartDao.Properties.IsFavor.eq(true));
-//        return qb.list();
-//    }
-
-    /**
-     * 删除所有数据--购物车
-     */
-
-    public void deleteShopping() {
-        testDao.deleteAll();
+    public void updateEmp(Emp emp) {
+        empDao.update(emp);
     }
 
     /**
-     * 删除数据根据goods_id
+     * 删除所有数据--会员信息
      */
 
-    public void deleteShoppingByGoodsId(String cartid) {
-        QueryBuilder qb = testDao.queryBuilder();
-        qb.where(EmpDao.Properties.Hxusername.eq(cartid));
-        testDao.deleteByKey(cartid);//删除
+    public void deleteAllEmp() {
+        empDao.deleteAll();
+    }
+
+    /**
+     * 删除数据根据
+     */
+
+    public void deleteEmpByHxusername(String hxusername) {
+        QueryBuilder qb = empDao.queryBuilder();
+        qb.where(EmpDao.Properties.Hxusername.eq(hxusername));
+        empDao.deleteByKey(hxusername);//删除
     }
 
 
     //动态
     //批量插入数据
-    public void saveRecordList(List<Emp> tests) {
-        testDao.insertOrReplaceInTx(tests);
+    public void saveEmpList(List<Emp> tests) {
+        empDao.insertOrReplaceInTx(tests);
     }
 
     /**
@@ -125,40 +104,177 @@ public class DBHelper {
      *
      * @return
      */
-    public List<Emp> getRecordList() {
-        return testDao.loadAll();
+    public List<Emp> getEmpList() {
+        return empDao.loadAll();
     }
 
     /**
      * 插入或是更新数据
      *
-     * @param test
      * @return
      */
-    public long saveRecord(Emp test) {
-        return testDao.insertOrReplace(test);
+    public long saveEmp(Emp emp) {
+        return empDao.insertOrReplace(emp);
     }
 
     //查询是否存在该动态
-    public boolean isRecord(String id) {
-        QueryBuilder<Emp> qb = testDao.queryBuilder();
+    public boolean isEmpSave(String id) {
+        QueryBuilder<Emp> qb = empDao.queryBuilder();
         qb.where(EmpDao.Properties.Hxusername.eq(id));
         qb.buildCount().count();
         return qb.buildCount().count() > 0 ? true : false;
     }
 
-    //查询动态
-    public Emp getRecord(String id) {
-        Emp recordMsg = testDao.load(id);
-        return recordMsg;
+    //查询会员信息
+    public Emp getEmpById(String id) {
+        Emp emp = empDao.load(id);
+        return emp;
+    }
+
+    public Emp getEmpByEmpId(String id) {
+        QueryBuilder qb = empDao.queryBuilder();
+        qb.where(EmpDao.Properties.Mm_emp_id.eq(id));
+        List<Emp> emps = qb.list();
+        if(emps != null && emps.size()>0){
+            return emps.get(0);
+        }else {
+            return null;
+        }
+    }
+
+    //查询喜讯是否存在
+    public XixunObj getXixunObjById(String id) {
+        XixunObj xixunObj = xixunObjDao.load(id);
+        return xixunObj;
     }
 
     /**
-     * 更新数据
+     * 插入或是更新数据
      *
-     * @param test
+     * @return
      */
-    public void updateRecord(Emp test) {
-        testDao.update(test);
+    public long saveXixunObj(XixunObj xixunObj) {
+        return xixunObjDao.insertOrReplace(xixunObj);
     }
+
+    /**
+     * 查询喜讯列表
+     *
+     * @return
+     */
+    public List<XixunObj> getXixunList() {
+        return xixunObjDao.loadAll();
+    }
+
+    /**
+     * 查询动态
+     *
+     * @return
+     */
+    public List<Record> getRecordList() {
+        return recordDao.loadAll();
+    }
+
+    //查询动态是否存在
+    public Record getRecordById(String id) {
+        Record record = recordDao.load(id);
+        return record;
+    }
+
+    /**
+     * 插入或是更新数据
+     *
+     * @return
+     */
+    public long saveRecord(Record record) {
+        return recordDao.insertOrReplace(record);
+    }
+
+    /**
+     * 查询电影
+     *
+     * @return
+     */
+    public List<Videos> getVideos() {
+        return videosDao.loadAll();
+    }
+
+    //查询videos是否存在
+    public Videos getVideosById(String id) {
+        Videos videos = videosDao.load(id);
+        return videos;
+    }
+
+    /**
+     * 插入或是更新数据
+     *
+     * @return
+     */
+    public long saveVideos(Videos videos) {
+        return videosDao.insertOrReplace(videos);
+    }
+
+
+    /**
+     * 插入或是更新数据
+     *
+     * @return
+     */
+    public long saveDianpu(EmpDianpu empDianpu) {
+        return empDianpuDao.insertOrReplace(empDianpu);
+    }
+
+    //查询店铺是否存在
+    public EmpDianpu getEmpDianpuById(String id) {
+        EmpDianpu empDianpu = empDianpuDao.load(id);
+        return empDianpu;
+    }
+
+    /**
+     * 查询店铺
+     *
+     * @return
+     */
+    public List<EmpDianpu> getDianpus() {
+        return empDianpuDao.loadAll();
+    }
+
+    /**
+     * 插入或是更新数据
+     *
+     * @return
+     */
+    public long saveManagerInfo(ManagerInfo managerInfo) {
+        return managerInfoDao.insertOrReplace(managerInfo);
+    }
+
+    //查询店铺是否存在
+    public ManagerInfo getManagerInfoById(String id) {
+        ManagerInfo managerInfo = managerInfoDao.load(id);
+        return managerInfo;
+    }
+
+    public ManagerInfo getManagerInfoByEmpId(String id) {
+        QueryBuilder qb = managerInfoDao.queryBuilder();
+        qb.where(ManagerInfoDao.Properties.Emp_id.eq(id));
+        List<ManagerInfo> emps = qb.list();
+        if(emps != null && emps.size()>0){
+            return emps.get(0);
+        }else {
+            return null;
+        }
+    }
+
+    /**
+     * 查询动态
+     *
+     * @return
+     */
+    public List<Record> getRecordListByEmpId(String id) {
+        QueryBuilder qb = recordDao.queryBuilder();
+        qb.where(RecordDao.Properties.Mm_emp_id.eq(id));
+        List<Record> records = qb.list();
+        return records;
+    }
+
 }

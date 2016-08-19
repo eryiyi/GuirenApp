@@ -18,12 +18,14 @@ import com.Lbins.GuirenApp.adapter.OnClickContentItemListener;
 import com.Lbins.GuirenApp.adapter.RecordAdapter;
 import com.Lbins.GuirenApp.base.BaseActivity;
 import com.Lbins.GuirenApp.base.InternetURL;
+import com.Lbins.GuirenApp.dao.DBHelper;
 import com.Lbins.GuirenApp.data.RecordDATA;
 import com.Lbins.GuirenApp.data.SuccessData;
 import com.Lbins.GuirenApp.library.PullToRefreshBase;
 import com.Lbins.GuirenApp.library.PullToRefreshListView;
 import com.Lbins.GuirenApp.module.Record;
 import com.Lbins.GuirenApp.util.Constants;
+import com.Lbins.GuirenApp.util.GuirenHttpUtils;
 import com.Lbins.GuirenApp.util.StringUtil;
 import com.Lbins.GuirenApp.widget.CustomProgressDialog;
 import com.Lbins.GuirenApp.widget.DeletePopWindow;
@@ -53,6 +55,9 @@ public class FindActivity extends BaseActivity implements View.OnClickListener,O
     private int tmpSelected;//暂时存UUID  删除用
     private DeletePopWindow deleteWindow;
 
+    boolean isMobileNet, isWifiNet;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,11 +66,32 @@ public class FindActivity extends BaseActivity implements View.OnClickListener,O
         res = getResources();
         emp_id = getGson().fromJson(getSp().getString("mm_emp_id", ""), String.class);
         initView();
-        progressDialog = new CustomProgressDialog(FindActivity.this, "正在加载中",R.anim.custom_dialog_frame);
-        progressDialog.setCancelable(true);
-        progressDialog.setIndeterminate(true);
-        progressDialog.show();
-        initData();
+
+        //判断是否有网
+        try {
+            isMobileNet = GuirenHttpUtils.isMobileDataEnable(FindActivity.this);
+            isWifiNet = GuirenHttpUtils.isWifiDataEnable(FindActivity.this);
+            if (!isMobileNet && !isWifiNet) {
+                recordList.addAll(DBHelper.getInstance(FindActivity.this).getRecordList());
+                if(recordList.size() > 0){
+                    no_collections.setVisibility(View.GONE);
+                    listView.setVisibility(View.VISIBLE);
+                }else {
+                    no_collections.setVisibility(View.VISIBLE);
+                    listView.setVisibility(View.GONE);
+                }
+                adapter.notifyDataSetChanged();
+            }else {
+                progressDialog = new CustomProgressDialog(FindActivity.this, "正在加载中",R.anim.custom_dialog_frame);
+                progressDialog.setCancelable(true);
+                progressDialog.setIndeterminate(true);
+                progressDialog.show();
+                initData();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     void initView(){
@@ -83,7 +109,18 @@ public class FindActivity extends BaseActivity implements View.OnClickListener,O
                 refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
                 IS_REFRESH = true;
                 pageIndex = 1;
-                initData();
+                //判断是否有网
+                try {
+                    isMobileNet = GuirenHttpUtils.isMobileDataEnable(FindActivity.this);
+                    isWifiNet = GuirenHttpUtils.isWifiDataEnable(FindActivity.this);
+                    if (!isMobileNet && !isWifiNet) {
+                        listView.onRefreshComplete();
+                    }else {
+                        initData();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override
@@ -94,7 +131,18 @@ public class FindActivity extends BaseActivity implements View.OnClickListener,O
                 refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
                 IS_REFRESH = false;
                 pageIndex++;
-                initData();
+                //判断是否有网
+                try {
+                    isMobileNet = GuirenHttpUtils.isMobileDataEnable(FindActivity.this);
+                    isWifiNet = GuirenHttpUtils.isWifiDataEnable(FindActivity.this);
+                    if (!isMobileNet && !isWifiNet) {
+                        listView.onRefreshComplete();
+                    }else {
+                        initData();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
         listView.setAdapter(adapter);
@@ -147,6 +195,15 @@ public class FindActivity extends BaseActivity implements View.OnClickListener,O
                                     listView.setVisibility(View.GONE);
                                 }
                                 adapter.notifyDataSetChanged();
+                                //处理数据，需要的话保存到数据库
+                                if (data != null && data.getData() != null) {
+                                    DBHelper dbHelper = DBHelper.getInstance(FindActivity.this);
+                                    for (Record record1 : data.getData()) {
+                                        if (dbHelper.getRecordById(record1.getMm_msg_id()) == null) {
+                                            DBHelper.getInstance(FindActivity.this).saveRecord(record1);
+                                        }
+                                    }
+                                }
                             } else {
                                 Toast.makeText(FindActivity.this, R.string.get_data_error, Toast.LENGTH_SHORT).show();
                             }
@@ -192,6 +249,17 @@ public class FindActivity extends BaseActivity implements View.OnClickListener,O
 
     @Override
     public void onClickContentItem(int position, int flag, Object object) {
+        //判断是否有网
+        try {
+            isMobileNet = GuirenHttpUtils.isMobileDataEnable(FindActivity.this);
+            isWifiNet = GuirenHttpUtils.isWifiDataEnable(FindActivity.this);
+            if (!isMobileNet && !isWifiNet) {
+                showMsg(FindActivity.this, "请检查网络链接");
+                return;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         record = recordList.get(position);
         switch (flag) {
             case 1:
@@ -287,6 +355,17 @@ public class FindActivity extends BaseActivity implements View.OnClickListener,O
 
         public void onClick(View v) {
             deleteWindow.dismiss();
+            //判断是否有网
+            try {
+                isMobileNet = GuirenHttpUtils.isMobileDataEnable(FindActivity.this);
+                isWifiNet = GuirenHttpUtils.isWifiDataEnable(FindActivity.this);
+                if (!isMobileNet && !isWifiNet) {
+                    showMsg(FindActivity.this, "请检查网络链接");
+                    return;
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             switch (v.getId()) {
                 case R.id.btn_sure:
                     delete();
@@ -419,7 +498,18 @@ public class FindActivity extends BaseActivity implements View.OnClickListener,O
 //                }
                 IS_REFRESH = true;
                 pageIndex = 1;
-                initData();
+                //判断是否有网
+                try {
+                    isMobileNet = GuirenHttpUtils.isMobileDataEnable(FindActivity.this);
+                    isWifiNet = GuirenHttpUtils.isWifiDataEnable(FindActivity.this);
+                    if (!isMobileNet && !isWifiNet) {
+                        listView.onRefreshComplete();
+                    }else {
+                        initData();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
             if (action.equals(Constants.SEND_PIC_TX_SUCCESS)) {
                 //更改头像的广播事件
@@ -491,6 +581,17 @@ public class FindActivity extends BaseActivity implements View.OnClickListener,O
 
     @Override
     public void onItemClick(int index) {
+        //判断是否有网
+        try {
+            isMobileNet = GuirenHttpUtils.isMobileDataEnable(FindActivity.this);
+            isWifiNet = GuirenHttpUtils.isWifiDataEnable(FindActivity.this);
+            if (!isMobileNet && !isWifiNet) {
+                showMsg(FindActivity.this, "请检查网络链接");
+                return;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         switch (index) {
             case 0:
                 Intent pic = new Intent(FindActivity.this, PublishPicActivity.class);

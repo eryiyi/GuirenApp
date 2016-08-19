@@ -27,6 +27,16 @@
                   android:layout_centerVertical="true"
                   android:textColor="@color/white"
                   android:layout_height="wrap_content"/>
+        <TextView android:layout_width="wrap_content"
+                  android:text="保存"
+                  android:id="@+id/sign_in_button"
+                  android:textColor="@color/white"
+                  android:layout_alignParentRight="true"
+                  android:padding="15dp"
+                  android:gravity="center"
+                  android:layout_centerVertical="true"
+                  android:textSize="16sp"
+                  android:layout_height="wrap_content"/>
     </RelativeLayout>
 
     <com.Lbins.GuirenApp.widget.ReboundScrollView android:layout_width="match_parent"
@@ -283,18 +293,7 @@
                       android:layout_height="35dp">
             </EditText>
 
-            <Button android:layout_width="match_parent"
-                    android:padding="12dp"
-                    android:layout_marginTop="25dp"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginRight="30dp"
-                    android:text="确  认"
-                    android:id="@+id/sign_in_button"
-                    android:textSize="16sp"
-                    android:textColor="@color/white"
-                    android:background="@drawable/btn_green_shape"
-                    android:layout_height="wrap_content"/>
+
 
 c        </LinearLayout>
     </com.Lbins.GuirenApp.widget.ReboundScrollView>

@@ -117,7 +117,7 @@
                           android:background="@drawable/btn_dark_shape"
                           android:layout_height="50dp">
                 <ImageView android:layout_width="35dp"
-                           android:src="@drawable/qiubai_icon"
+                           android:src="@drawable/find_videos"
                            android:layout_marginLeft="8dp"
                            android:layout_gravity="center_vertical"
                            android:layout_height="wrap_content"/>
