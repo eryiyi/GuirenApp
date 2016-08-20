@@ -38,6 +38,10 @@ public class DaoSession extends AbstractDaoSession {
 
     private final ManagerInfoDao managerInfoDao;
 
+    private final DaoConfig adObjDaoConfig;
+
+    private final AdObjDao adObjDao;
+
     public DaoSession(SQLiteDatabase db, IdentityScopeType type, Map<Class<? extends AbstractDao<?, ?>>, DaoConfig>
             daoConfigMap) {
         super(db);
@@ -77,6 +81,13 @@ public class DaoSession extends AbstractDaoSession {
         managerInfoDao = new ManagerInfoDao(managerInfoDaoConfig, this);
 
         registerDao(ManagerInfo.class, managerInfoDao);
+
+        adObjDaoConfig = daoConfigMap.get(AdObjDao.class).clone();
+        adObjDaoConfig.initIdentityScope(type);
+
+        adObjDao = new AdObjDao(adObjDaoConfig, this);
+
+        registerDao(AdObj.class, adObjDao);
     }
     
     public void clear() {
@@ -87,6 +98,7 @@ public class DaoSession extends AbstractDaoSession {
         videosDaoConfig.getIdentityScope().clear();
         empDianpuDaoConfig.getIdentityScope().clear();
         managerInfoDaoConfig.getIdentityScope().clear();
+        adObjDaoConfig.getIdentityScope().clear();
     }
 
     public EmpDao getEmpDao() {
@@ -112,5 +124,10 @@ public class DaoSession extends AbstractDaoSession {
     public ManagerInfoDao getManagerInfoDao() {
         return managerInfoDao;
     }
+
+    public AdObjDao getAdObjDao() {
+        return adObjDao;
+    }
+
 
 }

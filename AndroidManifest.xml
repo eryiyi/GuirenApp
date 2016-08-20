@@ -192,7 +192,7 @@
         <activity android:name=".ui.PublishZmtActivity" android:screenOrientation="portrait" android:theme="@style/AppTheme" android:windowSoftInputMode="adjustResize|stateHidden"/>
         <activity android:name=".ui.TongxunluActivityT" android:screenOrientation="portrait" android:theme="@style/AppTheme" android:windowSoftInputMode="adjustResize|stateHidden"/>
         <activity android:name=".ui.HelpActivity" android:screenOrientation="portrait" android:theme="@style/AppTheme" android:windowSoftInputMode="adjustResize|stateHidden"/>
-        <activity android:name=".ui.VideoPlayerActivity2" android:screenOrientation="portrait" android:theme="@style/AppTheme" android:windowSoftInputMode="adjustResize|stateHidden"/>
+        <activity android:name=".ui.VideoPlayerActivity2"  android:theme="@style/AppTheme" android:windowSoftInputMode="adjustResize|stateHidden"/>
         <activity android:name=".ui.VideosActivity" android:screenOrientation="portrait" android:theme="@style/AppTheme" android:windowSoftInputMode="adjustResize|stateHidden"/>
         <activity android:name=".ui.DetailVideosActivity" android:screenOrientation="portrait" android:theme="@style/AppTheme" android:windowSoftInputMode="adjustResize|stateHidden"/>
         <activity android:name=".ui.PublishVideoCommentAcitvity" android:screenOrientation="portrait" android:theme="@style/AppTheme" android:windowSoftInputMode="adjustResize|stateHidden"/>

@@ -24,6 +24,7 @@ public class DBHelper {
     private VideosDao videosDao;
     private XixunObjDao xixunObjDao;
     private ManagerInfoDao managerInfoDao;
+    private AdObjDao adObjDao;
 
     private DBHelper() {
     }
@@ -43,6 +44,7 @@ public class DBHelper {
             instance.videosDao = daoMaster.newSession().getVideosDao();
             instance.xixunObjDao = daoMaster.newSession().getXixunObjDao();
             instance.managerInfoDao = daoMaster.newSession().getManagerInfoDao();
+            instance.adObjDao = daoMaster.newSession().getAdObjDao();
         }
         return instance;
     }
@@ -277,4 +279,28 @@ public class DBHelper {
         return records;
     }
 
+
+    /**
+     * 查询广告
+     *
+     * @return
+     */
+    public List<AdObj> getAdObjs() {
+        return adObjDao.loadAll();
+    }
+
+    //查询广告是否存在
+    public AdObj getAdObjById(String id) {
+        AdObj videos = adObjDao.load(id);
+        return videos;
+    }
+
+    /**
+     * 插入或是更新数据
+     *
+     * @return
+     */
+    public long saveAdObj(AdObj adObj) {
+        return adObjDao.insertOrReplace(adObj);
+    }
 }

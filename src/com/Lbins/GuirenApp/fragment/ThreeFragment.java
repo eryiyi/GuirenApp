@@ -96,6 +96,11 @@ public class ThreeFragment extends BaseFragment implements View.OnClickListener 
                     listView.setVisibility(View.GONE);
                 }
                 adapter.notifyDataSetChanged();
+                List<AdObj> adObjs = DBHelper.getInstance(getActivity()).getAdObjs();
+                if(adObjs != null){
+                    listsAd.addAll(adObjs);
+                    initViewPager();
+                }
             }else {
                 initData();
                 getAd();
@@ -313,6 +318,15 @@ public class ThreeFragment extends BaseFragment implements View.OnClickListener 
                                     if (data != null && data.getData().size() > 0) {
                                         listsAd.addAll(data.getData());
                                     }
+
+                                    if(data != null && data.getData() != null){
+                                        for(AdObj adObj:data.getData()){
+                                            if(DBHelper.getInstance(getActivity()).getAdObjById(adObj.getMm_ad_id()) == null){
+                                                DBHelper.getInstance(getActivity()).saveAdObj(adObj);
+                                            }
+                                        }
+                                    }
+
                                     initViewPager();
                                 } else {
                                     Toast.makeText(getActivity(), R.string.get_data_error, Toast.LENGTH_SHORT).show();
