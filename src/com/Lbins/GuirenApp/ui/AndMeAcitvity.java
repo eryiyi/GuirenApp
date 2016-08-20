@@ -14,6 +14,7 @@ import com.Lbins.GuirenApp.base.BaseActivity;
 import com.Lbins.GuirenApp.base.InternetURL;
 import com.Lbins.GuirenApp.data.RecordSingleDATA;
 import com.Lbins.GuirenApp.data.RelateDATA;
+import com.Lbins.GuirenApp.data.SuccessData;
 import com.Lbins.GuirenApp.library.PullToRefreshBase;
 import com.Lbins.GuirenApp.library.PullToRefreshListView;
 import com.Lbins.GuirenApp.module.Relate;
@@ -50,6 +51,7 @@ public class AndMeAcitvity extends BaseActivity implements View.OnClickListener 
     private String emp_id = "";//当前登陆者UUID
     Relate recordtmp;//转换用
 
+    int tmpPosition = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,14 +93,18 @@ public class AndMeAcitvity extends BaseActivity implements View.OnClickListener 
             }
         });
         home_lstv.setAdapter(adapter);
+
         home_lstv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Relate relate = recordList.get(position - 1);
+                tmpPosition = position;
+                updateRelateById(relate.getId());
                 if (relate.getTypeId().equals("0")) {
                     //根据动态ID 查询动态详情
                     getRecordByUUID(relate);
                 }
+
                 if (relate.getTypeId().equals("9")) {
                     //拜见
                     Intent intent = new Intent(AndMeAcitvity.this, DetailRelateActivity.class);
@@ -106,6 +112,7 @@ public class AndMeAcitvity extends BaseActivity implements View.OnClickListener 
                     intent.putExtra("relate", relate);
                     startActivity(intent);
                 }
+
                 if (relate.getTypeId().equals("8")) {
                     //邀请需要审核
                     Intent intent = new Intent(AndMeAcitvity.this, DetailYaoqingActivity.class);
@@ -113,6 +120,7 @@ public class AndMeAcitvity extends BaseActivity implements View.OnClickListener 
                     intent.putExtra("relate", relate);
                     startActivity(intent);
                 }
+
 //                if (relate.getTypeId().equals("1")) {
 //                    //查询商品
 //                    getGoodsByUUID(relate);
@@ -341,5 +349,45 @@ public class AndMeAcitvity extends BaseActivity implements View.OnClickListener 
 //        };
 //        getRequestQueue().add(request);
 //    }
+
+
+    private void updateRelateById(final String id) {
+        StringRequest request = new StringRequest(
+                Request.Method.POST,
+                InternetURL.UPDATE_RELATE_URL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String s) {
+                        if (StringUtil.isJson(s)) {
+                            SuccessData data = getGson().fromJson(s, SuccessData.class);
+                            if (Integer.parseInt(data.getCode()) == 200) {
+                                recordList.get(tmpPosition-1).setIsread("1");
+                                adapter.notifyDataSetChanged();
+                            }
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                    }
+                }
+        ) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("id", id);
+                return params;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Content-Type", "application/x-www-form-urlencoded");
+                return params;
+            }
+        };
+        getRequestQueue().add(request);
+    }
 
 }

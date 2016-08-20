@@ -6,7 +6,6 @@
               android:layout_height="wrap_content">
     <com.Lbins.GuirenApp.widget.CircleImageView
             android:layout_width="40dp"
-            android:src="@drawable/ic_launcher"
             android:id="@+id/detail_favour_item_cover"
             android:layout_height="40dp"/>
     <TextView android:layout_width="match_parent"

@@ -59,6 +59,7 @@ public class AndMeAdapter extends BaseAdapter {
             holder.andme_item_nickname = (TextView) convertView.findViewById(R.id.andme_item_nickname);
             holder.andme_item_cont = (TextView) convertView.findViewById(R.id.andme_item_cont);
             holder.andme_item_dateline = (TextView) convertView.findViewById(R.id.andme_item_dateline);
+            holder.is_read = (ImageView) convertView.findViewById(R.id.is_read);
 
             convertView.setTag(holder);
         } else {
@@ -70,11 +71,18 @@ public class AndMeAdapter extends BaseAdapter {
             holder.andme_item_nickname.setText(StringUtil.replaceBlank(favour.getEmpName()));
             holder.andme_item_cont.setText(favour.getCont());
             holder.andme_item_dateline.setText(favour.getDateline());
+            if("0".equals(favour.getIsread())){
+                holder.is_read.setVisibility(View.VISIBLE);
+            }
+            if("1".equals(favour.getIsread())){
+                holder.is_read.setVisibility(View.GONE);
+            }
         }
         return convertView;
     }
 
     class ViewHolder {
+        ImageView is_read;
         ImageView andme_item_cover;
         TextView andme_item_nickname;
         TextView andme_item_cont;

@@ -21,6 +21,15 @@ public class Relate implements Serializable {
 
     private String empName;
     private String empCover;
+    private String isread;
+
+    public String getIsread() {
+        return isread;
+    }
+
+    public void setIsread(String isread) {
+        this.isread = isread;
+    }
 
     public String getOrderId() {
         return orderId;

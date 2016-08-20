@@ -282,4 +282,7 @@ public class InternetURL {
     //查询会员相册头三条
     public static final String RECORD_PICS_URL = INTERNAL + "recordPics.do";
 
+    //跟新与我相关  已读
+    public static final String UPDATE_RELATE_URL = INTERNAL + "updateRelateById.do";
+
 }

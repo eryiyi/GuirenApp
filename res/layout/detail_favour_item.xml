@@ -10,7 +10,7 @@
                 android:id="@+id/detail_favour_item_icon"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
-                android:src="@drawable/ic_launcher"/>
+               />
 
         <TextView android:layout_width="32dp"
                   android:id="@+id/favour_count"

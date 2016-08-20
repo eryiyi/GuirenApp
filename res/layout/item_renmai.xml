@@ -17,7 +17,6 @@
         <com.Lbins.GuirenApp.widget.CircleImageView
                 android:layout_width="50dp"
                 android:id="@+id/item_head"
-                android:src="@drawable/ic_launcher"
                 android:layout_height="50dp"/>
         <TextView android:layout_width="wrap_content"
                   android:textSize="14sp"
