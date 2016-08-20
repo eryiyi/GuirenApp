@@ -112,6 +112,7 @@ public class RegActivity extends BaseActivity implements View.OnClickListener,Ra
 
     private String sex_selected = "";
     boolean isMobileNet, isWifiNet;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -843,8 +844,8 @@ public class RegActivity extends BaseActivity implements View.OnClickListener,Ra
                 progressDialog.setCancelable(true);
                 progressDialog.setIndeterminate(true);
                 progressDialog.show();
-                reg();
-//                SMSSDK.submitVerificationCode("86", phString, code.getText().toString());
+//                reg();
+                SMSSDK.submitVerificationCode("86", phString, code.getText().toString());
             }
                 break;
             case R.id.btn_code:

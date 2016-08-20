@@ -9,11 +9,11 @@
         <RelativeLayout android:layout_width="match_parent"
                         android:id="@+id/liner_header"
                         android:background="@drawable/bg_1"
-                        android:layout_height="120dp">
+                        android:layout_height="160dp">
             <ImageView android:layout_width="match_parent"
                        android:id="@+id/pic_bg"
                        android:scaleType="fitXY"
-                       android:layout_height="120dp"/>
+                       android:layout_height="160dp"/>
             <ImageView
                     android:layout_width="60dp"
                     android:id="@+id/head"

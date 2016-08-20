@@ -17,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.Lbins.GuirenApp.GuirenApplication;
@@ -84,6 +85,7 @@ public class FiveFragment extends BaseFragment implements View.OnClickListener {
     private SelectPhoPopWindow deleteWindow;
     AsyncHttpClient client = new AsyncHttpClient();
 
+    private LinearLayout img_bg;//背景图
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -97,6 +99,7 @@ public class FiveFragment extends BaseFragment implements View.OnClickListener {
         res = getActivity().getResources();
         view.findViewById(R.id.edit).setOnClickListener(this);
         head = (ImageView) view.findViewById(R.id.head);
+        img_bg = (LinearLayout) view.findViewById(R.id.img_bg);
         nickname = (TextView) view.findViewById(R.id.nickname);
         mm_emp_motto = (TextView) view.findViewById(R.id.mm_emp_motto);
         mm_emp_native = (TextView) view.findViewById(R.id.mm_emp_native);
@@ -203,19 +206,19 @@ public class FiveFragment extends BaseFragment implements View.OnClickListener {
 
 
         final ImageView imageView = new ImageView(getActivity());
-//        if(!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("mm_emp_bg", ""), String.class))){
-//            imageLoader.displayImage(getGson().fromJson(getSp().getString("mm_emp_bg", ""), String.class), imageView, GuirenApplication.options, new AnimateFirstDisplayListener(){
-//                @Override
-//                public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
-//                    super.onLoadingComplete(imageUri, view, loadedImage);
-//                    if(imageView != null ){
-//                        view.findViewById(R.id.scorv).setBackground(imageView.getDrawable());
-//                    }
-//                }
-//            });
-//        }else {
-//            view.findViewById(R.id.scorv).setBackground(res.getDrawable(R.drawable.bg_one));
-//        }
+        if(!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("mm_emp_bg", ""), String.class))){
+            imageLoader.displayImage(getGson().fromJson(getSp().getString("mm_emp_bg", ""), String.class), imageView, GuirenApplication.options, new AnimateFirstDisplayListener(){
+                @Override
+                public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
+                    super.onLoadingComplete(imageUri, view, loadedImage);
+                    if(imageView != null && imageView.getDrawable() != null && img_bg != null){
+                        img_bg.setBackground(imageView.getDrawable());
+                    }
+                }
+            });
+        }else {
+            img_bg.setBackground(res.getDrawable(R.drawable.bg_one));
+        }
     }
     boolean isMobileNet, isWifiNet;
     private String typeCover;
@@ -427,9 +430,9 @@ public class FiveFragment extends BaseFragment implements View.OnClickListener {
                     uploadCover();
                 }
                 if("0".equals(typeCover)){
-//                    view.findViewById(R.id.scorv).setBackground(drawable);
-//                    //上传图片到七牛
-//                    uploadCover();
+                    img_bg.setBackground(drawable);
+                    //上传图片到七牛
+                    uploadCover();
                 }
             }
         }
