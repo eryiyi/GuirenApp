@@ -16,7 +16,7 @@
                 android:padding="8dip"
                 android:id="@+id/title"
                 android:layout_centerInParent="true"
-                android:text="电影推荐"
+                android:text="贵人影院"
                 android:textColor="@color/white"
                 android:textSize="18sp"/>
 

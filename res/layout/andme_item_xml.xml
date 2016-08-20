@@ -8,11 +8,10 @@
     <ImageView
             android:layout_width="45dp"
             android:id="@+id/andme_item_cover"
-            android:src="@drawable/default_avatar"
+            android:src="@drawable/ic_launcher"
             android:layout_height="45dp"/>
     <TextView android:layout_width="wrap_content"
               android:textSize="18sp"
-              android:text="昵称"
               android:id="@+id/andme_item_nickname"
               android:layout_marginLeft="8dp"
               android:layout_marginTop="8dp"
@@ -27,7 +26,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:textSize="14sp"
-            android:text="nininini你"
             android:textColor="@color/textColor"
             android:layout_marginLeft="5dp"
             android:ellipsize="end"
@@ -38,7 +36,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="12sp"
-            android:text="shijian"
             android:layout_marginTop="12dp"
             android:gravity="right"
             android:layout_alignParentRight="true"

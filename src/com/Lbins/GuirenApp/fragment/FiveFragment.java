@@ -203,19 +203,19 @@ public class FiveFragment extends BaseFragment implements View.OnClickListener {
 
 
         final ImageView imageView = new ImageView(getActivity());
-        if(!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("mm_emp_bg", ""), String.class))){
-            imageLoader.displayImage(getGson().fromJson(getSp().getString("mm_emp_bg", ""), String.class), imageView, GuirenApplication.options, new AnimateFirstDisplayListener(){
-                @Override
-                public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
-                    super.onLoadingComplete(imageUri, view, loadedImage);
-                    if(imageView != null ){
-                        view.findViewById(R.id.scorv).setBackground(imageView.getDrawable());
-                    }
-                }
-            });
-        }else {
-            view.findViewById(R.id.scorv).setBackground(res.getDrawable(R.drawable.bg_one));
-        }
+//        if(!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("mm_emp_bg", ""), String.class))){
+//            imageLoader.displayImage(getGson().fromJson(getSp().getString("mm_emp_bg", ""), String.class), imageView, GuirenApplication.options, new AnimateFirstDisplayListener(){
+//                @Override
+//                public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
+//                    super.onLoadingComplete(imageUri, view, loadedImage);
+//                    if(imageView != null ){
+//                        view.findViewById(R.id.scorv).setBackground(imageView.getDrawable());
+//                    }
+//                }
+//            });
+//        }else {
+//            view.findViewById(R.id.scorv).setBackground(res.getDrawable(R.drawable.bg_one));
+//        }
     }
     boolean isMobileNet, isWifiNet;
     private String typeCover;
@@ -401,9 +401,9 @@ public class FiveFragment extends BaseFragment implements View.OnClickListener {
         Intent intent = new Intent("com.android.camera.action.CROP");
         intent.setDataAndType(uri, "image/*");
         intent.putExtra("crop", "true");
-        intent.putExtra("aspectX", 1);
-        intent.putExtra("aspectY", 2);
-        intent.putExtra("outputX", 150);
+        intent.putExtra("aspectX", 2);
+        intent.putExtra("aspectY", 3);
+        intent.putExtra("outputX", 200);
         intent.putExtra("outputY", 300);
         intent.putExtra("return-data", true);
         startActivityForResult(intent, 3);
@@ -427,9 +427,9 @@ public class FiveFragment extends BaseFragment implements View.OnClickListener {
                     uploadCover();
                 }
                 if("0".equals(typeCover)){
-                    view.findViewById(R.id.scorv).setBackground(drawable);
-                    //上传图片到七牛
-                    uploadCover();
+//                    view.findViewById(R.id.scorv).setBackground(drawable);
+//                    //上传图片到七牛
+//                    uploadCover();
                 }
             }
         }

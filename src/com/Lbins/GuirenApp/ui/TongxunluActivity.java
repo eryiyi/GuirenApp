@@ -221,7 +221,7 @@ public class TongxunluActivity extends BaseActivity implements View.OnClickListe
                 }
             }
 
-            viewHolder.ivAvatar.setImageResource(R.drawable.default_avatar);
+            viewHolder.ivAvatar.setImageResource(R.drawable.ic_launcher);
             viewHolder.tvNick.setText(nickName);
             return convertView;
         }

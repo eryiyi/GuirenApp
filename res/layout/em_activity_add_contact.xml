@@ -67,7 +67,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="11dp"
                 android:scaleType="fitXY"
-                android:src="@drawable/em_default_avatar" />
+                android:src="@drawable/em_ic_launcher" />
 
             <TextView
                 android:id="@+id/name"

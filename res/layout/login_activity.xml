@@ -9,7 +9,7 @@
                android:id="@+id/head"
                android:layout_marginTop="25dp"
                android:layout_centerHorizontal="true"
-               android:src="@drawable/default_avatar"
+               android:src="@drawable/ic_launcher"
                android:layout_height="100dp"/>
 
     <EditText android:layout_width="match_parent"

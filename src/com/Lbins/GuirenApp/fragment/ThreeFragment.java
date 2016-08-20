@@ -512,10 +512,12 @@ public class ThreeFragment extends BaseFragment implements View.OnClickListener 
             switch (flag) {
                 case 0:
                     AdObj adObj = listsAd.get(position);
-                    Intent webV = new Intent(getActivity(), WebViewActivity.class);
-                    webV.putExtra("strurl", adObj.getMm_ad_url() == null ? "" : adObj.getMm_ad_url());
-                    webV.putExtra("strname", "贵人");
-                    startActivity(webV);
+                    if(!StringUtil.isNullOrEmpty(adObj.getMm_ad_url())){
+                        Intent webV = new Intent(getActivity(), WebViewActivity.class);
+                        webV.putExtra("strurl", adObj.getMm_ad_url());
+                        webV.putExtra("strname", "贵人");
+                        startActivity(webV);
+                    }
                     break;
             }
         }

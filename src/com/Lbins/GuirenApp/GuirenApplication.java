@@ -167,9 +167,9 @@ public class GuirenApplication extends Application  {
                 .build();                                       // 创建配置过得DisplayImageOption对象
 
         txOptions = new DisplayImageOptions.Builder()//头像
-                .showImageOnLoading(R.drawable.default_avatar)
-                .showImageForEmptyUri(R.drawable.default_avatar)    // 设置图片Uri为空或是错误的时候显示的图片
-                .showImageOnFail(R.drawable.default_avatar)        // 设置图片加载或解码过程中发生错误显示的图片
+                .showImageOnLoading(R.drawable.ic_launcher)
+                .showImageForEmptyUri(R.drawable.ic_launcher)    // 设置图片Uri为空或是错误的时候显示的图片
+                .showImageOnFail(R.drawable.ic_launcher)        // 设置图片加载或解码过程中发生错误显示的图片
                 .cacheInMemory(true)                           // 设置下载的图片是否缓存在内存中
                 .cacheOnDisc(true)                             // 设置下载的图片是否缓存在内存卡中
                 .imageScaleType(ImageScaleType.EXACTLY)

@@ -122,9 +122,9 @@ public class UserProfileActivity extends BaseActivity implements OnClickListener
 				    }
 					tvNickName.setText(user.getNick());
 					if(!TextUtils.isEmpty(user.getAvatar())){
-						 Glide.with(UserProfileActivity.this).load(user.getAvatar()).placeholder(R.drawable.em_default_avatar).into(headAvatar);
+						 Glide.with(UserProfileActivity.this).load(user.getAvatar()).placeholder(R.drawable.em_ic_launcher).into(headAvatar);
 					}else{
-					    Glide.with(UserProfileActivity.this).load(R.drawable.em_default_avatar).into(headAvatar);
+					    Glide.with(UserProfileActivity.this).load(R.drawable.em_ic_launcher).into(headAvatar);
 					}
 				}
 			}

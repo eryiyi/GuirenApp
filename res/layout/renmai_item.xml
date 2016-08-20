@@ -6,7 +6,7 @@
 
     <ImageView
             android:layout_width="65dp"
-            android:src="@drawable/default_avatar"
+            android:src="@drawable/ic_launcher"
             android:scaleType="fitXY"
             android:id="@+id/home_viewed_item_cover"
             android:layout_height="65dp"/>
@@ -23,12 +23,11 @@
             android:layout_toRightOf="@+id/home_viewed_item_cover"
             android:singleLine="true"
             android:ellipsize="end"
-            android:text="令狐冲"/>
+            />
 
     <TextView
             android:id="@+id/home_viewed_item_time"
             android:layout_width="wrap_content"
-            android:text="查看人脉"
             android:visibility="gone"
             android:padding="6dp"
             android:background="@color/mm_top_bg"
@@ -52,14 +51,12 @@
             android:layout_marginLeft="8dp"
             android:layout_below="@+id/home_viewed_item_name"
             android:textColor="@color/textColor"
-            android:text="滨州学院"
             android:drawablePadding="8dip"/>
 
     <TextView android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:layout_marginLeft="8dp"
               android:layout_toRightOf="@+id/home_viewed_item_cover"
-              android:text="hagnyhe"
               android:layout_marginTop="1dp"
               android:id="@+id/home_viewed_item_cont"
               android:textSize="13dp"

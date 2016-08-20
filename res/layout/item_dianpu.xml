@@ -15,7 +15,6 @@
               android:singleLine="true"
               android:layout_marginTop="5dp"
               android:layout_marginRight="50dp"
-              android:text="名名称名称名称名称名称名称名称名称名称名称名称名称名称名称名称称"
               android:textColor="@color/red"
               android:textSize="16sp"
               android:layout_marginLeft="6dp"
@@ -30,13 +29,12 @@
                     android:layout_below="@+id/item_title"
                     android:layout_height="wrap_content">
         <com.Lbins.GuirenApp.widget.CircleImageView
-                android:src="@drawable/default_avatar"
+                android:src="@drawable/ic_launcher"
                 android:layout_width="30dp"
                 android:id="@+id/head"
                 android:layout_height="30dp"/>
         <TextView android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  android:text="掌柜的"
                   android:layout_toRightOf="@+id/head"
                   android:gravity="center_vertical"
                   android:layout_marginTop="5dp"
@@ -62,7 +60,6 @@
                   android:textSize="16sp"
                   android:id="@+id/item_address"/>
         <TextView android:layout_width="wrap_content"
-                  android:text="120"
                    android:layout_height="wrap_content"
                    android:layout_marginRight="3dp"
                    android:textSize="14sp"

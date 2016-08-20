@@ -23,12 +23,10 @@
                           android:gravity="center_vertical"
                           android:textSize="15sp"
                           android:layout_marginLeft="8dp"
-                          android:text="111111"
                           android:textColor="@color/textColor"
                           android:id="@+id/comment_nickname"/>
 
                 <TextView android:layout_width="wrap_content"
-                          android:text="1#"
                           android:textSize="14sp"
                           android:gravity="center_vertical"
                           android:layout_alignParentRight="true"
@@ -42,12 +40,10 @@
                       android:layout_toRightOf="@+id/comment_photo"
                       android:layout_below="@+id/liner_one"
                       android:layout_marginLeft="8dp"
-                      android:text="22222"
                       android:id="@+id/comment_time"/>
 
             <TextView android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
-                      android:text="评论人"
                       android:layout_toRightOf="@+id/comment_photo"
                       android:layout_marginLeft="8dp"
                       android:layout_below="@+id/comment_photo"
@@ -59,7 +55,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/comment_f_nickname"
-                    android:text="sdfdasf"
                     android:layout_toRightOf="@+id/comment_photo"
                     android:textSize="14dp"
                     android:layout_marginLeft="8dp"

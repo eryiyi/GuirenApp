@@ -22,7 +22,6 @@
                     android:paddingRight="10dp"
                     android:paddingBottom="8dp"
                     android:paddingTop="10dp"
-                    android:text="biaoti"
                     android:id="@+id/item_title"
                     android:textColor="@color/textColor"
                     android:textSize="16dp"/>
@@ -59,7 +58,6 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:layout_marginRight="5dp"
-                        android:text="23 点赞"
                         android:textColor="@color/light_gray"
                         android:textSize="13sp"/>
 
@@ -75,7 +73,6 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
                         android:layout_toRightOf="@+id/dot2"
-                        android:text="7 评论"
                         android:id="@+id/item_comment"
                         android:textColor="@color/light_gray"
                         android:textSize="13sp"/>
@@ -84,7 +81,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
-                        android:text="12月12日"
                         android:id="@+id/item_dateline"
                         android:textColor="@color/light_gray"
                         android:textSize="13sp"/>

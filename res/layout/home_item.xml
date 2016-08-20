@@ -8,7 +8,7 @@
             android:layout_width="50dp"
             android:layout_marginLeft="12dp"
             android:layout_marginTop="10dp"
-            android:src="@drawable/default_avatar"
+            android:src="@drawable/ic_launcher"
             android:id="@+id/home_viewed_item_cover"
             android:layout_height="50dp"/>
 
@@ -21,7 +21,7 @@
             android:layout_marginTop="15dp"
             android:layout_marginLeft="8dp"
             android:layout_toRightOf="@+id/home_viewed_item_cover"
-            android:text="令狐冲"/>
+            />
     <TextView
             android:id="@+id/item_sign"
             android:layout_width="wrap_content"
@@ -32,7 +32,7 @@
             android:layout_below="@+id/home_viewed_item_name"
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@+id/home_viewed_item_cover"
-            android:text="签名"/>
+            />
 
 
     <TextView
@@ -55,7 +55,6 @@
         <TextView android:layout_width="match_parent"
                   android:layout_height="wrap_content"
                   android:layout_marginLeft="8dp"
-                  android:text="内容内容内容内容内容内容内容内容内容内容内容内容内容内容"
                   android:id="@+id/home_viewed_item_cont"
                   android:textSize="15dp"
                   android:layout_marginTop="8dp"
@@ -68,7 +67,7 @@
 
         <RelativeLayout android:layout_width="match_parent"
                         android:id="@+id/img_relate"
-                        android:layout_marginTop="3dp"
+                        android:paddingTop="12dp"
                         android:descendantFocusability="blocksDescendants"
                         android:layout_below="@+id/home_viewed_item_cont"
                         android:layout_height="wrap_content">
@@ -122,7 +121,6 @@
     <TextView
             android:id="@+id/home_viewed_item_time"
             android:layout_width="75dp"
-            android:text="20天之前"
             android:layout_marginLeft="8dp"
             android:drawablePadding="6dp"
             android:gravity="center|left"
@@ -165,7 +163,6 @@
             android:padding="5dp"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
-            android:text="5"
             android:layout_marginRight="8dp"
             android:textSize="14sp"
             android:ellipsize="end"
@@ -184,7 +181,6 @@
             android:layout_marginTop="3dp"
             android:layout_marginBottom="3dp"
             android:padding="5dp"
-            android:text="6"
             android:textSize="14sp"
             android:ellipsize="end"
             android:gravity="center|left"/>

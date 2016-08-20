@@ -608,7 +608,7 @@ public class GroupDetailsActivity extends BaseActivity implements OnClickListene
 				final String username = getItem(position);
 				convertView.setVisibility(View.VISIBLE);
 				button.setVisibility(View.VISIBLE);
-//				Drawable avatar = getResources().getDrawable(R.drawable.default_avatar);
+//				Drawable avatar = getResources().getDrawable(R.drawable.ic_launcher);
 //				avatar.setBounds(0, 0, referenceWidth, referenceHeight);
 //				button.setCompoundDrawables(null, avatar, null, null);
 				EaseUserUtils.setUserNick(username, holder.textView);

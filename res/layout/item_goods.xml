@@ -13,7 +13,6 @@
     <TextView android:layout_width="wrap_content"
               android:lineSpacingMultiplier="1.2"
               android:layout_height="wrap_content"
-              android:text="名名称名称名称名称名称名称名称名称名称名称名称名称名称名称名称称"
               android:padding="8dp"
               android:textColor="@color/textColor"
               android:textSize="16sp"
@@ -21,7 +20,6 @@
               android:id="@+id/item_title"/>
     <TextView android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:text="张三的歌"
               android:textColor="@color/textColor"
               android:layout_toRightOf="@+id/item_cover"
               android:layout_below="@+id/item_title"
@@ -31,7 +29,6 @@
               android:id="@+id/item_nickname"/>
     <TextView android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:text="直营"
               android:visibility="gone"
               android:textColor="@color/blue"
               android:layout_alignParentRight="true"
@@ -42,7 +39,6 @@
               android:id="@+id/item_zhiying"/>
     <TextView android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:text="@string/goods_prices"
               android:layout_marginLeft="8dp"
               android:textColor="#f00f00"
               android:layout_toRightOf="@+id/item_cover"
@@ -55,7 +51,6 @@
               android:id="@+id/item_sellPrice"/>
     <TextView android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:text="@string/goods_prices"
               android:layout_marginLeft="8dp"
               android:layout_toRightOf="@+id/item_sellPrice"
               android:textColor="#f00f00"
