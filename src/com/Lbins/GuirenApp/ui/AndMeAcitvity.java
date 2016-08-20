@@ -120,6 +120,11 @@ public class AndMeAcitvity extends BaseActivity implements View.OnClickListener 
                     intent.putExtra("relate", relate);
                     startActivity(intent);
                 }
+                if(relate.getTypeId().equals("7")) {
+                    Intent intent = new Intent(AndMeAcitvity.this, ProfileActivity.class);
+                    intent.putExtra("mm_emp_id", relate.getEmpId());
+                    startActivity(intent);
+                }
 
 //                if (relate.getTypeId().equals("1")) {
 //                    //查询商品
