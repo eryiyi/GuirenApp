@@ -71,6 +71,7 @@ public class Constants {
 
     //notice
     public static final String NOTICEUUID = "noticeid";
+    public static final String NOTICE = "notice";
 
     //兼职
     public static final String PART_INFO = "part_info";

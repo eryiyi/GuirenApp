@@ -102,6 +102,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener ,
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mainActivity =this;
+        registerBoradcastReceiver();
 //        String[] mPermissionList = new String[]{Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.CALL_PHONE,Manifest.permission.READ_LOGS,Manifest.permission.READ_PHONE_STATE, Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.SET_DEBUG_APP,Manifest.permission.SYSTEM_ALERT_WINDOW,Manifest.permission.GET_ACCOUNTS};
 //        ActivityCompat.requestPermissions(MainActivity.this,mPermissionList, 100);
 

@@ -263,9 +263,9 @@ public class WelcomeActivity extends BaseActivity implements Runnable ,AMapLocat
             //进行绑定
             PushManager.startWork(getApplicationContext(),
                     PushConstants.LOGIN_TYPE_API_KEY,
-                    com.Lbins.GuirenApp.baidu.Utils.getMetaValue(WelcomeActivity.this, "push_api_key"));
+                    com.Lbins.GuirenApp.baidu.Utils.getMetaValue(WelcomeActivity.this, "api_key"));
 //        } else {
-            //如果已经绑定，就保存
+//            //如果已经绑定，就保存
 //            save("userId", emp.getUserId());
 //        }
 

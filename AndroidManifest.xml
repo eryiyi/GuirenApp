@@ -78,6 +78,12 @@
     <!-- QQ、QQ空间所需权限 -->
     <uses-permission android:name="android.permission.USE_CREDENTIALS" />
 
+    <!-- Push service 运行需要的权限 -->
+    <!-- 富媒体需要声明的权限 -->
+    <uses-permission android:name="android.permission.ACCESS_DOWNLOAD_MANAGER"/>
+    <uses-permission android:name="android.permission.DOWNLOAD_WITHOUT_NOTIFICATION" />
+    <uses-permission android:name="android.permission.EXPAND_STATUS_BAR" />
+
     <permission
             android:name="com.Lbins.GuirenApp.permission.MIPUSH_RECEIVE"
             android:protectionLevel="signature" />
@@ -101,9 +107,6 @@
         <meta-data
                 android:name="DEBUG_LOG"
                 android:value="false" />
-        <!--<meta-data-->
-                <!--android:name="com.baidu.lbsapi.API_KEY"-->
-                <!--android:value="MzfTXxTwEsjui8n2EHmSCq57" />-->
 
         <activity android:name=".ui.WelcomeActivity"
                   android:screenOrientation="portrait"
@@ -196,6 +199,8 @@
         <activity android:name=".ui.VideosActivity" android:screenOrientation="portrait" android:theme="@style/AppTheme" android:windowSoftInputMode="adjustResize|stateHidden"/>
         <activity android:name=".ui.DetailVideosActivity" android:screenOrientation="portrait" android:theme="@style/AppTheme" android:windowSoftInputMode="adjustResize|stateHidden"/>
         <activity android:name=".ui.PublishVideoCommentAcitvity" android:screenOrientation="portrait" android:theme="@style/AppTheme" android:windowSoftInputMode="adjustResize|stateHidden"/>
+        <activity android:name=".ui.NoticeActivity" android:screenOrientation="portrait" android:theme="@style/AppTheme" android:windowSoftInputMode="adjustResize|stateHidden"/>
+        <activity android:name=".ui.NoticeDetailActivity" android:screenOrientation="portrait" android:theme="@style/AppTheme" android:windowSoftInputMode="adjustResize|stateHidden"/>
 
 
         <!--// *****************************高德地图sdk*******************************************-->
@@ -562,9 +567,9 @@
                 android:value="571c65c467e58e5fa7002aa7" >
         </meta-data>
         <meta-data android:value="hyphenate" android:name="UMENG_CHANNEL"/>
-        <meta-data
-                android:name="com.baidu.lbsapi.API_KEY"
-                android:value="3ecea51f560650b1ed8a4b99808f52e8" />
+        <!--<meta-data-->
+                <!--android:name="com.baidu.lbsapi.API_KEY"-->
+                <!--android:value="3ecea51f560650b1ed8a4b99808f52e8" />-->
 
         <activity
                 android:name="com.mob.tools.MobUIShell"
@@ -573,59 +578,12 @@
                 android:windowSoftInputMode="stateHidden|adjustResize"
                 />
 
-        <!-- 在百度开发者中心查询应用的API Key -->
-        <meta-data android:name="push_api_key" android:value="UT5s48GsO3ndHecBTyiaQoSn"/>
-
-        <!-- push应用定义消息receiver声明 -->
-        <receiver android:name="com.Lbins.GuirenApp.receiver.MyPushMessageReceiver">
-            <intent-filter>
-                <!-- 接收push消息 -->
-                <action android:name="com.baidu.android.pushservice.action.MESSAGE"/>
-                <!-- 接收bind,unbind,fetch,delete等反馈消息 -->
-                <action android:name="com.baidu.android.pushservice.action.RECEIVE"/>
-                <action android:name="com.baidu.android.pushservice.action.notification.CLICK"/>
-            </intent-filter>
-        </receiver>
-
-        <!-- push service start -->
-        <!-- 用于接收系统消息以保证PushService正常运行 -->
-        <receiver android:name="com.baidu.android.pushservice.PushServiceReceiver"
-                  android:process=":bdservice_v1" >
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
-                <action android:name="com.baidu.android.pushservice.action.notification.SHOW" />
-                <action android:name="com.baidu.android.pushservice.action.media.CLICK" />
-                <!-- 以下四项为可选的action声明，可大大提高service存活率和消息到达速度 -->
-                <action android:name="android.intent.action.MEDIA_MOUNTED" />
-                <action android:name="android.intent.action.USER_PRESENT" />
-                <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
-                <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
-            </intent-filter>
-        </receiver>
-        <!-- Push服务接收客户端发送的各种请求-->
-        <receiver android:name="com.baidu.android.pushservice.RegistrationReceiver"
-                  android:process=":bdservice_v1" >
-            <intent-filter>
-                <action android:name="com.baidu.android.pushservice.action.METHOD" />
-                <action android:name="com.baidu.android.pushservice.action.BIND_SYNC" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.PACKAGE_REMOVED" />
-                <data android:scheme="package" />
-            </intent-filter>
-        </receiver>
-        <service android:name="com.baidu.android.pushservice.PushService" android:exported="true"
-                 android:process=":bdservice_v1" >
-            <intent-filter >
-                <action android:name="com.baidu.android.pushservice.action.PUSH_SERVICE" />
-            </intent-filter>
-        </service>
-        <!-- 4.4版本新增的CommandService声明，提升小米和魅族手机上的实际推送到达率 -->
-        <service android:name="com.baidu.android.pushservice.CommandService"
-                 android:exported="true" />
-        <!-- push结束 -->
-
+        <!-- 适配Android N系统必需的ContentProvider写权限声明，写权限包含应用包名-->
+        <uses-permission android:name="baidu.push.permission.WRITE_PUSHINFOPROVIDER.com.Lbins.GuirenApp" />
+        <permission
+                android:name="baidu.push.permission.WRITE_PUSHINFOPROVIDER.com.Lbins.GuirenApp"
+                android:protectionLevel="normal">
+        </permission>
 
 
         <!-- QQ、QQ空间所需权限 -->
@@ -670,91 +628,73 @@
                 android:exported="true"
                 android:screenOrientation="portrait" />
 
-        <!--小米推送-->
 
 
-        <!-- 开机自启动服务 -->
-        <receiver android:name="com.Lbins.GuirenApp.receiver.StartServiceReceiver" >
-            <intent-filter android:priority="1000" >
+        <!--百度地图-->
+        <!-- push应用定义消息receiver声明 -->
+        <receiver android:name="com.Lbins.GuirenApp.receiver.MyPushMessageReceiver" >
+            <intent-filter>
+                <!-- 接收push消息 -->
+                <action android:name="com.baidu.android.pushservice.action.MESSAGE" />
+                <!-- 接收bind,unbind,fetch,delete等反馈消息 -->
+                <action android:name="com.baidu.android.pushservice.action.RECEIVE" />
+                <action android:name="com.baidu.android.pushservice.action.notification.CLICK" />
+            </intent-filter>
+        </receiver>
+
+        <!-- push必须的receviver和service声明 -->
+        <receiver
+                android:name="com.baidu.android.pushservice.PushServiceReceiver"
+                android:process=":bdservice_v1" >
+            <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
-                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+                <action android:name="com.baidu.android.pushservice.action.notification.SHOW" />
+                <action android:name="com.baidu.android.pushservice.action.media.CLICK" />
+                <!-- 以下四项为可选的action声明，可大大提高service存活率和消息到达速度 -->
+                <action android:name="android.intent.action.MEDIA_MOUNTED" />
+                <action android:name="android.intent.action.USER_PRESENT" />
+                <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
+                <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
+            </intent-filter>
+        </receiver>
+        <receiver
+                android:name="com.baidu.android.pushservice.RegistrationReceiver"
+                android:process=":bdservice_v1" >
+            <intent-filter>
+                <action android:name="com.baidu.android.pushservice.action.METHOD" />
+                <action android:name="com.baidu.android.pushservice.action.BIND_SYNC" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_REMOVED" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <data android:scheme="com.Lbins.GuirenApp" />
             </intent-filter>
         </receiver>
 
-        <!-- gcm start -->
-        <receiver
-                android:name="com.hyphenate.chat.EMGCMBroadcastReceiver"
+
+        <service
+                android:name="com.baidu.android.pushservice.PushService"
                 android:exported="true"
-                android:permission="com.google.android.c2dm.permission.SEND" >
+                android:process=":bdservice_v1" >
             <intent-filter>
-                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-                <category android:name="com.Lbins.GuirenApp" />
+                <action android:name="com.baidu.android.pushservice.action.PUSH_SERVICE" />
             </intent-filter>
-        </receiver>
-
-        <service android:name="com.hyphenate.chat.EMGCMListenerService"
-                 android:exported="false" >
         </service>
-
-        <!-- gcm end -->
-
-        <!-- mi push -->
         <service
-                android:name="com.xiaomi.mipush.sdk.PushMessageHandler"
-                android:enabled="true"
+                android:name="com.baidu.android.pushservice.CommandService"
                 android:exported="true" />
-        <service
-                android:name="com.xiaomi.mipush.sdk.MessageHandleService"
-                android:enabled="true" />
 
-        <receiver
-                android:name="com.hyphenate.chat.EMMipushReceiver"
-                android:exported="true" >
-            <intent-filter>
-                <action android:name="com.xiaomi.mipush.RECEIVE_MESSAGE" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="com.xiaomi.mipush.MESSAGE_ARRIVED" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="com.xiaomi.mipush.ERROR" />
-            </intent-filter>
-        </receiver>
-        <!-- mi push end -->
+        <!-- 适配Android N系统必需的ContentProvider声明，写权限包含应用包名-->
+        <provider
+                android:name="com.baidu.android.pushservice.PushInfoProvider"
+                android:authorities="com.Lbins.GuirenApp.bdpush"
+                android:writePermission="baidu.push.permission.WRITE_PUSHINFOPROVIDER.com.baidu.push.example"
+                android:exported="true" />
 
-        <!-- huawei push 第三方相关 :接收Push消息（注册、Push消息、Push连接状态、标签，LBS上报结果）广播  -->
-        <receiver android:name="com.hyphenate.chat.EMHuaweiPushReceiver" >
-            <intent-filter>
-                <!-- 必须,用于接收token -->
-                <action android:name="com.huawei.android.push.intent.REGISTRATION" />
-                <!-- 必须，用于接收消息 -->
-                <action android:name="com.huawei.android.push.intent.RECEIVE" />
-            </intent-filter>
-            />
-            <meta-data android:name="CS_cloud_ablitity" android:value="successRateAnalytics"/>
-        </receiver>
-
-        <!-- PushSDK:PushSDK接收外部请求事件入口-->
-        <receiver
-                android:name="com.huawei.android.pushagent.PushEventReceiver"
-                android:process=":pushservice" >
-            <intent-filter>
-                <action android:name="com.huawei.android.push.intent.REFRESH_PUSH_CHANNEL" />
-                <action android:name="com.huawei.intent.action.PUSH" />
-                <action android:name="com.huawei.intent.action.PUSH_ON" />
-                <action android:name="com.huawei.android.push.PLUGIN" />
-            </intent-filter>
-        </receiver>
-
-        <!-- PushSDK:Push服务-->
-        <service
-                android:name="com.huawei.android.pushagent.PushService"
-                android:process=":pushservice" >
-        </service>
-
-        <!-- huawei push end -->
-
+        <!-- 在百度开发者中心查询应用的API Key -->
+        <meta-data
+                android:name="api_key"
+                android:value="UT5s48GsO3ndHecBTyiaQoSn" />
     </application>
 </manifest>

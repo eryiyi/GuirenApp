@@ -20,5 +20,6 @@
     <orderEntry type="library" name="open_sdk_r5756" level="project" />
     <orderEntry type="library" name="SocialSDK_WeiXin_1" level="project" />
     <orderEntry type="library" name="httpmime-4.3.5" level="project" />
+    <orderEntry type="library" name="pushservice-5.1.0.48" level="project" />
   </component>
 </module>

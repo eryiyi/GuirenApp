@@ -207,9 +207,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             //进行绑定
             PushManager.startWork(getApplicationContext(),
                     PushConstants.LOGIN_TYPE_API_KEY,
-                    Utils.getMetaValue(LoginActivity.this, "push_api_key"));
+                    Utils.getMetaValue(LoginActivity.this, "api_key"));
 //        } else {
-            //如果已经绑定，就保存
+////            如果已经绑定，就保存
 //            save("userId", emp.getUserId());
 //        }
 

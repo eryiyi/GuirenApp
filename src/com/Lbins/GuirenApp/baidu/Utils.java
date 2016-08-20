@@ -13,8 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Utils {
-    public static final String API_KEY = "py440oPABt8q01nVMRfbMZkq";
-    public static final String SECRET_KEY = "ZHLqAqchldIpI4BlEMQRNmbUOeo5Dqd8";
+    public static final String API_KEY = "UT5s48GsO3ndHecBTyiaQoSn";
+    public static final String SECRET_KEY = "YwPSU7YEftS23np6x3CsRMm5vOImb5uj ";
 
     public static final String TAG = "PushDemoActivity";
     public static final String RESPONSE_METHOD = "method";

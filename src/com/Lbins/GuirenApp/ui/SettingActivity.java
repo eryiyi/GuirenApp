@@ -55,6 +55,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
         this.findViewById(R.id.liner_chat).setOnClickListener(this);
         this.findViewById(R.id.liner_help).setOnClickListener(this);
         this.findViewById(R.id.liner_version).setOnClickListener(this);
+        this.findViewById(R.id.liner_notice).setOnClickListener(this);
 
         check_version = (TextView) this.findViewById(R.id.check_version);
         check_version.setText(getVersion());
@@ -132,6 +133,12 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
                 progressDialog.setIndeterminate(true);
                 progressDialog.show();
                 initData();
+            }
+                break;
+            case R.id.liner_notice:
+            {
+                Intent intent = new Intent(SettingActivity.this, NoticeActivity.class);
+                startActivity(intent);
             }
                 break;
         }
