@@ -42,6 +42,10 @@ public class DaoSession extends AbstractDaoSession {
 
     private final AdObjDao adObjDao;
 
+    private final DaoConfig minePicObjDaoConfig;
+
+    private final MinePicObjDao minePicObjDao;
+
     public DaoSession(SQLiteDatabase db, IdentityScopeType type, Map<Class<? extends AbstractDao<?, ?>>, DaoConfig>
             daoConfigMap) {
         super(db);
@@ -88,6 +92,13 @@ public class DaoSession extends AbstractDaoSession {
         adObjDao = new AdObjDao(adObjDaoConfig, this);
 
         registerDao(AdObj.class, adObjDao);
+
+        minePicObjDaoConfig = daoConfigMap.get(MinePicObjDao.class).clone();
+        minePicObjDaoConfig.initIdentityScope(type);
+
+        minePicObjDao = new MinePicObjDao(minePicObjDaoConfig, this);
+
+        registerDao(MinePicObj.class, minePicObjDao);
     }
     
     public void clear() {
@@ -99,6 +110,7 @@ public class DaoSession extends AbstractDaoSession {
         empDianpuDaoConfig.getIdentityScope().clear();
         managerInfoDaoConfig.getIdentityScope().clear();
         adObjDaoConfig.getIdentityScope().clear();
+        minePicObjDaoConfig.getIdentityScope().clear();
     }
 
     public EmpDao getEmpDao() {
@@ -129,5 +141,8 @@ public class DaoSession extends AbstractDaoSession {
         return adObjDao;
     }
 
+    public MinePicObjDao getMinePicObjDao() {
+        return minePicObjDao;
+    }
 
 }

@@ -6,7 +6,9 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -16,24 +18,26 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.*;
 import com.Lbins.GuirenApp.GuirenApplication;
 import com.Lbins.GuirenApp.R;
 import com.Lbins.GuirenApp.adapter.AnimateFirstDisplayListener;
+import com.Lbins.GuirenApp.adapter.ItemPicAdapter;
 import com.Lbins.GuirenApp.base.BaseFragment;
 import com.Lbins.GuirenApp.base.InternetURL;
+import com.Lbins.GuirenApp.dao.DBHelper;
+import com.Lbins.GuirenApp.data.MinePicObjData;
+import com.Lbins.GuirenApp.data.XixunObjData;
+import com.Lbins.GuirenApp.module.MinePicObj;
+import com.Lbins.GuirenApp.module.XixunObj;
 import com.Lbins.GuirenApp.ui.*;
 import com.Lbins.GuirenApp.util.CompressPhotoUtil;
+import com.Lbins.GuirenApp.util.Constants;
 import com.Lbins.GuirenApp.util.GuirenHttpUtils;
 import com.Lbins.GuirenApp.util.StringUtil;
+import com.Lbins.GuirenApp.widget.PictureGridview;
 import com.Lbins.GuirenApp.widget.SelectPhoPopWindow;
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
+import com.android.volley.*;
 import com.android.volley.toolbox.StringRequest;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -48,7 +52,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -87,6 +93,10 @@ public class FiveFragment extends BaseFragment implements View.OnClickListener {
 
     private LinearLayout img_bg;//背景图
 
+    private PictureGridview gridView;
+    private List<MinePicObj> picLists = new ArrayList<MinePicObj>();
+    private ItemPicAdapter adapterGrid;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -124,7 +134,51 @@ public class FiveFragment extends BaseFragment implements View.OnClickListener {
 
         head.setOnClickListener(this);
         nickname.setOnClickListener(this);
+
+        gridView = (PictureGridview) view.findViewById(R.id.gridview);
+        adapterGrid = new ItemPicAdapter(picLists, getActivity());
+        gridView.setAdapter(adapterGrid);
+        gridView.setSelector(new ColorDrawable(Color.TRANSPARENT));
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //判断是否有网
+                try {
+                    isMobileNet = GuirenHttpUtils.isMobileDataEnable(getActivity());
+                    isWifiNet = GuirenHttpUtils.isWifiDataEnable(getActivity());
+                    if (!isMobileNet && !isWifiNet) {
+                        Toast.makeText(getActivity(), "请检查网络链接", Toast.LENGTH_SHORT).show();
+                    }else {
+                        Intent intent = new Intent(getActivity(), MinePhotoActivity.class);
+                        intent.putExtra("mm_emp_id", getGson().fromJson(getSp().getString("mm_emp_id", ""), String.class));
+                        startActivity(intent);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
         initDataMine();
+        //判断是否有网
+        try {
+            isMobileNet = GuirenHttpUtils.isMobileDataEnable(getActivity());
+            isWifiNet = GuirenHttpUtils.isWifiDataEnable(getActivity());
+            if (!isMobileNet && !isWifiNet) {
+                if(!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("mm_emp_id", ""), String.class))){
+                    List<MinePicObj> minePicObjs = DBHelper.getInstance(getActivity()).getPicsListByEmpId(getGson().fromJson(getSp().getString("mm_emp_id", ""), String.class));
+                    if(minePicObjs != null){
+                        picLists.clear();
+                        picLists.addAll(minePicObjs);
+                        adapterGrid.notifyDataSetChanged();
+                    }
+                }
+            }else {
+                getPics();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         return view;
     }
@@ -565,5 +619,72 @@ public class FiveFragment extends BaseFragment implements View.OnClickListener {
        getActivity(). unregisterReceiver(mBroadcastReceiver);
     }
 
+    //获得会员相册图片
+    private void getPics() {
+        StringRequest request = new StringRequest(
+                Request.Method.POST,
+                InternetURL.RECORD_PICS_URL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String s) {
+                        if (StringUtil.isJson(s)) {
+                            MinePicObjData data = getGson().fromJson(s, MinePicObjData.class);
+                            if (Integer.parseInt(data.getCode()) == 200) {
+                                picLists.clear();
+                                picLists.addAll(data.getData());
+                                adapterGrid.notifyDataSetChanged();
+                                //处理数据，需要的话保存到数据库
+                                if (data != null && data.getData() != null) {
+                                    DBHelper dbHelper = DBHelper.getInstance(getActivity());
+                                    for (MinePicObj minePicObj : data.getData()) {
+                                        if (dbHelper.getMinePicObjById(minePicObj.getPicStr()) != null) {
+                                            //已经存在了 不需要插入了
+                                        } else {
+                                            DBHelper.getInstance(getActivity()).saveMinePicObj(minePicObj);
+                                        }
+                                    }
+                                }
+                            } else {
+                                Toast.makeText(getActivity(), R.string.get_data_error, Toast.LENGTH_SHORT).show();
+                            }
+                        } else {
+                            Toast.makeText(getActivity(), R.string.get_data_error, Toast.LENGTH_SHORT).show();
+                        }
+                        if(progressDialog != null){
+                            progressDialog.dismiss();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        if(progressDialog != null){
+                            progressDialog.dismiss();
+                        }
+                        Toast.makeText(getActivity(), R.string.get_data_error, Toast.LENGTH_SHORT).show();
+                    }
+                }
+        ) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("page", "1");
+                params.put("mm_emp_id", getGson().fromJson(getSp().getString("mm_emp_id", ""), String.class));
+                params.put("mm_msg_type",  Constants.RECORD_TYPE);
+                return params;
+            }
 
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Content-Type", "application/x-www-form-urlencoded");
+                return params;
+            }
+        };
+
+        request.setRetryPolicy(new DefaultRetryPolicy(10000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        getRequestQueue().add(request);
+    }
 }

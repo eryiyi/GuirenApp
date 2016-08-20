@@ -32,9 +32,15 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.umeng.socialize.ShareAction;
+import com.umeng.socialize.UMShareAPI;
+import com.umeng.socialize.UMShareListener;
 import com.umeng.socialize.bean.RequestType;
+import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.media.UMImage;
 import com.umeng.socialize.media.UMVideo;
+import com.umeng.socialize.shareboard.SnsPlatform;
+import com.umeng.socialize.utils.ShareBoardlistener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -229,7 +235,7 @@ public class VideosActivity extends BaseActivity implements View.OnClickListener
             case 2:
                 //分享
             {
-                //todo
+                share();
             }
                 break;
             case 3:
@@ -253,6 +259,51 @@ public class VideosActivity extends BaseActivity implements View.OnClickListener
                 startActivity(intent);
                 break;
         }
+    }
+
+    void share() {
+        new ShareAction(VideosActivity.this).setDisplayList(SHARE_MEDIA.QQ, SHARE_MEDIA.QZONE, SHARE_MEDIA.WEIXIN, SHARE_MEDIA.WEIXIN_CIRCLE)
+                .setShareboardclickCallback(shareBoardlistener)
+                .open();
+    }
+
+    private ShareBoardlistener shareBoardlistener = new ShareBoardlistener() {
+
+        @Override
+        public void onclick(SnsPlatform snsPlatform, SHARE_MEDIA share_media) {
+            UMImage image = new UMImage(VideosActivity.this, tmpVideos.getPicUrl());
+            String title =  getGson().fromJson(getSp().getString("mm_emp_nickname", ""), String.class)+"邀您免费看电影" ;
+            String content = tmpVideos.getTitle()+tmpVideos.getContent();
+            new ShareAction(VideosActivity.this).setPlatform(share_media).setCallback(umShareListener)
+                    .withText(content)
+                    .withTitle(title)
+                    .withTargetUrl((InternetURL.SHARE_VIDEOS + "?id=" + tmpVideos.getId()))
+                    .withMedia(image)
+                    .share();
+        }
+    };
+
+    private UMShareListener umShareListener = new UMShareListener() {
+        @Override
+        public void onResult(SHARE_MEDIA platform) {
+            Toast.makeText(VideosActivity.this, platform + getResources().getString(R.string.share_success), Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onError(SHARE_MEDIA platform, Throwable t) {
+            Toast.makeText(VideosActivity.this, platform + getResources().getString(R.string.share_error), Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onCancel(SHARE_MEDIA platform) {
+            Toast.makeText(VideosActivity.this, platform + getResources().getString(R.string.share_cancel), Toast.LENGTH_SHORT).show();
+        }
+    };
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        UMShareAPI.get(VideosActivity.this).onActivityResult(requestCode, resultCode, data);
     }
 
 

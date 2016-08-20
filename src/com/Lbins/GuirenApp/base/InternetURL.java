@@ -279,4 +279,7 @@ public class InternetURL {
     //添加赞
     public static final String PUBLISH_VIDEO_FAVOUR_RECORD =  INTERNAL +  "appVideoZanSave.do";
 
+    //查询会员相册头三条
+    public static final String RECORD_PICS_URL = INTERNAL + "recordPics.do";
+
 }

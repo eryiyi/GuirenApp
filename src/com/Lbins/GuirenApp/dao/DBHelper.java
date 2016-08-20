@@ -25,6 +25,7 @@ public class DBHelper {
     private XixunObjDao xixunObjDao;
     private ManagerInfoDao managerInfoDao;
     private AdObjDao adObjDao;
+    private MinePicObjDao minePicObjDao;
 
     private DBHelper() {
     }
@@ -35,7 +36,7 @@ public class DBHelper {
             if (mContext == null) {
                 mContext = context;
             }
-            helper = new DaoMaster.DevOpenHelper(context, "guiren_hm_db_t", null);
+            helper = new DaoMaster.DevOpenHelper(context, "guiren_hm_db_t_1", null);
             db = helper.getWritableDatabase();
             daoMaster = new DaoMaster(db);
             instance.empDao = daoMaster.newSession().getEmpDao();
@@ -45,6 +46,7 @@ public class DBHelper {
             instance.xixunObjDao = daoMaster.newSession().getXixunObjDao();
             instance.managerInfoDao = daoMaster.newSession().getManagerInfoDao();
             instance.adObjDao = daoMaster.newSession().getAdObjDao();
+            instance.minePicObjDao = daoMaster.newSession().getMinePicObjDao();
         }
         return instance;
     }
@@ -150,6 +152,26 @@ public class DBHelper {
         return xixunObj;
     }
 
+
+    //查询图片是否存在
+    public MinePicObj getMinePicObjById(String id) {
+        MinePicObj minePicObj = minePicObjDao.load(id);
+        return minePicObj;
+    }
+
+
+    /**
+     * 查询图片列表
+     *
+     * @return
+     */
+    public List<MinePicObj> getPicsListByEmpId(String id) {
+        QueryBuilder qb = minePicObjDao.queryBuilder();
+        qb.where(MinePicObjDao.Properties.Mm_emp_id.eq(id));
+        List<MinePicObj> emps = qb.list();
+        return emps;
+    }
+
     /**
      * 插入或是更新数据
      *
@@ -158,6 +180,16 @@ public class DBHelper {
     public long saveXixunObj(XixunObj xixunObj) {
         return xixunObjDao.insertOrReplace(xixunObj);
     }
+
+    /**
+     * 插入或是更新数据
+     *
+     * @return
+     */
+    public long saveMinePicObj(MinePicObj minePicObj) {
+        return minePicObjDao.insertOrReplace(minePicObj);
+    }
+
 
     /**
      * 查询喜讯列表
