@@ -6,7 +6,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.EmbossMaskFilter;
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.text.TextPaint;
 import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -85,6 +89,8 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
     private LinearLayout liner_bottom;
     private TextView guirenwang;
 
+    private LinearLayout bg_profile;
+
     Emp emp;
 
     boolean isMobileNet, isWifiNet;
@@ -121,14 +127,12 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
-
     }
 
     void initView(){
         headLiner = (LinearLayout) LayoutInflater.from(ProfileActivity.this).inflate(R.layout.profile_header, null);
         head = (ImageView) headLiner.findViewById(R.id.head);
+        bg_profile = (LinearLayout) headLiner.findViewById(R.id.bg_profile);
         sex = (ImageView) headLiner.findViewById(R.id.sex);
         nickname = (TextView) headLiner.findViewById(R.id.nickname);
         guirenwang = (TextView) headLiner.findViewById(R.id.guirenwang);
@@ -429,6 +433,22 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
             sex.setImageDrawable(getResources().getDrawable(R.drawable.icon_sex_female));
         }else {
             sex.setImageDrawable(getResources().getDrawable(R.drawable.icon_sex_male));
+        }
+
+        //处理背景图
+        final ImageView imageView = new ImageView(ProfileActivity.this);
+        if(!StringUtil.isNullOrEmpty(emp.getMm_emp_bg())){
+            imageLoader.displayImage(emp.getMm_emp_bg(), imageView, GuirenApplication.options, new AnimateFirstDisplayListener(){
+                @Override
+                public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
+                    super.onLoadingComplete(imageUri, view, loadedImage);
+                    if(imageView != null && imageView.getDrawable() != null && bg_profile != null){
+                        bg_profile.setBackground(imageView.getDrawable());
+                    }
+                }
+            });
+        }else {
+            bg_profile.setBackground(res.getDrawable(R.drawable.bg_one));
         }
     }
 
