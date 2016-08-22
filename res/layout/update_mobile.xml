@@ -12,13 +12,15 @@
             android:background="@color/mm_main_bg_mine_top"
             android:gravity="center_vertical"
             >
-        <ImageView
+        <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_centerVertical="true"
                 android:id="@+id/back"
                 android:paddingLeft="10dp"
-                android:src="@drawable/md_return"
+                android:drawableLeft="@drawable/md_return"
+                android:text="返回"
+                android:gravity="center_vertical"
                 android:paddingRight="10dp"
                 />
         <TextView

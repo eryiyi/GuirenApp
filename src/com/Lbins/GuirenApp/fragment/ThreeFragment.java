@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Resources;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -513,10 +514,14 @@ public class ThreeFragment extends BaseFragment implements View.OnClickListener 
                 case 0:
                     AdObj adObj = listsAd.get(position);
                     if(!StringUtil.isNullOrEmpty(adObj.getMm_ad_url())){
-                        Intent webV = new Intent(getActivity(), WebViewActivity.class);
-                        webV.putExtra("strurl", adObj.getMm_ad_url());
-                        webV.putExtra("strname", "贵人");
-                        startActivity(webV);
+//                        Intent webV = new Intent(getActivity(), WebViewActivity.class);
+//                        webV.putExtra("strurl", adObj.getMm_ad_url());
+//                        webV.putExtra("strname", "贵人");
+//                        startActivity(webV);
+
+                        final Uri uri = Uri.parse(adObj.getMm_ad_url());
+                        final Intent it = new Intent(Intent.ACTION_VIEW, uri);
+                        startActivity(it);
                     }
                     break;
             }

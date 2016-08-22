@@ -56,7 +56,7 @@ import java.util.Map;
  */
 public class PublishZmtActivity extends BaseActivity implements View.OnClickListener {
     private final static int SELECT_LOCAL_PHOTO = 110;
-    private ImageView publis_pic_back;//返回
+
     private NoScrollGridView publish_moopd_gridview_image;//图片
     private Publish_mood_GridView_Adapter adapter;
     private TextView publish_pic_run;
@@ -89,9 +89,9 @@ public class PublishZmtActivity extends BaseActivity implements View.OnClickList
     }
 
     private void initView() {
-        publis_pic_back = (ImageView) this.findViewById(R.id.publis_pic_back);
+        this.findViewById(R.id.back).setOnClickListener(this);
         et_sendmessage = (EditText) this.findViewById(R.id.face_content);
-        publis_pic_back.setOnClickListener(this);
+
         publish_pic_run = (TextView) this.findViewById(R.id.publish_pic_run);
         publish_pic_run.setOnClickListener(this);
         title = (TextView) this.findViewById(R.id.title);
@@ -122,7 +122,7 @@ public class PublishZmtActivity extends BaseActivity implements View.OnClickList
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.publis_pic_back:
+            case R.id.back:
                 if (!TextUtils.isEmpty(et_sendmessage.getText().toString().trim())|| dataList.size()!=0) {   //这里trim()作用是去掉首位空格，防止不必要的错误
                     InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(et_sendmessage.getWindowToken(), 0); //强制隐藏键盘

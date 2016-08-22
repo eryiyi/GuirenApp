@@ -19,7 +19,6 @@ import com.Lbins.GuirenApp.util.Constants;
  * 类的功能、说明写在此处.
  */
 public class NoticeDetailActivity extends BaseActivity implements View.OnClickListener {
-    private ImageView notice_detail_menu;
     private Notice notice;
     private TextView title;
     private TextView content;
@@ -39,8 +38,7 @@ public class NoticeDetailActivity extends BaseActivity implements View.OnClickLi
 
 
     private void initView() {
-        notice_detail_menu = (ImageView) this.findViewById(R.id.notice_detail_menu);
-        notice_detail_menu.setOnClickListener(this);
+        this.findViewById(R.id.back).setOnClickListener(this);
         title = (TextView) this.findViewById(R.id.title);
         content = (TextView) this.findViewById(R.id.content);
         dateline = (TextView) this.findViewById(R.id.dateline);
@@ -49,7 +47,7 @@ public class NoticeDetailActivity extends BaseActivity implements View.OnClickLi
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.notice_detail_menu:
+            case R.id.back:
                 finish();
                 break;
         }

@@ -70,7 +70,6 @@ public class DetailPageAcitvity extends BaseActivity implements View.OnClickList
     List<CommentContent> commentContents;
     private Record record;//传参
     private PullToRefreshListView detail_lstv;
-    private ImageView detail_back;//返回按钮
     private ImageView detail_share;//分享按钮
     private TextView detail_title;//标题
     private LinearLayout detail_like_liner;//赞区域
@@ -156,8 +155,7 @@ public class DetailPageAcitvity extends BaseActivity implements View.OnClickList
 
     private void initView() {
         commentLayout = (LinearLayout) LayoutInflater.from(this).inflate(R.layout.detail_header, null);
-        detail_back = (ImageView) this.findViewById(R.id.detail_back);
-        detail_back.setOnClickListener(this);
+       this.findViewById(R.id.back).setOnClickListener(this);
         detail_share = (ImageView) this.findViewById(R.id.detail_share);
         detail_share.setOnClickListener(this);
         detail_title = (TextView) this.findViewById(R.id.detail_title);
@@ -384,7 +382,7 @@ public class DetailPageAcitvity extends BaseActivity implements View.OnClickList
             e.printStackTrace();
         }
         switch (v.getId()) {
-            case R.id.detail_back://返回按钮
+            case R.id.back://返回按钮
                 finish();
                 break;
             case R.id.detail_share://分享按钮

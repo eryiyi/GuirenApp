@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.format.DateUtils;
 import android.view.View;
@@ -161,6 +162,7 @@ public class VideosActivity extends BaseActivity implements View.OnClickListener
         adapter.setOnClickContentItemListener(this);
         this.findViewById(R.id.liner_one).setOnClickListener(this);
         this.findViewById(R.id.liner_two).setOnClickListener(this);
+        this.findViewById(R.id.back).setOnClickListener(this);
     }
 
     @Override
@@ -200,6 +202,9 @@ public class VideosActivity extends BaseActivity implements View.OnClickListener
                 favour_is = "1";
                 time_is = "0";
                 initData();
+                break;
+            case R.id.back:
+                finish();
                 break;
         }
     }
@@ -252,11 +257,14 @@ public class VideosActivity extends BaseActivity implements View.OnClickListener
             case 4:
                 //播放
                 String videoUrl = tmpVideos.getVideoUrl();
-                Intent intent = new Intent(VideosActivity.this, VideoPlayerActivity2.class);
-                VideoPlayer video = new VideoPlayer(videoUrl);
-                intent.putExtra(Constants.EXTRA_LAYOUT, "0");
-                intent.putExtra(VideoPlayer.class.getName(), video);
-                startActivity(intent);
+//                Intent intent = new Intent(VideosActivity.this, VideoPlayerActivity2.class);
+//                VideoPlayer video = new VideoPlayer(videoUrl);
+//                intent.putExtra(Constants.EXTRA_LAYOUT, "0");
+//                intent.putExtra(VideoPlayer.class.getName(), video);
+//                startActivity(intent);
+                final Uri uri = Uri.parse(videoUrl);
+                final Intent it = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(it);
                 break;
         }
     }
@@ -465,8 +473,6 @@ public class VideosActivity extends BaseActivity implements View.OnClickListener
         unregisterReceiver(mBroadcastReceiver);
     }
 
-    public void back(View view){
-        finish();
-    }
+
 
 }

@@ -11,14 +11,17 @@
                 android:background="@color/mm_main_bg_mine_top"
                 android:gravity="center_vertical"
                 android:layout_marginBottom="5dp">
-            <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_centerVertical="true"
-                    android:id="@+id/detail_favour_back"
-                    android:paddingLeft="10dp"
-                    android:src="@drawable/md_return"
-                    android:paddingRight="10dp"/>
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_centerVertical="true"
+                        android:id="@+id/back"
+                        android:paddingLeft="10dp"
+                        android:drawableLeft="@drawable/md_return"
+                        android:text="返回"
+                        android:gravity="center_vertical"
+                        android:paddingRight="10dp"
+                        />
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"

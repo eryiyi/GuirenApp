@@ -14,13 +14,16 @@
             android:gravity="center_vertical"
             android:layout_marginBottom="5dp"
             >
-        <ImageView
+        <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_centerVertical="true"
-                android:id="@+id/andme_xml_back"
+                android:id="@+id/back"
                 android:paddingLeft="10dp"
-                android:src="@drawable/md_return"
+                android:drawableLeft="@drawable/md_return"
+                android:text="返回"
+                android:gravity="center_vertical"
+                android:paddingRight="10dp"
                 />
         <TextView
                 android:layout_width="wrap_content"

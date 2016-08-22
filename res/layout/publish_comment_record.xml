@@ -25,15 +25,17 @@
                     android:textSize="18sp"/>
         </LinearLayout>
 
-        <ImageView
+        <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_centerVertical="true"
-                android:id="@+id/publis_comment_back"
+                android:id="@+id/back"
                 android:paddingLeft="10dp"
-                android:src="@drawable/md_return"
-                android:paddingRight="10dp"/>
-
+                android:drawableLeft="@drawable/md_return"
+                android:text="返回"
+                android:gravity="center_vertical"
+                android:paddingRight="10dp"
+                />
         <TextView
                 android:id="@+id/publish_comment_run"
                 android:layout_width="wrap_content"

@@ -31,8 +31,7 @@ public class AlbumChanceActivity extends AbsActivity implements OnItemClickListe
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_album_chance);
-        ImageView cancelTV = (ImageView) findViewById(R.id.cancel_button);
-        cancelTV.setOnClickListener(new OnClickListener() {
+        this.findViewById(R.id.back).setOnClickListener(new OnClickListener() {
 
             @Override
             public void onClick(View v) {

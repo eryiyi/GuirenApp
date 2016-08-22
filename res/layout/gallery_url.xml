@@ -24,7 +24,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
-                    android:text="校傲江湖"
+                    android:text=""
                     android:onClick="download"
                     android:src="@drawable/btn_blue_selector"
                     android:layout_centerHorizontal="true"

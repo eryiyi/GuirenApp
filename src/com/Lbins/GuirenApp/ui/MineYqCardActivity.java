@@ -68,7 +68,7 @@ public class MineYqCardActivity  extends BaseActivity implements View.OnClickLis
     }
     YaoqingCard record;
     void initView(){
-        this.findViewById(R.id.menu).setOnClickListener(this);
+        this.findViewById(R.id.back).setOnClickListener(this);
         btn_goumai = (TextView) this.findViewById(R.id.btn_goumai);
         btn_goumai.setOnClickListener(this);
         no_collections = (ImageView) this.findViewById(R.id.no_record);
@@ -240,7 +240,7 @@ public class MineYqCardActivity  extends BaseActivity implements View.OnClickLis
             e.printStackTrace();
         }
         switch (v.getId()){
-            case R.id.menu:
+            case R.id.back:
                 finish();
                 break;
             case R.id.btn_goumai:

@@ -38,7 +38,7 @@ import java.util.Map;
  * 类的功能、说明写在此处.
  */
 public class NoticeActivity extends BaseActivity implements View.OnClickListener {
-    private ImageView notice_menu;
+
     private PullToRefreshListView notice_lstv;
     private NoticeAdapter adapter;
     private int pageIndex = 1;
@@ -62,8 +62,8 @@ public class NoticeActivity extends BaseActivity implements View.OnClickListener
 
     private void initView() {
         notices = new ArrayList<Notice>();
-        notice_menu = (ImageView) this.findViewById(R.id.notice_menu);
-        notice_menu.setOnClickListener(this);
+       this.findViewById(R.id.back).setOnClickListener(this);
+
         notice_lstv = (PullToRefreshListView) this.findViewById(R.id.notice_lstv);
         adapter = new NoticeAdapter(notices, NoticeActivity.this);
         notice_lstv.setMode(PullToRefreshBase.Mode.BOTH);
@@ -110,7 +110,7 @@ public class NoticeActivity extends BaseActivity implements View.OnClickListener
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.notice_menu:
+            case R.id.back:
                 finish();
                 break;
         }

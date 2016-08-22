@@ -115,7 +115,7 @@ public class OrderMakeActivity extends BaseActivity implements View.OnClickListe
         api = WXAPIFactory.createWXAPI(this, InternetURL.WEIXIN_APPID, false);
         //获得价格表单
         getMoney();
-        toCalculate();
+
     }
 
 //    pay_wx_success
@@ -513,6 +513,7 @@ public class OrderMakeActivity extends BaseActivity implements View.OnClickListe
                                 for(MoneyJiageObj moneyJiageObj : list){
                                    if("0".equals(moneyJiageObj.getIstype())){
                                        money.setText(moneyJiageObj.getMoney_jiage());
+                                       break;
                                    }
                                 }
                                 toCalculate();

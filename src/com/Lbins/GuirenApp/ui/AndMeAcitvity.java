@@ -64,8 +64,7 @@ public class AndMeAcitvity extends BaseActivity implements View.OnClickListener 
     private void initView() {
         search_null = (ImageView) this.findViewById(R.id.search_null);
         home_lstv = (PullToRefreshListView) this.findViewById(R.id.andme_lstv);
-        andme_xml_back = (ImageView) this.findViewById(R.id.andme_xml_back);
-        andme_xml_back.setOnClickListener(this);
+       this.findViewById(R.id.back).setOnClickListener(this);
         recordList = new ArrayList<Relate>();
         adapter = new AndMeAdapter(recordList, AndMeAcitvity.this);
         home_lstv.setMode(PullToRefreshBase.Mode.BOTH);
@@ -145,7 +144,7 @@ public class AndMeAcitvity extends BaseActivity implements View.OnClickListener 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.andme_xml_back:
+            case R.id.back:
                 finish();
                 break;
         }

@@ -115,8 +115,7 @@ public class DetailGoodsActivity extends BaseActivity implements
             }
         });
 
-        detail_goods_back = (ImageView) this.findViewById(R.id.detail_goods_back);
-        detail_goods_back.setOnClickListener(this);
+        this.findViewById(R.id.back).setOnClickListener(this);
 
     }
 
@@ -134,7 +133,7 @@ public class DetailGoodsActivity extends BaseActivity implements
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.detail_goods_back://返回
+            case R.id.back://返回
                 finish();
                 break;
         }

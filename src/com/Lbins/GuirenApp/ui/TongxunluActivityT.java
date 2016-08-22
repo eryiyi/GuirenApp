@@ -9,7 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.*;
+import com.Lbins.GuirenApp.GuirenApplication;
 import com.Lbins.GuirenApp.R;
+import com.Lbins.GuirenApp.adapter.AnimateFirstDisplayListener;
 import com.Lbins.GuirenApp.base.BaseActivity;
 import com.Lbins.GuirenApp.base.InternetURL;
 import com.Lbins.GuirenApp.data.EmpRelateObjData;
@@ -25,6 +27,8 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 
 import java.util.*;
 
@@ -37,6 +41,10 @@ public class TongxunluActivityT extends BaseActivity implements View.OnClickList
     private WindowManager mWindowManager;
     private TextView mDialogText;
     private ContactAdapter adapter;
+
+    static ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
+    static ImageLoader imageLoader = ImageLoader.getInstance();//图片加载类
+
     /**
      * 昵称
      */
@@ -213,6 +221,7 @@ public class TongxunluActivityT extends BaseActivity implements View.OnClickList
             if (position == 0) {
                 viewHolder.tvCatalog.setVisibility(View.VISIBLE);
                 viewHolder.tvCatalog.setText(catalog);
+                imageLoader.displayImage(mNicks.get(position).getMm_emp_cover(), viewHolder.ivAvatar, GuirenApplication.options, animateFirstListener);
             } else {
                 String lastCatalog = PingYinUtil.converterToFirstSpell(
                         mNicks.get(position - 1).getMm_emp_nickname()).substring(0, 1);
@@ -222,9 +231,10 @@ public class TongxunluActivityT extends BaseActivity implements View.OnClickList
                     viewHolder.tvCatalog.setVisibility(View.VISIBLE);
                     viewHolder.tvCatalog.setText(catalog);
                 }
+                imageLoader.displayImage(mNicks.get(position - 1).getMm_emp_cover(), viewHolder.ivAvatar, GuirenApplication.options, animateFirstListener);
             }
 
-            viewHolder.ivAvatar.setImageResource(R.drawable.ic_launcher);
+
             viewHolder.tvNick.setText(nickName);
             return convertView;
         }

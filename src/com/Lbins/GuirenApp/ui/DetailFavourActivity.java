@@ -34,7 +34,7 @@ import java.util.Map;
  */
 public class DetailFavourActivity extends BaseActivity implements View.OnClickListener {
     private PullToRefreshListView detail_favour_lstv;//列表
-    private ImageView detail_favour_back;//返回
+
     private TextView detail_favour_title;//标题
     private FavourAdapter adapter;
     List<Favour> favours;
@@ -55,8 +55,7 @@ public class DetailFavourActivity extends BaseActivity implements View.OnClickLi
     private void initView() {
         favours = new ArrayList<Favour>();
         detail_favour_lstv = (PullToRefreshListView) this.findViewById(R.id.detail_favour_lstv);
-        detail_favour_back = (ImageView) this.findViewById(R.id.detail_favour_back);
-        detail_favour_back.setOnClickListener(this);
+         this.findViewById(R.id.back).setOnClickListener(this);
         detail_favour_title = (TextView) this.findViewById(R.id.detail_favour_title);
         adapter = new FavourAdapter(favours, this);
 //        adapter.setOnClickContentItemListener(this);
@@ -105,7 +104,7 @@ public class DetailFavourActivity extends BaseActivity implements View.OnClickLi
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.detail_favour_back:
+            case R.id.back:
                 finish();
                 break;
         }

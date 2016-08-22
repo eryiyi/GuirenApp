@@ -43,7 +43,7 @@ import java.util.Map;
  * 类的功能、说明写在此处.
  */
 public class PublishCommentAcitvity extends BaseActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
-    private ImageView publis_comment_back;//返回
+
     private TextView publish_comment_run;//发布
     private String cont;
     private TextView rebacktext;//父评论者
@@ -150,8 +150,7 @@ public class PublishCommentAcitvity extends BaseActivity implements View.OnClick
     }
 
     private void initView() {
-        publis_comment_back = (ImageView) this.findViewById(R.id.publis_comment_back);
-        publis_comment_back.setOnClickListener(this);
+      this.findViewById(R.id.back).setOnClickListener(this);
         publish_comment_run = (TextView) this.findViewById(R.id.publish_comment_run);
         publish_comment_run.setOnClickListener(this);
         rebacktext = (TextView) this.findViewById(R.id.rebacktext);
@@ -161,7 +160,7 @@ public class PublishCommentAcitvity extends BaseActivity implements View.OnClick
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.publis_comment_back:
+            case R.id.back:
                 finish();
                 break;
             case R.id.publish_comment_run:

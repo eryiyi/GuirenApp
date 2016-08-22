@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.format.DateUtils;
 import android.view.LayoutInflater;
@@ -261,11 +262,14 @@ public class DetailVideosActivity extends BaseActivity implements View.OnClickLi
 
             case R.id.picplay://视频播放按钮
                 String videoUrl = record.getVideoUrl();
-                Intent intent = new Intent(DetailVideosActivity.this, VideoPlayerActivity2.class);
-                VideoPlayer video = new VideoPlayer(videoUrl);
-                intent.putExtra(Constants.EXTRA_LAYOUT, "0");
-                intent.putExtra(VideoPlayer.class.getName(), video);
-                startActivity(intent);
+//                Intent intent = new Intent(DetailVideosActivity.this, VideoPlayerActivity2.class);
+//                VideoPlayer video = new VideoPlayer(videoUrl);
+//                intent.putExtra(Constants.EXTRA_LAYOUT, "0");
+//                intent.putExtra(VideoPlayer.class.getName(), video);
+//                startActivity(intent);
+                final Uri uri = Uri.parse(videoUrl);
+                final Intent it = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(it);
                 break;
 
         }
