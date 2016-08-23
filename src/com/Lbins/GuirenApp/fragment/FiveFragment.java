@@ -274,6 +274,7 @@ public class FiveFragment extends BaseFragment implements View.OnClickListener {
             img_bg.setBackground(res.getDrawable(R.drawable.bg_one));
         }
     }
+
     boolean isMobileNet, isWifiNet;
     private String typeCover;
     @Override

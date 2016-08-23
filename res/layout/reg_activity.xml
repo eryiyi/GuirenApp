@@ -196,7 +196,6 @@
                       android:singleLine="true"
                       android:id="@+id/email"
                       android:hint="邮箱"
-                      android:drawableLeft="@drawable/star"
                       android:background="@color/white"
                       android:layout_height="35dp">
             </EditText>
@@ -326,6 +325,7 @@
                       android:drawablePadding="8dp"
                       android:layout_height="wrap_content"/>
         </LinearLayout>
+
             <com.Lbins.GuirenApp.widget.CustomerSpinner
                     android:background="@drawable/login_edit_bg"
                     android:layout_marginLeft="25dp"
@@ -337,8 +337,8 @@
                     android:id="@+id/mm_emp_provinceId"
                     android:layout_width="match_parent"
                     android:layout_height="40dp">
-
             </com.Lbins.GuirenApp.widget.CustomerSpinner>
+
             <com.Lbins.GuirenApp.widget.CustomerSpinner
                     android:background="@drawable/login_edit_bg"
                     android:layout_marginLeft="25dp"

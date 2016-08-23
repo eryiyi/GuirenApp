@@ -130,6 +130,7 @@ public class MineYqCardActivity  extends BaseActivity implements View.OnClickLis
             new ShareAction(MineYqCardActivity.this).setPlatform(share_media).setCallback(umShareListener)
                     .withText(content)
                     .withTitle(title)
+                    .withFollow("0000")
                     .withTargetUrl((InternetURL.SHARE_YAOQING_CARD_URL + "?id=" + record.getGuiren_card_id()))
                     .withMedia(image)
                     .share();

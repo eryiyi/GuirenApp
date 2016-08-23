@@ -248,10 +248,6 @@ public class RegActivity extends BaseActivity implements View.OnClickListener,Ra
                 params.put("cityName", cityName);
                 params.put("countryName", countryName);
 
-
-                if(!StringUtil.isNullOrEmpty(email.getText().toString())){
-                    params.put("mm_emp_email" , email.getText().toString());
-                }
                 if(!StringUtil.isNullOrEmpty(qq.getText().toString())){
                     params.put("mm_emp_qq" , qq.getText().toString());
                 }
