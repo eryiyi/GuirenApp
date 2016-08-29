@@ -26,8 +26,12 @@ import android.view.View.OnLongClickListener;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.widget.*;
+import com.Lbins.GuirenApp.GuirenApplication;
 import com.Lbins.GuirenApp.R;
+import com.Lbins.GuirenApp.adapter.AnimateFirstDisplayListener;
 import com.Lbins.GuirenApp.base.BaseActivity;
+import com.Lbins.GuirenApp.dao.DBHelper;
+import com.Lbins.GuirenApp.module.Emp;
 import com.hyphenate.EMGroupChangeListener;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMConversation;
@@ -41,6 +45,8 @@ import com.hyphenate.easeui.widget.EaseSwitchButton;
 import com.hyphenate.exceptions.HyphenateException;
 import com.hyphenate.util.EMLog;
 import com.hyphenate.util.NetUtils;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -101,7 +107,7 @@ public class GroupDetailsActivity extends BaseActivity implements OnClickListene
 		blacklistLayout = (RelativeLayout) findViewById(R.id.rl_blacklist);
 		changeGroupNameLayout = (RelativeLayout) findViewById(R.id.rl_change_group_name);
 		idLayout = (RelativeLayout) findViewById(R.id.rl_group_id);
-		idLayout.setVisibility(View.VISIBLE);
+//		idLayout.setVisibility(View.VISIBLE);
 		idText = (TextView) findViewById(R.id.tv_group_id_value);
 		
 		rl_switch_block_groupmsg = (RelativeLayout) findViewById(R.id.rl_switch_block_groupmsg);
@@ -514,6 +520,9 @@ public class GroupDetailsActivity extends BaseActivity implements OnClickListene
 		}
 	}
 
+	private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
+	ImageLoader imageLoader = ImageLoader.getInstance();//图片加载类
+
 	/**
 	 * 群组成员gridadapter
 	 * 
@@ -611,8 +620,20 @@ public class GroupDetailsActivity extends BaseActivity implements OnClickListene
 //				Drawable avatar = getResources().getDrawable(R.drawable.ic_launcher);
 //				avatar.setBounds(0, 0, referenceWidth, referenceHeight);
 //				button.setCompoundDrawables(null, avatar, null, null);
-				EaseUserUtils.setUserNick(username, holder.textView);
-				EaseUserUtils.setUserAvatar(getContext(), username, holder.imageView);
+//				EaseUserUtils.setUserNick(username, holder.textView);
+//				EaseUserUtils.setUserAvatar(getContext(), username, holder.imageView);
+
+				//根据hxusername查找用户信息
+				Emp emp= DBHelper.getInstance(GroupDetailsActivity.this).getEmpById(username);
+				if(emp != null){
+					holder.textView.setText(emp.getMm_emp_nickname());
+					imageLoader.displayImage(emp.getMm_emp_cover(), holder.imageView, GuirenApplication.txOptions, animateFirstListener);
+				}else{
+					EaseUserUtils.setUserNick(username, holder.textView);
+					EaseUserUtils.setUserAvatar(getContext(), username, holder.imageView);
+				}
+
+
 				if (isInDeleteMode) {
 					// 如果是删除模式下，显示减人图标
 					convertView.findViewById(R.id.badge_delete).setVisibility(View.VISIBLE);

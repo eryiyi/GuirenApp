@@ -3,6 +3,6 @@
     android:oneshot="false"
     xmlns:android="http://schemas.android.com/apk/res/android" 
     >   
-    <item android:drawable="@drawable/progress_loading_image_01" android:duration="150"/>  
-     <item android:drawable="@drawable/progress_loading_image_02" android:duration="150"/>  
+    <item android:drawable="@drawable/ic_launcher" android:duration="150"/>
+     <item android:drawable="@drawable/ic_launcher" android:duration="150"/>
 </animation-list>   

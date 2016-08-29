@@ -7,7 +7,9 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.util.Xml;
 import android.view.View;
@@ -96,7 +98,7 @@ public class OrderMakeActivity extends BaseActivity implements View.OnClickListe
         };
     };
     //------------------------------------------------------------------------------------
-    private ImageView back;
+    private TextView back;
     private TextView order_count;//价格合计
     private TextView number;
     private TextView money;
@@ -121,13 +123,39 @@ public class OrderMakeActivity extends BaseActivity implements View.OnClickListe
 //    pay_wx_success
 
     private void initView() {
-        back = (ImageView) this.findViewById(R.id.back);
+        back = (TextView) this.findViewById(R.id.back);
         order_count = (TextView) this.findViewById(R.id.order_count);
         number = (TextView) this.findViewById(R.id.number);
         money = (TextView) this.findViewById(R.id.money);
-
         back.setOnClickListener(this);
+        this.findViewById(R.id.liner_zfb).setOnClickListener(this);
+        this.findViewById(R.id.liner_wx).setOnClickListener(this);
+        number.addTextChangedListener(textWatcher);
     }
+
+    private TextWatcher textWatcher = new TextWatcher() {
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before,
+                                  int count) {
+        }
+
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count,
+                                      int after) {
+        }
+        @Override
+        public void afterTextChanged(Editable s) {
+            if(!StringUtil.isNullOrEmpty(number.getText().toString())){
+                if(number.getText().toString().length() > 3){
+                    showMsg(OrderMakeActivity.this, "超出数量限制，请重新填写");
+                }else {
+                    toCalculate();
+                }
+            }
+
+        }
+    };
 
     @Override
     public void onClick(View view) {
@@ -135,6 +163,12 @@ public class OrderMakeActivity extends BaseActivity implements View.OnClickListe
         {
             case R.id.back:
                 finish();
+                break;
+            case R.id.liner_zfb:
+                goToPayAliy();
+                break;
+            case R.id.liner_wx:
+                goToPayWeixin();
                 break;
         }
     }
@@ -322,7 +356,7 @@ public class OrderMakeActivity extends BaseActivity implements View.OnClickListe
     }
 
 
-    public void goToPayAliy(View view) {
+    public void goToPayAliy() {
         //
         if (StringUtil.isNullOrEmpty(order_count.getText().toString())) {
             showMsg(OrderMakeActivity.this, getResources().getString(R.string.please_select));
@@ -343,7 +377,7 @@ public class OrderMakeActivity extends BaseActivity implements View.OnClickListe
 
     String xmlStr = "";
     WxPayObj wxPayObj;
-    public void goToPayWeixin(View view){
+    public void goToPayWeixin(){
         // 将该app注册到微信
         api.registerApp(InternetURL.WEIXIN_APPID);
         if (StringUtil.isNullOrEmpty(order_count.getText().toString()) || order_count == null) {
@@ -564,7 +598,6 @@ public class OrderMakeActivity extends BaseActivity implements View.OnClickListe
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
             if(action.equals("pay_wx_success")){
-                //
                 updateMineOrder();
             }
         }

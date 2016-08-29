@@ -43,12 +43,26 @@
                           android:id="@+id/liner_one"
                           android:gravity="center"
                           android:layout_height="wrap_content">
-                <TextView android:layout_width="wrap_content"
-                          android:id="@+id/number"
-                          android:text="1"
-                          android:textSize="35sp"
-                          android:textColor="@color/textColor"
-                          android:layout_height="wrap_content"/>
+                <LinearLayout android:layout_width="wrap_content"
+                              android:orientation="vertical"
+                              android:layout_height="wrap_content">
+                    <EditText android:layout_width="wrap_content"
+                              android:id="@+id/number"
+                              android:background="@null"
+                              android:text="1"
+                              android:numeric="integer"
+                              android:layout_gravity="center"
+                              android:gravity="center"
+                              android:textSize="35sp"
+                              android:textColor="@color/textColor"
+                              android:layout_height="wrap_content"/>
+                    <ImageView android:layout_width="wrap_content"
+                               android:scaleType="fitXY"
+                               android:minWidth="50dp"
+                               android:src="@drawable/line"
+                               android:layout_height="wrap_content"/>
+                </LinearLayout>
+
                 <ImageView android:layout_width="wrap_content"
                            android:src="@drawable/chahao"
                            android:layout_marginLeft="15dp"
@@ -112,17 +126,41 @@
                   android:padding="15dp"
                   android:orientation="horizontal"
                   android:layout_height="wrap_content">
-        <Button android:layout_width="0dp"
-                android:layout_weight="1"
-                android:onClick="goToPayAliy"
-                android:layout_marginRight="8dp"
-                android:background="@drawable/btn_pay_aliy_shape"
-                android:layout_height="wrap_content"/>
+        <!--<Button android:layout_width="0dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:onClick="goToPayAliy"-->
+                <!--android:layout_marginRight="8dp"-->
+                <!--android:background="@drawable/btn_pay_aliy_shape"-->
+                <!--android:layout_height="wrap_content"/>-->
 
-        <Button android:layout_width="0dp"
-                android:layout_weight="1"
-                android:onClick="goToPayWeixin"
-                android:background="@drawable/btn_pay_weixin_shape"
-                android:layout_height="wrap_content"/>
+        <!--<Button android:layout_width="0dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:onClick="goToPayWeixin"-->
+                <!--android:background="@drawable/btn_pay_weixin_shape"-->
+                <!--android:layout_height="wrap_content"/>-->
+
+        <LinearLayout android:layout_width="wrap_content"
+                      android:orientation="horizontal"
+                      android:id="@+id/liner_wx"
+                      android:layout_height="wrap_content">
+            <TextView android:layout_width="wrap_content"
+                      android:text="微信支付"
+                      android:textColor="@color/text_color"
+                      android:gravity="center_vertical"
+                      android:drawableLeft="@drawable/ssdk_oks_classic_wechat"
+                      android:layout_height="wrap_content"/>
+        </LinearLayout>
+        <LinearLayout android:layout_width="wrap_content"
+                      android:layout_marginLeft="8dp"
+                      android:id="@+id/liner_zfb"
+                      android:orientation="horizontal"
+                      android:layout_height="wrap_content">
+            <TextView android:layout_width="wrap_content"
+                      android:text="支付宝支付"
+                      android:textColor="@color/text_color"
+                      android:gravity="center_vertical"
+                      android:drawableLeft="@drawable/ssdk_oks_classic_alipay"
+                      android:layout_height="wrap_content"/>
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>
