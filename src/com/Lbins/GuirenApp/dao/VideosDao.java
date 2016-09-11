@@ -32,6 +32,7 @@ public class VideosDao extends AbstractDao<Videos, String> {
         public final static Property Dateline = new Property(6, String.class, "dateline", false, "DATELINE");
         public final static Property ZanNum = new Property(7, String.class, "zanNum", false, "ZAN_NUM");
         public final static Property PlNum = new Property(8, String.class, "plNum", false, "PL_NUM");
+        public final static Property Video_type_name = new Property(9, String.class, "video_type_name", false, "VIDEO_TYPE_NAME");
     };
 
     private DaoSession daoSession;
@@ -58,7 +59,8 @@ public class VideosDao extends AbstractDao<Videos, String> {
                 "'ISDEL' TEXT," + // 5: isdel
                 "'DATELINE' TEXT," + // 6: dateline
                 "'ZAN_NUM' TEXT," + // 7: zanNum
-                "'PL_NUM' TEXT);"); // 8: plNum
+                "'PL_NUM' TEXT," + // 8: plNum
+                "'VIDEO_TYPE_NAME' TEXT);"); // 9: video_type_name
     }
 
     /** Drops the underlying database table. */
@@ -108,6 +110,11 @@ public class VideosDao extends AbstractDao<Videos, String> {
         if (plNum != null) {
             stmt.bindString(9, plNum);
         }
+ 
+        String video_type_name = entity.getVideo_type_name();
+        if (video_type_name != null) {
+            stmt.bindString(10, video_type_name);
+        }
     }
 
     @Override
@@ -134,7 +141,8 @@ public class VideosDao extends AbstractDao<Videos, String> {
             cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // isdel
             cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // dateline
             cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // zanNum
-            cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8) // plNum
+            cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8), // plNum
+            cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9) // video_type_name
         );
         return entity;
     }
@@ -151,6 +159,7 @@ public class VideosDao extends AbstractDao<Videos, String> {
         entity.setDateline(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
         entity.setZanNum(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
         entity.setPlNum(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));
+        entity.setVideo_type_name(cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9));
      }
     
     /** @inheritdoc */

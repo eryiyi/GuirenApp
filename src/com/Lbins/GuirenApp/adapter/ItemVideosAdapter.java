@@ -63,15 +63,17 @@ public class ItemVideosAdapter extends BaseAdapter {
         if (convertView == null) {
             holder = new ViewHolder();
             convertView = LayoutInflater.from(mContext).inflate(R.layout.item_videos, null);
-            holder.item_comment = (TextView) convertView.findViewById(R.id.item_comment);
-            holder.item_favour = (TextView) convertView.findViewById(R.id.item_favour);
-            holder.item_dateline = (TextView) convertView.findViewById(R.id.item_dateline);
-            holder.item_title = (TextView) convertView.findViewById(R.id.item_title);
+//            holder.item_comment = (TextView) convertView.findViewById(R.id.item_comment);
+//            holder.item_favour = (TextView) convertView.findViewById(R.id.item_favour);
+//            holder.item_dateline = (TextView) convertView.findViewById(R.id.item_dateline);
+//            holder.item_title = (TextView) convertView.findViewById(R.id.item_title);
             holder.item_pic = (ImageView) convertView.findViewById(R.id.item_pic);
-            holder.item_play = (ImageView) convertView.findViewById(R.id.item_play);
-            holder.item_comment_btn = (ImageView) convertView.findViewById(R.id.item_comment_btn);
-            holder.item_share_btn = (ImageView) convertView.findViewById(R.id.item_share_btn);
-            holder.item_favour_btn = (ImageView) convertView.findViewById(R.id.item_favour_btn);
+            holder.item_title = (TextView) convertView.findViewById(R.id.item_title);
+            holder.item_type_name = (TextView) convertView.findViewById(R.id.item_type_name);
+//            holder.item_play = (ImageView) convertView.findViewById(R.id.item_play);
+//            holder.item_comment_btn = (ImageView) convertView.findViewById(R.id.item_comment_btn);
+//            holder.item_share_btn = (ImageView) convertView.findViewById(R.id.item_share_btn);
+//            holder.item_favour_btn = (ImageView) convertView.findViewById(R.id.item_favour_btn);
 
 
             convertView.setTag(holder);
@@ -81,49 +83,53 @@ public class ItemVideosAdapter extends BaseAdapter {
         final Videos favour = findEmps.get(position);
         if (findEmps != null) {
             imageLoader.displayImage(favour.getPicUrl(), holder.item_pic, GuirenApplication.options, animateFirstListener);
-            holder.item_title.setText(favour.getTitle());
-            holder.item_dateline.setText(favour.getDateline());
-            holder.item_favour.setText((favour.getZanNum()==null?"0":favour.getZanNum()) + "点赞");
-            holder.item_comment.setText((favour.getPlNum()==null?"0":favour.getPlNum()) + "评论");
+            holder.item_title.setText(favour.getTitle()==null?"":favour.getTitle());
+            holder.item_type_name.setText(favour.getVideo_type_name()==null?"":favour.getVideo_type_name());
+//            holder.item_title.setText(favour.getTitle());
+//            holder.item_dateline.setText(favour.getDateline());
+//            holder.item_favour.setText((favour.getZanNum()==null?"0":favour.getZanNum()) + "点赞");
+//            holder.item_comment.setText((favour.getPlNum()==null?"0":favour.getPlNum()) + "评论");
         }
-        holder.item_comment_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onClickContentItemListener.onClickContentItem(position, 1, null);
-            }
-        });
-        holder.item_share_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onClickContentItemListener.onClickContentItem(position, 2, null);
-            }
-        });
-        holder.item_favour_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onClickContentItemListener.onClickContentItem(position, 3, null);
-            }
-        });
-        holder.item_play.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onClickContentItemListener.onClickContentItem(position, 4, null);
-            }
-        });
+//        holder.item_comment_btn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                onClickContentItemListener.onClickContentItem(position, 1, null);
+//            }
+//        });
+//        holder.item_share_btn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                onClickContentItemListener.onClickContentItem(position, 2, null);
+//            }
+//        });
+//        holder.item_favour_btn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                onClickContentItemListener.onClickContentItem(position, 3, null);
+//            }
+//        });
+//        holder.item_play.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                onClickContentItemListener.onClickContentItem(position, 4, null);
+//            }
+//        });
 
         return convertView;
     }
 
     class ViewHolder {
-        TextView item_comment;
-        TextView item_dateline;
-        TextView item_favour;
-        TextView item_title;
+//        TextView item_comment;
+//        TextView item_dateline;
+//        TextView item_favour;
+//        TextView item_title;
         ImageView item_pic;
-        ImageView item_play;
-        ImageView item_comment_btn;
-        ImageView item_share_btn;
-        ImageView item_favour_btn;
+        TextView item_title;
+        TextView item_type_name;
+//        ImageView item_play;
+//        ImageView item_comment_btn;
+//        ImageView item_share_btn;
+//        ImageView item_favour_btn;
     }
 
 }

@@ -26,12 +26,10 @@ public class DaoSession extends AbstractDaoSession {
 
     private final DaoConfig xixunObjDaoConfig;
     private final DaoConfig recordDaoConfig;
-    private final DaoConfig videosDaoConfig;
     private final DaoConfig empDianpuDaoConfig;
 
     private final XixunObjDao xixunObjDao;
     private final RecordDao recordDao;
-    private final VideosDao videosDao;
     private final EmpDianpuDao empDianpuDao;
 
     private final DaoConfig managerInfoDaoConfig;
@@ -45,6 +43,9 @@ public class DaoSession extends AbstractDaoSession {
     private final DaoConfig minePicObjDaoConfig;
 
     private final MinePicObjDao minePicObjDao;
+
+    private final VideosDao videosDao;
+    private final DaoConfig videosDaoConfig;
 
     public DaoSession(SQLiteDatabase db, IdentityScopeType type, Map<Class<? extends AbstractDao<?, ?>>, DaoConfig>
             daoConfigMap) {

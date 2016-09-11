@@ -14,7 +14,7 @@ import java.io.Serializable;
 /**
  * Entity mapped to table VIDEOS.
  */
-public class Videos implements Serializable{
+public class Videos implements Serializable {
 
     /** Not-null value. */
     private String id;
@@ -27,6 +27,7 @@ public class Videos implements Serializable{
     private String dateline;
     private String zanNum;
     private String plNum;
+    private String video_type_name;
 
     /** Used to resolve relations */
     private transient DaoSession daoSession;
@@ -45,7 +46,7 @@ public class Videos implements Serializable{
         this.id = id;
     }
 
-    public Videos(String id, String title, String content, String picUrl, String videoUrl, String isdel, String dateline, String zanNum, String plNum) {
+    public Videos(String id, String title, String content, String picUrl, String videoUrl, String isdel, String dateline, String zanNum, String plNum, String video_type_name) {
         this.id = id;
         this.title = title;
         this.content = content;
@@ -55,6 +56,7 @@ public class Videos implements Serializable{
         this.dateline = dateline;
         this.zanNum = zanNum;
         this.plNum = plNum;
+        this.video_type_name = video_type_name;
     }
 
     /** called by internal mechanisms, do not call yourself. */
@@ -137,6 +139,14 @@ public class Videos implements Serializable{
 
     public void setPlNum(String plNum) {
         this.plNum = plNum;
+    }
+
+    public String getVideo_type_name() {
+        return video_type_name;
+    }
+
+    public void setVideo_type_name(String video_type_name) {
+        this.video_type_name = video_type_name;
     }
 
     /** Convenient call for {@link AbstractDao#delete(Object)}. Entity must attached to an entity context. */

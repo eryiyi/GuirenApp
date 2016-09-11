@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:background="@color/white"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <com.Lbins.GuirenApp.library.PullToRefreshGridView
+            android:id="@+id/gridv_one"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:horizontalSpacing="0dip"
+            android:numColumns="2"
+            android:verticalSpacing="0dip"
+            />
+</LinearLayout>
