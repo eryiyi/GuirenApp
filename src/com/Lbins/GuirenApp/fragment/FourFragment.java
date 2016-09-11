@@ -40,6 +40,7 @@ public class FourFragment extends BaseFragment implements View.OnClickListener {
         view.findViewById(R.id.liner_baike).setOnClickListener(this);//游戏
         view.findViewById(R.id.liner_zmt).setOnClickListener(this);//自媒体
         view.findViewById(R.id.liner_movie).setOnClickListener(this);//电影
+        view.findViewById(R.id.liner_tv).setOnClickListener(this);//电影
         return view;
     }
 
@@ -127,10 +128,19 @@ public class FourFragment extends BaseFragment implements View.OnClickListener {
                break;
            case R.id.liner_movie:
            {
+               //电影
+               Intent intent = new Intent(getActivity(), VideosSearchActivity.class);
+               startActivity(intent);
+           }
+               break;
+           case R.id.liner_tv:
+           {
+               //视频
                Intent intent = new Intent(getActivity(), VideosActivity.class);
                startActivity(intent);
            }
                break;
+
        }
     }
 

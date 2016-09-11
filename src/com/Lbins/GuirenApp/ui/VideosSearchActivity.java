@@ -7,10 +7,11 @@ import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.format.DateUtils;
+import android.util.DisplayMetrics;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
-import android.widget.Toast;
+import android.view.ViewGroup;
+import android.widget.*;
 import com.Lbins.GuirenApp.R;
 import com.Lbins.GuirenApp.adapter.ItemVideosAdapter;
 import com.Lbins.GuirenApp.adapter.OnClickContentItemListener;
@@ -18,9 +19,11 @@ import com.Lbins.GuirenApp.base.BaseActivity;
 import com.Lbins.GuirenApp.base.InternetURL;
 import com.Lbins.GuirenApp.dao.DBHelper;
 import com.Lbins.GuirenApp.data.RecordDATA;
+import com.Lbins.GuirenApp.data.VideoTypeObjData;
 import com.Lbins.GuirenApp.data.VideosData;
 import com.Lbins.GuirenApp.library.PullToRefreshBase;
 import com.Lbins.GuirenApp.library.PullToRefreshListView;
+import com.Lbins.GuirenApp.module.VideoTypeObj;
 import com.Lbins.GuirenApp.module.Videos;
 import com.Lbins.GuirenApp.util.Constants;
 import com.Lbins.GuirenApp.util.GuirenHttpUtils;
@@ -66,6 +69,8 @@ public class VideosSearchActivity extends BaseActivity implements View.OnClickLi
 
     boolean isMobileNet, isWifiNet;
 
+    private GridView gridView;//电影分类
+    private List<VideoTypeObj> listDianying = new ArrayList<VideoTypeObj>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -156,9 +161,14 @@ public class VideosSearchActivity extends BaseActivity implements View.OnClickLi
             }
         });
         adapter.setOnClickContentItemListener(this);
-        this.findViewById(R.id.liner_one).setOnClickListener(this);
-        this.findViewById(R.id.liner_two).setOnClickListener(this);
+//        this.findViewById(R.id.liner_one).setOnClickListener(this);
+//        this.findViewById(R.id.liner_two).setOnClickListener(this);
         this.findViewById(R.id.back).setOnClickListener(this);
+
+        gridView = (GridView) findViewById(R.id.grid);
+
+        setGridView();
+        setData();
     }
 
     @Override
@@ -175,30 +185,30 @@ public class VideosSearchActivity extends BaseActivity implements View.OnClickLi
             e.printStackTrace();
         }
         switch (view.getId()){
-            case R.id.liner_one:
-                progressDialog = new CustomProgressDialog(VideosSearchActivity.this, "正在加载中",R.anim.custom_dialog_frame);
-
-                progressDialog.setCancelable(true);
-                progressDialog.setIndeterminate(true);
-                progressDialog.show();
-                IS_REFRESH = true;
-                pageIndex = 1;
-                time_is = "1";
-                favour_is = "0";
-                initData();
-                break;
-            case R.id.liner_two:
-                progressDialog = new CustomProgressDialog(VideosSearchActivity.this, "正在加载中",R.anim.custom_dialog_frame);
-
-                progressDialog.setCancelable(true);
-                progressDialog.setIndeterminate(true);
-                progressDialog.show();
-                IS_REFRESH = true;
-                pageIndex = 1;
-                favour_is = "1";
-                time_is = "0";
-                initData();
-                break;
+//            case R.id.liner_one:
+//                progressDialog = new CustomProgressDialog(VideosSearchActivity.this, "正在加载中",R.anim.custom_dialog_frame);
+//
+//                progressDialog.setCancelable(true);
+//                progressDialog.setIndeterminate(true);
+//                progressDialog.show();
+//                IS_REFRESH = true;
+//                pageIndex = 1;
+//                time_is = "1";
+//                favour_is = "0";
+//                initData();
+//                break;
+//            case R.id.liner_two:
+//                progressDialog = new CustomProgressDialog(VideosSearchActivity.this, "正在加载中",R.anim.custom_dialog_frame);
+//
+//                progressDialog.setCancelable(true);
+//                progressDialog.setIndeterminate(true);
+//                progressDialog.show();
+//                IS_REFRESH = true;
+//                pageIndex = 1;
+//                favour_is = "1";
+//                time_is = "0";
+//                initData();
+//                break;
             case R.id.back:
                 finish();
                 break;
@@ -441,6 +451,69 @@ public class VideosSearchActivity extends BaseActivity implements View.OnClickLi
         getRequestQueue().add(request);
     }
 
+    //获得电影类别
+    public void setData(){
+        StringRequest request = new StringRequest(
+                Request.Method.POST,
+                InternetURL.GET_DIANYING_TYPES_URL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String s) {
+                        if (StringUtil.isJson(s)) {
+                            VideoTypeObjData data = getGson().fromJson(s, VideoTypeObjData.class);
+                            if (Integer.parseInt(data.getCode())== 200) {
+                                listDianying.clear();
+                                listDianying.addAll(data.getData());
+                                adapterDy.notifyDataSetChanged();
+
+//                                //处理数据，需要的话保存到数据库
+//                                if (data != null && data.getData() != null) {
+//                                    DBHelper dbHelper = DBHelper.getInstance(VideosSearchActivity.this);
+//                                    for (Videos videos : data.getData()) {
+//                                        if (dbHelper.getVideosById(videos.getId()) == null) {
+//                                            DBHelper.getInstance(VideosSearchActivity.this).saveVideos(videos);
+//                                        }
+//                                    }
+//                                }
+                            } else {
+                                Toast.makeText(VideosSearchActivity.this, R.string.get_data_error, Toast.LENGTH_SHORT).show();
+                            }
+                        } else {
+                            Toast.makeText(VideosSearchActivity.this, R.string.get_data_error, Toast.LENGTH_SHORT).show();
+                        }
+                        if (progressDialog != null) {
+                            progressDialog.dismiss();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        if (progressDialog != null) {
+                            progressDialog.dismiss();
+                        }
+                        Toast.makeText(VideosSearchActivity.this, R.string.get_data_error, Toast.LENGTH_SHORT).show();
+                    }
+                }
+        ) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("page", String.valueOf(pageIndex));
+                params.put("time_is", time_is);
+                params.put("favour_is", favour_is);
+                return params;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Content-Type", "application/x-www-form-urlencoded");
+                return params;
+            }
+        };
+        getRequestQueue().add(request);
+    }
 
     //广播接收动作
     private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
@@ -468,6 +541,70 @@ public class VideosSearchActivity extends BaseActivity implements View.OnClickLi
         super.onDestroy();
         unregisterReceiver(mBroadcastReceiver);
     }
+
+
+
+    GridViewAdapter adapterDy;
+    /**设置GirdView参数，绑定数据*/
+    private void setGridView() {
+        int size = listDianying.size();
+        int length = 100;
+        DisplayMetrics dm = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(dm);
+        float density = dm.density;
+        int gridviewWidth = (int) (size * (length + 4) * density);
+        int itemWidth = (int) (length * density);
+
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                gridviewWidth, LinearLayout.LayoutParams.FILL_PARENT);
+        gridView.setLayoutParams(params); // 设置GirdView布局参数,横向布局的关键
+        gridView.setColumnWidth(itemWidth); // 设置列表项宽
+        gridView.setHorizontalSpacing(5); // 设置列表项水平间距
+        gridView.setStretchMode(GridView.NO_STRETCH);
+        gridView.setNumColumns(size); // 设置列数量=列表集合数
+
+        adapterDy = new GridViewAdapter(getApplicationContext(),
+                listDianying);
+        gridView.setAdapter(adapterDy);
+    }
+
+    /**GirdView 数据适配器*/
+    public class GridViewAdapter extends BaseAdapter {
+        Context context;
+        List<VideoTypeObj> list;
+        public GridViewAdapter(Context _context, List<VideoTypeObj> _list) {
+            this.list = _list;
+            this.context = _context;
+        }
+
+        @Override
+        public int getCount() {
+            return list.size();
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return list.get(position);
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            LayoutInflater layoutInflater = LayoutInflater.from(context);
+            convertView = layoutInflater.inflate(R.layout.item_dianying_type, null);
+            TextView title = (TextView) convertView.findViewById(R.id.title);
+            VideoTypeObj city = list.get(position);
+
+            title.setText(city.getVideo_type_name());
+            return convertView;
+        }
+    }
+
+
 
 
 

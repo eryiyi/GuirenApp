@@ -13,10 +13,7 @@ import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.*;
 import com.Lbins.GuirenApp.R;
 import com.Lbins.GuirenApp.adapter.ItemVideoTypeAdapter;
 import com.Lbins.GuirenApp.adapter.ItemVideosAdapter;
@@ -69,7 +66,7 @@ public class VideosActivity extends BaseActivity implements View.OnClickListener
     private int currentSelect = 0;//当前选中的viewpage
 
     //----第二部分
-    private PullToRefreshGridView gridv_one;
+    private GridView gridv_one;
     private ItemVideoTypeAdapter adapterType;
     private List<VideoTypeObj> listsType = new ArrayList<VideoTypeObj>();
 
@@ -184,10 +181,10 @@ public class VideosActivity extends BaseActivity implements View.OnClickListener
         this.findViewById(R.id.back).setOnClickListener(this);
 
         //----第二部分
-        gridv_one = (PullToRefreshGridView) view2.findViewById(R.id.gridv_one);
+        gridv_one = (GridView) view2.findViewById(R.id.gridv_one);
         adapterType = new ItemVideoTypeAdapter(listsType, VideosActivity.this);
         gridv_one.setAdapter(adapterType);
-//        gridv_one.setSelector(new ColorDrawable(Color.TRANSPARENT));
+        gridv_one.setSelector(new ColorDrawable(Color.TRANSPARENT));
     }
 
     @Override
@@ -212,6 +209,7 @@ public class VideosActivity extends BaseActivity implements View.OnClickListener
                 btn_one.setTextColor(getResources().getColor(R.color.white));
                 btn_two.setTextColor(getResources().getColor(R.color.gray_button));
                 currentSelect = 0;
+                vPager.setCurrentItem(currentSelect);
             }
                 break;
             case R.id.btn_two:
@@ -219,6 +217,7 @@ public class VideosActivity extends BaseActivity implements View.OnClickListener
                 btn_two.setTextColor(getResources().getColor(R.color.white));
                 btn_one.setTextColor(getResources().getColor(R.color.gray_button));
                 currentSelect = 1;
+                vPager.setCurrentItem(currentSelect);
             }
                 break;
         }

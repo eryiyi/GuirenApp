@@ -289,4 +289,7 @@ public class InternetURL {
     //获得视频类别
     public static final String GET_VIDEO_TYPES_URL = INTERNAL + "getVideoTypes.do";
 
+    //查询电影类别
+    public static final String GET_DIANYING_TYPES_URL = INTERNAL + "getDianyingTypes.do";
+
 }

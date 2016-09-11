@@ -4,7 +4,7 @@
               android:background="@color/white"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
-    <com.Lbins.GuirenApp.library.PullToRefreshGridView
+    <GridView
             android:id="@+id/gridv_one"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
