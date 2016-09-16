@@ -264,8 +264,10 @@ public class InternetURL {
     //动态页面
     public static final String SHARE_RECORD_URL = INTERNAL + "viewRecord.do";
 
-    //视频列表
+    //电影列表
     public static final String GET_VIDEOS_URL = INTERNAL +  "listVideosApp.do";
+    //视频列表
+    public static final String GET_VIDEOS_TV_URL = INTERNAL +  "listVideosAppTv.do";
 
     //视频分享
     public static final String SHARE_VIDEOS = INTERNAL +  "viewVideos.do";

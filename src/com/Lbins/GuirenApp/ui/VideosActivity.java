@@ -226,7 +226,7 @@ public class VideosActivity extends BaseActivity implements View.OnClickListener
     private void initData() {
         StringRequest request = new StringRequest(
                 Request.Method.POST,
-               InternetURL.GET_VIDEOS_URL,
+               InternetURL.GET_VIDEOS_TV_URL,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String s) {
