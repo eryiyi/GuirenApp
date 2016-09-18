@@ -80,7 +80,7 @@ public class GroupPickContactsActivity extends BaseActivity {
                     }
                     return lhs.getInitialLetter().compareTo(rhs.getInitialLetter());
                 }
-                
+
             }
         });
 

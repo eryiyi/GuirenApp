@@ -27,8 +27,20 @@
                    android:layout_gravity="center"
                    android:gravity="center"
                    android:layout_marginRight="8dp"
-                   android:text="贵人视频"
+                   android:text="最新"
                    android:textColor="@color/white"
+                   android:textSize="14sp"/>
+           <TextView
+                   android:layout_width="0dp"
+                   android:layout_weight="1"
+                   android:layout_height="wrap_content"
+                   android:layout_marginLeft="8dp"
+                   android:layout_gravity="center"
+                   android:gravity="center"
+                   android:padding="8dip"
+                   android:id="@+id/btn_two"
+                   android:text="频道"
+                   android:textColor="@color/gray_button"
                    android:textSize="14sp"/>
        </LinearLayout>
         <TextView

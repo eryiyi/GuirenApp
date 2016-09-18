@@ -61,7 +61,7 @@ public class ItemVideoTypeAdapter extends BaseAdapter {
         final VideoTypeObj cell = records.get(position);//获得元素
         if (cell != null) {
             holder.item_title.setText(cell.getVideo_type_name());
-            imageLoader.displayImage(cell.getVideo_type_pic() , holder.item_pic, GuirenApplication.txOptions, animateFirstListener);
+            imageLoader.displayImage(cell.getVideo_type_pic() , holder.item_pic, GuirenApplication.options, animateFirstListener);
         }
         return convertView;
     }

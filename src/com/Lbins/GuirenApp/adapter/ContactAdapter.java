@@ -80,7 +80,7 @@ public class ContactAdapter  extends BaseAdapter implements SectionIndexer {
         if (position == 0) {
             viewHolder.tvCatalog.setVisibility(View.VISIBLE);
             viewHolder.tvCatalog.setText(catalog);
-            imageLoader.displayImage( mNicks.get(position).getMm_emp_cover(),  viewHolder.ivAvatar, GuirenApplication.options, animateFirstListener);
+            imageLoader.displayImage( mNicks.get(position).getMm_emp_cover(),  viewHolder.ivAvatar, GuirenApplication.txOptions, animateFirstListener);
         } else {
             String lastCatalog = PingYinUtil.converterToFirstSpell(
                     mNicks.get(position - 1).getMm_emp_nickname()).substring(0, 1);
@@ -90,7 +90,7 @@ public class ContactAdapter  extends BaseAdapter implements SectionIndexer {
                 viewHolder.tvCatalog.setVisibility(View.VISIBLE);
                 viewHolder.tvCatalog.setText(catalog);
             }
-            imageLoader.displayImage( mNicks.get(position ).getMm_emp_cover(),  viewHolder.ivAvatar, GuirenApplication.options, animateFirstListener);
+            imageLoader.displayImage( mNicks.get(position ).getMm_emp_cover(),  viewHolder.ivAvatar, GuirenApplication.txOptions, animateFirstListener);
         }
 
 

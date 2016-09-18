@@ -30,9 +30,9 @@
             <ImageView 
                 android:id="@+id/arrow"
                 android:layout_width="wrap_content"
+                android:src="@drawable/default_ptr_rotate"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:src="@drawable/default_ptr_rotate"
                 />
             <ProgressBar 
                 android:id="@+id/progress_bar"

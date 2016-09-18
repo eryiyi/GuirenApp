@@ -21,6 +21,7 @@
               android:layout_marginLeft="25dp"
               android:layout_marginRight="25dp"
               android:padding="10dp"
+              android:numeric="integer"
               android:drawablePadding="15dp"
               android:background="@color/white"
               android:drawableLeft="@drawable/md_user"

@@ -68,7 +68,39 @@ public class NewGroupActivity extends BaseActivity {
 		    new EaseAlertDialog(this, R.string.Group_name_cannot_be_empty).show();
 		} else {
 			// select from contact list
-			startActivityForResult(new Intent(this, GroupPickContactsActivity.class).putExtra("groupName", name), 0);
+//			startActivityForResult(new Intent(this, GroupPickContactsActivity.class).putExtra("groupName", name), 0);
+			addGroup();
+		}
+	}
+
+	void addGroup(){
+		final String groupName = groupNameEditText.getText().toString().trim();
+		String desc = introductionEditText.getText().toString();
+		String[] members = new String[0];
+		try {
+			EMGroupOptions option = new EMGroupOptions();
+			option.maxUsers = 200;
+
+			String reason = NewGroupActivity.this.getString(R.string.invite_join_group);
+			reason  = EMClient.getInstance().getCurrentUser() + reason + groupName;
+
+			if(publibCheckBox.isChecked()){
+				option.style = memberCheckbox.isChecked() ? EMGroupStyle.EMGroupStylePublicJoinNeedApproval : EMGroupStyle.EMGroupStylePublicOpenJoin;
+			}else{
+				option.style = memberCheckbox.isChecked()?EMGroupStyle.EMGroupStylePrivateMemberCanInvite:EMGroupStyle.EMGroupStylePrivateOnlyOwnerInvite;
+			}
+			EMClient.getInstance().groupManager().createGroup(groupName, desc, members, reason, option);
+			runOnUiThread(new Runnable() {
+				public void run() {
+					setResult(RESULT_OK);
+					finish();
+				}
+			});
+		} catch (final HyphenateException e) {
+			runOnUiThread(new Runnable() {
+				public void run() {
+				}
+			});
 		}
 	}
 	

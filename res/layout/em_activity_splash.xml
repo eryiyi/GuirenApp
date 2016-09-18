@@ -2,7 +2,7 @@
     android:id="@+id/splash_root"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@drawable/em_splash" >
+    >
 
     <ImageView
         android:id="@+id/iv_splash_logo"

@@ -62,6 +62,7 @@ public class VideosSearchActivity extends BaseActivity implements View.OnClickLi
     }
 
     private void initView() {
+        this.findViewById(R.id.back).setOnClickListener(this);
         mColumnHorizontalScrollView = (ColumnHorizontalScrollView) findViewById(R.id.mColumnHorizontalScrollView);
         mRadioGroup_content = (LinearLayout) findViewById(R.id.mRadioGroup_content);
         mViewPager = (ViewPager) findViewById(R.id.mViewPager);

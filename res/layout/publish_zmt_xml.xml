@@ -36,6 +36,7 @@
                 android:paddingLeft="10dp"
                 android:drawableLeft="@drawable/md_return"
                 android:text="返回"
+                android:textColor="@color/white"
                 android:gravity="center_vertical"
                 android:paddingRight="10dp"
                 />

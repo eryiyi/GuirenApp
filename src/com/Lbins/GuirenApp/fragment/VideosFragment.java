@@ -225,7 +225,7 @@ public class VideosFragment extends BaseFragment implements OnClickContentItemLi
     @Override
     public void onDestroy() {
         super.onDestroy();
-        getActivity().unregisterReceiver(mBroadcastReceiver);
+//        getActivity().unregisterReceiver(mBroadcastReceiver);
     }
 
     int tmpId = 0;
