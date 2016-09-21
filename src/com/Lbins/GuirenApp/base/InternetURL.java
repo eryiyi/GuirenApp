@@ -1,8 +1,8 @@
 package com.Lbins.GuirenApp.base;
 
 public class InternetURL {
-    public static final String INTERNAL = "http://www.shandongguiren.com/";
-//    public static final String INTERNAL =  "http://192.168.0.224/";
+//    public static final String INTERNAL = "http://www.shandongguiren.com/";
+    public static final String INTERNAL =  "http://192.168.0.224:8080/";
 
     public static final String QINIU_URL =  "http://7xt74j.com1.z0.glb.clouddn.com/";
 

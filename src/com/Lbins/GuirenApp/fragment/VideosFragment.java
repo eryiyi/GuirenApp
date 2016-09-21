@@ -129,6 +129,7 @@ public class VideosFragment extends BaseFragment implements OnClickContentItemLi
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             }
         });
+        mAdapter.setOnClickContentItemListener(this);
 
     }
 
