@@ -143,15 +143,15 @@ public class RecordAdapter extends BaseAdapter {
                     if (picUrls.length > 0) {
                         //有多张图
                         holder.gridview_detail_picture.setAdapter(new ImageGridViewAdapter(picUrls, mContext));
-                        if(picUrls.length ==1){
-                            //如果只有1张图片
-                            holder.gridview_detail_picture.setClickable(false);
-                            holder.gridview_detail_picture.setPressed(false);
-                            holder.gridview_detail_picture.setEnabled(false);
-                            holder.gridview_detail_picture.setVisibility(View.GONE);
-                            holder.home_photo_item_photo.setVisibility(View.VISIBLE);
-                            imageLoader.displayImage(picUrls[0], holder.home_photo_item_photo, GuirenApplication.options, animateFirstListener);
-                        }else {
+//                        if(picUrls.length ==1){
+//                            //如果只有1张图片
+//                            holder.gridview_detail_picture.setClickable(false);
+//                            holder.gridview_detail_picture.setPressed(false);
+//                            holder.gridview_detail_picture.setEnabled(false);
+//                            holder.gridview_detail_picture.setVisibility(View.GONE);
+//                            holder.home_photo_item_photo.setVisibility(View.VISIBLE);
+//                            imageLoader.displayImage(picUrls[0], holder.home_photo_item_photo, GuirenApplication.options, animateFirstListener);
+//                        }else {
                             holder.gridview_detail_picture.setClickable(true);
                             holder.gridview_detail_picture.setPressed(true);
                             holder.gridview_detail_picture.setEnabled(true);
@@ -167,7 +167,7 @@ public class RecordAdapter extends BaseAdapter {
                                     mContext.startActivity(intent);
                                 }
                             });
-                        }
+//                        }
 
                     }
                 }

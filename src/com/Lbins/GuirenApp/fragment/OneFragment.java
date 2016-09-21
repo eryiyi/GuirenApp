@@ -97,8 +97,8 @@ public class OneFragment extends BaseFragment implements View.OnClickListener ,A
         setUpMap();
         btn_one = (TextView) view.findViewById(R.id.btn_one);
         btn_two = (TextView) view.findViewById(R.id.btn_two);
-        btn_one.setText(getGson().fromJson(getSp().getString("mm_hangye_name", ""), String.class) );
-        btn_two.setText(getGson().fromJson(getSp().getString("areaName", ""), String.class) );
+//        btn_one.setText(getGson().fromJson(getSp().getString("mm_hangye_name", ""), String.class) );
+//        btn_two.setText(getGson().fromJson(getSp().getString("areaName", ""), String.class) );
         btn_one.setOnClickListener(this);
         btn_two.setOnClickListener(this);
     }

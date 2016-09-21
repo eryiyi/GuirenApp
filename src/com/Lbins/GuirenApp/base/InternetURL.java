@@ -1,10 +1,10 @@
 package com.Lbins.GuirenApp.base;
 
 public class InternetURL {
-//    public static final String INTERNAL = "http://smilekyle.xicp.net:42765/";
     public static final String INTERNAL = "http://www.shandongguiren.com/";
-    public static final String QINIU_URL =  "http://7xt74j.com1.z0.glb.clouddn.com/";
 //    public static final String INTERNAL =  "http://192.168.0.224/";
+
+    public static final String QINIU_URL =  "http://7xt74j.com1.z0.glb.clouddn.com/";
 
     public static final String WEIXIN_APPID = "wx4da8b73a07135cd1";
     public static final String WEIXIN_SECRET = "a393cc92c26041c3cdad965a931ba537";
