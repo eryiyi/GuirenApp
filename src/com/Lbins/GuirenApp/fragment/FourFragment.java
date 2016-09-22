@@ -2,7 +2,6 @@ package com.Lbins.GuirenApp.fragment;
 
 import android.content.Intent;
 import android.content.res.Resources;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +10,6 @@ import android.widget.Toast;
 import com.Lbins.GuirenApp.R;
 import com.Lbins.GuirenApp.base.BaseFragment;
 import com.Lbins.GuirenApp.ui.*;
-import com.Lbins.GuirenApp.util.GuirenHttpUtils;
 
 /**
  * Created by zhl on 2016/5/6.
@@ -140,7 +138,7 @@ public class FourFragment extends BaseFragment implements View.OnClickListener {
            case R.id.liner_tv:
            {
                //视频
-               Intent intent = new Intent(getActivity(), VideosActivityT.class);
+               Intent intent = new Intent(getActivity(), VideosActivity.class);
                startActivity(intent);
            }
                break;

@@ -266,7 +266,7 @@ public class InternetURL {
 
     //电影列表
     public static final String GET_VIDEOS_URL = INTERNAL +  "listVideosApp.do";
-    //视频列表
+    //TV列表
     public static final String GET_VIDEOS_TV_URL = INTERNAL +  "listVideosAppTv.do";
 
     //视频分享
