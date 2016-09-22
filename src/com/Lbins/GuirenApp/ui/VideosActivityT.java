@@ -16,11 +16,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
 import com.Lbins.GuirenApp.R;
+import com.Lbins.GuirenApp.adapter.ItemTvAdapter;
 import com.Lbins.GuirenApp.adapter.ItemVideoTypeAdapter;
 import com.Lbins.GuirenApp.adapter.ItemVideosAdapter;
+import com.Lbins.GuirenApp.adapter.OnClickContentItemListener;
 import com.Lbins.GuirenApp.base.BaseActivity;
 import com.Lbins.GuirenApp.base.InternetURL;
 import com.Lbins.GuirenApp.dao.DBHelper;
+import com.Lbins.GuirenApp.data.RecordDATA;
 import com.Lbins.GuirenApp.data.VideoTypeObjData;
 import com.Lbins.GuirenApp.data.VideosData;
 import com.Lbins.GuirenApp.library.PullToRefreshBase;
@@ -37,6 +40,13 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.umeng.socialize.ShareAction;
+import com.umeng.socialize.UMShareAPI;
+import com.umeng.socialize.UMShareListener;
+import com.umeng.socialize.bean.SHARE_MEDIA;
+import com.umeng.socialize.media.UMImage;
+import com.umeng.socialize.shareboard.SnsPlatform;
+import com.umeng.socialize.utils.ShareBoardlistener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -47,15 +57,14 @@ import java.util.Map;
  * Created by Administrator on 2015/12/15.
  * 视频
  */
-public class VideosActivityT extends BaseActivity implements View.OnClickListener {
+public class VideosActivityT extends BaseActivity implements View.OnClickListener,OnClickContentItemListener {
     private PullToRefreshListView lstv;
     private List<Videos> list = new ArrayList<Videos>();
-    private ItemVideosAdapter adapter;
+    protected ItemTvAdapter adapter;
     private int pageIndex = 1;
     private static boolean IS_REFRESH = true;
 
     private String emp_id = "";//当前登陆者UUID
-    private int tmpId;
 
     boolean isMobileNet, isWifiNet;
 
@@ -121,7 +130,7 @@ public class VideosActivityT extends BaseActivity implements View.OnClickListene
 
         //第一部分
         lstv = (PullToRefreshListView) view1.findViewById(R.id.lstv);
-        adapter = new ItemVideosAdapter(list, VideosActivityT.this);
+        adapter = new ItemTvAdapter(list, VideosActivityT.this);
         lstv.setMode(PullToRefreshBase.Mode.BOTH);
         lstv.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
             @Override
@@ -169,23 +178,24 @@ public class VideosActivityT extends BaseActivity implements View.OnClickListene
             }
         });
         lstv.setAdapter(adapter);
+        adapter.setOnClickContentItemListener(this);
         lstv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Videos tmpVideos = list.get(position - 1);
-//                Intent detailView = new Intent(VideosActivityT.this, DetailVideosActivity.class);
-//                detailView.putExtra(Constants.INFO, tmpVideos);
-//                startActivity(detailView);
+                Intent detailView = new Intent(VideosActivityT.this, DetailTvActivity.class);
+                detailView.putExtra(Constants.INFO, tmpVideos);
+                startActivity(detailView);
 //                final Uri uri = Uri.parse(tmpVideos.getVideoUrl());
 //                final Intent it = new Intent(Intent.ACTION_VIEW, uri);
 //                startActivity(it);
 
-                String videoUrl = tmpVideos.getVideoUrl();
-                Intent intent = new Intent(VideosActivityT.this, VideoPlayerActivity2.class);
-                VideoPlayer video = new VideoPlayer(videoUrl);
-                intent.putExtra(Constants.EXTRA_LAYOUT, "0");
-                intent.putExtra(VideoPlayer.class.getName(), video);
-                startActivity(intent);
+//                String videoUrl = tmpVideos.getVideoUrl();
+//                Intent intent = new Intent(VideosActivityT.this, VideoPlayerActivity2.class);
+//                VideoPlayer video = new VideoPlayer(videoUrl);
+//                intent.putExtra(Constants.EXTRA_LAYOUT, "0");
+//                intent.putExtra(VideoPlayer.class.getName(), video);
+//                startActivity(intent);
             }
         });
         this.findViewById(R.id.back).setOnClickListener(this);
@@ -441,4 +451,162 @@ public class VideosActivityT extends BaseActivity implements View.OnClickListene
             }
         }
     }
+    int tmpId = 0;
+    Videos tmpVideos ;
+    @Override
+    public void onClickContentItem(int position, int flag, Object object) {
+        tmpVideos = list.get(position);
+        tmpId = position;
+        switch (flag){
+            case 1:
+                //评论
+            {
+                Intent comment = new Intent(VideosActivityT.this, PublishTvCommentAcitvity.class);
+                comment.putExtra(Constants.FATHER_PERSON_NAME, "");
+                comment.putExtra(Constants.FATHER_UUID, "0");
+                comment.putExtra(Constants.RECORD_UUID, tmpVideos.getId());
+                comment.putExtra("fplempid", "");
+                startActivity(comment);
+            }
+            break;
+            case 2:
+                //分享
+            {
+                share();
+            }
+            break;
+            case 3:
+                //赞
+            {
+                progressDialog =  new CustomProgressDialog(VideosActivityT.this, "正在加载中",R.anim.custom_dialog_frame);
+                progressDialog.setCancelable(true);
+                progressDialog.setIndeterminate(true);
+                progressDialog.show();
+                zan_click(tmpVideos);
+            }
+            break;
+            case 4:
+                //播放
+                String videoUrl = tmpVideos.getVideoUrl();
+                Intent intent = new Intent(VideosActivityT.this, VideoPlayerActivity2.class);
+                VideoPlayer video = new VideoPlayer(videoUrl);
+                intent.putExtra(Constants.EXTRA_LAYOUT, "0");
+                intent.putExtra(VideoPlayer.class.getName(), video);
+                startActivity(intent);
+//                final Uri uri = Uri.parse(videoUrl);
+//                final Intent it = new Intent(Intent.ACTION_VIEW, uri);
+//                startActivity(it);
+                break;
+        }
+    }
+
+    void share() {
+        new ShareAction(VideosActivityT.this).setDisplayList(SHARE_MEDIA.QQ, SHARE_MEDIA.QZONE, SHARE_MEDIA.WEIXIN, SHARE_MEDIA.WEIXIN_CIRCLE)
+                .setShareboardclickCallback(shareBoardlistener)
+                .open();
+    }
+
+    private ShareBoardlistener shareBoardlistener = new ShareBoardlistener() {
+
+        @Override
+        public void onclick(SnsPlatform snsPlatform, SHARE_MEDIA share_media) {
+            UMImage image = new UMImage(VideosActivityT.this, tmpVideos.getPicUrl());
+            String title =  getGson().fromJson(getSp().getString("mm_emp_nickname", ""), String.class)+"邀您免费看电影" ;
+            String content = tmpVideos.getTitle()+tmpVideos.getContent();
+            new ShareAction(VideosActivityT.this).setPlatform(share_media).setCallback(umShareListener)
+                    .withText(content)
+                    .withTitle(title)
+                    .withTargetUrl((InternetURL.SHARE_VIDEOS_TV + "?id=" + tmpVideos.getId()))
+                    .withMedia(image)
+                    .share();
+        }
+    };
+
+    private UMShareListener umShareListener = new UMShareListener() {
+        @Override
+        public void onResult(SHARE_MEDIA platform) {
+            Toast.makeText(VideosActivityT.this, platform + getResources().getString(R.string.share_success), Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onError(SHARE_MEDIA platform, Throwable t) {
+            Toast.makeText(VideosActivityT.this, platform + getResources().getString(R.string.share_error), Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onCancel(SHARE_MEDIA platform) {
+            Toast.makeText(VideosActivityT.this, platform + getResources().getString(R.string.share_cancel), Toast.LENGTH_SHORT).show();
+        }
+    };
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        UMShareAPI.get(VideosActivityT.this).onActivityResult(requestCode, resultCode, data);
+    }
+
+
+    //赞
+    private void zan_click(final Videos record) {
+        StringRequest request = new StringRequest(
+                Request.Method.POST,
+                InternetURL.PUBLISH_VIDEO_FAVOUR_RECORD_TV,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String s) {
+                        if (StringUtil.isJson(s)) {
+                            RecordDATA data = getGson().fromJson(s, RecordDATA.class);
+                            if (Integer.parseInt(data.getCode()) == 200) {
+                                //赞+1
+                                Toast.makeText(VideosActivityT.this, R.string.zan_success, Toast.LENGTH_SHORT).show();
+                                list.get(tmpId).setZanNum(String.valueOf(Integer.parseInt((list.get(tmpId).getZanNum() == null ? "0" : list.get(tmpId).getZanNum())) + 1));
+                                adapter.notifyDataSetChanged();
+                            }
+                            if (Integer.parseInt(data.getCode()) == 1) {
+                                Toast.makeText(VideosActivityT.this, R.string.zan_error_one, Toast.LENGTH_SHORT).show();
+
+                            }
+                            if (Integer.parseInt(data.getCode()) == 2) {
+                                Toast.makeText(VideosActivityT.this, R.string.zan_error_two, Toast.LENGTH_SHORT).show();
+
+                            }
+                        } else {
+                            Toast.makeText(VideosActivityT.this, R.string.zan_error_two, Toast.LENGTH_SHORT).show();
+
+                        }
+                        if (progressDialog != null) {
+                            progressDialog.dismiss();
+                        }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        Toast.makeText(VideosActivityT.this, R.string.zan_error_two, Toast.LENGTH_SHORT).show();
+                        if (progressDialog != null) {
+                            progressDialog.dismiss();
+                        }
+                    }
+                }
+        ) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("recordId", record.getId());
+                params.put("empId", getGson().fromJson(getSp().getString("mm_emp_id", ""), String.class));
+                params.put("sendEmpId", "");
+                return params;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Content-Type", "application/x-www-form-urlencoded");
+                return params;
+            }
+        };
+        getRequestQueue().add(request);
+    }
+
 }

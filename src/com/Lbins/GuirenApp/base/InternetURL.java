@@ -294,4 +294,18 @@ public class InternetURL {
     //查询电影类别
     public static final String GET_DIANYING_TYPES_URL = INTERNAL + "getDianyingTypes.do";
 
+
+    //添加评论TV
+    public static final String PUBLISH_VIDEO_COMMENT_RECORD_TV =  INTERNAL +  "appVideosSaveCommentTv.do";
+    //添加赞TV
+    public static final String PUBLISH_VIDEO_FAVOUR_RECORD_TV =  INTERNAL +  "appVideoZanSaveTV.do";
+
+    //查询TV评论
+    public static final String GET_VIDEOS_PL_URL_TV = INTERNAL +  "listVideosCommentTv.do";
+    //查询TV赞
+    public static final String GET_VIDEOS_FAVOUR_URL_TV =  INTERNAL + "appVideosListZanTV.do";
+
+
+    //视频分享
+    public static final String SHARE_VIDEOS_TV = INTERNAL +  "viewVideosTv.do";
 }
