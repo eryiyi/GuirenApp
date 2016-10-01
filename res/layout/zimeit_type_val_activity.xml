@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="fill_parent"
               android:id="@+id/main"
-              android:background="@color/white"
+              android:background="#ebebeb"
               android:layout_height="fill_parent"
               android:orientation="vertical">
 
@@ -38,18 +38,17 @@
                 android:id="@+id/detail_title"
                 />
     </RelativeLayout>
-    <RelativeLayout android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-        <GridView
+
+        <com.Lbins.GuirenApp.widget.PictureGridview
                 android:id="@+id/lstv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:horizontalSpacing="0.1dip"
+                android:background="#ebebeb"
+                android:horizontalSpacing="4dip"
                 android:numColumns="3"
                 android:stretchMode="columnWidth"
-                android:verticalSpacing="0.1dip"
-                />
-    </RelativeLayout>
+                android:verticalSpacing="4dip"
+                android:padding="4dip"/>
 
 </LinearLayout>

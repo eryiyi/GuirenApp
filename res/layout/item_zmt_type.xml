@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
+              android:padding="12dp"
+              android:layout_gravity="center"
+              android:gravity="center"
+              android:background="@drawable/zhuye_item_select"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content">
 
@@ -9,7 +13,8 @@
               android:id="@+id/item_title"
               android:textSize="15sp"
               android:textStyle="bold"
-              android:textColor="@color/white"
+              android:textColor="@color/text_color"
               android:layout_centerInParent="true"
               android:layout_height="wrap_content"/>
+
 </RelativeLayout>

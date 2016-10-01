@@ -4,10 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.format.DateUtils;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.Toast;
+import android.widget.*;
 import com.Lbins.GuirenApp.GuirenApplication;
 import com.Lbins.GuirenApp.R;
 import com.Lbins.GuirenApp.adapter.ItemDianpuAdapter;
@@ -46,8 +43,11 @@ public class ZimeitiActivity extends BaseActivity implements View.OnClickListene
     private ImageView no_record;
     private String emp_id = "";//当前登陆者UUID
 
+    private String gd_type_id;//分类
+    private String gd_type_name;//分类名称
 
     boolean isMobileNet, isWifiNet;
+    private TextView detail_title;
 
 
     @Override
@@ -83,6 +83,10 @@ public class ZimeitiActivity extends BaseActivity implements View.OnClickListene
     }
 
     private void initView() {
+        gd_type_id = "";
+        gd_type_name = "自媒体";
+        detail_title = (TextView) this.findViewById(R.id.detail_title);
+        detail_title.setText(gd_type_name);
         this.findViewById(R.id.back).setOnClickListener(this);
         lstv = (PullToRefreshListView) this.findViewById(R.id.lstv);//列表
         adapter = new ItemDianpuAdapter(listgoods, ZimeitiActivity.this);
@@ -168,6 +172,18 @@ public class ZimeitiActivity extends BaseActivity implements View.OnClickListene
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 1000 && resultCode == 1000){
+            gd_type_id = data.getExtras().getString("gd_type_id");
+            gd_type_name = data.getExtras().getString("gd_type_name");
+            detail_title.setText(gd_type_name);
+            initData();
+        }
+    }
+
+
     //获得商家店铺列表
     private void initData() {
         StringRequest request = new StringRequest(
@@ -233,6 +249,9 @@ public class ZimeitiActivity extends BaseActivity implements View.OnClickListene
                 if(!StringUtil.isNullOrEmpty(GuirenApplication.lngStr)){
                     params.put("lng",GuirenApplication.lngStr);
                 }
+
+                params.put("gd_type_id", gd_type_id);
+
                 return params;
             }
 

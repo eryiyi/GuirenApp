@@ -31,4 +31,10 @@ public class GdTypeObj {
     public void setTop_num(String top_num) {
         this.top_num = top_num;
     }
+
+    public GdTypeObj(String gd_type_id, String gd_type_name, String top_num) {
+        this.gd_type_id = gd_type_id;
+        this.gd_type_name = gd_type_name;
+        this.top_num = top_num;
+    }
 }

@@ -17,6 +17,7 @@ import com.Lbins.GuirenApp.data.GdTypeObjData;
 import com.Lbins.GuirenApp.module.GdTypeObj;
 import com.Lbins.GuirenApp.module.VideoTypeObj;
 import com.Lbins.GuirenApp.util.StringUtil;
+import com.Lbins.GuirenApp.widget.PictureGridview;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -33,8 +34,7 @@ import java.util.Map;
  * Created by zhl on 2016/10/1.
  */
 public class ZimeitiTypeValActivity extends BaseActivity implements View.OnClickListener {
-    //----第二部分
-    private GridView gridv_one;
+    private PictureGridview gridv_one;
     private ItemZmtTypeAdapter adapterType;
     private List<GdTypeObj> listsType = new ArrayList<GdTypeObj>();
 
@@ -42,15 +42,13 @@ public class ZimeitiTypeValActivity extends BaseActivity implements View.OnClick
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.zimeit_type_val_activity);
-
         initView();
         getType();
     }
 
     private void initView() {
-
         this.findViewById(R.id.back).setOnClickListener(this);
-        gridv_one = (GridView) this.findViewById(R.id.lstv);
+        gridv_one = (PictureGridview) this.findViewById(R.id.lstv);
         adapterType = new ItemZmtTypeAdapter(listsType, ZimeitiTypeValActivity.this);
         gridv_one.setAdapter(adapterType);
         gridv_one.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -62,14 +60,13 @@ public class ZimeitiTypeValActivity extends BaseActivity implements View.OnClick
                         Intent intent = new Intent();
                         intent.putExtra("gd_type_id" , videoTypeObj.getGd_type_id());
                         intent.putExtra("gd_type_name" , videoTypeObj.getGd_type_name());
-                        setResult(RESULT_OK , intent);
+                        setResult(1000 , intent);
                         finish();
                     }
                 }
             }
         });
         gridv_one.setSelector(new ColorDrawable(Color.TRANSPARENT));
-
     }
 
     @Override
@@ -95,6 +92,7 @@ public class ZimeitiTypeValActivity extends BaseActivity implements View.OnClick
                                 if (Integer.parseInt(code1) == 200) {
                                     GdTypeObjData data = getGson().fromJson(s, GdTypeObjData.class);
                                     listsType.clear();
+                                    listsType.add(new  GdTypeObj("", "全部", "0"));
                                     listsType.addAll(data.getData());
                                     adapterType.notifyDataSetChanged();
                                 }
