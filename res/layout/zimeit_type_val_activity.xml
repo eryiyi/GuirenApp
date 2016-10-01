@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="fill_parent"
+              android:id="@+id/main"
+              android:background="@color/white"
+              android:layout_height="fill_parent"
+              android:orientation="vertical">
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/topbar_height"
+            android:background="@color/mm_main_bg_mine_top"
+            android:gravity="center_vertical"
+            >
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:id="@+id/back"
+                android:paddingLeft="10dp"
+                android:drawableLeft="@drawable/md_return"
+                android:text="返回"
+                android:textColor="@color/white"
+                android:gravity="center_vertical"
+                android:paddingRight="10dp"
+                />
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textColor="@color/white"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:singleLine="true"
+                android:text="自媒体类别"
+                android:layout_marginLeft="45dp"
+                android:layout_marginRight="45dp"
+                android:id="@+id/detail_title"
+                />
+    </RelativeLayout>
+    <RelativeLayout android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+        <GridView
+                android:id="@+id/lstv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:horizontalSpacing="0.1dip"
+                android:numColumns="3"
+                android:stretchMode="columnWidth"
+                android:verticalSpacing="0.1dip"
+                />
+    </RelativeLayout>
+
+</LinearLayout>

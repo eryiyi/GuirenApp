@@ -73,6 +73,7 @@ public class ProfileZmtActivity extends BaseActivity implements View.OnClickList
     private TextView company_detail;
     private TextView title;
     private TextView add;
+    private TextView gd_type_id;
 
     private LinearLayout headLiner;
 
@@ -83,7 +84,6 @@ public class ProfileZmtActivity extends BaseActivity implements View.OnClickList
     ManagerInfo managerInfo;
 
     boolean isMobileNet, isWifiNet;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -144,6 +144,7 @@ public class ProfileZmtActivity extends BaseActivity implements View.OnClickList
         company_tel = (TextView) headLiner.findViewById(R.id.company_tel);
         company_address = (TextView) headLiner.findViewById(R.id.company_address);
         company_detail = (TextView) headLiner.findViewById(R.id.company_detail);
+        gd_type_id = (TextView) headLiner.findViewById(R.id.gd_type_id);
 
         head.setOnClickListener(this);
         nickname.setOnClickListener(this);
@@ -630,6 +631,7 @@ public class ProfileZmtActivity extends BaseActivity implements View.OnClickList
         company_detail.setText(managerInfo.getCompany_detail());
         imageLoader.displayImage(managerInfo.getCompany_pic(), pic_bg, GuirenApplication.options, animateFirstListener);
         title.setText(managerInfo.getCompany_name());
+        gd_type_id.setText(managerInfo.getGd_type_name()==null?"":managerInfo.getGd_type_name());
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.Lbins.GuirenApp.ui;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -11,17 +12,22 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.view.Gravity;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
+import android.widget.*;
 import com.Lbins.GuirenApp.GuirenApplication;
 import com.Lbins.GuirenApp.R;
 import com.Lbins.GuirenApp.adapter.AnimateFirstDisplayListener;
 import com.Lbins.GuirenApp.base.BaseActivity;
 import com.Lbins.GuirenApp.base.InternetURL;
+import com.Lbins.GuirenApp.data.GdTypeObjData;
+import com.Lbins.GuirenApp.data.ProvinceData;
+import com.Lbins.GuirenApp.module.CityObj;
+import com.Lbins.GuirenApp.module.CountryObj;
+import com.Lbins.GuirenApp.module.GdTypeObj;
+import com.Lbins.GuirenApp.module.ProvinceObj;
 import com.Lbins.GuirenApp.util.CompressPhotoUtil;
 import com.Lbins.GuirenApp.util.StringUtil;
 import com.Lbins.GuirenApp.widget.CustomProgressDialog;
+import com.Lbins.GuirenApp.widget.CustomerSpinner;
 import com.Lbins.GuirenApp.widget.SelectPhoPopWindow;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -41,7 +47,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -65,10 +73,22 @@ public class OpenZimeitiActivity extends BaseActivity implements View.OnClickLis
     private SelectPhoPopWindow deleteWindow;
     AsyncHttpClient client = new AsyncHttpClient();
 
+
+    //省市县
+    private CustomerSpinner province;
+    private List<GdTypeObj> provinces = new ArrayList<GdTypeObj>();
+    private ArrayList<String> provinceNames = new ArrayList<String>();//省份名称
+    ArrayAdapter<String> ProvinceAdapter;
+    private String provinceName = "";
+    private String provinceCode = "";
+
+    private Resources res;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.open_zimeiti_activity);
+        res = getResources();
         company_name = (EditText) this.findViewById(R.id.company_name);
         company_person = (EditText) this.findViewById(R.id.company_person);
         company_tel = (EditText) this.findViewById(R.id.company_tel);
@@ -79,7 +99,95 @@ public class OpenZimeitiActivity extends BaseActivity implements View.OnClickLis
         add_pic.setOnClickListener(this);
         sign_in_button.setOnClickListener(this);
         this.findViewById(R.id.back).setOnClickListener(this);
+        ProvinceAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, provinceNames);
+        ProvinceAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        province = (CustomerSpinner) findViewById(R.id.mm_emp_provinceId);
+        province.setAdapter(ProvinceAdapter);
+        province.setList(provinceNames);
+        province.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                GdTypeObj province = null;
+                if (provinces != null && position > 0) {
+                    province = provinces.get(position - 1);
+                    provinceName = province.getGd_type_name();
+                    provinceCode = province.getGd_type_id();
+                } else if (provinces != null) {
+                    province = provinces.get(position);
+                    provinceName = province.getGd_type_name();
+                    provinceCode = province.getGd_type_id();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+        getType();
+
     }
+
+
+    public void getType() {
+        StringRequest request = new StringRequest(
+                Request.Method.POST,
+                InternetURL.GET_GD_TYPE_LISTS_URL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String s) {
+                        if (StringUtil.isJson(s)) {
+                            try {
+                                JSONObject jo = new JSONObject(s);
+                                String code1 = jo.getString("code");
+                                if (Integer.parseInt(code1) == 200) {
+                                    provinceNames.add(res.getString(R.string.select_province));
+                                    GdTypeObjData data = getGson().fromJson(s, GdTypeObjData.class);
+                                    provinces = data.getData();
+                                    if (provinces != null) {
+                                        for (int i = 0; i < provinces.size(); i++) {
+                                            provinceNames.add(provinces.get(i).getGd_type_name());
+                                        }
+                                    }
+                                    ProvinceAdapter.notifyDataSetChanged();
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        } else {
+                            Toast.makeText(OpenZimeitiActivity.this, R.string.get_data_error, Toast.LENGTH_SHORT).show();
+                        }
+                        if (progressDialog != null) {
+                            progressDialog.dismiss();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        if (progressDialog != null) {
+                            progressDialog.dismiss();
+                        }
+                        Toast.makeText(OpenZimeitiActivity.this, R.string.get_data_error, Toast.LENGTH_SHORT).show();
+                    }
+                }
+        ) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                return params;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Content-Type", "application/x-www-form-urlencoded");
+                return params;
+            }
+        };
+        getRequestQueue().add(request);
+    }
+
+
 
     @Override
     public void onClick(View v) {
@@ -93,6 +201,7 @@ public class OpenZimeitiActivity extends BaseActivity implements View.OnClickLis
                         StringUtil.isNullOrEmpty(company_tel.getText().toString())||
                         StringUtil.isNullOrEmpty(company_address.getText().toString())||
                         StringUtil.isNullOrEmpty(company_detail.getText().toString())||
+                        StringUtil.isNullOrEmpty(provinceCode)||
                         StringUtil.isNullOrEmpty(pics)){
                     showMsg(OpenZimeitiActivity.this, "请完善信息");
                     return;
@@ -289,12 +398,14 @@ public class OpenZimeitiActivity extends BaseActivity implements View.OnClickLis
                 params.put("company_tel", company_tel.getText().toString());
                 params.put("company_person", company_person.getText().toString());
                 params.put("company_address", company_address.getText().toString());
+                params.put("gd_type_id", provinceCode);
                 if(!StringUtil.isNullOrEmpty(GuirenApplication.latStr)){
                     params.put("lat_company", GuirenApplication.latStr);
                 }
                 if(!StringUtil.isNullOrEmpty(GuirenApplication.lngStr)){
                     params.put("lng_company", GuirenApplication.lngStr);
                 }
+
                 return params;
             }
 

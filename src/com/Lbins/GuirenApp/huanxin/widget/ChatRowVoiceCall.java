@@ -7,7 +7,7 @@ import android.widget.TextView;
 import com.Lbins.GuirenApp.huanxin.Constant;
 import com.hyphenate.chat.EMMessage;
 import com.hyphenate.chat.EMTextMessageBody;
-import com.hyphenate.easeui.R;
+import com.Lbins.GuirenApp.R;
 import com.hyphenate.easeui.widget.chatrow.EaseChatRow;
 
 public class ChatRowVoiceCall extends EaseChatRow{

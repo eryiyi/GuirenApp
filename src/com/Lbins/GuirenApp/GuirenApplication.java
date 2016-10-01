@@ -17,6 +17,7 @@ import com.android.volley.*;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
+import com.hyphenate.easeui.controller.EaseUI;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -93,6 +94,7 @@ public class GuirenApplication extends Application  {
         PlatformConfig.setWeixin(InternetURL.WEIXIN_APPID, InternetURL.WEIXIN_SECRET);
         //微信 appid appsecret
         PlatformConfig.setQQZone("1105560084", "939gBlg60YfMVERY");
+        EaseUI.getInstance().init(this, null);
     }
 
     @Override

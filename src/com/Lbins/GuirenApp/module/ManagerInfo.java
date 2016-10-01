@@ -40,6 +40,8 @@ public class ManagerInfo {
     private String company_pic;
     private String emp_id;
     private String emp_cover;
+    private String gd_type_id;
+    private String gd_type_name;
 
     /** Used to resolve relations */
     private transient DaoSession daoSession;
@@ -58,7 +60,7 @@ public class ManagerInfo {
         this.id = id;
     }
 
-    public ManagerInfo(String id, String managerId, String realName, String idcard, String idcardUrl, String payNumber, String checkName, String bankCard, String bankType, String bankAddress, String bankName, String mobile, String lat_company, String lng_company, String company_address, String company_person, String company_detail, String company_tel, String company_name, String yingye_time_start, String yingye_time_end, String shouhui, String company_pic, String emp_id, String emp_cover) {
+    public ManagerInfo(String id, String managerId, String realName, String idcard, String idcardUrl, String payNumber, String checkName, String bankCard, String bankType, String bankAddress, String bankName, String mobile, String lat_company, String lng_company, String company_address, String company_person, String company_detail, String company_tel, String company_name, String yingye_time_start, String yingye_time_end, String shouhui, String company_pic, String emp_id, String emp_cover, String gd_type_id, String gd_type_name) {
         this.id = id;
         this.managerId = managerId;
         this.realName = realName;
@@ -84,6 +86,8 @@ public class ManagerInfo {
         this.company_pic = company_pic;
         this.emp_id = emp_id;
         this.emp_cover = emp_cover;
+        this.gd_type_id = gd_type_id;
+        this.gd_type_name = gd_type_name;
     }
 
     /** called by internal mechanisms, do not call yourself. */
@@ -294,6 +298,23 @@ public class ManagerInfo {
         this.emp_cover = emp_cover;
     }
 
+    public String getGd_type_id() {
+        return gd_type_id;
+    }
+
+    public void setGd_type_id(String gd_type_id) {
+        this.gd_type_id = gd_type_id;
+    }
+
+    public String getGd_type_name() {
+        return gd_type_name;
+    }
+
+    public void setGd_type_name(String gd_type_name) {
+        this.gd_type_name = gd_type_name;
+    }
+
+    /** Convenient call for {@link AbstractDao#delete(Object)}. Entity must attached to an entity context. */
     public void delete() {
         if (myDao == null) {
             throw new DaoException("Entity is detached from DAO context");
@@ -301,6 +322,7 @@ public class ManagerInfo {
         myDao.delete(this);
     }
 
+    /** Convenient call for {@link AbstractDao#update(Object)}. Entity must attached to an entity context. */
     public void update() {
         if (myDao == null) {
             throw new DaoException("Entity is detached from DAO context");
@@ -308,6 +330,7 @@ public class ManagerInfo {
         myDao.update(this);
     }
 
+    /** Convenient call for {@link AbstractDao#refresh(Object)}. Entity must attached to an entity context. */
     public void refresh() {
         if (myDao == null) {
             throw new DaoException("Entity is detached from DAO context");

@@ -149,6 +149,7 @@ public class ZimeitiActivity extends BaseActivity implements View.OnClickListene
             }
         });
         no_record = (ImageView) this.findViewById(R.id.no_record);
+        this.findViewById(R.id.btn_val).setOnClickListener(this);
     }
 
     @Override
@@ -156,6 +157,13 @@ public class ZimeitiActivity extends BaseActivity implements View.OnClickListene
         switch (v.getId()) {
             case R.id.back:
                 finish();
+                break;
+            case R.id.btn_val:
+            {
+                //筛选
+                Intent intent = new Intent(ZimeitiActivity.this, ZimeitiTypeValActivity.class);
+                startActivityForResult(intent, 1000);
+            }
                 break;
         }
     }

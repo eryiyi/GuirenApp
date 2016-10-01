@@ -48,6 +48,8 @@ public class ManagerInfoDao extends AbstractDao<ManagerInfo, String> {
         public final static Property Company_pic = new Property(22, String.class, "company_pic", false, "COMPANY_PIC");
         public final static Property Emp_id = new Property(23, String.class, "emp_id", false, "EMP_ID");
         public final static Property Emp_cover = new Property(24, String.class, "emp_cover", false, "EMP_COVER");
+        public final static Property Gd_type_id = new Property(25, String.class, "gd_type_id", false, "GD_TYPE_ID");
+        public final static Property Gd_type_name = new Property(26, String.class, "gd_type_name", false, "GD_TYPE_NAME");
     };
 
     private DaoSession daoSession;
@@ -90,7 +92,9 @@ public class ManagerInfoDao extends AbstractDao<ManagerInfo, String> {
                 "'SHOUHUI' TEXT," + // 21: shouhui
                 "'COMPANY_PIC' TEXT," + // 22: company_pic
                 "'EMP_ID' TEXT," + // 23: emp_id
-                "'EMP_COVER' TEXT);"); // 24: emp_cover
+                "'EMP_COVER' TEXT," + // 24: emp_cover
+                "'GD_TYPE_ID' TEXT," + // 25: gd_type_id
+                "'GD_TYPE_NAME' TEXT);"); // 26: gd_type_name
     }
 
     /** Drops the underlying database table. */
@@ -224,6 +228,16 @@ public class ManagerInfoDao extends AbstractDao<ManagerInfo, String> {
         if (emp_cover != null) {
             stmt.bindString(25, emp_cover);
         }
+ 
+        String gd_type_id = entity.getGd_type_id();
+        if (gd_type_id != null) {
+            stmt.bindString(26, gd_type_id);
+        }
+ 
+        String gd_type_name = entity.getGd_type_name();
+        if (gd_type_name != null) {
+            stmt.bindString(27, gd_type_name);
+        }
     }
 
     @Override
@@ -266,7 +280,9 @@ public class ManagerInfoDao extends AbstractDao<ManagerInfo, String> {
             cursor.isNull(offset + 21) ? null : cursor.getString(offset + 21), // shouhui
             cursor.isNull(offset + 22) ? null : cursor.getString(offset + 22), // company_pic
             cursor.isNull(offset + 23) ? null : cursor.getString(offset + 23), // emp_id
-            cursor.isNull(offset + 24) ? null : cursor.getString(offset + 24) // emp_cover
+            cursor.isNull(offset + 24) ? null : cursor.getString(offset + 24), // emp_cover
+            cursor.isNull(offset + 25) ? null : cursor.getString(offset + 25), // gd_type_id
+            cursor.isNull(offset + 26) ? null : cursor.getString(offset + 26) // gd_type_name
         );
         return entity;
     }
@@ -299,6 +315,8 @@ public class ManagerInfoDao extends AbstractDao<ManagerInfo, String> {
         entity.setCompany_pic(cursor.isNull(offset + 22) ? null : cursor.getString(offset + 22));
         entity.setEmp_id(cursor.isNull(offset + 23) ? null : cursor.getString(offset + 23));
         entity.setEmp_cover(cursor.isNull(offset + 24) ? null : cursor.getString(offset + 24));
+        entity.setGd_type_id(cursor.isNull(offset + 25) ? null : cursor.getString(offset + 25));
+        entity.setGd_type_name(cursor.isNull(offset + 26) ? null : cursor.getString(offset + 26));
      }
     
     /** @inheritdoc */

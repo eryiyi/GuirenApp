@@ -36,7 +36,7 @@ public class PickAtUserActivity extends BaseActivity {
         String groupId = getIntent().getStringExtra("groupId");
         EMGroup group = EMClient.getInstance().groupManager().getGroup(groupId);
 
-        sidebar = (EaseSidebar) findViewById(com.hyphenate.easeui.R.id.sidebar);
+        sidebar = (EaseSidebar) findViewById(R.id.sidebar);
         listView = (ListView) findViewById(R.id.list);
         sidebar.setListView(listView);
         List<String> members = group.getMembers();

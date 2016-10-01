@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           xmlns:tools="http://schemas.android.com/tools"
           package="com.Lbins.GuirenApp"
-          android:versionCode="5"
-          android:versionName="1.0.4">
+          android:versionCode="6"
+          android:versionName="1.0.5">
     <uses-sdk android:minSdkVersion="17"/>
 
 
@@ -206,6 +206,7 @@
         <activity android:name=".ui.PublishTvCommentAcitvity" android:screenOrientation="portrait" android:theme="@style/AppTheme" android:windowSoftInputMode="adjustResize|stateHidden"/>
         <activity android:name=".ui.DetailTvActivity" android:screenOrientation="portrait" android:theme="@style/AppTheme" android:windowSoftInputMode="adjustResize|stateHidden"/>
         <activity android:name=".ui.VideosByTypeActivity" android:screenOrientation="portrait" android:theme="@style/AppTheme" android:windowSoftInputMode="adjustResize|stateHidden"/>
+        <activity android:name=".ui.ZimeitiTypeValActivity" android:screenOrientation="portrait" android:theme="@style/AppTheme" android:windowSoftInputMode="adjustResize|stateHidden"/>
 
 
         <!--// *****************************高德地图sdk*******************************************-->

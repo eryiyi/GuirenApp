@@ -94,7 +94,6 @@
                       android:layout_height="35dp">
             </EditText>
 
-
             <EditText android:layout_width="match_parent"
                       android:layout_marginLeft="25dp"
                       android:layout_marginRight="25dp"
@@ -109,6 +108,20 @@
                       android:background="@color/white"
                       android:layout_height="35dp">
             </EditText>
+
+            <com.Lbins.GuirenApp.widget.CustomerSpinner
+                    android:background="@drawable/login_edit_bg"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginRight="25dp"
+                    android:drawableLeft="@drawable/star"
+                    android:paddingLeft="15dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_alignParentRight="true"
+                    android:id="@+id/mm_emp_provinceId"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp">
+            </com.Lbins.GuirenApp.widget.CustomerSpinner>
+
             <TextView android:layout_width="wrap_content"
                       android:text="自媒体封面"
                       android:padding="8dp"

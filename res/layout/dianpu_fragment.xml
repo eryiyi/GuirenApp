@@ -37,6 +37,14 @@
                 android:layout_marginRight="45dp"
                 android:id="@+id/detail_title"
                 />
+        <TextView android:layout_width="wrap_content"
+                  android:text="筛选"
+                  android:id="@+id/btn_val"
+                  android:layout_centerVertical="true"
+                  android:padding="12dp"
+                  android:textColor="@color/white"
+                  android:layout_alignParentRight="true"
+                  android:layout_height="wrap_content"/>
 
     </RelativeLayout>
     <RelativeLayout android:layout_width="match_parent"

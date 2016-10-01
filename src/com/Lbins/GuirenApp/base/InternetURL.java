@@ -308,4 +308,7 @@ public class InternetURL {
 
     //视频分享
     public static final String SHARE_VIDEOS_TV = INTERNAL +  "viewVideosTv.do";
+
+    //查询所有自媒体类别
+    public static final String GET_GD_TYPE_LISTS_URL = INTERNAL + "getGdTypes.do";
 }
