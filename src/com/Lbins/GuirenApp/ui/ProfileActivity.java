@@ -7,10 +7,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
-import android.graphics.EmbossMaskFilter;
-import android.graphics.Typeface;
 import android.os.Bundle;
-import android.text.TextPaint;
 import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,6 +33,7 @@ import com.Lbins.GuirenApp.module.Record;
 import com.Lbins.GuirenApp.util.Constants;
 import com.Lbins.GuirenApp.util.GuirenHttpUtils;
 import com.Lbins.GuirenApp.util.StringUtil;
+import com.Lbins.GuirenApp.widget.ContentListView;
 import com.Lbins.GuirenApp.widget.CustomProgressDialog;
 import com.android.volley.*;
 import com.android.volley.toolbox.StringRequest;
@@ -50,11 +48,12 @@ import java.util.Map;
 /**
  * Created by zhl on 2016/5/28.
  */
-public class ProfileActivity extends BaseActivity implements View.OnClickListener ,OnClickContentItemListener {
+public class ProfileActivity extends BaseActivity implements View.OnClickListener ,OnClickContentItemListener,ContentListView.OnRefreshListener,
+        ContentListView.OnLoadListener {
     private String mm_emp_id;
     private Resources res;
     //    RECORD_URL
-    private PullToRefreshListView lstv;
+    private ContentListView lstv;
     private RecordAdapter adapter;
     private int pageIndex = 1;
     private static boolean IS_REFRESH = true;
@@ -121,7 +120,7 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
                 progressDialog.setCancelable(true);
                 progressDialog.setIndeterminate(true);
                 progressDialog.show();
-                initData();
+                initData(ContentListView.REFRESH);
                 getData();
             }
         } catch (Exception e) {
@@ -158,71 +157,22 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
 
         head.setOnClickListener(this);
 
-        lstv = (PullToRefreshListView) this.findViewById(R.id.lstv);
-        ListView listView = lstv.getRefreshableView();
-
-        listView.addHeaderView(headLiner);
-
+        lstv = (ContentListView) this.findViewById(R.id.lstv);
         adapter = new RecordAdapter(recordList, ProfileActivity.this, getGson().fromJson(getSp().getString("mm_emp_id", ""), String.class));
-        lstv.setMode(PullToRefreshBase.Mode.BOTH);
-        lstv.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
-            @Override
-            public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
-                String label = DateUtils.formatDateTime(getApplicationContext(), System.currentTimeMillis(),
-                        DateUtils.FORMAT_SHOW_TIME | DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_ABBREV_ALL);
-
-                refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
-                IS_REFRESH = true;
-                pageIndex = 1;
-                //判断是否有网
-                try {
-                    isMobileNet = GuirenHttpUtils.isMobileDataEnable(ProfileActivity.this);
-                    isWifiNet = GuirenHttpUtils.isWifiDataEnable(ProfileActivity.this);
-                    if (!isMobileNet && !isWifiNet) {
-                        lstv.onRefreshComplete();
-                    }else {
-                        initData();
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
-                String label = DateUtils.formatDateTime(getApplicationContext(), System.currentTimeMillis(),
-                        DateUtils.FORMAT_SHOW_TIME | DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_ABBREV_ALL);
-
-                refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
-                IS_REFRESH = false;
-                pageIndex++;
-                //判断是否有网
-                try {
-                    isMobileNet = GuirenHttpUtils.isMobileDataEnable(ProfileActivity.this);
-                    isWifiNet = GuirenHttpUtils.isWifiDataEnable(ProfileActivity.this);
-                    if (!isMobileNet && !isWifiNet) {
-                        lstv.onRefreshComplete();
-                    }else {
-                        initData();
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
         lstv.setAdapter(adapter);
+        lstv.addHeaderView(headLiner);
+        lstv.setOnRefreshListener(this);
+        lstv.setOnLoadListener(this);
         adapter.setOnClickContentItemListener(this);
         lstv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if(position >1){
+                if(recordList.size() >position){
                     Record record = recordList.get(position - 2);
                     if(record != null){
-                        //          if (!record.getMm_msg_type().equals("1")) {
                         Intent detail = new Intent(ProfileActivity.this, DetailPageAcitvity.class);
                         detail.putExtra(Constants.INFO, record);
                         startActivity(detail);
-//                    }
                     }
                 }
 
@@ -230,22 +180,29 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
         });
     }
 
-    private void initData() {
+    private void initData(final int currentid) {
         StringRequest request = new StringRequest(
                 Request.Method.POST,
                 InternetURL.RECORD_URL,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String s) {
+                        lstv.onRefreshComplete();
+                        lstv.onLoadComplete();
                         if (StringUtil.isJson(s)) {
                             RecordDATA data = getGson().fromJson(s, RecordDATA.class);
                             if (Integer.parseInt(data.getCode()) == 200) {
-                                if (IS_REFRESH) {
+                                if (ContentListView.REFRESH == currentid) {
                                     recordList.clear();
+                                    recordList.addAll(data.getData());
+                                    lstv.setResultSize(data.getData().size());
+                                    adapter.notifyDataSetChanged();
                                 }
-                                recordList.addAll(data.getData());
-                                lstv.onRefreshComplete();
-                                adapter.notifyDataSetChanged();
+                                if (ContentListView.LOAD == currentid) {
+                                    recordList.addAll(data.getData());
+                                    lstv.setResultSize(data.getData().size());
+                                    adapter.notifyDataSetChanged();
+                                }
                                 //处理数据，需要的话保存到数据库
                                 if (data != null && data.getData() != null) {
                                     DBHelper dbHelper = DBHelper.getInstance(ProfileActivity.this);
@@ -272,6 +229,8 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
                         if(progressDialog != null){
                             progressDialog.dismiss();
                         }
+                        lstv.onRefreshComplete();
+                        lstv.onLoadComplete();
                         Toast.makeText(ProfileActivity.this, R.string.get_data_error, Toast.LENGTH_SHORT).show();
                     }
                 }
@@ -557,16 +516,11 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
                 finish();
                 break;
             case R.id.btn_baijian:
-//                Intent tpv=  new Intent(ProfileActivity.this, TuopuActivity.class);
-//                tpv.putExtra("mm_emp_id", mm_emp_id);
-//                startActivity(tpv);
-
                 showRelate();
                 break;
             case R.id.head:
                 //头像
             {
-                //
                 final String[] picUrls = {emp.getMm_emp_cover()};
                 Intent intent = new Intent(this, GalleryUrlActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
@@ -707,7 +661,7 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
 //                }
                 IS_REFRESH = true;
                 pageIndex = 1;
-                initData();
+                initData(ContentListView.REFRESH);
             }
             if (action.equals(Constants.SEND_PIC_TX_SUCCESS)) {
                 //更改头像的广播事件
@@ -877,6 +831,24 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
             }
         };
         getRequestQueue().add(request);
+    }
+
+    /**
+     * 加载数据监听实现
+     */
+    @Override
+    public void onLoad() {
+        pageIndex++;
+        initData(ContentListView.LOAD);
+    }
+
+    /**
+     * 刷新数据监听实现
+     */
+    @Override
+    public void onRefresh() {
+        pageIndex = 1;
+        initData(ContentListView.REFRESH);
     }
 
 }

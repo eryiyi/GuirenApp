@@ -35,6 +35,7 @@ import com.Lbins.GuirenApp.util.Constants;
 import com.Lbins.GuirenApp.util.GuirenHttpUtils;
 import com.Lbins.GuirenApp.util.PicUtil;
 import com.Lbins.GuirenApp.util.StringUtil;
+import com.Lbins.GuirenApp.widget.ContentListView;
 import com.Lbins.GuirenApp.widget.CustomProgressDialog;
 import com.Lbins.GuirenApp.widget.DeletePopWindow;
 import com.Lbins.GuirenApp.widget.PictureGridview;
@@ -64,12 +65,13 @@ import java.util.Map;
  * Time: 14:36
  * 类的功能、说明写在此处.
  */
-public class DetailPageAcitvity extends BaseActivity implements View.OnClickListener, OnClickContentItemListener {
+public class DetailPageAcitvity extends BaseActivity implements View.OnClickListener, OnClickContentItemListener ,ContentListView.OnRefreshListener,
+        ContentListView.OnLoadListener{
     ImageLoader imageLoader = ImageLoader.getInstance();//图片加载类
     private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
     List<CommentContent> commentContents;
     private Record record;//传参
-    private PullToRefreshListView detail_lstv;
+    private ContentListView detail_lstv;
     private ImageView detail_share;//分享按钮
     private TextView detail_title;//标题
     private LinearLayout detail_like_liner;//赞区域
@@ -141,7 +143,7 @@ public class DetailPageAcitvity extends BaseActivity implements View.OnClickList
                 progressDialog.setCancelable(true);
                 progressDialog.setIndeterminate(true);
                 progressDialog.show();
-                loadData();
+                loadData(ContentListView.REFRESH);
                 getFavour();
             }
         } catch (Exception e) {
@@ -159,7 +161,7 @@ public class DetailPageAcitvity extends BaseActivity implements View.OnClickList
         detail_share = (ImageView) this.findViewById(R.id.detail_share);
         detail_share.setOnClickListener(this);
         detail_title = (TextView) this.findViewById(R.id.detail_title);
-        detail_lstv = (PullToRefreshListView) this.findViewById(R.id.detail_lstv);
+        detail_lstv = (ContentListView) this.findViewById(R.id.lstv);
         detail_like_liner = (LinearLayout) this.findViewById(R.id.detail_like_liner);
         detail_comment_liner = (LinearLayout) this.findViewById(R.id.detail_comment_liner);
         detail_report_liner = (LinearLayout) this.findViewById(R.id.detail_report_liner);
@@ -204,72 +206,26 @@ public class DetailPageAcitvity extends BaseActivity implements View.OnClickList
 
         adapter = new DetailCommentAdapter(this, commentContents);
         adapter.setOnClickContentItemListener(this);
-        ListView listView = detail_lstv.getRefreshableView();
-
-        listView.addHeaderView(commentLayout);
-        detail_lstv.setMode(PullToRefreshBase.Mode.BOTH);
-
-        detail_lstv.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
-            @Override
-            public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
-                String label = DateUtils.formatDateTime(getApplicationContext(), System.currentTimeMillis(),
-                        DateUtils.FORMAT_SHOW_TIME | DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_ABBREV_ALL);
-
-                refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
-                IS_REFRESH = true;
-                pageIndex = 1;
-                //判断是否有网
-                try {
-                    isMobileNet = GuirenHttpUtils.isMobileDataEnable(DetailPageAcitvity.this);
-                    isWifiNet = GuirenHttpUtils.isWifiDataEnable(DetailPageAcitvity.this);
-                    if (!isMobileNet && !isWifiNet) {
-                        detail_lstv.onRefreshComplete();
-                    }else {
-                        loadData();
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
-                String label = DateUtils.formatDateTime(getApplicationContext(), System.currentTimeMillis(),
-                        DateUtils.FORMAT_SHOW_TIME | DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_ABBREV_ALL);
-
-                refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
-                IS_REFRESH = false;
-                pageIndex++;
-                //判断是否有网
-                try {
-                    isMobileNet = GuirenHttpUtils.isMobileDataEnable(DetailPageAcitvity.this);
-                    isWifiNet = GuirenHttpUtils.isWifiDataEnable(DetailPageAcitvity.this);
-                    if (!isMobileNet && !isWifiNet) {
-                        detail_lstv.onRefreshComplete();
-                    }else {
-                        loadData();
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-            }
-        });
-
         detail_lstv.setAdapter(adapter);
+        detail_lstv.addHeaderView(commentLayout);
+        detail_lstv.setOnRefreshListener(this);
+        detail_lstv.setOnLoadListener(this);
+        adapter.setOnClickContentItemListener(this);
 
         detail_lstv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                CommentContent commentContent = (CommentContent) parent.getAdapter().getItem(position);
-                if (commentContent != null) {
-                    Intent comment = new Intent(DetailPageAcitvity.this, PublishCommentAcitvity.class);
-                    comment.putExtra(Constants.FATHER_PERSON_NAME, commentContent.getNickName());
-                    comment.putExtra(Constants.FATHER_UUID, commentContent.getId());
-                    comment.putExtra(Constants.RECORD_UUID, record.getMm_msg_id());
-                    comment.putExtra(Constants.FATHER_PERSON_UUID, record.getMm_emp_id());
-                    comment.putExtra("fplempid", commentContent.getEmpId());
-                    startActivity(comment);
+                if(commentContents.size() > position){
+                    CommentContent commentContent = commentContents.get(position);
+                    if (commentContent != null) {
+                        Intent comment = new Intent(DetailPageAcitvity.this, PublishCommentAcitvity.class);
+                        comment.putExtra(Constants.FATHER_PERSON_NAME, commentContent.getNickName());
+                        comment.putExtra(Constants.FATHER_UUID, commentContent.getId());
+                        comment.putExtra(Constants.RECORD_UUID, record.getMm_msg_id());
+                        comment.putExtra(Constants.FATHER_PERSON_UUID, record.getMm_emp_id());
+                        comment.putExtra("fplempid", commentContent.getEmpId());
+                        startActivity(comment);
+                    }
                 }
             }
         });
@@ -515,21 +471,29 @@ public class DetailPageAcitvity extends BaseActivity implements View.OnClickList
     }
 
 
-    private void loadData() {
+    private void loadData(final int currentid) {
         StringRequest request = new StringRequest(
                 Request.Method.POST,
                 InternetURL.GET_DETAIL_PL_URL,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String s) {
+                        detail_lstv.onRefreshComplete();
+                        detail_lstv.onLoadComplete();
                         if (StringUtil.isJson(s)) {
                             CommentContentDATA data = getGson().fromJson(s, CommentContentDATA.class);
                              if (Integer.parseInt(data.getCode()) == 200) {
-                                 if (IS_REFRESH) {
+                                 if (ContentListView.REFRESH == currentid) {
                                      commentContents.clear();
+                                     commentContents.addAll(data.getData());
+                                     detail_lstv.setResultSize(data.getData().size());
+                                     adapter.notifyDataSetChanged();
                                  }
-                                 commentContents.addAll(data.getData());
-                                 detail_lstv.onRefreshComplete();
+                                 if (ContentListView.LOAD == currentid) {
+                                     commentContents.addAll(data.getData());
+                                     detail_lstv.setResultSize(data.getData().size());
+                                     adapter.notifyDataSetChanged();
+                                 }
                                  detail_lstv.setVisibility(View.VISIBLE);
                                  adapter.notifyDataSetChanged();
                             } else {
@@ -549,6 +513,8 @@ public class DetailPageAcitvity extends BaseActivity implements View.OnClickList
                         if (progressDialog != null) {
                             progressDialog.dismiss();
                         }
+                        detail_lstv.onRefreshComplete();
+                        detail_lstv.onLoadComplete();
                         Toast.makeText(DetailPageAcitvity.this, R.string.get_data_error, Toast.LENGTH_SHORT).show();
                     }
                 }
@@ -842,7 +808,7 @@ public class DetailPageAcitvity extends BaseActivity implements View.OnClickList
                     isWifiNet = GuirenHttpUtils.isWifiDataEnable(DetailPageAcitvity.this);
                     if (!isMobileNet && !isWifiNet) {
                     }else {
-                        loadData();
+                        loadData(ContentListView.REFRESH);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -864,6 +830,24 @@ public class DetailPageAcitvity extends BaseActivity implements View.OnClickList
         }
 
     };
+
+    /**
+     * 加载数据监听实现
+     */
+    @Override
+    public void onLoad() {
+        pageIndex++;
+        loadData(ContentListView.LOAD);
+    }
+
+    /**
+     * 刷新数据监听实现
+     */
+    @Override
+    public void onRefresh() {
+        pageIndex = 1;
+        loadData(ContentListView.REFRESH);
+    }
 
     //注册广播
     public void registerBoradcastReceiver() {

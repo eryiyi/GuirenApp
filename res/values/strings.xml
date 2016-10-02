@@ -1125,4 +1125,10 @@
     <string name="umeng_common_download_finish">下载完成，请点击安装</string>
     <string name="umeng_common_patch_finish">更新完成，请点击安装</string>
     <string name="umeng_common_silent_download_finish">新版本已经准备好，请点击安装</string>
+    <string name="lastUpdateTime">最近更新：%s</string>
+    <string name="load_full">已加载全部</string>
+    <string name="more">加载中</string>
+    <string name="no_data">暂无数据</string>
+
+
 </resources>
