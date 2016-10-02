@@ -1,6 +1,5 @@
 package com.Lbins.GuirenApp.ui;
 
-import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -34,7 +33,6 @@ import com.Lbins.GuirenApp.util.GuirenHttpUtils;
 import com.Lbins.GuirenApp.util.StringUtil;
 import com.Lbins.GuirenApp.widget.CustomProgressDialog;
 import com.Lbins.GuirenApp.widget.CustomerSpinner;
-import com.Lbins.GuirenApp.widget.SexRadioGroup;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -51,7 +49,7 @@ import java.util.Map;
 /**
  * Created by zhl on 2016/5/9.
  */
-public class RegActivity extends BaseActivity implements View.OnClickListener,RadioGroup.OnCheckedChangeListener {
+public class RegActivity extends BaseActivity implements View.OnClickListener {
     private Resources res;
     private EditText mm_emp_mobile;
     private EditText code;
@@ -94,21 +92,6 @@ public class RegActivity extends BaseActivity implements View.OnClickListener,Ra
     private String provinceCode = "";
     private String cityCode = "";
     private String countryCode = "";
-
-    private EditText email;
-    private EditText qq;
-    private EditText weixin;
-    private EditText company;
-    private EditText techang;
-    private EditText xingqu;
-    private EditText jianjie;
-    private EditText age;
-    private EditText mm_emp_motto;
-    private EditText mm_emp_native;
-
-    private SexRadioGroup profile_personal_sex;//性别
-    private RadioButton button_one;
-    private RadioButton button_two;
 
     private String sex_selected = "";
     boolean isMobileNet, isWifiNet;
@@ -173,7 +156,6 @@ public class RegActivity extends BaseActivity implements View.OnClickListener,Ra
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
 
@@ -248,40 +230,14 @@ public class RegActivity extends BaseActivity implements View.OnClickListener,Ra
                 params.put("cityName", cityName);
                 params.put("countryName", countryName);
 
-                if(!StringUtil.isNullOrEmpty(qq.getText().toString())){
-                    params.put("mm_emp_qq" , qq.getText().toString());
-                }
-                if(!StringUtil.isNullOrEmpty(weixin.getText().toString())){
-                    params.put("mm_emp_weixin" , weixin.getText().toString());
-                }
-                if(!StringUtil.isNullOrEmpty(company.getText().toString())){
-                    params.put("mm_emp_company" , company.getText().toString());
-                }
-                if(!StringUtil.isNullOrEmpty(techang.getText().toString())){
-                    params.put("mm_emp_techang" , techang.getText().toString());
-                }
-                if(!StringUtil.isNullOrEmpty(xingqu.getText().toString())){
-                    params.put("mm_emp_xingqu" , xingqu.getText().toString());
-                }
-                if(!StringUtil.isNullOrEmpty(jianjie.getText().toString())){
-                    params.put("mm_emp_detail" , jianjie.getText().toString());
-                }
-                if(!StringUtil.isNullOrEmpty(age.getText().toString())){
-                    params.put("mm_emp_age" , age.getText().toString());
-                }
+
                 if(!StringUtil.isNullOrEmpty(sex_selected)){
                     params.put("mm_emp_sex" , sex_selected);
                 }else {
                     params.put("mm_emp_sex" , "0");
                 }
 
-                if(!StringUtil.isNullOrEmpty(mm_emp_motto.getText().toString())){
-                    params.put("mm_emp_motto" , mm_emp_motto.getText().toString());
-                }
 
-                if(!StringUtil.isNullOrEmpty(mm_emp_native.getText().toString())){
-                    params.put("mm_emp_native" , mm_emp_native.getText().toString());
-                }
                 return params;
             }
 
@@ -438,25 +394,10 @@ public class RegActivity extends BaseActivity implements View.OnClickListener,Ra
         nickname = (EditText) this.findViewById(R.id.nickname);
         mm_emp_mobile = (EditText) this.findViewById(R.id.mm_emp_mobile);
         code = (EditText) this.findViewById(R.id.code);
-        mm_emp_native = (EditText) this.findViewById(R.id.mm_emp_native);
-        mm_emp_motto = (EditText) this.findViewById(R.id.mm_emp_motto);
         password = (EditText) this.findViewById(R.id.password);
         surepass = (EditText) this.findViewById(R.id.surepass);
         select_hy = (TextView) this.findViewById(R.id.select_hy);
         yaoqingma = (EditText) this.findViewById(R.id.yaoqingma);
-        email = (EditText) this.findViewById(R.id.email);
-        qq = (EditText) this.findViewById(R.id.qq);
-        weixin = (EditText) this.findViewById(R.id.weixin);
-        company = (EditText) this.findViewById(R.id.company);
-        techang = (EditText) this.findViewById(R.id.techang);
-        xingqu = (EditText) this.findViewById(R.id.xingqu);
-        jianjie = (EditText) this.findViewById(R.id.jianjie);
-        age = (EditText) this.findViewById(R.id.age);
-        profile_personal_sex = (SexRadioGroup) this.findViewById(R.id.segment_text);
-        profile_personal_sex.setOnClickListener(this);
-        button_one = (RadioButton) this.findViewById(R.id.button_one);
-        button_two = (RadioButton) this.findViewById(R.id.button_two);
-
         ProvinceAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, provinceNames);
         ProvinceAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         province = (CustomerSpinner) findViewById(R.id.mm_emp_provinceId);
@@ -549,15 +490,6 @@ public class RegActivity extends BaseActivity implements View.OnClickListener,Ra
 
     }
 
-    public void onCheckedChanged(RadioGroup group, int checkedId) {
-        if (group == profile_personal_sex) {
-            if (checkedId == R.id.button_one) {
-                sex_selected = "0";
-            } else if (checkedId == R.id.button_two) {
-                sex_selected = "1";
-            }
-        }
-    }
 
     //获得省份
     public void getProvince() {
@@ -790,31 +722,6 @@ public class RegActivity extends BaseActivity implements View.OnClickListener,Ra
                     return;
                 }
 
-                if(StringUtil.isNullOrEmpty(email.getText().toString().trim())){
-                    showMsg(RegActivity.this, "请输入邮箱");
-                    return;
-                }
-//                if(StringUtil.isNullOrEmpty(qq.getText().toString().trim())){
-//                    showMsg(RegActivity.this, "请输入QQ");
-//                    return;
-//                }
-//                if(StringUtil.isNullOrEmpty(weixin.getText().toString().trim())){
-//                    showMsg(RegActivity.this, "请输入微信");
-//                    return;
-//                }
-                if(StringUtil.isNullOrEmpty(company.getText().toString().trim())){
-                    showMsg(RegActivity.this, "请输入公司");
-                    return;
-                }
-//                if(StringUtil.isNullOrEmpty(techang.getText().toString().trim())){
-//                    showMsg(RegActivity.this, "请输入特长");
-//                    return;
-//                }
-//                if(StringUtil.isNullOrEmpty(xingqu.getText().toString().trim())){
-//                    showMsg(RegActivity.this, "请输入兴趣");
-//                    return;
-//                }
-
                 if(record1 == null){
                     showMsg(RegActivity.this, "请选择您所从事的职业");
                     return;
@@ -831,16 +738,11 @@ public class RegActivity extends BaseActivity implements View.OnClickListener,Ra
                     showMsg(RegActivity.this, res.getString(R.string.select_area));
                     return;
                 }
-//                if(StringUtil.isNullOrEmpty(jianjie.getText().toString().trim())){
-//                    showMsg(RegActivity.this, "请输入个人简介");
-//                    return;
-//                }
 
                 progressDialog = new CustomProgressDialog(RegActivity.this, "正在加载中",R.anim.custom_dialog_frame);
                 progressDialog.setCancelable(true);
                 progressDialog.setIndeterminate(true);
                 progressDialog.show();
-//                reg();
                 SMSSDK.submitVerificationCode("86", phString, code.getText().toString());
             }
                 break;

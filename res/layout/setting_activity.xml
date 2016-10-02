@@ -30,177 +30,183 @@
                   android:textColor="@color/white"
                   android:layout_height="wrap_content"/>
     </RelativeLayout>
+    <com.Lbins.GuirenApp.widget.ReboundScrollView android:layout_width="match_parent"
+                                                  android:layout_height="match_parent">
+        <LinearLayout android:layout_width="match_parent"
+                      android:orientation="vertical"
+                      android:layout_height="match_parent">
+            <LinearLayout android:layout_width="match_parent"
+                          android:orientation="horizontal"
+                          android:layout_marginTop="20dp"
+                          android:background="@drawable/btn_dark_shape"
+                          android:id="@+id/liner_updatepwr"
+                          android:layout_height="50dp">
+                <!--<ImageView android:layout_width="35dp"-->
+                <!--android:src="@drawable/afd"-->
+                <!--android:layout_gravity="center_vertical"-->
+                <!--android:layout_marginLeft="8dp"-->
+                <!--android:layout_height="wrap_content"/>-->
+                <TextView android:layout_width="wrap_content"
+                          android:text="修改密码"
+                          android:layout_marginLeft="15dp"
+                          android:layout_gravity="center_vertical"
+                          android:textColor="@color/black"
+                          android:textSize="16sp"
+                          android:layout_height="wrap_content"/>
+            </LinearLayout>
+            <View android:layout_width="match_parent"
+                  android:background="@color/gray01"
+                  android:layout_height="0.1dp">
+            </View>
 
-    <LinearLayout android:layout_width="match_parent"
-                  android:orientation="horizontal"
-                  android:layout_marginTop="20dp"
-                  android:background="@drawable/btn_dark_shape"
-                  android:id="@+id/liner_updatepwr"
-                  android:layout_height="50dp">
-        <!--<ImageView android:layout_width="35dp"-->
-                   <!--android:src="@drawable/afd"-->
-                   <!--android:layout_gravity="center_vertical"-->
-                   <!--android:layout_marginLeft="8dp"-->
-                   <!--android:layout_height="wrap_content"/>-->
-        <TextView android:layout_width="wrap_content"
-                  android:text="修改密码"
-                  android:layout_marginLeft="15dp"
-                  android:layout_gravity="center_vertical"
-                  android:textColor="@color/black"
-                  android:textSize="16sp"
-                  android:layout_height="wrap_content"/>
-    </LinearLayout>
-    <View android:layout_width="match_parent"
-          android:background="@color/gray01"
-          android:layout_height="0.1dp">
-    </View>
+            <LinearLayout android:layout_width="match_parent"
+                          android:orientation="horizontal"
+                          android:background="@drawable/btn_dark_shape"
+                          android:id="@+id/liner_mobile"
+                          android:layout_height="50dp">
+                <!--<ImageView android:layout_width="35dp"-->
+                <!--android:src="@drawable/afd"-->
+                <!--android:layout_gravity="center_vertical"-->
+                <!--android:layout_marginLeft="8dp"-->
+                <!--android:layout_height="wrap_content"/>-->
+                <TextView android:layout_width="wrap_content"
+                          android:text="修改手机"
+                          android:layout_marginLeft="15dp"
+                          android:layout_gravity="center_vertical"
+                          android:textColor="@color/black"
+                          android:textSize="16sp"
+                          android:layout_height="wrap_content"/>
+            </LinearLayout>
+            <View android:layout_width="match_parent"
+                  android:background="@color/gray01"
+                  android:layout_height="0.1dp">
+            </View>
+            <LinearLayout android:layout_width="match_parent"
+                          android:orientation="horizontal"
+                          android:background="@drawable/btn_dark_shape"
+                          android:id="@+id/liner_black"
+                          android:layout_height="50dp">
+                <!--<ImageView android:layout_width="35dp"-->
+                <!--android:src="@drawable/afd"-->
+                <!--android:layout_gravity="center_vertical"-->
+                <!--android:layout_marginLeft="8dp"-->
+                <!--android:layout_height="wrap_content"/>-->
+                <TextView android:layout_width="wrap_content"
+                          android:text="我的黑名单"
+                          android:layout_marginLeft="15dp"
+                          android:layout_gravity="center_vertical"
+                          android:textColor="@color/black"
+                          android:textSize="16sp"
+                          android:layout_height="wrap_content"/>
+            </LinearLayout>
 
-    <LinearLayout android:layout_width="match_parent"
-                  android:orientation="horizontal"
-                  android:background="@drawable/btn_dark_shape"
-                  android:id="@+id/liner_mobile"
-                  android:layout_height="50dp">
-        <!--<ImageView android:layout_width="35dp"-->
-        <!--android:src="@drawable/afd"-->
-        <!--android:layout_gravity="center_vertical"-->
-        <!--android:layout_marginLeft="8dp"-->
-        <!--android:layout_height="wrap_content"/>-->
-        <TextView android:layout_width="wrap_content"
-                  android:text="修改手机"
-                  android:layout_marginLeft="15dp"
-                  android:layout_gravity="center_vertical"
-                  android:textColor="@color/black"
-                  android:textSize="16sp"
-                  android:layout_height="wrap_content"/>
-    </LinearLayout>
-    <View android:layout_width="match_parent"
-          android:background="@color/gray01"
-          android:layout_height="0.1dp">
-    </View>
-    <LinearLayout android:layout_width="match_parent"
-                  android:orientation="horizontal"
-                  android:background="@drawable/btn_dark_shape"
-                  android:id="@+id/liner_black"
-                  android:layout_height="50dp">
-        <!--<ImageView android:layout_width="35dp"-->
-        <!--android:src="@drawable/afd"-->
-        <!--android:layout_gravity="center_vertical"-->
-        <!--android:layout_marginLeft="8dp"-->
-        <!--android:layout_height="wrap_content"/>-->
-        <TextView android:layout_width="wrap_content"
-                  android:text="我的黑名单"
-                  android:layout_marginLeft="15dp"
-                  android:layout_gravity="center_vertical"
-                  android:textColor="@color/black"
-                  android:textSize="16sp"
-                  android:layout_height="wrap_content"/>
-    </LinearLayout>
+            <View android:layout_width="match_parent"
+                  android:background="@color/gray01"
+                  android:layout_height="0.1dp">
+            </View>
+            <LinearLayout android:layout_width="match_parent"
+                          android:orientation="horizontal"
+                          android:background="@drawable/btn_dark_shape"
+                          android:id="@+id/liner_chat"
+                          android:layout_height="50dp">
+                <!--<ImageView android:layout_width="35dp"-->
+                <!--android:src="@drawable/afd"-->
+                <!--android:layout_gravity="center_vertical"-->
+                <!--android:layout_marginLeft="8dp"-->
+                <!--android:layout_height="wrap_content"/>-->
+                <TextView android:layout_width="wrap_content"
+                          android:text="聊天设置"
+                          android:layout_marginLeft="15dp"
+                          android:layout_gravity="center_vertical"
+                          android:textColor="@color/black"
+                          android:textSize="16sp"
+                          android:layout_height="wrap_content"/>
+            </LinearLayout>
+            <View android:layout_width="match_parent"
+                  android:background="@color/gray01"
+                  android:layout_height="0.1dp">
+            </View>
 
-    <View android:layout_width="match_parent"
-          android:background="@color/gray01"
-          android:layout_height="0.1dp">
-    </View>
-    <LinearLayout android:layout_width="match_parent"
-                  android:orientation="horizontal"
-                  android:background="@drawable/btn_dark_shape"
-                  android:id="@+id/liner_chat"
-                  android:layout_height="50dp">
-        <!--<ImageView android:layout_width="35dp"-->
-        <!--android:src="@drawable/afd"-->
-        <!--android:layout_gravity="center_vertical"-->
-        <!--android:layout_marginLeft="8dp"-->
-        <!--android:layout_height="wrap_content"/>-->
-        <TextView android:layout_width="wrap_content"
-                  android:text="聊天设置"
-                  android:layout_marginLeft="15dp"
-                  android:layout_gravity="center_vertical"
-                  android:textColor="@color/black"
-                  android:textSize="16sp"
-                  android:layout_height="wrap_content"/>
-    </LinearLayout>
-    <View android:layout_width="match_parent"
-          android:background="@color/gray01"
-          android:layout_height="0.1dp">
-    </View>
+            <LinearLayout android:layout_width="match_parent"
+                          android:orientation="horizontal"
+                          android:id="@+id/liner_version"
+                          android:background="@drawable/btn_dark_shape"
+                          android:layout_height="50dp">
+                <TextView android:layout_width="wrap_content"
+                          android:text="更新版本"
+                          android:id="@+id/check_version"
+                          android:layout_marginLeft="15dp"
+                          android:layout_gravity="center_vertical"
+                          android:textColor="@color/black"
+                          android:textSize="16sp"
+                          android:layout_height="wrap_content"/>
+            </LinearLayout>
+            <View android:layout_width="match_parent"
+                  android:background="@color/gray01"
+                  android:layout_height="0.1dp">
+            </View>
+            <LinearLayout android:layout_width="match_parent"
+                          android:orientation="horizontal"
+                          android:id="@+id/liner_notice"
+                          android:background="@drawable/btn_dark_shape"
+                          android:layout_height="50dp">
+                <TextView android:layout_width="wrap_content"
+                          android:text="系统通知"
+                          android:id="@+id/check_notice"
+                          android:layout_marginLeft="15dp"
+                          android:layout_gravity="center_vertical"
+                          android:textColor="@color/black"
+                          android:textSize="16sp"
+                          android:layout_height="wrap_content"/>
+            </LinearLayout>
+            <View android:layout_width="match_parent"
+                  android:background="@color/gray01"
+                  android:layout_height="0.1dp">
+            </View>
+            <LinearLayout android:layout_width="match_parent"
+                          android:orientation="horizontal"
+                          android:background="@drawable/btn_dark_shape"
+                          android:id="@+id/liner_help"
+                          android:layout_height="50dp">
+                <!--<ImageView android:layout_width="35dp"-->
+                <!--android:src="@drawable/afd"-->
+                <!--android:layout_gravity="center_vertical"-->
+                <!--android:layout_marginLeft="8dp"-->
+                <!--android:layout_height="wrap_content"/>-->
+                <TextView android:layout_width="wrap_content"
+                          android:text="帮助文档"
+                          android:layout_marginLeft="15dp"
+                          android:layout_gravity="center_vertical"
+                          android:textColor="@color/black"
+                          android:textSize="16sp"
+                          android:layout_height="wrap_content"/>
+            </LinearLayout>
+            <View android:layout_width="match_parent"
+                  android:background="@color/gray01"
+                  android:layout_height="0.1dp">
+            </View>
+            <LinearLayout android:layout_width="match_parent"
+                          android:orientation="horizontal"
 
-    <LinearLayout android:layout_width="match_parent"
-                  android:orientation="horizontal"
-                  android:id="@+id/liner_version"
-                  android:background="@drawable/btn_dark_shape"
-                  android:layout_height="50dp">
-        <TextView android:layout_width="wrap_content"
-                  android:text="更新版本"
-                  android:id="@+id/check_version"
-                  android:layout_marginLeft="15dp"
-                  android:layout_gravity="center_vertical"
-                  android:textColor="@color/black"
-                  android:textSize="16sp"
-                  android:layout_height="wrap_content"/>
-    </LinearLayout>
-    <View android:layout_width="match_parent"
-          android:background="@color/gray01"
-          android:layout_height="0.1dp">
-    </View>
-    <LinearLayout android:layout_width="match_parent"
-                  android:orientation="horizontal"
-                  android:id="@+id/liner_notice"
-                  android:background="@drawable/btn_dark_shape"
-                  android:layout_height="50dp">
-        <TextView android:layout_width="wrap_content"
-                  android:text="系统通知"
-                  android:id="@+id/check_notice"
-                  android:layout_marginLeft="15dp"
-                  android:layout_gravity="center_vertical"
-                  android:textColor="@color/black"
-                  android:textSize="16sp"
-                  android:layout_height="wrap_content"/>
-    </LinearLayout>
-    <View android:layout_width="match_parent"
-          android:background="@color/gray01"
-          android:layout_height="0.1dp">
-    </View>
-    <LinearLayout android:layout_width="match_parent"
-                  android:orientation="horizontal"
-                  android:background="@drawable/btn_dark_shape"
-                  android:id="@+id/liner_help"
-                  android:layout_height="50dp">
-        <!--<ImageView android:layout_width="35dp"-->
-        <!--android:src="@drawable/afd"-->
-        <!--android:layout_gravity="center_vertical"-->
-        <!--android:layout_marginLeft="8dp"-->
-        <!--android:layout_height="wrap_content"/>-->
-        <TextView android:layout_width="wrap_content"
-                  android:text="帮助文档"
-                  android:layout_marginLeft="15dp"
-                  android:layout_gravity="center_vertical"
-                  android:textColor="@color/black"
-                  android:textSize="16sp"
-                  android:layout_height="wrap_content"/>
-    </LinearLayout>
-    <View android:layout_width="match_parent"
-          android:background="@color/gray01"
-          android:layout_height="0.1dp">
-    </View>
-    <LinearLayout android:layout_width="match_parent"
-                  android:orientation="horizontal"
-
-                  android:background="@drawable/btn_dark_shape"
-                  android:layout_below="@+id/liner_one"
-                  android:id="@+id/liner_two"
-                  android:layout_height="50dp">
-        <!--<ImageView android:layout_width="35dp"-->
-        <!--android:src="@drawable/afd"-->
-        <!--android:layout_gravity="center_vertical"-->
-        <!--android:layout_marginLeft="8dp"-->
-        <!--android:layout_height="wrap_content"/>-->
-        <TextView android:layout_width="wrap_content"
-                  android:text="关于我们"
-                  android:layout_marginLeft="15dp"
-                  android:layout_gravity="center_vertical"
-                  android:textColor="@color/black"
-                  android:textSize="16sp"
-                  android:layout_height="wrap_content"/>
-    </LinearLayout>
+                          android:background="@drawable/btn_dark_shape"
+                          android:layout_below="@+id/liner_one"
+                          android:id="@+id/liner_two"
+                          android:layout_height="50dp">
+                <!--<ImageView android:layout_width="35dp"-->
+                <!--android:src="@drawable/afd"-->
+                <!--android:layout_gravity="center_vertical"-->
+                <!--android:layout_marginLeft="8dp"-->
+                <!--android:layout_height="wrap_content"/>-->
+                <TextView android:layout_width="wrap_content"
+                          android:text="关于我们"
+                          android:layout_marginLeft="15dp"
+                          android:layout_gravity="center_vertical"
+                          android:textColor="@color/black"
+                          android:textSize="16sp"
+                          android:layout_height="wrap_content"/>
+            </LinearLayout>
+        </LinearLayout>
+    </com.Lbins.GuirenApp.widget.ReboundScrollView>
 
     <Button android:layout_width="match_parent"
             android:padding="12dp"

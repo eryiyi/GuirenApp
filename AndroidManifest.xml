@@ -207,6 +207,7 @@
         <activity android:name=".ui.DetailTvActivity" android:screenOrientation="portrait" android:theme="@style/AppTheme" android:windowSoftInputMode="adjustResize|stateHidden"/>
         <activity android:name=".ui.VideosByTypeActivity" android:screenOrientation="portrait" android:theme="@style/AppTheme" android:windowSoftInputMode="adjustResize|stateHidden"/>
         <activity android:name=".ui.ZimeitiTypeValActivity" android:screenOrientation="portrait" android:theme="@style/AppTheme" android:windowSoftInputMode="adjustResize|stateHidden"/>
+        <activity android:name=".ui.UpdateEmpActivity" android:screenOrientation="portrait" android:theme="@style/AppTheme" android:windowSoftInputMode="adjustResize|stateHidden"/>
 
 
         <!--// *****************************高德地图sdk*******************************************-->
