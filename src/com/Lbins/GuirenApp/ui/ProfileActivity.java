@@ -312,9 +312,7 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
                             EmpData data = getGson().fromJson(s, EmpData.class);
                             if (Integer.parseInt(data.getCode()) == 200) {
                                 emp = data.getData();
-                                if( DBHelper.getInstance(ProfileActivity.this).getEmpByEmpId(emp.getMm_emp_id()) ==null){
-                                    DBHelper.getInstance(ProfileActivity.this).saveEmp(emp);
-                                }
+                                DBHelper.getInstance(ProfileActivity.this).saveEmp(emp);
                                 if(emp != null){
                                     initMine();
                                 }

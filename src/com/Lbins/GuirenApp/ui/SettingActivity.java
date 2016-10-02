@@ -56,6 +56,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
         this.findViewById(R.id.liner_help).setOnClickListener(this);
         this.findViewById(R.id.liner_version).setOnClickListener(this);
         this.findViewById(R.id.liner_notice).setOnClickListener(this);
+        this.findViewById(R.id.liner_location).setOnClickListener(this);
 
         check_version = (TextView) this.findViewById(R.id.check_version);
         check_version.setText(getVersion());
@@ -139,6 +140,14 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
             {
                 Intent intent = new Intent(SettingActivity.this, NoticeActivity.class);
                 startActivity(intent);
+            }
+                break;
+            case R.id.liner_location:
+            {
+                //地图显示
+                Intent intent = new Intent(SettingActivity.this, UpLocationActivity.class);
+                startActivity(intent);
+
             }
                 break;
         }

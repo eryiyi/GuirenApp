@@ -404,7 +404,12 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
         super.onStop();
         // unregister this event listener when this activity enters the
         // background
-        EMClient.getInstance().chatManager().removeMessageListener(this);
+        if(EMClient.getInstance() != null){
+            if(EMClient.getInstance().chatManager() != null){
+                EMClient.getInstance().chatManager().removeMessageListener(this);
+            }
+        }
+
 
         // remove activity from foreground activity list
         EaseUI.getInstance().popActivity(getActivity());

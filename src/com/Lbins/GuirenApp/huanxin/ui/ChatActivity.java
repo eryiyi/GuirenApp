@@ -38,7 +38,9 @@ public class ChatActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        activityInstance = null;
+        if(activityInstance != null){
+            activityInstance = null;
+        }
     }
     
     @Override
@@ -57,10 +59,10 @@ public class ChatActivity extends BaseActivity {
     @Override
     public void onBackPressed() {
         chatFragment.onBackPressed();
-        if (EasyUtils.isSingleActivity(this)) {
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
-        }
+//        if (EasyUtils.isSingleActivity(this)) {
+//            Intent intent = new Intent(this, MainActivity.class);
+//            startActivity(intent);
+//        }
     }
     
     public String getToChatUsername(){

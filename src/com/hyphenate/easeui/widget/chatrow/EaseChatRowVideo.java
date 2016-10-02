@@ -7,6 +7,9 @@ import android.os.AsyncTask;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import com.Lbins.GuirenApp.module.VideoPlayer;
+import com.Lbins.GuirenApp.ui.VideoPlayerActivity2;
+import com.Lbins.GuirenApp.util.Constants;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMFileMessageBody;
 import com.hyphenate.chat.EMMessage;
@@ -100,19 +103,26 @@ public class EaseChatRowVideo extends EaseChatRowFile{
 	protected void onBubbleClick() {
 	    EMVideoMessageBody videoBody = (EMVideoMessageBody) message.getBody();
         EMLog.d(TAG, "video view is on click");
-        Intent intent = new Intent(context, EaseShowVideoActivity.class);
-        intent.putExtra("localpath", videoBody.getLocalUrl());
-        intent.putExtra("secret", videoBody.getSecret());
-        intent.putExtra("remotepath", videoBody.getRemoteUrl());
-        if (message != null && message.direct() == EMMessage.Direct.RECEIVE && !message.isAcked()
-                && message.getChatType() == ChatType.Chat) {
-            try {
-                EMClient.getInstance().chatManager().ackMessageRead(message.getFrom(), message.getMsgId());
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
+//        Intent intent = new Intent(context, EaseShowVideoActivity.class);
+//        intent.putExtra("localpath", videoBody.getLocalUrl());
+//        intent.putExtra("secret", videoBody.getSecret());
+//        intent.putExtra("remotepath", videoBody.getRemoteUrl());
+//        if (message != null && message.direct() == EMMessage.Direct.RECEIVE && !message.isAcked()
+//                && message.getChatType() == ChatType.Chat) {
+//            try {
+//                EMClient.getInstance().chatManager().ackMessageRead(message.getFrom(), message.getMsgId());
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//        }
+//        activity.startActivity(intent);
+        String videoUrl = videoBody.getRemoteUrl();
+        Intent intent = new Intent(context, VideoPlayerActivity2.class);
+        VideoPlayer video = new VideoPlayer(videoUrl);
+        intent.putExtra(Constants.EXTRA_LAYOUT, "0");
+        intent.putExtra(VideoPlayer.class.getName(), video);
         activity.startActivity(intent);
+
 	}
 	
 	/**

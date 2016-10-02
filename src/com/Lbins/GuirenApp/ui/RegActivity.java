@@ -230,13 +230,11 @@ public class RegActivity extends BaseActivity implements View.OnClickListener {
                 params.put("cityName", cityName);
                 params.put("countryName", countryName);
 
-
                 if(!StringUtil.isNullOrEmpty(sex_selected)){
                     params.put("mm_emp_sex" , sex_selected);
                 }else {
                     params.put("mm_emp_sex" , "0");
                 }
-
 
                 return params;
             }
