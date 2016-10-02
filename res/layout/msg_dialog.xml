@@ -52,14 +52,14 @@
                     android:layout_height="wrap_content"
                     android:paddingTop="8dp"
                     android:paddingBottom="8dp"
-                    android:background="@null"
+                    android:background="@color/blue"
                     android:clickable="true"
                     android:gravity="center"
                     android:layout_marginRight="10dp"
                     android:textSize="16dp"
                     android:text="确定"
                     android:layout_marginLeft="20dp"
-                    android:textColor="@color/blue"/>
+                    android:textColor="@color/white"/>
 
             <Button
                     android:id="@+id/jubao_cancle"
@@ -67,7 +67,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:background="@null"
+                    android:background="@color/blue"
                     android:clickable="true"
                     android:textSize="16dp"
                     android:paddingTop="8dp"
@@ -75,7 +75,7 @@
                     android:layout_marginRight="20dp"
                     android:gravity="center"
                     android:text="取消"
-                    android:textColor="@color/blue"/>
+                    android:textColor="@color/white"/>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

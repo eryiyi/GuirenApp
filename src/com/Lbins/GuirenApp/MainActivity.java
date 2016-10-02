@@ -1,8 +1,12 @@
 package com.Lbins.GuirenApp;
 
 import android.annotation.TargetApi;
+import android.app.Dialog;
 import android.content.*;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
@@ -32,8 +36,10 @@ import com.Lbins.GuirenApp.huanxin.ui.ConversationListFragment;
 import com.Lbins.GuirenApp.huanxin.ui.GroupsActivity;
 import com.Lbins.GuirenApp.huanxin.ui.LoginActivity;
 import com.Lbins.GuirenApp.module.Emp;
+import com.Lbins.GuirenApp.module.VersionUpdateObj;
 import com.Lbins.GuirenApp.ui.AndMeAcitvity;
 import com.Lbins.GuirenApp.util.StringUtil;
+import com.Lbins.GuirenApp.widget.CustomProgressDialog;
 import com.android.volley.*;
 import com.android.volley.toolbox.StringRequest;
 import com.hyphenate.EMCallBack;
@@ -152,7 +158,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener ,
         new Thread(MainActivity.this).start();
 
 
-
+        //检查版本更新
+        checkVersion();
     }
 
     @TargetApi(23)
@@ -1020,4 +1027,102 @@ public class MainActivity extends BaseActivity implements View.OnClickListener ,
         unregisterReceiver(mBroadcastReceiver);
 
     }
+
+
+
+    public void checkVersion() {
+        StringRequest request = new StringRequest(
+                Request.Method.POST,
+                InternetURL.CHECK_VERSION_CODE_URL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String s) {
+                        if (StringUtil.isJson(s)) {
+                            try {
+                                JSONObject jo = new JSONObject(s);
+                                String code1 = jo.getString("code");
+                                if (Integer.parseInt(code1) == 200) {
+                                    VersionUpdateObjData data = getGson().fromJson(s, VersionUpdateObjData.class);
+                                    VersionUpdateObj versionUpdateObj = data.getData();
+                                    if("true".equals(versionUpdateObj.getFlag())){
+                                        showVersion(versionUpdateObj.getDurl());
+                                    }else{
+                                    }
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        } else {
+                            Toast.makeText(MainActivity.this, R.string.get_data_error, Toast.LENGTH_SHORT).show();
+                        }
+                        if (progressDialog != null) {
+                            progressDialog.dismiss();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        if (progressDialog != null) {
+                            progressDialog.dismiss();
+                        }
+                        Toast.makeText(MainActivity.this, R.string.get_data_error, Toast.LENGTH_SHORT).show();
+                    }
+                }
+        ) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("mm_version_code", getV());
+                params.put("mm_version_package", "com.Lbins.GuirenApp");
+                return params;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Content-Type", "application/x-www-form-urlencoded");
+                return params;
+            }
+        };
+        getRequestQueue().add(request);
+    }
+    String getV(){
+        try {
+            PackageManager manager = this.getPackageManager();
+            PackageInfo info = manager.getPackageInfo(this.getPackageName(), 0);
+            return info.versionName;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "";
+        }
+    }
+
+
+    void showVersion(final String urlVersion){
+        final Dialog picAddDialog = new Dialog(MainActivity.this, R.style.dialog);
+        View picAddInflate = View.inflate(this, R.layout.msg_dialog, null);
+        TextView jubao_sure = (TextView) picAddInflate.findViewById(R.id.jubao_sure);
+        final TextView jubao_cont = (TextView) picAddInflate.findViewById(R.id.jubao_cont);
+        jubao_cont.setText("有新版本，下载最新版本吗");
+        jubao_sure.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Uri uri = Uri.parse(urlVersion);
+                final Intent it = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(it);
+                picAddDialog.dismiss();
+            }
+        });
+        TextView jubao_cancle = (TextView) picAddInflate.findViewById(R.id.jubao_cancle);
+        jubao_cancle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                picAddDialog.dismiss();
+            }
+        });
+        picAddDialog.setContentView(picAddInflate);
+        picAddDialog.show();
+    }
+
 }

@@ -5,7 +5,6 @@ import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
-import android.support.multidex.MultiDex;
 import android.util.LruCache;
 import com.Lbins.GuirenApp.base.InternetURL;
 import com.Lbins.GuirenApp.dao.DBHelper;
@@ -73,7 +72,7 @@ public class GuirenApplication extends Application  {
     @Override
     public void onCreate() {
         super.onCreate();
-        MultiDex.install(this);
+//        MultiDex.install(this);
         applicationContext = this;
         instance = this;
         locationAddress = "";
@@ -100,7 +99,7 @@ public class GuirenApplication extends Application  {
     @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
-        MultiDex.install(this);
+//        MultiDex.install(this);
     }
 
     /**

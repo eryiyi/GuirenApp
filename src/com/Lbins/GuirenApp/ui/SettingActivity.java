@@ -201,7 +201,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("mm_version_code", getV());
-                params.put("mm_version_package", "com.Lbins.Mlt");
+                params.put("mm_version_package", "com.Lbins.GuirenApp");
                 return params;
             }
 
