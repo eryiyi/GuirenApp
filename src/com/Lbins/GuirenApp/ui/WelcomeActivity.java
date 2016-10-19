@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
-import com.Lbins.GuirenApp.GuirenApplication;
 import com.Lbins.GuirenApp.MainActivity;
 import com.Lbins.GuirenApp.R;
 import com.Lbins.GuirenApp.base.BaseActivity;
@@ -15,10 +14,6 @@ import com.Lbins.GuirenApp.huanxin.DemoHelper;
 import com.Lbins.GuirenApp.huanxin.db.DemoDBManager;
 import com.Lbins.GuirenApp.module.Emp;
 import com.Lbins.GuirenApp.util.StringUtil;
-import com.amap.api.location.AMapLocation;
-import com.amap.api.location.AMapLocationClient;
-import com.amap.api.location.AMapLocationClientOption;
-import com.amap.api.location.AMapLocationListener;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -31,8 +26,6 @@ import com.hyphenate.chat.EMClient;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 

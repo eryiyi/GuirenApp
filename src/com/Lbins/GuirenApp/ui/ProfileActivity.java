@@ -8,7 +8,7 @@ import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.text.format.DateUtils;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.*;
@@ -25,8 +25,6 @@ import com.Lbins.GuirenApp.data.EmpRelateObjData;
 import com.Lbins.GuirenApp.data.RecordDATA;
 import com.Lbins.GuirenApp.data.SuccessData;
 import com.Lbins.GuirenApp.huanxin.ui.ChatActivity;
-import com.Lbins.GuirenApp.library.PullToRefreshBase;
-import com.Lbins.GuirenApp.library.PullToRefreshListView;
 import com.Lbins.GuirenApp.module.Emp;
 import com.Lbins.GuirenApp.module.EmpRelateObj;
 import com.Lbins.GuirenApp.module.Record;
@@ -35,6 +33,7 @@ import com.Lbins.GuirenApp.util.GuirenHttpUtils;
 import com.Lbins.GuirenApp.util.StringUtil;
 import com.Lbins.GuirenApp.widget.ContentListView;
 import com.Lbins.GuirenApp.widget.CustomProgressDialog;
+import com.Lbins.GuirenApp.widget.DeletePopWindow;
 import com.android.volley.*;
 import com.android.volley.toolbox.StringRequest;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -412,6 +411,8 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
         }
     }
 
+    private int tmpSelected;
+
     @Override
     public void onClickContentItem(int position, int flag, Object object) {
         //判断是否有网
@@ -460,11 +461,11 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
 //                intent.putExtra(VideoPlayer.class.getName(), video);
 //                startActivity(intent);
                 break;
-            case 6:
+            case 11:
                 //删除该动态
-//                recordtmp = record;//放到中间存储
-//                tmpSelected = position;
-//                showSelectImageDialog();
+                recordtmp = record;//放到中间存储
+                tmpSelected = position;
+                showSelectImageDialog();
                 break;
             case 7:
                 if (record.getMm_msg_type().equals("1"))
@@ -498,6 +499,75 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
         }
     }
 
+    private DeletePopWindow deleteWindow;
+
+    // 选择是否删除
+    private void showSelectImageDialog() {
+        deleteWindow = new DeletePopWindow(ProfileActivity.this, itemsOnClick);
+        //显示窗口
+        deleteWindow.showAtLocation(ProfileActivity.this.findViewById(R.id.main), Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
+    }
+
+    //为弹出窗口实现监听类
+    private View.OnClickListener itemsOnClick = new View.OnClickListener() {
+
+        public void onClick(View v) {
+            deleteWindow.dismiss();
+            switch (v.getId()) {
+                case R.id.btn_sure:
+                    delete();
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
+
+    //删除方法
+    private void delete() {
+        StringRequest request = new StringRequest(
+                Request.Method.POST,
+                InternetURL.DELETE_RECORDS_URL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String s) {
+                        if (StringUtil.isJson(s)) {
+                            SuccessData data = getGson().fromJson(s, SuccessData.class);
+                            if (Integer.parseInt(data.getCode()) == 200) {
+                                Toast.makeText(ProfileActivity.this, R.string.delete_success, Toast.LENGTH_SHORT).show();
+                                recordList.remove(tmpSelected);
+                                adapter.notifyDataSetChanged();
+                            } else {
+                                Toast.makeText(ProfileActivity.this, R.string.delete_error, Toast.LENGTH_SHORT).show();
+                            }
+                        } else {
+                            Toast.makeText(ProfileActivity.this, R.string.delete_error, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        Toast.makeText(ProfileActivity.this, R.string.delete_error, Toast.LENGTH_SHORT).show();
+                    }
+                }
+        ) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("recordId", recordtmp.getMm_msg_id());
+                return params;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Content-Type", "application/x-www-form-urlencoded");
+                return params;
+            }
+        };
+        getRequestQueue().add(request);
+    }
 
     @Override
     public void onClick(View v) {

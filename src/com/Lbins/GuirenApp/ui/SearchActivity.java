@@ -1,6 +1,5 @@
 package com.Lbins.GuirenApp.ui;
 
-import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;

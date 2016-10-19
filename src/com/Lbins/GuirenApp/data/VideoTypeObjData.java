@@ -2,7 +2,6 @@ package com.Lbins.GuirenApp.data;
 
 import com.Lbins.GuirenApp.module.VideoTypeObj;
 
-import java.util.Date;
 import java.util.List;
 
 /**

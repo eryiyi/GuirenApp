@@ -50,10 +50,10 @@ public class GuirenApplication extends Application  {
 
     public static Context applicationContext;
 
-    public static String latStr;
-    public static String lngStr;
-    public static String locationAddress;
-    public static String empName;
+//    public static String latStr;
+//    public static String lngStr;
+//    public static String locationAddress;
+//    public static String empName;
 
     public static List<HangYeType>  listsTypeHy = new ArrayList<HangYeType>();
     public  static List<ProvinceObj> provinces = new ArrayList<ProvinceObj>();
@@ -64,9 +64,6 @@ public class GuirenApplication extends Application  {
     // login user name
     public final String PREF_USERNAME = "username";
 
-    /**
-     * nickname for current user, the nickname instead of ID be shown when user receive notification from APNs
-     */
     public static String currentUserNick = "";
 
     @Override
@@ -75,7 +72,6 @@ public class GuirenApplication extends Application  {
 //        MultiDex.install(this);
         applicationContext = this;
         instance = this;
-        locationAddress = "";
         application = this;
         requestQueue = Volley.newRequestQueue(this);
         gson = new Gson();

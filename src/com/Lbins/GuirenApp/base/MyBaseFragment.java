@@ -1,6 +1,5 @@
 package com.Lbins.GuirenApp.base;
 
-import android.app.ProgressDialog;
 import android.content.SharedPreferences;
 import android.support.v4.app.Fragment;
 import com.Lbins.GuirenApp.GuirenApplication;

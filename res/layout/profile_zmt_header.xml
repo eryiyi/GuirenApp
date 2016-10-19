@@ -9,11 +9,11 @@
         <RelativeLayout android:layout_width="match_parent"
                         android:id="@+id/liner_header"
                         android:background="@drawable/bg_1"
-                        android:layout_height="160dp">
+                        android:layout_height="wrap_content">
             <ImageView android:layout_width="match_parent"
                        android:id="@+id/pic_bg"
                        android:scaleType="fitXY"
-                       android:layout_height="160dp"/>
+                       android:layout_height="wrap_content"/>
             <ImageView
                     android:layout_width="60dp"
                     android:id="@+id/head"
@@ -30,7 +30,6 @@
                       android:textSize="16sp"
                       android:textColor="@color/text_color"
                       android:layout_height="wrap_content"/>
-
         </RelativeLayout>
         <LinearLayout android:layout_width="match_parent"
                       android:orientation="vertical"

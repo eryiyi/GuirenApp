@@ -18,7 +18,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.Lbins.GuirenApp.base.BaseActivity;
 import com.Lbins.GuirenApp.base.InternetURL;
-import com.Lbins.GuirenApp.dao.DBHelper;
 import com.Lbins.GuirenApp.data.*;
 import com.Lbins.GuirenApp.face.FaceConversionUtil;
 import com.Lbins.GuirenApp.fragment.FiveFragment;
@@ -39,8 +38,10 @@ import com.Lbins.GuirenApp.module.Emp;
 import com.Lbins.GuirenApp.module.VersionUpdateObj;
 import com.Lbins.GuirenApp.ui.AndMeAcitvity;
 import com.Lbins.GuirenApp.util.StringUtil;
-import com.Lbins.GuirenApp.widget.CustomProgressDialog;
-import com.android.volley.*;
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.EMContactListener;
@@ -125,7 +126,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener ,
         //-------------------huanxin------end-------------
         setContentView(R.layout.main);
         res = getResources();
-        initData();
+//        initData();
         //表情
         new Thread(new Runnable() {
             @Override
@@ -293,123 +294,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener ,
         }
     }
 
-    boolean isMobileNet, isWifiNet;
     @Override
     public void onClick(View view) {
-
         switchFragment(view.getId());
-    }
-
-//    void sendLocation() {
-//        StringRequest request = new StringRequest(
-//                Request.Method.POST,
-//                InternetURL.SEND_LOCATION_BYID_URL,
-//                new Response.Listener<String>() {
-//                    @Override
-//                    public void onResponse(String s) {
-//                        if (StringUtil.isJson(s)) {
-//                            try {
-//                                JSONObject jo = new JSONObject(s);
-//                                String code = jo.getString("code");
-//                                if (Integer.parseInt(code) == 200) {
-//
-//                                } else {
-//                                }
-//                            } catch (JSONException e) {
-//                                e.printStackTrace();
-//                            }
-//                        }
-//                        if (progressDialog != null) {
-//                            progressDialog.dismiss();
-//                        }
-//                    }
-//                },
-//                new Response.ErrorListener() {
-//                    @Override
-//                    public void onErrorResponse(VolleyError volleyError) {
-//                        if (progressDialog != null) {
-//                            progressDialog.dismiss();
-//                        }
-//                    }
-//                }
-//        ) {
-//            @Override
-//            protected Map<String, String> getParams() throws AuthFailureError {
-//                Map<String, String> params = new HashMap<String, String>();
-//                params.put("lat", (GuirenApplication.latStr == null ? "" : GuirenApplication.latStr));
-//                params.put("lng", (GuirenApplication.lngStr == null ? "" : GuirenApplication.lngStr));
-//                params.put("mm_emp_id", getGson().fromJson(getSp().getString("mm_emp_id", ""), String.class));
-//                return params;
-//            }
-//
-//            @Override
-//            public Map<String, String> getHeaders() throws AuthFailureError {
-//                Map<String, String> params = new HashMap<String, String>();
-//                params.put("Content-Type", "application/x-www-form-urlencoded");
-//                return params;
-//            }
-//        };
-//        getRequestQueue().add(request);
-//    }
-
-    private void initData() {
-        StringRequest request = new StringRequest(
-                Request.Method.POST,
-                InternetURL.GET_RENMAI_URL,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String s) {
-                        if (StringUtil.isJson(s)) {
-                            EmpsData data = getGson().fromJson(s, EmpsData.class);
-                            if (Integer.parseInt(data.getCode()) == 200) {
-//                                if (IS_REFRESH) {
-                                recordList.clear();
-//                                }
-                                recordList.addAll(data.getData());
-                                oneFragment.addMarkersToMap();
-                            } else {
-                                Toast.makeText(MainActivity.this, R.string.get_data_error, Toast.LENGTH_SHORT).show();
-                            }
-                        } else {
-                            Toast.makeText(MainActivity.this, R.string.get_data_error, Toast.LENGTH_SHORT).show();
-                        }
-                        if(progressDialog != null){
-                            progressDialog.dismiss();
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError volleyError) {
-                        if(progressDialog != null){
-                            progressDialog.dismiss();
-                        }
-                        Toast.makeText(MainActivity.this, R.string.get_data_error, Toast.LENGTH_SHORT).show();
-                    }
-                }
-        ) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("page", String.valueOf(1));
-                params.put("keyword", "");
-                params.put("mm_hangye_id", "");
-                params.put("mm_emp_cityId", "");
-                return params;
-            }
-
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("Content-Type", "application/x-www-form-urlencoded");
-                return params;
-            }
-        };
-
-        request.setRetryPolicy(new DefaultRetryPolicy(10000,
-                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-        getRequestQueue().add(request);
     }
 
     //----------------------------huanxin----------------------------

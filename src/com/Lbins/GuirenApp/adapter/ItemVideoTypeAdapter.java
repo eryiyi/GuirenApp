@@ -9,7 +9,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.Lbins.GuirenApp.GuirenApplication;
 import com.Lbins.GuirenApp.R;
-import com.Lbins.GuirenApp.module.CityObj;
 import com.Lbins.GuirenApp.module.VideoTypeObj;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;

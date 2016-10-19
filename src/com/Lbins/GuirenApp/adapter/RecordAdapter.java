@@ -79,6 +79,7 @@ public class RecordAdapter extends BaseAdapter {
             holder.home_item_school = (TextView) convertView.findViewById(R.id.home_item_school);
             holder.item_sign = (TextView) convertView.findViewById(R.id.item_sign);
             holder.home_viewed_item_type = (TextView) convertView.findViewById(R.id.home_viewed_item_type);
+            holder.home_photo_item_delete = (TextView) convertView.findViewById(R.id.home_photo_item_delete);
             holder.home_player_icon_video = (ImageView) convertView.findViewById(R.id.home_player_icon_video);
             convertView.setTag(holder);
         } else {
@@ -95,11 +96,11 @@ public class RecordAdapter extends BaseAdapter {
         final Record cell = records.get(position);//获得元素
         holder.home_viewed_item_type.setVisibility(View.GONE);
         if (cell != null) {
-//            if (mEmp_id.equals(cell.getMm_emp_id())) {//是发布者本人的动态
-//                holder.home_photo_item_delete.setVisibility(View.VISIBLE);//显示删除按钮
-//            } else {
-//                holder.home_photo_item_delete.setVisibility(View.GONE);//隐藏删除按钮
-//            }
+            if (mEmp_id.equals(cell.getMm_emp_id())) {//是发布者本人的动态
+                holder.home_photo_item_delete.setVisibility(View.VISIBLE);//显示删除按钮
+            } else {
+                holder.home_photo_item_delete.setVisibility(View.GONE);//隐藏删除按钮
+            }
             String img_url = cell.getMm_emp_cover();
             if(img_url.indexOf("7xt74j.com1.z0.glb.clouddn.com") > 0){
                 //图片保存到七牛上了，有缩率图
@@ -257,6 +258,14 @@ public class RecordAdapter extends BaseAdapter {
                 onClickContentItemListener.onClickContentItem(position, 10,null);
             }
         });
+        //删除
+        holder.home_photo_item_delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickContentItemListener.onClickContentItem(position, 11, null);
+            }
+        });
+
         return convertView;
     }
 
@@ -273,6 +282,7 @@ public class RecordAdapter extends BaseAdapter {
         ImageView home_player_icon_video;//视频播放
         TextView home_item_school;//所属学校
         TextView home_viewed_item_type;
+        TextView home_photo_item_delete;
         PictureGridview gridview_detail_picture;//九宫格--图片
     }
 }

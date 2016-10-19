@@ -104,7 +104,7 @@
                       android:singleLine="true"
                       android:drawableLeft="@drawable/star"
                       android:id="@+id/company_detail"
-                      android:hint="说明"
+                      android:hint="详细说明"
                       android:background="@color/white"
                       android:layout_height="35dp">
             </EditText>
@@ -123,7 +123,7 @@
             </com.Lbins.GuirenApp.widget.CustomerSpinner>
 
             <TextView android:layout_width="wrap_content"
-                      android:text="自媒体封面"
+                      android:text="自媒体封面，点击上传"
                       android:padding="8dp"
                       android:layout_marginLeft="20dp"
                       android:textColor="@color/textColortwo"

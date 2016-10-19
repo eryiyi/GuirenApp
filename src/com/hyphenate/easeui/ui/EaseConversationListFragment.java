@@ -16,6 +16,9 @@ import android.view.View.OnTouchListener;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.*;
 import android.widget.AdapterView.OnItemClickListener;
+import com.Lbins.GuirenApp.GuirenApplication;
+import com.Lbins.GuirenApp.R;
+import com.Lbins.GuirenApp.adapter.AnimateFirstDisplayListener;
 import com.Lbins.GuirenApp.base.InternetURL;
 import com.Lbins.GuirenApp.data.EmpsData;
 import com.Lbins.GuirenApp.huanxin.mine.MyEMConversation;
@@ -34,8 +37,9 @@ import com.hyphenate.EMConversationListener;
 import com.hyphenate.EMError;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMConversation;
-import com.Lbins.GuirenApp.R;
 import com.hyphenate.easeui.widget.EaseConversationList;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 
 import java.util.*;
 
@@ -63,6 +67,10 @@ public class EaseConversationListFragment extends EaseBaseFragment implements On
     boolean isMobileNet, isWifiNet;
 
     private ImageView right_image;
+    private ImageView andme_icon;
+
+    ImageLoader imageLoader = ImageLoader.getInstance();//图片加载类
+    private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
 
     protected EMConversationListener convListener = new EMConversationListener(){
 		@Override
@@ -77,6 +85,7 @@ public class EaseConversationListFragment extends EaseBaseFragment implements On
         view = inflater.inflate(R.layout.ease_fragment_conversation_list, null);
         res = getActivity().getResources();
         registerBoradcastReceiver();
+
         return view;
     }
 
@@ -90,6 +99,8 @@ public class EaseConversationListFragment extends EaseBaseFragment implements On
         listViewHead = (LinearLayout) LayoutInflater.from(getActivity()).inflate(R.layout.chatheader, null);
         unread_andme_number = (TextView) listViewHead.findViewById(R.id.unread_andme_number);
         listViewHead.findViewById(R.id.andme).setOnClickListener(this);
+        andme_icon = (ImageView) listViewHead.findViewById(R.id.andme_icon);
+        imageLoader.displayImage( getGson().fromJson(getSp().getString("mm_emp_cover", ""), String.class) ,andme_icon, GuirenApplication.txOptions, animateFirstListener);
         super.onActivityCreated(savedInstanceState);
     }
 

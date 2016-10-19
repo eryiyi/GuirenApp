@@ -23,11 +23,11 @@ import android.view.View;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.Toast;
+import com.Lbins.GuirenApp.R;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMMessage;
 import com.hyphenate.chat.EMMessage.ChatType;
 import com.hyphenate.chat.EMVoiceMessageBody;
-import com.Lbins.GuirenApp.R;
 import com.hyphenate.easeui.controller.EaseUI;
 import com.hyphenate.util.EMLog;
 

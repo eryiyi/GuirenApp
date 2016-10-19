@@ -6,22 +6,20 @@ import android.content.SharedPreferences;
 import android.text.TextUtils;
 import android.util.Log;
 import com.Lbins.GuirenApp.base.InternetURL;
-import com.Lbins.GuirenApp.data.SuccessData;
 import com.Lbins.GuirenApp.ui.AndMeAcitvity;
 import com.Lbins.GuirenApp.ui.NoticeActivity;
 import com.Lbins.GuirenApp.util.Constants;
-import com.Lbins.GuirenApp.util.StringUtil;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.baidu.android.pushservice.PushMessageReceiver;
 import com.google.gson.Gson;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.baidu.android.pushservice.PushMessageReceiver;
 import java.util.List;
 
 /**

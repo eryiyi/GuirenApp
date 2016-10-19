@@ -1,7 +1,6 @@
 package com.Lbins.GuirenApp.ui;
 
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
@@ -56,7 +55,6 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
         this.findViewById(R.id.liner_help).setOnClickListener(this);
         this.findViewById(R.id.liner_version).setOnClickListener(this);
         this.findViewById(R.id.liner_notice).setOnClickListener(this);
-        this.findViewById(R.id.liner_location).setOnClickListener(this);
 
         check_version = (TextView) this.findViewById(R.id.check_version);
         check_version.setText(getVersion());
@@ -142,14 +140,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
                 startActivity(intent);
             }
                 break;
-            case R.id.liner_location:
-            {
-                //地图显示
-                Intent intent = new Intent(SettingActivity.this, UpLocationActivity.class);
-                startActivity(intent);
 
-            }
-                break;
         }
     }
 

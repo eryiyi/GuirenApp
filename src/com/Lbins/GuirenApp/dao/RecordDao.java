@@ -3,7 +3,6 @@ package com.Lbins.GuirenApp.dao;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
-
 import com.Lbins.GuirenApp.module.Record;
 import de.greenrobot.dao.AbstractDao;
 import de.greenrobot.dao.Property;

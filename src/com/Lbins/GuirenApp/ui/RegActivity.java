@@ -742,6 +742,7 @@ public class RegActivity extends BaseActivity implements View.OnClickListener {
                 progressDialog.setIndeterminate(true);
                 progressDialog.show();
                 SMSSDK.submitVerificationCode("86", phString, code.getText().toString());
+//                reg();
             }
                 break;
             case R.id.btn_code:

@@ -10,9 +10,9 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import com.Lbins.GuirenApp.R;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
-import com.Lbins.GuirenApp.R;
 import com.hyphenate.util.EMLog;
 import com.hyphenate.util.PathUtil;
 

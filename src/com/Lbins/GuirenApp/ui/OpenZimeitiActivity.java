@@ -1,6 +1,5 @@
 package com.Lbins.GuirenApp.ui;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -13,17 +12,12 @@ import android.provider.MediaStore;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.*;
-import com.Lbins.GuirenApp.GuirenApplication;
 import com.Lbins.GuirenApp.R;
 import com.Lbins.GuirenApp.adapter.AnimateFirstDisplayListener;
 import com.Lbins.GuirenApp.base.BaseActivity;
 import com.Lbins.GuirenApp.base.InternetURL;
 import com.Lbins.GuirenApp.data.GdTypeObjData;
-import com.Lbins.GuirenApp.data.ProvinceData;
-import com.Lbins.GuirenApp.module.CityObj;
-import com.Lbins.GuirenApp.module.CountryObj;
 import com.Lbins.GuirenApp.module.GdTypeObj;
-import com.Lbins.GuirenApp.module.ProvinceObj;
 import com.Lbins.GuirenApp.util.CompressPhotoUtil;
 import com.Lbins.GuirenApp.util.StringUtil;
 import com.Lbins.GuirenApp.widget.CustomProgressDialog;
@@ -399,12 +393,6 @@ public class OpenZimeitiActivity extends BaseActivity implements View.OnClickLis
                 params.put("company_person", company_person.getText().toString());
                 params.put("company_address", company_address.getText().toString());
                 params.put("gd_type_id", provinceCode);
-                if(!StringUtil.isNullOrEmpty(GuirenApplication.latStr)){
-                    params.put("lat_company", GuirenApplication.latStr);
-                }
-                if(!StringUtil.isNullOrEmpty(GuirenApplication.lngStr)){
-                    params.put("lng_company", GuirenApplication.lngStr);
-                }
 
                 return params;
             }

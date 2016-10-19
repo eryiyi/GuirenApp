@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           xmlns:tools="http://schemas.android.com/tools"
           package="com.Lbins.GuirenApp"
-          android:versionCode="6"
-          android:versionName="1.0.5">
+          android:versionCode="9"
+          android:versionName="1.0.8">
     <uses-sdk android:minSdkVersion="17"/>
 
 
@@ -207,16 +207,15 @@
         <activity android:name=".ui.DetailTvActivity" android:screenOrientation="portrait" android:theme="@style/AppTheme" android:windowSoftInputMode="adjustResize|stateHidden"/>
         <activity android:name=".ui.VideosByTypeActivity" android:screenOrientation="portrait" android:theme="@style/AppTheme" android:windowSoftInputMode="adjustResize|stateHidden"/>
         <activity android:name=".ui.ZimeitiTypeValActivity" android:screenOrientation="portrait" android:theme="@style/AppTheme" android:windowSoftInputMode="adjustResize|stateHidden"/>
-        <activity android:name=".ui.UpLocationActivity" android:screenOrientation="portrait" android:theme="@style/AppTheme" android:windowSoftInputMode="adjustResize|stateHidden"/>
 
         <!--// *****************************高德地图sdk*******************************************-->
-        <meta-data
-                android:name="com.amap.api.v2.apikey"
-                android:value="8fce261132d5ea7ad5a38717bc2c453e" />
+        <!--<meta-data-->
+                <!--android:name="com.amap.api.v2.apikey"-->
+                <!--android:value="8fce261132d5ea7ad5a38717bc2c453e" />-->
 
-        <!-- 定位需要的服务 -->
-        <service android:name="com.amap.api.location.APSService" >
-        </service>
+        <!--&lt;!&ndash; 定位需要的服务 &ndash;&gt;-->
+        <!--<service android:name="com.amap.api.location.APSService" >-->
+        <!--</service>-->
 
         <!-- 设置环信应用的AppKey -->
         <meta-data android:name="EASEMOB_APPKEY"  android:value="826321978#guiren" />

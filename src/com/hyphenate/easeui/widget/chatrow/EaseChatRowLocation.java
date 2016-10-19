@@ -4,11 +4,11 @@ import android.content.Context;
 import android.view.View;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+import com.Lbins.GuirenApp.R;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMLocationMessageBody;
 import com.hyphenate.chat.EMMessage;
 import com.hyphenate.chat.EMMessage.ChatType;
-import com.Lbins.GuirenApp.R;
 import com.hyphenate.exceptions.HyphenateException;
 import com.hyphenate.util.LatLng;
 

@@ -6,22 +6,11 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 import com.Lbins.GuirenApp.R;
 import com.Lbins.GuirenApp.base.BaseActivity;
-import com.Lbins.GuirenApp.base.InternetURL;
-import com.Lbins.GuirenApp.data.EmpsRmData;
 import com.Lbins.GuirenApp.fragment.TuopuFragmentOne;
 import com.Lbins.GuirenApp.fragment.TuopuFragmentThree;
 import com.Lbins.GuirenApp.fragment.TuopuFragmentTwo;
-import com.Lbins.GuirenApp.module.Emp;
-import com.Lbins.GuirenApp.util.StringUtil;
-import com.android.volley.*;
-import com.android.volley.toolbox.StringRequest;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Created by zhl on 2016/6/13.

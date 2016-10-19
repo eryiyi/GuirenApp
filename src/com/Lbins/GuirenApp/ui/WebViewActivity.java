@@ -1,6 +1,5 @@
 package com.Lbins.GuirenApp.ui;
 
-import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;

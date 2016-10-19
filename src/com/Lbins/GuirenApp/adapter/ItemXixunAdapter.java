@@ -69,9 +69,17 @@ public class ItemXixunAdapter extends BaseAdapter {
         if (cell != null) {
             holder.home_viewed_item_name.setText(cell.getMm_emp_nickname());
             holder.home_viewed_item_cont.setText(cell.getGuiren_xixun_title());
-            holder.home_viewed_item_time.setText(cell.getDateline());
+//            holder.home_viewed_item_time.setText(cell.getDateline());
             imageLoader.displayImage(cell.getMm_emp_cover(), holder.home_viewed_item_cover, GuirenApplication.txOptions, animateFirstListener);
             holder.home_item_school.setText(cell.getMm_hangye_name());
+
+            holder.home_viewed_item_time.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onClickContentItemListener.onClickContentItem(position, 1, "1000");
+                }
+            });
+
         }
         return convertView;
     }

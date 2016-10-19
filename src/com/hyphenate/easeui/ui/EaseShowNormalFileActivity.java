@@ -4,10 +4,10 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+import com.Lbins.GuirenApp.R;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMFileMessageBody;
-import com.Lbins.GuirenApp.R;
 import com.hyphenate.util.FileUtils;
 
 import java.io.File;

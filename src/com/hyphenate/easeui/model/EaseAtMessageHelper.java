@@ -1,11 +1,11 @@
 package com.hyphenate.easeui.model;
 
 import android.text.TextUtils;
+import com.Lbins.GuirenApp.R;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMMessage;
 import com.hyphenate.chat.EMMessage.ChatType;
 import com.hyphenate.easeui.EaseConstant;
-import com.Lbins.GuirenApp.R;
 import com.hyphenate.easeui.controller.EaseUI;
 import com.hyphenate.easeui.domain.EaseUser;
 import com.hyphenate.easeui.utils.EaseUserUtils;

@@ -11,8 +11,6 @@ import android.widget.TextView;
 import com.Lbins.GuirenApp.GuirenApplication;
 import com.Lbins.GuirenApp.R;
 import com.Lbins.GuirenApp.module.EmpDianpu;
-import com.Lbins.GuirenApp.util.StringUtil;
-import com.amap.api.maps.model.LatLng;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 
@@ -101,12 +99,12 @@ public class ItemDianpuAdapter extends BaseAdapter {
         //加载图片
         imageLoader.displayImage(cell.getCompany_pic(), holder.item_cover, GuirenApplication.options, animateFirstListener);
         imageLoader.displayImage(cell.getMm_emp_cover(), holder.head, GuirenApplication.txOptions, animateFirstListener);
-        if(!StringUtil.isNullOrEmpty(GuirenApplication.latStr) && !StringUtil.isNullOrEmpty(GuirenApplication.lngStr) && !StringUtil.isNullOrEmpty(cell.getLat_company()) && !StringUtil.isNullOrEmpty(cell.getLng_company())){
-            LatLng latLng = new LatLng(Double.valueOf(GuirenApplication.latStr), Double.valueOf(GuirenApplication.lngStr));
-            LatLng latLng1 = new LatLng(Double.valueOf(cell.getLat_company()), Double.valueOf(cell.getLng_company()));
-            String distance = StringUtil.getDistance(latLng, latLng1);
-            holder.item_location.setText(distance + "km");
-        }
+//        if(!StringUtil.isNullOrEmpty(GuirenApplication.latStr) && !StringUtil.isNullOrEmpty(GuirenApplication.lngStr) && !StringUtil.isNullOrEmpty(cell.getLat_company()) && !StringUtil.isNullOrEmpty(cell.getLng_company())){
+//            LatLng latLng = new LatLng(Double.valueOf(GuirenApplication.latStr), Double.valueOf(GuirenApplication.lngStr));
+//            LatLng latLng1 = new LatLng(Double.valueOf(cell.getLat_company()), Double.valueOf(cell.getLng_company()));
+//            String distance = StringUtil.getDistance(latLng, latLng1);
+//            holder.item_location.setText(distance + "km");
+//        }
 
 
         return convertView;

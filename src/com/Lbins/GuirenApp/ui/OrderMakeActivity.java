@@ -13,7 +13,6 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.util.Xml;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.Lbins.GuirenApp.R;

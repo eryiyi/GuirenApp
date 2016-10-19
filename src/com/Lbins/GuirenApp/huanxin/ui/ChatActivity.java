@@ -3,12 +3,10 @@ package com.Lbins.GuirenApp.huanxin.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import com.Lbins.GuirenApp.MainActivity;
 import com.Lbins.GuirenApp.R;
 import com.Lbins.GuirenApp.base.BaseActivity;
 import com.Lbins.GuirenApp.huanxin.runtimepermissions.PermissionsManager;
 import com.hyphenate.easeui.ui.EaseChatFragment;
-import com.hyphenate.util.EasyUtils;
 
 /**
  *

@@ -5,12 +5,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
-import com.Lbins.GuirenApp.GuirenApplication;
 import com.Lbins.GuirenApp.R;
 import com.Lbins.GuirenApp.module.GdTypeObj;
-import com.Lbins.GuirenApp.module.VideoTypeObj;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 

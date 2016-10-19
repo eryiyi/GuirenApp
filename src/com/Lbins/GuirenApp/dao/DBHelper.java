@@ -2,7 +2,6 @@ package com.Lbins.GuirenApp.dao;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
-import com.Lbins.GuirenApp.data.ManagerInfoData;
 import com.Lbins.GuirenApp.module.*;
 import de.greenrobot.dao.query.QueryBuilder;
 

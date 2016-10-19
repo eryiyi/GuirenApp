@@ -4,10 +4,10 @@ import android.content.Context;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import com.Lbins.GuirenApp.R;
 import com.bumptech.glide.Glide;
 import com.hyphenate.chat.EMMessage;
 import com.hyphenate.easeui.EaseConstant;
-import com.Lbins.GuirenApp.R;
 import com.hyphenate.easeui.controller.EaseUI;
 import com.hyphenate.easeui.domain.EaseEmojicon;
 

@@ -6,12 +6,12 @@ import android.graphics.PixelFormat;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.*;
-import com.Lbins.GuirenApp.GuirenApplication;
+import android.widget.AdapterView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.TextView;
 import com.Lbins.GuirenApp.R;
-import com.Lbins.GuirenApp.adapter.AnimateFirstDisplayListener;
 import com.Lbins.GuirenApp.adapter.ContactAdapter;
 import com.Lbins.GuirenApp.base.BaseActivity;
 import com.Lbins.GuirenApp.base.InternetURL;
@@ -20,18 +20,17 @@ import com.Lbins.GuirenApp.module.EmpRelateObj;
 import com.Lbins.GuirenApp.util.GuirenHttpUtils;
 import com.Lbins.GuirenApp.util.StringUtil;
 import com.Lbins.GuirenApp.widget.CustomProgressDialog;
-import com.Lbins.GuirenApp.widget.PingYinUtil;
-import com.Lbins.GuirenApp.widget.PinyinComparator;
 import com.Lbins.GuirenApp.widget.SideBar;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by zhl on 2016/7/14.

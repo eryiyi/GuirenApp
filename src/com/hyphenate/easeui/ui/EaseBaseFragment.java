@@ -5,8 +5,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
-import com.Lbins.GuirenApp.base.MyBaseFragment;
 import com.Lbins.GuirenApp.R;
+import com.Lbins.GuirenApp.base.MyBaseFragment;
 import com.hyphenate.easeui.widget.EaseTitleBar;
 
 public abstract class EaseBaseFragment extends MyBaseFragment{

@@ -6,11 +6,11 @@ import android.view.View;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 import android.widget.TextView.BufferType;
+import com.Lbins.GuirenApp.R;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMMessage;
 import com.hyphenate.chat.EMMessage.ChatType;
 import com.hyphenate.chat.EMTextMessageBody;
-import com.Lbins.GuirenApp.R;
 import com.hyphenate.easeui.utils.EaseSmileUtils;
 import com.hyphenate.exceptions.HyphenateException;
 

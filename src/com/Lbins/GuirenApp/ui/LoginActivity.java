@@ -1,6 +1,5 @@
 package com.Lbins.GuirenApp.ui;
 
-import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -35,7 +34,6 @@ import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
-import com.tencent.open.utils.HttpUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 

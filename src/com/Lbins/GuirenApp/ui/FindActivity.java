@@ -338,6 +338,11 @@ public class FindActivity extends BaseActivity implements View.OnClickListener,O
                 startActivity(intentzmt);
             }
                 break;
+            case 11:
+            {
+                //刪除動態
+            }
+                break;
             default:
                 break;
         }

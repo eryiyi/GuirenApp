@@ -1,6 +1,5 @@
 package com.Lbins.GuirenApp.ui;
 
-import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -12,18 +11,11 @@ import android.widget.*;
 import com.Lbins.GuirenApp.R;
 import com.Lbins.GuirenApp.base.BaseActivity;
 import com.Lbins.GuirenApp.base.InternetURL;
-import com.Lbins.GuirenApp.data.CityData;
-import com.Lbins.GuirenApp.data.CountrysData;
-import com.Lbins.GuirenApp.data.ProvinceData;
-import com.Lbins.GuirenApp.module.CityObj;
-import com.Lbins.GuirenApp.module.CountryObj;
 import com.Lbins.GuirenApp.module.HangYeType;
-import com.Lbins.GuirenApp.module.ProvinceObj;
 import com.Lbins.GuirenApp.util.Constants;
 import com.Lbins.GuirenApp.util.GuirenHttpUtils;
 import com.Lbins.GuirenApp.util.StringUtil;
 import com.Lbins.GuirenApp.widget.CustomProgressDialog;
-import com.Lbins.GuirenApp.widget.CustomerSpinner;
 import com.Lbins.GuirenApp.widget.SexRadioGroup;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -33,9 +25,7 @@ import com.android.volley.toolbox.StringRequest;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -492,14 +482,6 @@ public class EditEmpActivity extends BaseActivity implements View.OnClickListene
             case R.id.sign_in_button:
                 if(StringUtil.isNullOrEmpty(nickname.getText().toString().trim())){
                     showMsg(EditEmpActivity.this, "请输入姓名");
-                    return;
-                }
-                if(StringUtil.isNullOrEmpty(email.getText().toString().trim())){
-                    showMsg(EditEmpActivity.this, "请输入邮箱");
-                    return;
-                }
-                if(StringUtil.isNullOrEmpty(company.getText().toString().trim())){
-                    showMsg(EditEmpActivity.this, "请输入公司");
                     return;
                 }
                 progressDialog = new CustomProgressDialog(EditEmpActivity.this, "正在加载中",R.anim.custom_dialog_frame);

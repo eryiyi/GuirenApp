@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.text.format.DateUtils;
 import android.view.View;
 import android.widget.*;
-import com.Lbins.GuirenApp.GuirenApplication;
 import com.Lbins.GuirenApp.R;
 import com.Lbins.GuirenApp.adapter.ItemDianpuAdapter;
 import com.Lbins.GuirenApp.base.BaseActivity;
@@ -15,7 +14,6 @@ import com.Lbins.GuirenApp.data.DianpuData;
 import com.Lbins.GuirenApp.library.PullToRefreshBase;
 import com.Lbins.GuirenApp.library.PullToRefreshListView;
 import com.Lbins.GuirenApp.module.EmpDianpu;
-import com.Lbins.GuirenApp.module.Record;
 import com.Lbins.GuirenApp.util.GuirenHttpUtils;
 import com.Lbins.GuirenApp.util.StringUtil;
 import com.Lbins.GuirenApp.widget.CustomProgressDialog;
@@ -243,15 +241,7 @@ public class ZimeitiActivity extends BaseActivity implements View.OnClickListene
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("keyWords", "");
                 params.put("page", String.valueOf(pageIndex));
-                if(!StringUtil.isNullOrEmpty(GuirenApplication.latStr)){
-                    params.put("lat",GuirenApplication.latStr);
-                }
-                if(!StringUtil.isNullOrEmpty(GuirenApplication.lngStr)){
-                    params.put("lng",GuirenApplication.lngStr);
-                }
-
                 params.put("gd_type_id", gd_type_id);
-
                 return params;
             }
 

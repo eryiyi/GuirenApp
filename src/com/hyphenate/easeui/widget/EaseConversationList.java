@@ -7,11 +7,11 @@ import android.os.Message;
 import android.util.AttributeSet;
 import android.util.Pair;
 import android.widget.ListView;
+import com.Lbins.GuirenApp.R;
 import com.Lbins.GuirenApp.huanxin.mine.MyEMConversation;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMConversation;
 import com.hyphenate.chat.EMMessage;
-import com.Lbins.GuirenApp.R;
 import com.hyphenate.easeui.adapter.EaseConversationAdapater;
 
 import java.util.*;

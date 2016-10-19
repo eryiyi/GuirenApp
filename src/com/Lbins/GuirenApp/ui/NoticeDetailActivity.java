@@ -2,13 +2,9 @@ package com.Lbins.GuirenApp.ui;
 
 import android.os.Bundle;
 import android.view.View;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
-import android.widget.ImageView;
 import android.widget.TextView;
 import com.Lbins.GuirenApp.R;
 import com.Lbins.GuirenApp.base.BaseActivity;
-import com.Lbins.GuirenApp.base.InternetURL;
 import com.Lbins.GuirenApp.module.Notice;
 import com.Lbins.GuirenApp.util.Constants;
 

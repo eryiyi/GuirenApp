@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:background="@color/mm_main_bg"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <LinearLayout android:layout_width="match_parent"
+                  android:orientation="vertical"
+                  android:layout_marginTop="8dp"
+                  android:layout_height="wrap_content">
+        <LinearLayout android:layout_width="match_parent"
+                      android:orientation="horizontal"
+                      android:padding="3dp"
+                      android:layout_height="wrap_content">
+            <!--<TextView android:layout_width="wrap_content"-->
+                      <!--android:text="行业筛选"-->
+                      <!--android:layout_marginLeft="8dp"-->
+                      <!--android:layout_gravity="center_vertical"-->
+                      <!--android:padding="8dp"-->
+                      <!--android:textColor="@color/textColor"-->
+                      <!--android:layout_height="wrap_content"/>-->
+            <TextView android:layout_width="wrap_content"
+                      android:layout_weight="1"
+                      android:padding="8dp"
+                      android:id="@+id/btn_one"
+                      android:gravity="center"
+                      android:background="@color/white"
+                      android:drawableRight="@drawable/sm_more"
+                      android:layout_marginRight="8dp"
+                      android:layout_marginLeft="8dp"
+                      android:text="点击切换行业"
+                      android:textColor="@color/blue"
+                      android:layout_height="wrap_content"/>
+        </LinearLayout>
+        <LinearLayout android:layout_width="match_parent"
+                      android:orientation="horizontal"
+                      android:padding="3dp"
+                      android:layout_height="wrap_content">
+            <!--<TextView android:layout_width="wrap_content"-->
+                      <!--android:text="地区筛选"-->
+                      <!--android:layout_marginLeft="8dp"-->
+                      <!--android:layout_gravity="center_vertical"-->
+                      <!--android:padding="8dp"-->
+                      <!--android:textColor="@color/textColor"-->
+                      <!--android:layout_height="wrap_content"/>-->
+            <TextView android:layout_width="wrap_content"
+                      android:layout_weight="1"
+                      android:padding="8dp"
+                      android:id="@+id/btn_two"
+                      android:gravity="center"
+                      android:background="@color/white"
+                      android:drawableRight="@drawable/sm_more"
+                      android:layout_marginRight="8dp"
+                      android:layout_marginLeft="8dp"
+                      android:text="点击切换地区"
+                      android:textColor="@color/blue"
+                      android:layout_height="wrap_content"/>
+        </LinearLayout>
+    </LinearLayout>
+    <View android:layout_width="match_parent"
+          android:background="@color/gray01"
+          android:layout_marginTop="8dp"
+          android:layout_height="1dp"></View>
+</LinearLayout>

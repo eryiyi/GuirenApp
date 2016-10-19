@@ -1,6 +1,5 @@
 package com.Lbins.GuirenApp.ui;
 
-import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -371,6 +370,12 @@ public class ProfileZmtActivity extends BaseActivity implements View.OnClickList
 //                startActivity(intentzmt);
             }
             break;
+            case 11:
+                //删除该动态
+                recordtmp = record;//放到中间存储
+                tmpSelected = position;
+                showSelectImageDialog();
+                break;
             default:
                 break;
         }

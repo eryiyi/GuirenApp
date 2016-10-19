@@ -31,7 +31,6 @@ import com.Lbins.GuirenApp.R;
 import com.Lbins.GuirenApp.adapter.AnimateFirstDisplayListener;
 import com.Lbins.GuirenApp.base.BaseActivity;
 import com.Lbins.GuirenApp.base.InternetURL;
-import com.Lbins.GuirenApp.dao.DBHelper;
 import com.Lbins.GuirenApp.data.EmpsData;
 import com.Lbins.GuirenApp.module.Emp;
 import com.Lbins.GuirenApp.ui.GroupAddEmpActivity;
