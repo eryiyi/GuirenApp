@@ -35,11 +35,11 @@ public class ContactAdapter  extends BaseAdapter implements SectionIndexer {
         this.mContext = mContext;
         this.mNicks = nicks;
         // 排序(实现了中英文混排)
-        String[] arrays = new String[mNicks.size()];
-        for(int i=0;i<mNicks.size();i++){
-            arrays[i]=mNicks.get(i).getMm_emp_nickname();
-        }
-        Arrays.sort(arrays, new PinyinComparator());
+//        String[] arrays = new String[mNicks.size()];
+//        for(int i=0;i<mNicks.size();i++){
+//            arrays[i]=mNicks.get(i).getMm_emp_nickname();
+//        }
+//        Arrays.sort(mNicks, new PinyinComparator());
     }
 
     @Override

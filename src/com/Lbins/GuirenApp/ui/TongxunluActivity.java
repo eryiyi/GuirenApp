@@ -20,6 +20,7 @@ import com.Lbins.GuirenApp.module.EmpRelateObj;
 import com.Lbins.GuirenApp.util.GuirenHttpUtils;
 import com.Lbins.GuirenApp.util.StringUtil;
 import com.Lbins.GuirenApp.widget.CustomProgressDialog;
+import com.Lbins.GuirenApp.widget.PinyinComparator;
 import com.Lbins.GuirenApp.widget.SideBar;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -27,10 +28,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by zhl on 2016/7/14.
@@ -84,6 +82,7 @@ public class TongxunluActivity extends BaseActivity implements View.OnClickListe
                             if (Integer.parseInt(data.getCode()) == 200) {
                                 nicks.clear();
                                 nicks.addAll(data.getData());
+                                Collections.sort(nicks, new PinyinComparator());
                                 adapter.notifyDataSetChanged();
                             }else {
                                 showMsg(TongxunluActivity.this, getResources().getString(R.string.get_data_error));
