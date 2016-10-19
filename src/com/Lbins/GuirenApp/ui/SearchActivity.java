@@ -72,13 +72,17 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
         setContentView(R.layout.search_activity);
         res = getResources();
         registerBoradcastReceiver();
-        mm_hangye_id = getIntent().getExtras().getString("mm_hangye_id");
-        mm_emp_countryId = getIntent().getExtras().getString("mm_emp_countryId");
-        mm_hangye_name = getIntent().getExtras().getString("mm_hangye_name");
-        mm_emp_countryName = getIntent().getExtras().getString("mm_emp_countryName");
+        keyStr = getIntent().getExtras().getString("keyStr");
+//        mm_hangye_id = getIntent().getExtras().getString("mm_hangye_id");
+//        mm_emp_countryId = getIntent().getExtras().getString("mm_emp_countryId");
+//        mm_hangye_name = getIntent().getExtras().getString("mm_hangye_name");
+//        mm_emp_countryName = getIntent().getExtras().getString("mm_emp_countryName");
 //        mm_hangye_id = getGson().fromJson(getSp().getString("mm_hangye_id", ""), String.class);
 //        mm_emp_cityId = getGson().fromJson(getSp().getString("mm_emp_cityId", ""), String.class);
         initView();
+        if(!StringUtil.isNullOrEmpty(keyStr)){
+            input_edittext.setText(keyStr);
+        }
         //判断是否有网
         try {
             isMobileNet = GuirenHttpUtils.isMobileDataEnable(SearchActivity.this);
