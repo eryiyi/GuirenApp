@@ -653,10 +653,10 @@ public class GroupDetailsActivity extends BaseActivity implements OnClickListene
 			    holder.imageView.setImageResource(R.drawable.em_smiley_add_btn);
 //				button.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.smiley_add_btn, 0, 0);
 				// 如果不是创建者或者没有相应权限
-				if (!group.isAllowInvites() && !group.getOwner().equals(EMClient.getInstance().getCurrentUser())) {
+//				if (!group.isAllowInvites() && !group.getOwner().equals(EMClient.getInstance().getCurrentUser())) {
 					// if current user is not group admin, hide add/remove btn
-					convertView.setVisibility(View.INVISIBLE);
-				} else {
+//					convertView.setVisibility(View.INVISIBLE);
+//				} else {
 					// 正处于删除模式下,隐藏添加按钮
 					if (isInDeleteMode) {
 						convertView.setVisibility(View.INVISIBLE);
@@ -678,7 +678,7 @@ public class GroupDetailsActivity extends BaseActivity implements OnClickListene
 									REQUEST_CODE_ADD_USER);
 						}
 					});
-				}
+//				}
 			}
 			else { // 普通item，显示群组成员
 				if(members.size() > position){
