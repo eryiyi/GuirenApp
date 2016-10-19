@@ -1,8 +1,8 @@
 package com.Lbins.GuirenApp.base;
 
 public class InternetURL {
-    public static final String INTERNAL = "http://www.shandongguiren.com/";
-//    public static final String INTERNAL =  "http://192.168.0.224:8080/";
+//    public static final String INTERNAL = "http://www.shandongguiren.com/";
+    public static final String INTERNAL =  "http://192.168.0.224:8080/";
 
     public static final String QINIU_URL =  "http://7xt74j.com1.z0.glb.clouddn.com/";
 
@@ -120,7 +120,7 @@ public class InternetURL {
     //赞动态
     public static final String CLICK_LIKE_URL = INTERNAL + "zanRecord.do";
     //根据动态Id删除动态
-    public static final String DELETE_RECORDS_URL = INTERNAL + "record/deleteRecordById.do";
+    public static final String DELETE_RECORDS_URL = INTERNAL + "deleteRecordById.do";
 
     //行业
     public static final String GET_HY_URL = INTERNAL + "getHyTypes.do";

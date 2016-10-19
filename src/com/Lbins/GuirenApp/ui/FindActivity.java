@@ -296,6 +296,7 @@ public class FindActivity extends BaseActivity implements View.OnClickListener,O
 //                startActivity(intent);
                 break;
             case 6:
+            case 11:
                 //删除该动态
                 recordtmp = record;//放到中间存储
                 tmpSelected = position;
@@ -338,11 +339,7 @@ public class FindActivity extends BaseActivity implements View.OnClickListener,O
                 startActivity(intentzmt);
             }
                 break;
-            case 11:
-            {
-                //刪除動態
-            }
-                break;
+
             default:
                 break;
         }
@@ -610,9 +607,11 @@ public class FindActivity extends BaseActivity implements View.OnClickListener,O
 //                overridePendingTransition(R.anim.push_up_in, R.anim.push_up_out);
 //                break;
             case  1:
+            {
                 Intent photo = new Intent(FindActivity.this, PublishPicActivity.class);
                 photo.putExtra(Constants.SELECT_PHOTOORPIIC, "1");
                 startActivity(photo);
+            }
                 break;
         }
     }
