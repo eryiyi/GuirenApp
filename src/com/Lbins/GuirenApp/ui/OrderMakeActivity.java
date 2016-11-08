@@ -250,7 +250,8 @@ public class OrderMakeActivity extends BaseActivity implements View.OnClickListe
                 // 构造PayTask 对象
                 PayTask alipay = new PayTask(OrderMakeActivity.this);
                 // 调用支付接口，获取支付结果
-                String result = alipay.pay(payInfo);
+                //todo
+                String result = alipay.pay(payInfo, true);
 
                 Message msg = new Message();
                 msg.what = SDK_PAY_FLAG;
@@ -277,11 +278,13 @@ public class OrderMakeActivity extends BaseActivity implements View.OnClickListe
                 // 构造PayTask 对象
                 PayTask payTask = new PayTask(OrderMakeActivity.this);
                 // 调用查询接口，获取查询结果
-                boolean isExist = payTask.checkAccountIfExist();
+                //todo
+//                boolean isExist = payTask.checkAccountIfExist();
+//                boolean isExist = payTask.checkAccountIfExist();
 
                 Message msg = new Message();
                 msg.what = SDK_CHECK_FLAG;
-                msg.obj = isExist;
+                msg.obj = true;
                 mHandler.sendMessage(msg);
             }
         };

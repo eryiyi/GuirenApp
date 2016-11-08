@@ -143,7 +143,7 @@ public class InternetURL {
     //修改个人信息
     public static final String EDIT_EMP_BY_ID = INTERNAL + "editEmpById.do";
 
-    //根据环信id查询用户资料
+    //根据贵人id查询用户资料
     public static final String GET_EMP_BY_HXUSERNAME = INTERNAL + "getHxByName.do";
     //查询好友资料
     public static final String GET_INVITE_CONTACT_URL = INTERNAL + "listInviteMemberInfo.do";

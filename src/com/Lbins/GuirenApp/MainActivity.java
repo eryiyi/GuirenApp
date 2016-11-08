@@ -34,9 +34,11 @@ import com.Lbins.GuirenApp.huanxin.ui.ChatActivity;
 import com.Lbins.GuirenApp.huanxin.ui.ConversationListFragment;
 import com.Lbins.GuirenApp.huanxin.ui.GroupsActivity;
 import com.Lbins.GuirenApp.huanxin.ui.LoginActivity;
+import com.Lbins.GuirenApp.huanxin.utils.RedPacketConstant;
 import com.Lbins.GuirenApp.module.Emp;
 import com.Lbins.GuirenApp.module.VersionUpdateObj;
 import com.Lbins.GuirenApp.ui.AndMeAcitvity;
+import com.Lbins.GuirenApp.util.RedPacketUtil;
 import com.Lbins.GuirenApp.util.StringUtil;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -318,9 +320,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener ,
             for (EMMessage message : messages) {
                 EMCmdMessageBody cmdMsgBody = (EMCmdMessageBody) message.getBody();
                 final String action = cmdMsgBody.action();//获取自定义action
-//                if (action.equals(RedPacketConstant.REFRESH_GROUP_RED_PACKET_ACTION)) {
-//                    RedPacketUtil.receiveRedPacketAckMessage(message);
-//                }
+                if (action.equals(RedPacketConstant.REFRESH_GROUP_RED_PACKET_ACTION)) {
+                    RedPacketUtil.receiveRedPacketAckMessage(message);
+                }
             }
             //end of red packet code
             refreshUIWithMessage();

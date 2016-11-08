@@ -217,7 +217,7 @@
         <!--<service android:name="com.amap.api.location.APSService" >-->
         <!--</service>-->
 
-        <!-- 设置环信应用的AppKey -->
+        <!-- 设置贵人应用的AppKey -->
         <meta-data android:name="EASEMOB_APPKEY"  android:value="826321978#guiren" />
         <!-- 声明SDK所需的service SDK核心功能-->
         <service android:name="com.hyphenate.chat.EMChatService" android:exported="true"/>
@@ -233,7 +233,6 @@
                 <action android:name="android.intent.action.USER_PRESENT" />
             </intent-filter>
         </receiver>
-
 
         <!-- 开屏页 -->
         <activity
@@ -467,54 +466,54 @@
 
         <!--红包相关Activity start-->
         <!--发红包-->
-        <!--<activity-->
-                <!--android:name="com.easemob.redpacketui.ui.activity.RPRedPacketActivity"-->
-                <!--android:screenOrientation="portrait"-->
-                <!--android:theme="@style/horizontal_slide"-->
-                <!--android:windowSoftInputMode="adjustPan|stateVisible"-->
-                <!--/>-->
+        <activity
+                android:name="com.easemob.redpacketui.ui.activity.RPRedPacketActivity"
+                android:screenOrientation="portrait"
+                android:theme="@style/horizontal_slide"
+                android:windowSoftInputMode="adjustPan|stateVisible"
+                />
         <!--&lt;!&ndash;红包详情&ndash;&gt;-->
-        <!--<activity-->
-                <!--android:name="com.easemob.redpacketui.ui.activity.RPDetailActivity"-->
-                <!--android:screenOrientation="portrait"-->
-                <!--android:theme="@style/horizontal_slide"-->
-                <!--android:windowSoftInputMode="adjustPan"-->
-                <!--/>-->
+        <activity
+                android:name="com.easemob.redpacketui.ui.activity.RPDetailActivity"
+                android:screenOrientation="portrait"
+                android:theme="@style/horizontal_slide"
+                android:windowSoftInputMode="adjustPan"
+                />
         <!--&lt;!&ndash;红包记录&ndash;&gt;-->
-        <!--<activity-->
-                <!--android:name="com.easemob.redpacketui.ui.activity.RPRecordActivity"-->
-                <!--android:screenOrientation="portrait"-->
-                <!--android:theme="@style/horizontal_slide"-->
-                <!--android:windowSoftInputMode="adjustPan"-->
-                <!--/>-->
+        <activity
+                android:name="com.easemob.redpacketui.ui.activity.RPRecordActivity"
+                android:screenOrientation="portrait"
+                android:theme="@style/horizontal_slide"
+                android:windowSoftInputMode="adjustPan"
+                />
         <!--&lt;!&ndash;WebView相关&ndash;&gt;-->
-        <!--<activity-->
-                <!--android:name="com.easemob.redpacketui.ui.activity.RPWebViewActivity"-->
-                <!--android:screenOrientation="portrait"-->
-                <!--android:theme="@style/horizontal_slide"-->
-                <!--android:windowSoftInputMode="adjustResize|stateHidden"-->
-                <!--/>-->
+        <activity
+                android:name="com.easemob.redpacketui.ui.activity.RPWebViewActivity"
+                android:screenOrientation="portrait"
+                android:theme="@style/horizontal_slide"
+                android:windowSoftInputMode="adjustResize|stateHidden"
+                />
         <!--&lt;!&ndash;零钱&ndash;&gt;-->
-        <!--<activity-->
-                <!--android:name="com.easemob.redpacketui.ui.activity.RPChangeActivity"-->
-                <!--android:screenOrientation="portrait"-->
-                <!--android:theme="@style/horizontal_slide"-->
-                <!--android:windowSoftInputMode="adjustResize|stateHidden"-->
-                <!--/>-->
+        <activity
+                android:name="com.easemob.redpacketui.ui.activity.RPChangeActivity"
+                android:screenOrientation="portrait"
+                android:theme="@style/horizontal_slide"
+                android:windowSoftInputMode="adjustResize|stateHidden"
+                />
         <!--&lt;!&ndash;绑定银行卡&ndash;&gt;-->
-        <!--<activity-->
-                <!--android:name="com.easemob.redpacketui.ui.activity.RPBankCardActivity"-->
-                <!--android:screenOrientation="portrait"-->
-                <!--android:theme="@style/horizontal_slide"-->
-                <!--android:windowSoftInputMode="adjustPan|stateHidden"-->
-                <!--/>-->
+        <activity
+                android:name="com.easemob.redpacketui.ui.activity.RPBankCardActivity"
+                android:screenOrientation="portrait"
+                android:theme="@style/horizontal_slide"
+                android:windowSoftInputMode="adjustPan|stateHidden"
+                />
         <!--&lt;!&ndash;群成员列表页&ndash;&gt;-->
-        <!--<activity-->
-                <!--android:name="com.easemob.redpacketui.ui.activity.RPGroupMemberActivity"-->
-                <!--android:screenOrientation="portrait"-->
-                <!--android:theme="@style/horizontal_slide"-->
-                <!--android:windowSoftInputMode="adjustPan|stateHidden"-->
-                <!--/>-->
+        <activity
+                android:name="com.easemob.redpacketui.ui.activity.RPGroupMemberActivity"
+                android:screenOrientation="portrait"
+                android:theme="@style/horizontal_slide"
+                android:windowSoftInputMode="adjustPan|stateHidden"
+                />
         <!--支付宝h5支付页面-->
         <activity
                 android:name="com.alipay.sdk.app.H5PayActivity"

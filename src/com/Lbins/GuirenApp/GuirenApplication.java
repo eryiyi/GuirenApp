@@ -15,6 +15,7 @@ import com.Lbins.GuirenApp.util.StringUtil;
 import com.android.volley.*;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.easemob.redpacketsdk.RedPacket;
 import com.google.gson.Gson;
 import com.hyphenate.easeui.controller.EaseUI;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
@@ -76,14 +77,14 @@ public class GuirenApplication extends Application  {
         requestQueue = Volley.newRequestQueue(this);
         gson = new Gson();
         lxThread = Executors.newFixedThreadPool(20);
-        sp = getSharedPreferences("university_manage", Context.MODE_PRIVATE);
+        sp = getSharedPreferences("guiren_manage", Context.MODE_PRIVATE);
         imageLoader = new com.android.volley.toolbox.ImageLoader(requestQueue, new BitmapCache());
         initImageLoader(this);
         //init demo helper
         DemoHelper.getInstance().init(applicationContext);
         //red packet code : 初始化红包上下文，开启日志输出开关
-//        RedPacket.getInstance().initContext(applicationContext);
-//        RedPacket.getInstance().setDebugMode(true);
+        RedPacket.getInstance().initContext(applicationContext);
+        RedPacket.getInstance().setDebugMode(true);
         //end of red packet code
         //微信 wx12342956d1cab4f9,a5ae111de7d9ea137e88a5e02c07c94d
         PlatformConfig.setWeixin(InternetURL.WEIXIN_APPID, InternetURL.WEIXIN_SECRET);
@@ -143,7 +144,7 @@ public class GuirenApplication extends Application  {
      */
     public SharedPreferences getSp() {
         if (sp == null) {
-            sp = getSharedPreferences("university_manage", Context.MODE_PRIVATE);
+            sp = getSharedPreferences("guiren_manage", Context.MODE_PRIVATE);
         }
         return sp;
     }

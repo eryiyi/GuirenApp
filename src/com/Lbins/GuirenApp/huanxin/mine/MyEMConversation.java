@@ -6,7 +6,7 @@ import com.hyphenate.chat.EMConversation;
 
 /**
  * Created by Administrator on 2015/3/5.
- * 继承环信提供的EMConversation，增加emp属性，以及getter and setter 方法
+ * 继承贵人提供的EMConversation，增加emp属性，以及getter and setter 方法
  */
 public class MyEMConversation {
 

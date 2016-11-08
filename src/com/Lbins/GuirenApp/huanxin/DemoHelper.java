@@ -21,6 +21,8 @@ import com.Lbins.GuirenApp.huanxin.ui.ChatActivity;
 import com.Lbins.GuirenApp.huanxin.ui.VideoCallActivity;
 import com.Lbins.GuirenApp.huanxin.ui.VoiceCallActivity;
 import com.Lbins.GuirenApp.huanxin.utils.PreferenceManager;
+import com.Lbins.GuirenApp.huanxin.utils.RedPacketConstant;
+import com.Lbins.GuirenApp.util.RedPacketUtil;
 import com.hyphenate.*;
 import com.hyphenate.chat.*;
 import com.hyphenate.chat.EMMessage.ChatType;
@@ -524,7 +526,8 @@ public class DemoHelper {
             msg.setFrom(accepter);
             msg.setTo(groupId);
             msg.setMsgId(UUID.randomUUID().toString());
-            msg.addBody(new EMTextMessageBody(accepter + " " +st4));
+            msg.addBody(new EMTextMessageBody(st4));
+//            msg.addBody(new EMTextMessageBody(accepter + " " +st4));
             msg.setStatus(Status.SUCCESS);
             // save accept message
             EMClient.getInstance().chatManager().saveMessage(msg);
@@ -548,7 +551,8 @@ public class DemoHelper {
             msg.setFrom(inviter);
             msg.setTo(groupId);
             msg.setMsgId(UUID.randomUUID().toString());
-            msg.addBody(new EMTextMessageBody(inviter + " " +st3));
+//            msg.addBody(new EMTextMessageBody(inviter + " " +st3));
+            msg.addBody(new EMTextMessageBody(st3));
             msg.setStatus(Status.SUCCESS);
             // save invitation as messages
             EMClient.getInstance().chatManager().saveMessage(msg);
@@ -720,10 +724,10 @@ public class DemoHelper {
                     final String action = cmdMsgBody.action();//获取自定义action
                     //red packet code : 处理红包回执透传消息
                     if(!easeUI.hasForegroundActivies()){
-//                        if (action.equals(RedPacketConstant.REFRESH_GROUP_RED_PACKET_ACTION)){
-//                            RedPacketUtil.receiveRedPacketAckMessage(message);
-//                            broadcastManager.sendBroadcast(new Intent(RedPacketConstant.REFRESH_GROUP_RED_PACKET_ACTION));
-//                        }
+                        if (action.equals(RedPacketConstant.REFRESH_GROUP_RED_PACKET_ACTION)){
+                            RedPacketUtil.receiveRedPacketAckMessage(message);
+                            broadcastManager.sendBroadcast(new Intent(RedPacketConstant.REFRESH_GROUP_RED_PACKET_ACTION));
+                        }
                     }
                     //end of red packet code
                     //获取扩展属性 此处省略

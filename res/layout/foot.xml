@@ -14,7 +14,7 @@
                    android:id="@+id/foot_one"
                    android:textSize="18sp"
                    android:layout_centerHorizontal="true"
-                   android:text="喜讯"
+                   android:text="搜索"
                    android:textColor="@color/textColortwo"
                    android:gravity="center"
                    android:layout_height="match_parent"/>
@@ -67,7 +67,7 @@
                   android:id="@+id/foot_three"
                   android:textSize="18sp"
                   android:layout_centerHorizontal="true"
-                  android:text="视频"
+                  android:text="喜讯"
                   android:textColor="@color/textColortwo"
                   android:gravity="center"
                   android:layout_height="match_parent"/>

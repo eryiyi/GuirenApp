@@ -224,7 +224,7 @@ public class MyPushMessageReceiver extends PushMessageReceiver {
 
 
 //    public void updateChanelId(final Context context, String chanelId, final String userId) {
-//        final SharedPreferences sp = context.getSharedPreferences("university_manage", Context.MODE_PRIVATE);
+//        final SharedPreferences sp = context.getSharedPreferences("guiren_manage", Context.MODE_PRIVATE);
 ////        String spUserId = sp.getString(Constants.PUSH_USER_ID, "");
 ////        if(spUserId.equals(userId)){
 ////            return;
@@ -260,7 +260,7 @@ public class MyPushMessageReceiver extends PushMessageReceiver {
 //    }
 
     private void updateChanelId(final Context context, String channelId, final String userId) {
-        final SharedPreferences sp = context.getSharedPreferences("university_manage", Context.MODE_PRIVATE);
+        final SharedPreferences sp = context.getSharedPreferences("guiren_manage", Context.MODE_PRIVATE);
         String empId = new Gson().fromJson(sp.getString("mm_emp_id", ""), String.class);
         RequestQueue queue = Volley.newRequestQueue(context);
         String uri = String.format(InternetURL.UPDATE_PUSH_ID + "?id=%s&userId=%s&channelId=%s&type=3", empId, userId, channelId);

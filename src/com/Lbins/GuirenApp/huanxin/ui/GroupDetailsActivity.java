@@ -145,7 +145,7 @@ public class GroupDetailsActivity extends BaseActivity implements OnClickListene
 		((TextView) findViewById(R.id.group_name)).setText(group.getGroupName() + "(" + group.getAffiliationsCount() + st);
 		
 
-		List<String> membershx =  group.getMembers();//获得环信用户列表
+		List<String> membershx =  group.getMembers();//获得贵人用户列表
 		String hxUserNames = "";
 		for(String str:membershx){
 			hxUserNames += str +",";
@@ -186,7 +186,7 @@ public class GroupDetailsActivity extends BaseActivity implements OnClickListene
 	}
 
 
-	//通过环信username获取用户昵称
+	//通过贵人username获取用户昵称
 	private void getNickNamesByHxUserNames(final String hxUserNames) {
 		StringRequest request = new StringRequest(
 				Request.Method.POST,

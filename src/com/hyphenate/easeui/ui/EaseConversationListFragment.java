@@ -412,7 +412,7 @@ public class EaseConversationListFragment extends EaseBaseFragment implements On
 
     //获得好友资料
     List<Emp> emps = new ArrayList<Emp>();
-    //通过环信username获取用户昵称
+    //通过贵人username获取用户昵称
     private void getNickNamesByHxUserNames(final String hxUserNames) {
         StringRequest request = new StringRequest(
                 Request.Method.POST,

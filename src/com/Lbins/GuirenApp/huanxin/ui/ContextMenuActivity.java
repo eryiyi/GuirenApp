@@ -19,6 +19,7 @@ import android.view.View;
 import com.Lbins.GuirenApp.R;
 import com.Lbins.GuirenApp.base.BaseActivity;
 import com.Lbins.GuirenApp.huanxin.Constant;
+import com.Lbins.GuirenApp.huanxin.utils.RedPacketConstant;
 import com.hyphenate.chat.EMMessage;
 
 public class ContextMenuActivity extends BaseActivity {
@@ -46,26 +47,26 @@ public class ContextMenuActivity extends BaseActivity {
 				setContentView(R.layout.em_context_menu_for_text);
 			}
 		}
-//		} else if (type == EMMessage.Type.LOCATION.ordinal()) {
-//		    setContentView(R.layout.em_context_menu_for_location);
-//		} else if (type == EMMessage.Type.IMAGE.ordinal()) {
-//		    setContentView(R.layout.em_context_menu_for_image);
-//		} else if (type == EMMessage.Type.VOICE.ordinal()) {
-//		    setContentView(R.layout.em_context_menu_for_voice);
-//		} else if (type == EMMessage.Type.VIDEO.ordinal()) {
-//			setContentView(R.layout.em_context_menu_for_video);
-//		} else if (type == EMMessage.Type.FILE.ordinal()) {
-//		    setContentView(R.layout.em_context_menu_for_location);
-//		}
-//		if (isChatroom
-//				//red packet code : 屏蔽红包消息的撤回功能
-//				|| message.getBooleanAttribute(RedPacketConstant.MESSAGE_ATTR_IS_RED_PACKET_MESSAGE, false)) {
-//			    //end of red packet code
-//			View v = (View) findViewById(R.id.forward);
-//	        if (v != null) {
-//	            v.setVisibility(View.GONE);
-//	        }
-//		}
+		 else if (type == EMMessage.Type.LOCATION.ordinal()) {
+		    setContentView(R.layout.em_context_menu_for_location);
+		} else if (type == EMMessage.Type.IMAGE.ordinal()) {
+		    setContentView(R.layout.em_context_menu_for_image);
+		} else if (type == EMMessage.Type.VOICE.ordinal()) {
+		    setContentView(R.layout.em_context_menu_for_voice);
+		} else if (type == EMMessage.Type.VIDEO.ordinal()) {
+			setContentView(R.layout.em_context_menu_for_video);
+		} else if (type == EMMessage.Type.FILE.ordinal()) {
+		    setContentView(R.layout.em_context_menu_for_location);
+		}
+		if (isChatroom
+				//red packet code : 屏蔽红包消息的撤回功能
+				|| message.getBooleanAttribute(RedPacketConstant.MESSAGE_ATTR_IS_RED_PACKET_MESSAGE, false)) {
+			    //end of red packet code
+			View v = (View) findViewById(R.id.forward);
+	        if (v != null) {
+	            v.setVisibility(View.GONE);
+	        }
+		}
 	}
 
 	@Override

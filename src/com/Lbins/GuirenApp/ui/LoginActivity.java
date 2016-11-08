@@ -54,7 +54,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_activity);
-        //先退出环信
+        //先退出贵人
         DemoHelper.getInstance().logout(false, new EMCallBack() {
             @Override
             public void onSuccess() {

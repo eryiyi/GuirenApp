@@ -16,6 +16,7 @@ import com.Lbins.GuirenApp.R;
 import com.Lbins.GuirenApp.huanxin.Constant;
 import com.Lbins.GuirenApp.huanxin.db.InviteMessgeDao;
 import com.Lbins.GuirenApp.huanxin.mine.MyEMConversation;
+import com.Lbins.GuirenApp.huanxin.utils.RedPacketConstant;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMConversation.EMConversationType;
 import com.hyphenate.chat.EMMessage;
@@ -79,21 +80,21 @@ public class ConversationListFragment extends EaseConversationListFragment{
         conversationListView.setConversationListHelper(new EaseConversationListHelper() {
             @Override
             public String onSetItemSecondaryText(EMMessage lastMessage) {
-//                if (lastMessage.getBooleanAttribute(RedPacketConstant.MESSAGE_ATTR_IS_RED_PACKET_ACK_MESSAGE, false)) {
-//                    String sendNick = lastMessage.getStringAttribute(RedPacketConstant.EXTRA_RED_PACKET_SENDER_NAME, "");
-//                    String receiveNick = lastMessage.getStringAttribute(RedPacketConstant.EXTRA_RED_PACKET_RECEIVER_NAME, "");
-//                    String msg="";
-//                    if (lastMessage.direct() == EMMessage.Direct.RECEIVE) {
-////                        msg = String.format(getResources().getString(R.string.msg_someone_take_red_packet), receiveNick);
-//                    } else {
-////                        if (sendNick.equals(receiveNick)) {
-////                            msg = getResources().getString(R.string.msg_take_red_packet);
-////                        } else {
-////                            msg = String.format(getResources().getString(R.string.msg_take_someone_red_packet), sendNick);
-////                        }
-//                    }
-//                    return msg;
-//                }
+                if (lastMessage.getBooleanAttribute(RedPacketConstant.MESSAGE_ATTR_IS_RED_PACKET_ACK_MESSAGE, false)) {
+                    String sendNick = lastMessage.getStringAttribute(RedPacketConstant.EXTRA_RED_PACKET_SENDER_NAME, "");
+                    String receiveNick = lastMessage.getStringAttribute(RedPacketConstant.EXTRA_RED_PACKET_RECEIVER_NAME, "");
+                    String msg="";
+                    if (lastMessage.direct() == EMMessage.Direct.RECEIVE) {
+                        msg = String.format(getResources().getString(R.string.msg_someone_take_red_packet), receiveNick);
+                    } else {
+                        if (sendNick.equals(receiveNick)) {
+                            msg = getResources().getString(R.string.msg_take_red_packet);
+                        } else {
+                            msg = String.format(getResources().getString(R.string.msg_take_someone_red_packet), sendNick);
+                        }
+                    }
+                    return msg;
+                }
                 return null;
             }
         });
