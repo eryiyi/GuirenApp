@@ -29,10 +29,7 @@ import com.Lbins.GuirenApp.dao.DBHelper;
 import com.Lbins.GuirenApp.data.MinePicObjData;
 import com.Lbins.GuirenApp.module.MinePicObj;
 import com.Lbins.GuirenApp.ui.*;
-import com.Lbins.GuirenApp.util.CompressPhotoUtil;
-import com.Lbins.GuirenApp.util.Constants;
-import com.Lbins.GuirenApp.util.GuirenHttpUtils;
-import com.Lbins.GuirenApp.util.StringUtil;
+import com.Lbins.GuirenApp.util.*;
 import com.Lbins.GuirenApp.widget.PictureGridview;
 import com.Lbins.GuirenApp.widget.SelectPhoPopWindow;
 import com.android.volley.*;
@@ -291,8 +288,9 @@ public class FiveFragment extends BaseFragment implements View.OnClickListener {
        switch (view.getId()){
            case R.id.edit:
            {
-               Intent intent = new Intent(getActivity(), EditEmpActivity.class);
-               startActivity(intent);
+//               Intent intent = new Intent(getActivity(), EditEmpActivity.class);
+//               startActivity(intent);
+               RedPacketUtil.startChangeActivity(getActivity());
            }
                break;
            case R.id.liner_one:
@@ -686,4 +684,5 @@ public class FiveFragment extends BaseFragment implements View.OnClickListener {
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         getRequestQueue().add(request);
     }
+
 }

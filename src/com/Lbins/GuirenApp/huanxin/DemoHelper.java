@@ -57,7 +57,7 @@ public class DemoHelper {
 	private EaseUI easeUI;
 	
     /**
-     * EMEventListener
+     * EMEveonCmdMessageReceivedntListener
      */
     protected EMMessageListener messageListener = null;
 

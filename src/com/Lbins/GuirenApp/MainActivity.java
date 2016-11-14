@@ -322,6 +322,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener ,
                 final String action = cmdMsgBody.action();//获取自定义action
                 if (action.equals(RedPacketConstant.REFRESH_GROUP_RED_PACKET_ACTION)) {
                     RedPacketUtil.receiveRedPacketAckMessage(message);
+                    broadcastManager.sendBroadcast(new Intent(RedPacketConstant.REFRESH_GROUP_RED_PACKET_ACTION));
                 }
             }
             //end of red packet code
@@ -365,7 +366,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener ,
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(Constant.ACTION_CONTACT_CHANAGED);
         intentFilter.addAction(Constant.ACTION_GROUP_CHANAGED);
-//        intentFilter.addAction(RedPacketConstant.REFRESH_GROUP_RED_PACKET_ACTION);
+        intentFilter.addAction(RedPacketConstant.REFRESH_GROUP_RED_PACKET_ACTION);
         broadcastReceiver = new BroadcastReceiver() {
 
             @Override
@@ -390,11 +391,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener ,
                     }
                 }
                 //red packet code : 处理红包回执透传消息
-//                if (action.equals(RedPacketConstant.REFRESH_GROUP_RED_PACKET_ACTION)){
+                if (action.equals(RedPacketConstant.REFRESH_GROUP_RED_PACKET_ACTION)){
 //                    if (conversationListFragment != null){
 //                        conversationListFragment.refresh();
 //                    }
-//                }
+                }
                 //end of red packet code
             }
         };
