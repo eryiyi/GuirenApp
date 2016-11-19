@@ -4,7 +4,7 @@
           package="com.Lbins.GuirenApp"
           android:versionCode="9"
           android:versionName="1.0.8">
-    <uses-sdk android:minSdkVersion="17"/>
+    <uses-sdk android:minSdkVersion="16"/>
 
 
     <!-- 读联系人权限 -->

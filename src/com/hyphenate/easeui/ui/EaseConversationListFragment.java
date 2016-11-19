@@ -20,6 +20,7 @@ import com.Lbins.GuirenApp.GuirenApplication;
 import com.Lbins.GuirenApp.R;
 import com.Lbins.GuirenApp.adapter.AnimateFirstDisplayListener;
 import com.Lbins.GuirenApp.base.InternetURL;
+import com.Lbins.GuirenApp.dao.DBHelper;
 import com.Lbins.GuirenApp.data.EmpsData;
 import com.Lbins.GuirenApp.huanxin.mine.MyEMConversation;
 import com.Lbins.GuirenApp.huanxin.ui.GroupsActivity;
@@ -426,6 +427,17 @@ public class EaseConversationListFragment extends EaseBaseFragment implements On
                                 emps = data.getData();
                                 if(conversationListView != null){
                                     conversationListView.refresh();
+                                }
+                                if(emps != null){
+                                    for(Emp emp : emps){
+                                        Emp emp1 = DBHelper.getInstance(getActivity()).getEmpByEmpId(emp.getMm_emp_id());
+                                        if(emp1 != null){
+                                            //说明存在这个用户了
+                                        }else{
+                                            //不存在该用户 可以保存到数据库
+                                            DBHelper.getInstance(getActivity()).saveEmp(emp);
+                                        }
+                                    }
                                 }
                                 notifyMyAdapter();
                             } else {

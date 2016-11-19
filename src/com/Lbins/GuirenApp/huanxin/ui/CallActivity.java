@@ -34,6 +34,7 @@ public class CallActivity extends BaseActivity {
 
     protected boolean isInComingCall;
     protected String username;
+    protected String usernameStr;
     protected CallingState callingState = CallingState.CANCED;
     protected String callDruationText;
     protected String msgid;

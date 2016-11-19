@@ -881,71 +881,71 @@ public class GroupDetailsActivity extends BaseActivity implements OnClickListene
     
     private class GroupChangeListener implements EMGroupChangeListener{
 
+
 		@Override
 		public void onInvitationReceived(String groupId, String groupName,
-				String inviter, String reason) {
+										 String inviter, String reason) {
 			// TODO Auto-generated method stub
-			
+
 		}
 
 		@Override
 		public void onApplicationReceived(String groupId, String groupName,
-				String applyer, String reason) {
+										  String applyer, String reason) {
 			// TODO Auto-generated method stub
-			
+
 		}
 
 		@Override
 		public void onApplicationAccept(String groupId, String groupName,
-				String accepter) {
+										String accepter) {
 			// TODO Auto-generated method stub
-			
+
 		}
 
 		@Override
 		public void onApplicationDeclined(String groupId, String groupName,
-				String decliner, String reason) {
-			
+										  String decliner, String reason) {
+
 		}
 
 		@Override
-		public void onInvitationAccpted(String groupId, String inviter,
-				String reason) {
+		public void onInvitationAccepted(String groupId, String inviter, String reason) {
 			runOnUiThread(new Runnable(){
 
 				@Override
 				public void run() {
 					refreshMembers();
 				}
-        		
-        	});
-			
+
+			});
+
 		}
 
 		@Override
 		public void onInvitationDeclined(String groupId, String invitee,
-				String reason) {
+										 String reason) {
 			// TODO Auto-generated method stub
-			
+
 		}
 
 		@Override
 		public void onUserRemoved(String groupId, String groupName) {
 			finish();
-			
+
 		}
 
 		@Override
-		public void onGroupDestroy(String groupId, String groupName) {
+		public void onGroupDestroyed(String groupId, String groupName) {
 			finish();
-			
+
 		}
 
-        @Override
-        public void onAutoAcceptInvitationFromGroup(String groupId, String inviter, String inviteMessage) {
-            // TODO Auto-generated method stub
-            
-        }
+		@Override
+		public void onAutoAcceptInvitationFromGroup(String groupId, String inviter, String inviteMessage) {
+			// TODO Auto-generated method stub
+
+		}
     	
     }
 

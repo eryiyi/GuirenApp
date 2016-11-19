@@ -63,6 +63,7 @@
             android:id="@+id/swing_card"
             android:layout_width="60dp"
             android:layout_height="60dp"
+            android:visibility="gone"
             android:scaleType="fitXY"
             android:layout_marginTop="10dp"
             android:src="@drawable/em_ic_launcher" />

@@ -90,7 +90,8 @@ public class EaseMessageAdapter extends BaseAdapter{
 		private void refreshList() {
 			// you should not call getAllMessages() in UI thread
 			// otherwise there is problem when refreshing UI and there is new message arrive
-			messages = (EMMessage[]) conversation.getAllMessages().toArray(new EMMessage[0]);
+			java.util.List<EMMessage> var = conversation.getAllMessages();
+			messages = var.toArray(new EMMessage[var.size()]);
 			conversation.markAllMessagesAsRead();
 			notifyDataSetChanged();
 		}
@@ -187,15 +188,16 @@ public class EaseMessageAdapter extends BaseAdapter{
 		if(customRowProvider != null && customRowProvider.getCustomChatRowType(message) > 0){
 		    return customRowProvider.getCustomChatRowType(message) + 13;
 		}
-		
+
 		if (message.getType() == EMMessage.Type.TXT) {
-		    if(message.getBooleanAttribute(EaseConstant.MESSAGE_ATTR_IS_BIG_EXPRESSION, false)){
-		        return message.direct() == EMMessage.Direct.RECEIVE ? MESSAGE_TYPE_RECV_EXPRESSION : MESSAGE_TYPE_SENT_EXPRESSION;
-		    }
+			if(message.getBooleanAttribute(EaseConstant.MESSAGE_ATTR_IS_BIG_EXPRESSION, false)){
+				return message.direct() == EMMessage.Direct.RECEIVE ? MESSAGE_TYPE_RECV_EXPRESSION : MESSAGE_TYPE_SENT_EXPRESSION;
+			}
 			return message.direct() == EMMessage.Direct.RECEIVE ? MESSAGE_TYPE_RECV_TXT : MESSAGE_TYPE_SENT_TXT;
 		}
 		if (message.getType() == EMMessage.Type.IMAGE) {
 			return message.direct() == EMMessage.Direct.RECEIVE ? MESSAGE_TYPE_RECV_IMAGE : MESSAGE_TYPE_SENT_IMAGE;
+
 		}
 		if (message.getType() == EMMessage.Type.LOCATION) {
 			return message.direct() == EMMessage.Direct.RECEIVE ? MESSAGE_TYPE_RECV_LOCATION : MESSAGE_TYPE_SENT_LOCATION;
@@ -254,7 +256,7 @@ public class EaseMessageAdapter extends BaseAdapter{
 				chatRow.usernickView.setText(emp.getMm_emp_nickname()==null?"":emp.getMm_emp_nickname());
 			}
 		}else {
-			GuirenApplication.getInstance().getEmpId(message.getFrom());
+//			GuirenApplication.getInstance().getEmpId(message.getFrom());
 		}
         return chatRow;
     }

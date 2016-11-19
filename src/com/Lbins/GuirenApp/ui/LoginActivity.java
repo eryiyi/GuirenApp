@@ -16,6 +16,7 @@ import com.Lbins.GuirenApp.adapter.AnimateFirstDisplayListener;
 import com.Lbins.GuirenApp.baidu.Utils;
 import com.Lbins.GuirenApp.base.BaseActivity;
 import com.Lbins.GuirenApp.base.InternetURL;
+import com.Lbins.GuirenApp.dao.DBHelper;
 import com.Lbins.GuirenApp.data.EmpData;
 import com.Lbins.GuirenApp.huanxin.DemoHelper;
 import com.Lbins.GuirenApp.huanxin.db.DemoDBManager;
@@ -253,6 +254,14 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         save("mm_emp_motto", emp.getMm_emp_motto());
         save("mm_emp_type", emp.getMm_emp_type());
 
+
+        Emp emp1 = DBHelper.getInstance(LoginActivity.this).getEmpByEmpId(emp.getMm_emp_id());
+        if(emp1 != null){
+            //说明存在这个用户了
+        }else{
+            //不存在该用户 可以保存到数据库
+            DBHelper.getInstance(LoginActivity.this).saveEmp(emp);
+        }
 
         // close it before login to make sure DemoDB not overlap
         DemoDBManager.getInstance().closeDB();

@@ -17,9 +17,11 @@ package com.Lbins.GuirenApp.huanxin.receiver;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import com.Lbins.GuirenApp.dao.DBHelper;
 import com.Lbins.GuirenApp.huanxin.DemoHelper;
 import com.Lbins.GuirenApp.huanxin.ui.VideoCallActivity;
 import com.Lbins.GuirenApp.huanxin.ui.VoiceCallActivity;
+import com.Lbins.GuirenApp.module.Emp;
 import com.hyphenate.util.EMLog;
 
 public class CallReceiver extends BroadcastReceiver{
@@ -32,14 +34,29 @@ public class CallReceiver extends BroadcastReceiver{
 		String from = intent.getStringExtra("from");
 		//call type
 		String type = intent.getStringExtra("type");
+		Emp emp = DBHelper.getInstance(context).getEmpById(from);
 		if("video".equals(type)){ //video call
-		    context.startActivity(new Intent(context, VideoCallActivity.class).
-                    putExtra("username", from).putExtra("isComingCall", true).
-                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+			if(emp != null){
+				context.startActivity(new Intent(context, VideoCallActivity.class).
+						putExtra("username", from).putExtra("isComingCall", true).putExtra("usernameStr", emp.getMm_emp_nickname()).
+						addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+			}else {
+				context.startActivity(new Intent(context, VideoCallActivity.class).
+						putExtra("username", from).putExtra("isComingCall", true).putExtra("usernameStr", "").
+						addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+			}
+
 		}else{ //voice call
-		    context.startActivity(new Intent(context, VoiceCallActivity.class).
-		            putExtra("username", from).putExtra("isComingCall", true).
-		            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+			if(emp != null){
+				context.startActivity(new Intent(context, VoiceCallActivity.class).
+						putExtra("username", from).putExtra("isComingCall", true).putExtra("usernameStr", emp.getMm_emp_nickname()).
+						addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+			}else {
+				context.startActivity(new Intent(context, VoiceCallActivity.class).
+						putExtra("username", from).putExtra("isComingCall", true).putExtra("usernameStr", "").
+						addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+			}
+
 		}
 		EMLog.d("CallReceiver", "app received a incoming call");
 	}

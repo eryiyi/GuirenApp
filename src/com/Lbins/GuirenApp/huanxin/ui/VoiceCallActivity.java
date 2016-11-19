@@ -31,6 +31,7 @@ import com.Lbins.GuirenApp.R;
 import com.Lbins.GuirenApp.huanxin.DemoHelper;
 import com.hyphenate.chat.EMCallStateChangeListener;
 import com.hyphenate.chat.EMClient;
+import com.hyphenate.exceptions.HyphenateException;
 import com.hyphenate.util.EMLog;
 
 import java.util.UUID;
@@ -98,8 +99,9 @@ public class VoiceCallActivity extends CallActivity implements OnClickListener {
 		msgid = UUID.randomUUID().toString();
 
 		username = getIntent().getStringExtra("username");
+        usernameStr = getIntent().getStringExtra("usernameStr");
 		isInComingCall = getIntent().getBooleanExtra("isComingCall", false);
-		nickTextView.setText(username);
+		nickTextView.setText(usernameStr);
 		if (!isInComingCall) {// outgoing call
 			soundPool = new SoundPool(1, AudioManager.STREAM_RING, 0);
 			outgoing = soundPool.load(this, R.raw.em_outgoing, 1);
@@ -199,18 +201,18 @@ public class VoiceCallActivity extends CallActivity implements OnClickListener {
                 case VOICE_PAUSE:
                     runOnUiThread(new Runnable() {
                         public void run() {
-                            Toast.makeText(getApplicationContext(), "VOICE_PAUSE", 0).show();
+                            Toast.makeText(getApplicationContext(), "VOICE_PAUSE", Toast.LENGTH_SHORT).show();
                         }
                     });
                     break;
                 case VOICE_RESUME:
                     runOnUiThread(new Runnable() {
                         public void run() {
-                            Toast.makeText(getApplicationContext(), "VOICE_RESUME", 0).show();
+                            Toast.makeText(getApplicationContext(), "VOICE_RESUME", Toast.LENGTH_SHORT).show();
                         }
                     });
                     break;
-                case DISCONNNECTED:
+                case DISCONNECTED:
                     handler.removeCallbacks(timeoutHangup);
                     final CallError fError = error;
                     runOnUiThread(new Runnable() {
@@ -256,7 +258,7 @@ public class VoiceCallActivity extends CallActivity implements OnClickListener {
                                 callStateTextView.setText(st2);
                             } else if (fError == CallError.ERROR_TRANSPORT) {
                                 callStateTextView.setText(st3);
-                            } else if (fError == CallError.ERROR_INAVAILABLE) {
+                            } else if (fError == CallError.ERROR_UNAVAILABLE) {
                                 callingState = CallingState.OFFLINE;
                                 callStateTextView.setText(st4);
                             } else if (fError == CallError.ERROR_BUSY) {
@@ -265,7 +267,7 @@ public class VoiceCallActivity extends CallActivity implements OnClickListener {
                             } else if (fError == CallError.ERROR_NORESPONSE) {
                                 callingState = CallingState.NORESPONSE;
                                 callStateTextView.setText(st6);
-                            } else if (fError == CallError.ERROR_LOCAL_VERSION_SMALLER || fError == CallError.ERROR_PEER_VERSION_SMALLER){
+                            } else if (fError == CallError.ERROR_LOCAL_SDK_VERSION_OUTDATED || fError == CallError.ERROR_REMOTE_SDK_VERSION_OUTDATED){
                                 callingState = CallingState.VERSION_NOT_SAME;
                                 callStateTextView.setText(R.string.call_version_inconsistent);
                             } else {
@@ -335,11 +337,19 @@ public class VoiceCallActivity extends CallActivity implements OnClickListener {
 		case R.id.iv_mute:
 			if (isMuteState) {
 				muteImage.setImageResource(R.drawable.em_icon_mute_normal);
-				EMClient.getInstance().callManager().resumeVoiceTransfer();
+                try {
+                    EMClient.getInstance().callManager().resumeVoiceTransfer();
+                } catch (HyphenateException e) {
+                    e.printStackTrace();
+                }
 				isMuteState = false;
 			} else {
 				muteImage.setImageResource(R.drawable.em_icon_mute_on);
-				EMClient.getInstance().callManager().pauseVoiceTransfer();
+                try {
+                    EMClient.getInstance().callManager().pauseVoiceTransfer();
+                } catch (HyphenateException e) {
+                    e.printStackTrace();
+                }
 				isMuteState = true;
 			}
 			break;

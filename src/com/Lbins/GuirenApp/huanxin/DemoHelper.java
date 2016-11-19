@@ -9,6 +9,7 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import com.Lbins.GuirenApp.MainActivity;
 import com.Lbins.GuirenApp.R;
+import com.Lbins.GuirenApp.dao.DBHelper;
 import com.Lbins.GuirenApp.huanxin.db.DemoDBManager;
 import com.Lbins.GuirenApp.huanxin.db.InviteMessgeDao;
 import com.Lbins.GuirenApp.huanxin.db.UserDao;
@@ -22,7 +23,8 @@ import com.Lbins.GuirenApp.huanxin.ui.VideoCallActivity;
 import com.Lbins.GuirenApp.huanxin.ui.VoiceCallActivity;
 import com.Lbins.GuirenApp.huanxin.utils.PreferenceManager;
 import com.Lbins.GuirenApp.huanxin.utils.RedPacketConstant;
-import com.Lbins.GuirenApp.util.RedPacketUtil;
+import com.Lbins.GuirenApp.module.Emp;
+import com.easemob.redpacketui.utils.RedPacketUtil;
 import com.hyphenate.*;
 import com.hyphenate.chat.*;
 import com.hyphenate.chat.EMMessage.ChatType;
@@ -309,6 +311,10 @@ public class DemoHelper {
                     if (chatType == ChatType.Chat) { // single chat message
                         intent.putExtra("userId", message.getFrom());
                         intent.putExtra("chatType", Constant.CHATTYPE_SINGLE);
+                        Emp emp = DBHelper.getInstance(appContext).getEmpById(message.getFrom());
+                        if(emp != null){
+                            intent.putExtra("usernameStr", emp.getMm_emp_nickname());
+                        }
                     } else { // group chat message
                         // message.getTo() is the group id
                         intent.putExtra("userId", message.getTo());
@@ -409,9 +415,9 @@ public class DemoHelper {
 
         @Override
         public void onInvitationReceived(String groupId, String groupName, String inviter, String reason) {
-            
+
             new InviteMessgeDao(appContext).deleteMessage(groupId);
-            
+
             // user invite you to join group
             InviteMessage msg = new InviteMessage();
             msg.setFrom(groupId);
@@ -427,10 +433,10 @@ public class DemoHelper {
         }
 
         @Override
-        public void onInvitationAccpted(String groupId, String invitee, String reason) {
-            
+        public void onInvitationAccepted(String groupId, String invitee, String reason) {
+
             new InviteMessgeDao(appContext).deleteMessage(groupId);
-            
+
             //user accept your invitation
             boolean hasGroup = false;
             EMGroup _group = null;
@@ -443,7 +449,7 @@ public class DemoHelper {
             }
             if (!hasGroup)
                 return;
-            
+
             InviteMessage msg = new InviteMessage();
             msg.setFrom(groupId);
             msg.setTime(System.currentTimeMillis());
@@ -456,33 +462,31 @@ public class DemoHelper {
             notifyNewInviteMessage(msg);
             broadcastManager.sendBroadcast(new Intent(Constant.ACTION_GROUP_CHANAGED));
         }
-        
+
         @Override
         public void onInvitationDeclined(String groupId, String invitee, String reason) {
-            
+
             new InviteMessgeDao(appContext).deleteMessage(groupId);
-            
+
             //user declined your invitation
-            boolean hasGroup = false;
             EMGroup group = null;
             for (EMGroup _group : EMClient.getInstance().groupManager().getAllGroups()) {
                 if (_group.getGroupId().equals(groupId)) {
                     group = _group;
-                    hasGroup = true;
                     break;
                 }
             }
-            if (!hasGroup)
+            if (group == null)
                 return;
-            
+
             InviteMessage msg = new InviteMessage();
             msg.setFrom(groupId);
             msg.setTime(System.currentTimeMillis());
             msg.setGroupId(groupId);
-            msg.setGroupName(group == null ? groupId : group.getGroupName());
+            msg.setGroupName(group.getGroupName());
             msg.setReason(reason);
             msg.setGroupInviter(invitee);
-            Log.d(TAG, invitee + "Declined to join the group：" + group == null ? groupId : group.getGroupName());
+            Log.d(TAG, invitee + "Declined to join the group：" + group.getGroupName());
             msg.setStatus(InviteMessage.InviteMesageStatus.GROUPINVITATION_DECLINED);
             notifyNewInviteMessage(msg);
             broadcastManager.sendBroadcast(new Intent(Constant.ACTION_GROUP_CHANAGED));
@@ -495,14 +499,14 @@ public class DemoHelper {
         }
 
         @Override
-        public void onGroupDestroy(String groupId, String groupName) {
-        	// group is dismissed, 
+        public void onGroupDestroyed(String groupId, String groupName) {
+            // group is dismissed,
             broadcastManager.sendBroadcast(new Intent(Constant.ACTION_GROUP_CHANAGED));
         }
 
         @Override
         public void onApplicationReceived(String groupId, String groupName, String applyer, String reason) {
-            
+
             // user apply to join group
             InviteMessage msg = new InviteMessage();
             msg.setFrom(applyer);
@@ -526,8 +530,7 @@ public class DemoHelper {
             msg.setFrom(accepter);
             msg.setTo(groupId);
             msg.setMsgId(UUID.randomUUID().toString());
-            msg.addBody(new EMTextMessageBody(st4));
-//            msg.addBody(new EMTextMessageBody(accepter + " " +st4));
+            msg.addBody(new EMTextMessageBody(accepter + " " +st4));
             msg.setStatus(Status.SUCCESS);
             // save accept message
             EMClient.getInstance().chatManager().saveMessage(msg);
@@ -551,9 +554,8 @@ public class DemoHelper {
             msg.setFrom(inviter);
             msg.setTo(groupId);
             msg.setMsgId(UUID.randomUUID().toString());
-//            msg.addBody(new EMTextMessageBody(inviter + " " +st3));
-            msg.addBody(new EMTextMessageBody(st3));
-            msg.setStatus(Status.SUCCESS);
+            msg.addBody(new EMTextMessageBody(inviter + " " +st3));
+            msg.setStatus(EMMessage.Status.SUCCESS);
             // save invitation as messages
             EMClient.getInstance().chatManager().saveMessage(msg);
             // notify invitation message

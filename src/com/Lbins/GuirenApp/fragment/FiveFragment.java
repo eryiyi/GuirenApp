@@ -34,6 +34,7 @@ import com.Lbins.GuirenApp.widget.PictureGridview;
 import com.Lbins.GuirenApp.widget.SelectPhoPopWindow;
 import com.android.volley.*;
 import com.android.volley.toolbox.StringRequest;
+import com.easemob.redpacketui.utils.RedPacketUtil;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;

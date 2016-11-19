@@ -118,14 +118,14 @@ public class EaseNotifier {
      * @param message
      */
     public synchronized void onNewMsg(EMMessage message) {
-        if(EMClient.getInstance().chatManager().isSlientMessage(message)){
+        if(EMClient.getInstance().chatManager().isSilentMessage(message)){
             return;
         }
         EaseSettingsProvider settingsProvider = EaseUI.getInstance().getSettingsProvider();
         if(!settingsProvider.isMsgNotifyAllowed(message)){
             return;
         }
-        
+
         // check if app running background
         if (!EasyUtils.isAppRunningForeground(appContext)) {
             EMLog.d(TAG, "app is running in backgroud");
@@ -134,12 +134,12 @@ public class EaseNotifier {
             sendNotification(message, true);
 
         }
-        
+
         vibrateAndPlayTone(message);
     }
-    
+
     public synchronized void onNewMesg(List<EMMessage> messages) {
-        if(EMClient.getInstance().chatManager().isSlientMessage(messages.get(messages.size()-1))){
+        if(EMClient.getInstance().chatManager().isSilentMessage(messages.get(messages.size() - 1))){
             return;
         }
         EaseSettingsProvider settingsProvider = EaseUI.getInstance().getSettingsProvider();
@@ -290,11 +290,11 @@ public class EaseNotifier {
      */
     public void vibrateAndPlayTone(EMMessage message) {
         if(message != null){
-            if(EMClient.getInstance().chatManager().isSlientMessage(message)){
+            if(EMClient.getInstance().chatManager().isSilentMessage(message)){
                 return;
-            } 
+            }
         }
-        
+
         if (System.currentTimeMillis() - lastNotifiyTime < 1000) {
             // received new messages within 2 seconds, skip play ringtone
             return;
