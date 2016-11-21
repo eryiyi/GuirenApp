@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
+import com.Lbins.GuirenApp.GuirenApplication;
 import com.Lbins.GuirenApp.MainActivity;
 import com.Lbins.GuirenApp.R;
 import com.Lbins.GuirenApp.base.BaseActivity;
@@ -199,6 +200,10 @@ public class WelcomeActivity extends BaseActivity implements Runnable  {
         save("mm_emp_native", emp.getMm_emp_native());
         save("mm_emp_motto", emp.getMm_emp_motto());
         save("mm_emp_type", emp.getMm_emp_type());
+
+        GuirenApplication.currentCover = emp.getMm_emp_cover();
+        GuirenApplication.currentName = emp.getMm_emp_nickname();
+
 
         Emp emp1 = DBHelper.getInstance(WelcomeActivity.this).getEmpByEmpId(emp.getMm_emp_id());
         if(emp1 != null){

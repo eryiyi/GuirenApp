@@ -66,6 +66,8 @@ public class GuirenApplication extends Application  {
     public final String PREF_USERNAME = "username";
 
     public static String currentUserNick = "";
+    public static String currentCover = "";
+    public static String currentName = "";
 
     @Override
     public void onCreate() {

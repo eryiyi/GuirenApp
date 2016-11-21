@@ -150,8 +150,7 @@ public class LoginActivity extends BaseActivity {
 			    EMClient.getInstance().chatManager().loadAllConversations();
 
 			    // update current user's display name for APNs
-				boolean updatenick = EMClient.getInstance().updateCurrentUserNick(
-						GuirenApplication.currentUserNick.trim());
+				boolean updatenick = EMClient.getInstance().updateCurrentUserNick(GuirenApplication.currentUserNick.trim());
 				if (!updatenick) {
 					Log.e("LoginActivity", "update current user nick fail");
 				}

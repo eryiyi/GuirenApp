@@ -40,10 +40,10 @@ public class EaseUserUtils {
                 Glide.with(context).load(avatarResId).into(imageView);
             } catch (Exception e) {
                 //use default avatar
-//                Glide.with(context).load(user.getAvatar()).diskCacheStrategy(DiskCacheStrategy.ALL).placeholder(R.drawable.ease_default_avatar).into(imageView);
+//                Glide.with(context).load(user.getAvatar()).diskCacheStrategy(DiskCacheStrategy.ALL).placeholder(R.drawable.ic_launcher).into(imageView);
             }
         }else{
-//            Glide.with(context).load(R.drawable.ease_default_avatar).into(imageView);
+//            Glide.with(context).load(R.drawable.ic_launcher).into(imageView);
         }
     }
     

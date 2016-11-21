@@ -67,7 +67,7 @@ public class ImageGridFragment extends Fragment implements OnItemClickListener {
 		// The ImageFetcher takes care of loading images into our ImageView
 		// children asynchronously
 		mImageResizer = new ImageResizer(getActivity(), mImageThumbSize);
-		mImageResizer.setLoadingImage(R.drawable.em_empty_photo);
+		mImageResizer.setLoadingImage(R.drawable.no_data);
 		mImageResizer.addImageCache(getActivity().getSupportFragmentManager(),
 				cacheParams);
 		
@@ -250,7 +250,7 @@ public class ImageGridFragment extends Fragment implements OnItemClickListener {
 				
 				holder.tvDur.setText(DateUtils.toTime(entty.duration));
 				holder.tvSize.setText(TextFormater.getDataSize(entty.size));
-				holder.imageView.setImageResource(R.drawable.em_empty_photo);
+				holder.imageView.setImageResource(R.drawable.no_data);
 				mImageResizer.loadImage(entty.filePath, holder.imageView);
 			}
 			return convertView;

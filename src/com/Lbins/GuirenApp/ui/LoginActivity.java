@@ -200,7 +200,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         getRequestQueue().add(request);
     }
 
-    public void saveAccount(Emp emp) {
+    public void saveAccount(final Emp emp) {
         //登录成功，绑定百度云推送
 //        if (StringUtil.isNullOrEmpty(emp.getUserId())) {
             //进行绑定
@@ -253,7 +253,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         save("mm_emp_native", emp.getMm_emp_native());
         save("mm_emp_motto", emp.getMm_emp_motto());
         save("mm_emp_type", emp.getMm_emp_type());
-
+        GuirenApplication.currentCover = emp.getMm_emp_cover();
+        GuirenApplication.currentName = emp.getMm_emp_nickname();
 
         Emp emp1 = DBHelper.getInstance(LoginActivity.this).getEmpByEmpId(emp.getMm_emp_id());
         if(emp1 != null){
@@ -280,8 +281,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 EMClient.getInstance().chatManager().loadAllConversations();
 
                 // update current user's display name for APNs
-                boolean updatenick = EMClient.getInstance().updateCurrentUserNick(
-                        GuirenApplication.currentUserNick.trim());
+                boolean updatenick = EMClient.getInstance().updateCurrentUserNick(emp.getMm_emp_nickname());
                 if (!updatenick) {
 //                    Log.e("LoginActivity", "update current user nick fail");
                 }

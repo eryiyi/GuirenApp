@@ -14,9 +14,9 @@
     <orderEntry type="jdk" jdkName="Android API 23 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="alipaySDK-20150724" level="project" />
-    <orderEntry type="library" name="libs" level="project" />
     <orderEntry type="module" module-name="redpacketlibrary" />
     <orderEntry type="library" name="alipaySdk-20160516" level="project" />
     <orderEntry type="library" name="volley-1.0.19" level="project" />
+    <orderEntry type="library" name="redpacket-3.2.0" level="project" />
   </component>
 </module>

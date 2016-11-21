@@ -127,6 +127,7 @@ public class FiveFragment extends BaseFragment implements View.OnClickListener {
         view.findViewById(R.id.liner_four).setOnClickListener(this);
         view.findViewById(R.id.liner_five).setOnClickListener(this);
         view.findViewById(R.id.liner_six).setOnClickListener(this);
+        view.findViewById(R.id.liner_money).setOnClickListener(this);
 
         head.setOnClickListener(this);
         nickname.setOnClickListener(this);
@@ -351,6 +352,12 @@ public class FiveFragment extends BaseFragment implements View.OnClickListener {
                ShowPickDialog();
                break;
            case R.id.nickname:
+               break;
+           case R.id.liner_money:
+           {
+               //我的零钱
+               RedPacketUtil.startChangeActivity(getActivity());
+           }
                break;
        }
     }

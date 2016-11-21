@@ -373,12 +373,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener ,
             public void onReceive(Context context, Intent intent) {
                 updateUnreadLabel();
                 updateUnreadAddressLable();
-                if (currentTabIndex == 0) {
                     // refresh conversation list
                     if (twoFragment != null) {
                         twoFragment.refresh();
                     }
-                }
 //                else if (currentTabIndex == 1) {
 //                    if(contactListFragment != null) {
 //                        contactListFragment.refresh();
@@ -392,9 +390,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener ,
                 }
                 //red packet code : 处理红包回执透传消息
                 if (action.equals(RedPacketConstant.REFRESH_GROUP_RED_PACKET_ACTION)){
-//                    if (conversationListFragment != null){
-//                        conversationListFragment.refresh();
-//                    }
+                    if (twoFragment != null){
+                        twoFragment.refresh();
+                    }
                 }
                 //end of red packet code
             }
@@ -977,6 +975,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener ,
         };
         getRequestQueue().add(request);
     }
+
     String getV(){
         try {
             PackageManager manager = this.getPackageManager();
@@ -987,7 +986,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener ,
             return "";
         }
     }
-
 
     void showVersion(final String urlVersion){
         final Dialog picAddDialog = new Dialog(MainActivity.this, R.style.dialog);
