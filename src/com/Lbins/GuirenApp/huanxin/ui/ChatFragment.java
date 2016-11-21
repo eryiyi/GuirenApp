@@ -285,7 +285,12 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHe
         //消息框点击事件，demo这里不做覆盖，如需覆盖，return true
         //red packet code : 拆红包页面
         if (message.getBooleanAttribute(RPConstant.MESSAGE_ATTR_IS_RED_PACKET_MESSAGE, false)){
-            RedPacketUtil.openRedPacket(getActivity(), chatType, message, toChatUsername, messageList);
+            Emp emp = DBHelper.getInstance(getActivity()).getEmpByEmpId(getGson().fromJson(getSp().getString("mm_emp_id", ""), String.class));
+            if(emp != null){
+                RedPacketUtil.openRedPacket(getActivity(), chatType, message, toChatUsername, messageList, emp.getMm_emp_nickname(), emp.getMm_emp_cover());
+            }else {
+                RedPacketUtil.openRedPacket(getActivity(), chatType, message, toChatUsername, messageList, "", "");
+            }
             return true;
         } else if (message.getBooleanAttribute(RPConstant.MESSAGE_ATTR_IS_TRANSFER_PACKET_MESSAGE, false)) {
             RedPacketUtil.openTransferPacket(getActivity(), message);
@@ -337,7 +342,7 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHe
             case ITEM_RED_PACKET:
             {
                 //根据ID 查询用户信息
-                Emp emp = DBHelper.getInstance(getActivity()).getEmpById(toChatUsername);
+                Emp emp = DBHelper.getInstance(getActivity()).getEmpByEmpId(getGson().fromJson(getSp().getString("mm_emp_id", ""), String.class));
                 if(emp != null){
                     RedPacketUtil.startRedPacketActivityForResult(this, chatType, toChatUsername, REQUEST_CODE_SEND_RED_PACKET, emp.getMm_emp_nickname(), emp.getMm_emp_cover());
                 }else {

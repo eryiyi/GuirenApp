@@ -253,6 +253,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         save("mm_emp_native", emp.getMm_emp_native());
         save("mm_emp_motto", emp.getMm_emp_motto());
         save("mm_emp_type", emp.getMm_emp_type());
+        save("mm_emp_bg", emp.getMm_emp_bg());
         GuirenApplication.currentCover = emp.getMm_emp_cover();
         GuirenApplication.currentName = emp.getMm_emp_nickname();
 

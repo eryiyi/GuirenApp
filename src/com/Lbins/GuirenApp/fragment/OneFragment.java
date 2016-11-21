@@ -605,6 +605,20 @@ public class OneFragment extends BaseFragment implements View.OnClickListener ,O
         switch (flag){
             case 1:
                 //查看我和他的人脉关系
+                if(recordList.size() > (position)){
+                    Emp emp = recordList.get(position);
+                    if(emp != null){
+                        if(emp.getMm_emp_id().equals(getGson().fromJson(getSp().getString("mm_emp_id", ""), String.class))){
+                            //说明是自己
+                            Toast.makeText(getActivity(), "不能查看自己", Toast.LENGTH_SHORT).show();
+                        }else{
+                            Intent intent = new Intent(getActivity(), TuopuActivity.class);
+                            intent.putExtra("mm_emp_id", emp.getMm_emp_id());
+                            startActivity(intent);
+                        }
+                    }
+                }
+
                 break;
         }
     }
