@@ -35,6 +35,7 @@ import com.Lbins.GuirenApp.huanxin.ui.ConversationListFragment;
 import com.Lbins.GuirenApp.huanxin.ui.GroupsActivity;
 import com.Lbins.GuirenApp.huanxin.ui.LoginActivity;
 import com.Lbins.GuirenApp.huanxin.utils.RedPacketConstant;
+import com.Lbins.GuirenApp.module.CityObj;
 import com.Lbins.GuirenApp.module.Emp;
 import com.Lbins.GuirenApp.module.VersionUpdateObj;
 import com.Lbins.GuirenApp.ui.AndMeAcitvity;
@@ -139,7 +140,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener ,
         fm = getSupportFragmentManager();
 
         initView();
-
+        save("location_city_id", "");
         switchFragment(R.id.foot_liner_one);
 
         //------huanxin----------start------------------------
@@ -159,7 +160,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener ,
 
         //获取配置信息  省 市 县
         new Thread(MainActivity.this).start();
-
 
         //检查版本更新
         checkVersion();
@@ -913,10 +913,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener ,
         } catch (Exception e) {
         }
         unregisterReceiver(mBroadcastReceiver);
-
     }
-
-
 
     public void checkVersion() {
         StringRequest request = new StringRequest(
@@ -1012,5 +1009,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener ,
         picAddDialog.setContentView(picAddInflate);
         picAddDialog.show();
     }
+
+    private  List<CityObj> listEmps = new ArrayList<CityObj>();
+
 
 }

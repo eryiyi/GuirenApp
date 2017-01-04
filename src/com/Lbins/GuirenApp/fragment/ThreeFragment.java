@@ -19,7 +19,6 @@ import android.widget.*;
 import com.Lbins.GuirenApp.R;
 import com.Lbins.GuirenApp.adapter.AdViewPagerAdapter;
 import com.Lbins.GuirenApp.adapter.ItemTvAdapter;
-import com.Lbins.GuirenApp.adapter.ItemXixunAdapter;
 import com.Lbins.GuirenApp.adapter.OnClickContentItemListener;
 import com.Lbins.GuirenApp.base.BaseFragment;
 import com.Lbins.GuirenApp.base.InternetURL;
@@ -27,16 +26,22 @@ import com.Lbins.GuirenApp.dao.DBHelper;
 import com.Lbins.GuirenApp.data.AdObjData;
 import com.Lbins.GuirenApp.data.RecordDATA;
 import com.Lbins.GuirenApp.data.VideosData;
-import com.Lbins.GuirenApp.data.XixunObjData;
 import com.Lbins.GuirenApp.library.PullToRefreshBase;
 import com.Lbins.GuirenApp.library.PullToRefreshListView;
-import com.Lbins.GuirenApp.module.*;
-import com.Lbins.GuirenApp.ui.*;
+import com.Lbins.GuirenApp.module.AdObj;
+import com.Lbins.GuirenApp.module.VideoPlayer;
+import com.Lbins.GuirenApp.module.Videos;
+import com.Lbins.GuirenApp.ui.DetailTvActivity;
+import com.Lbins.GuirenApp.ui.PublishTvCommentAcitvity;
+import com.Lbins.GuirenApp.ui.VideoPlayerActivity2;
 import com.Lbins.GuirenApp.util.Constants;
 import com.Lbins.GuirenApp.util.GuirenHttpUtils;
 import com.Lbins.GuirenApp.util.StringUtil;
 import com.Lbins.GuirenApp.widget.CustomProgressDialog;
-import com.android.volley.*;
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.UMShareAPI;
@@ -383,6 +388,7 @@ public class ThreeFragment extends BaseFragment implements View.OnClickListener 
         };
         getRequestQueue().add(request);
     }
+
     private void initViewPager() {
         adapterAd = new AdViewPagerAdapter(getActivity());
         adapterAd.change(listsAd);

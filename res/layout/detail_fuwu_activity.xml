@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:id="@+id/main"
+              android:layout_width="match_parent"
+              android:background="@color/detail_back"
+              android:layout_height="match_parent">
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/topbar_height"
+            android:background="@color/mm_main_bg_mine_top"
+            android:gravity="center_vertical"
+            >
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:id="@+id/back"
+                android:paddingLeft="10dp"
+                android:drawableLeft="@drawable/md_return"
+                android:text="返回"
+                android:textColor="@color/white"
+                android:gravity="center_vertical"
+                android:paddingRight="10dp"
+                />
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:singleLine="true"
+                android:text="服务详情"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:id="@+id/goods_detail_title"/>
+        <Button
+                android:id="@+id/detail_goods_item"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dip"
+                android:visibility="gone"
+                android:paddingRight="5dp"
+                android:layout_centerVertical="true"
+                android:background="@drawable/icons_others_menu"
+                />
+    </RelativeLayout>
+    <LinearLayout android:layout_width="match_parent"
+                  android:orientation="vertical"
+                  android:layout_height="match_parent">
+        <com.Lbins.GuirenApp.widget.ReboundScrollView android:layout_width="match_parent"
+                                                      android:layout_weight="1"
+                                                      android:layout_height="wrap_content">
+            <LinearLayout android:layout_width="match_parent"
+                          android:orientation="vertical"
+                          android:layout_height="match_parent">
+                <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:id="@+id/ad"
+                        android:layout_height="180dp">
+                    <android.support.v4.view.ViewPager
+                            android:id="@+id/viewpager"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+                    </android.support.v4.view.ViewPager>
+
+                    <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:layout_alignParentLeft="true"
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            android:paddingBottom="3dp"
+                            android:paddingTop="3dp">
+
+                        <LinearLayout
+                                android:id="@+id/viewGroup"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="right"
+                                android:layout_marginRight="5dp"
+                                android:layout_marginLeft="5dp"
+                                android:orientation="horizontal"
+                                android:paddingBottom="1dp"
+                                android:paddingTop="1dp">
+                        </LinearLayout>
+                    </LinearLayout>
+                </RelativeLayout>
+                <RelativeLayout android:layout_width="match_parent"
+                                android:padding="8dp"
+                                android:layout_height="wrap_content">
+                    <com.Lbins.GuirenApp.widget.CircleImageView
+                            android:src="@drawable/ic_launcher"
+                            android:layout_width="45dp"
+                            android:id="@+id/cover"
+                            android:layout_height="45dp"/>
+                    <TextView android:layout_width="wrap_content"
+                              android:layout_marginTop="3dp"
+                              android:layout_marginLeft="8dp"
+                              android:layout_toRightOf="@+id/cover"
+                              android:textSize="16sp"
+                              android:textColor="@color/text_color"
+                              android:id="@+id/name"
+                              android:layout_height="wrap_content"/>
+                    <TextView android:layout_width="wrap_content"
+                              android:id="@+id/typeName"
+                              android:layout_below="@+id/name"
+                              android:textSize="14sp"
+                              android:layout_marginTop="3dp"
+                              android:textColor="@color/textColortwo"
+                              android:layout_marginLeft="8dp"
+                              android:layout_toRightOf="@+id/cover"
+                              android:layout_height="wrap_content"/>
+                    <TextView android:layout_width="wrap_content"
+                              android:layout_marginTop="12dp"
+                              android:id="@+id/money"
+                              android:textSize="16sp"
+                              android:textColor="@color/money_red_light"
+                              android:layout_alignParentRight="true"
+                              android:layout_marginRight="8dp"
+                              android:layout_height="wrap_content"/>
+                </RelativeLayout>
+                <TextView android:layout_width="match_parent"
+                          android:padding="8dp"
+                          android:layout_marginLeft="8dp"
+                          android:layout_marginRight="8dp"
+                          android:lineSpacingMultiplier="1.4"
+                          android:textColor="@color/text_color"
+                          android:id="@+id/title"
+                          android:layout_height="wrap_content"/>
+                <TextView android:layout_width="match_parent"
+                          android:padding="8dp"
+                          android:layout_marginLeft="8dp"
+                          android:layout_marginRight="8dp"
+                          android:lineSpacingMultiplier="1.4"
+                          android:textColor="@color/textColortwo"
+                          android:id="@+id/content"
+                          android:layout_height="wrap_content"/>
+                <TextView android:layout_width="match_parent"
+                          android:padding="8dp"
+                          android:layout_marginLeft="8dp"
+                          android:layout_marginRight="8dp"
+                          android:lineSpacingMultiplier="1.4"
+                          android:textColor="@color/textColortwo"
+                          android:id="@+id/address"
+                          android:layout_height="wrap_content"/>
+            </LinearLayout>
+        </com.Lbins.GuirenApp.widget.ReboundScrollView>
+        <LinearLayout android:layout_width="match_parent"
+                      android:orientation="horizontal"
+                      android:background="#1a1a1a"
+                      android:id="@+id/liner_bottom"
+                      android:visibility="gone"
+                      android:gravity="center_vertical"
+                      android:layout_height="50dp">
+            <TextView android:layout_width="0dp"
+                      android:layout_weight="1"
+                      android:text="对话"
+                      android:gravity="center"
+                      android:id="@+id/btn_chat"
+                      android:textColor="@color/white"
+                      android:textSize="16sp"
+                      android:layout_height="match_parent"/>
+            <TextView android:layout_width="0dp"
+                      android:layout_weight="1"
+                      android:text="联系TA"
+                      android:gravity="center"
+                      android:id="@+id/btn_baijian"
+                      android:textColor="@color/white"
+                      android:textSize="16sp"
+                      android:layout_height="match_parent"/>
+        </LinearLayout>
+    </LinearLayout>
+
+
+
+</LinearLayout>

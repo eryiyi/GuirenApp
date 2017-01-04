@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:id="@+id/main"
+              android:orientation="vertical"
+              android:background="@color/white">
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/topbar_height"
+            android:background="@color/mm_main_bg_mine_top"
+            android:gravity="center_vertical"
+            >
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:id="@+id/back"
+                android:paddingLeft="10dp"
+                android:drawableLeft="@drawable/md_return"
+                android:text="返回"
+                android:textColor="@color/white"
+                android:gravity="center_vertical"
+                android:paddingRight="10dp"
+                />
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textColor="@color/white"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:singleLine="true"
+                android:text="发布服务"
+                android:layout_marginLeft="45dp"
+                android:layout_marginRight="45dp"
+                android:id="@+id/detail_title"
+                />
+        <TextView android:layout_width="wrap_content"
+                   android:layout_height="match_parent"
+                   android:text="分享"
+                   android:visibility="gone"
+                   android:textSize="16sp"
+                   android:gravity="center_vertical"
+                   android:textColor="@color/white"
+                   android:layout_alignParentRight="true"
+                   android:paddingLeft="10dp"
+                   android:paddingRight="15dp"
+                   android:id="@+id/share"
+                />
+    </RelativeLayout>
+
+        <RelativeLayout android:layout_width="match_parent"
+                      android:orientation="vertical"
+                      android:layout_height="match_parent">
+
+            <com.Lbins.GuirenApp.widget.ReboundScrollView android:layout_width="match_parent"
+                                                          android:layout_height="match_parent">
+                <LinearLayout android:layout_width="match_parent"
+                              android:orientation="vertical"
+                              android:padding="12dp"
+                              android:id="@+id/liner_one"
+                              android:layout_height="match_parent">
+                    <LinearLayout android:layout_width="match_parent"
+                                  android:orientation="horizontal"
+                                  android:padding="8dp"
+                                  android:layout_height="wrap_content">
+                        <TextView android:layout_width="wrap_content"
+                                  android:text="我能"
+                                  android:padding="4dp"
+                                  android:drawableLeft="@drawable/star"
+                                  android:textColor="@color/text_color"
+                                  android:layout_height="wrap_content"/>
+                        <EditText android:layout_width="wrap_content"
+                                  android:layout_weight="1"
+                                  android:textSize="15sp"
+                                  android:id="@+id/help_title"
+                                  android:textColor="@color/text_color"
+                                  android:background="@null"
+                                  android:hint="为服务起一个响亮的名字"
+                                  android:layout_height="wrap_content"/>
+                    </LinearLayout>
+                    <View android:layout_width="match_parent"
+                          android:background="@color/gray01"
+                          android:layout_marginTop="3dp"
+                          android:layout_height="0.1dp"></View>
+                    <LinearLayout android:layout_width="match_parent"
+                                  android:orientation="horizontal"
+                                  android:padding="8dp"
+                                  android:layout_height="wrap_content">
+                        <TextView android:layout_width="wrap_content"
+                                  android:text="描述"
+                                  android:padding="4dp"
+                                  android:drawableLeft="@drawable/star"
+                                  android:textColor="@color/text_color"
+                                  android:layout_height="wrap_content"/>
+                        <EditText android:layout_width="wrap_content"
+                                  android:layout_weight="1"
+                                  android:minHeight="80dp"
+                                  android:textSize="15sp"
+                                  android:id="@+id/help_content"
+                                  android:textColor="@color/text_color"
+                                  android:background="@null"
+                                  android:textColorHint="@color/textColortwo"
+                                  android:hint="详细描述你的服务"
+                                  android:layout_height="wrap_content"/>
+                    </LinearLayout>
+                    <View android:layout_width="match_parent"
+                          android:background="@color/gray01"
+                          android:layout_marginTop="3dp"
+                          android:layout_height="0.1dp"></View>
+                    <LinearLayout android:layout_width="match_parent"
+                                  android:orientation="horizontal"
+                                  android:padding="8dp"
+                                  android:layout_height="wrap_content">
+
+                        <TextView android:layout_width="wrap_content"
+                                  android:text="价格"
+                                  android:padding="4dp"
+                                  android:drawableLeft="@drawable/star"
+                                  android:textColor="@color/text_color"
+                                  android:layout_height="wrap_content"/>
+                        <EditText android:layout_width="wrap_content"
+                                  android:layout_weight="1"
+                                  android:textSize="15sp"
+                                  android:id="@+id/help_money"
+                                  android:numeric="decimal"
+                                  android:textColor="@color/text_color"
+                                  android:background="@null"
+                                  android:hint="输入服务的价格（元）"
+                                  android:layout_height="wrap_content"/>
+                    </LinearLayout>
+                    <View android:layout_width="match_parent"
+                          android:background="@color/gray01"
+                          android:layout_marginTop="3dp"
+                          android:layout_height="0.1dp"></View>
+                    <TextView android:layout_width="wrap_content"
+                              android:text="我在"
+                              android:padding="4dp"
+                              android:layout_marginLeft="8dp"
+                              android:drawableLeft="@drawable/star"
+                              android:layout_marginTop="8dp"
+                              android:textColor="@color/text_color"
+                              android:layout_height="wrap_content"/>
+                    <LinearLayout android:layout_width="match_parent"
+                                  android:orientation="horizontal"
+                                  android:layout_height="wrap_content">
+                        <com.Lbins.GuirenApp.widget.CustomerSpinner
+                                android:background="@drawable/login_edit_bg"
+                                android:layout_marginLeft="6dp"
+                                android:layout_marginRight="6dp"
+                                android:drawableLeft="@drawable/star"
+                                android:paddingLeft="15dp"
+                                android:layout_marginTop="6dp"
+                                android:layout_alignParentRight="true"
+                                android:id="@+id/mm_emp_provinceId"
+                                android:layout_width="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_height="40dp">
+                        </com.Lbins.GuirenApp.widget.CustomerSpinner>
+
+                        <com.Lbins.GuirenApp.widget.CustomerSpinner
+                                android:background="@drawable/login_edit_bg"
+                                android:layout_marginLeft="6dp"
+                                android:layout_marginRight="6dp"
+                                android:drawableLeft="@drawable/star"
+                                android:layout_marginTop="6dp"
+                                android:paddingLeft="15dp"
+                                android:layout_alignParentRight="true"
+                                android:id="@+id/mm_emp_cityId"
+                                android:layout_width="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_height="40dp">
+
+                        </com.Lbins.GuirenApp.widget.CustomerSpinner>
+                        <com.Lbins.GuirenApp.widget.CustomerSpinner
+                                android:background="@drawable/login_edit_bg"
+                                android:layout_marginLeft="6dp"
+                                android:layout_marginRight="6dp"
+                                android:drawableLeft="@drawable/star"
+                                android:layout_marginTop="6dp"
+                                android:paddingLeft="15dp"
+                                android:layout_alignParentRight="true"
+                                android:id="@+id/mm_emp_countryId"
+                                android:layout_width="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_height="40dp">
+                        </com.Lbins.GuirenApp.widget.CustomerSpinner>
+                    </LinearLayout>
+                    <View android:layout_width="match_parent"
+                          android:background="@color/gray01"
+                          android:layout_marginTop="3dp"
+                          android:layout_height="0.1dp"></View>
+                    <LinearLayout android:layout_width="match_parent"
+                                  android:orientation="horizontal"
+                                  android:padding="8dp"
+                                  android:id="@+id/liner_help_danwei_id"
+                                  android:layout_height="wrap_content">
+                        <TextView android:layout_width="wrap_content"
+                                  android:text="单位"
+                                  android:layout_weight="1"
+                                  android:padding="4dp"
+                                  android:drawableLeft="@drawable/star"
+                                  android:textColor="@color/text_color"
+                                  android:layout_height="wrap_content"/>
+                        <TextView android:layout_width="wrap_content"
+                                  android:textSize="15sp"
+                                  android:singleLine="true"
+                                  android:text="请选择"
+                                  android:id="@+id/help_danwei_id"
+                                  android:drawableRight="@drawable/em_right_arrow_icon"
+                                  android:textColor="@color/text_color"
+                                  android:layout_height="wrap_content"/>
+                    </LinearLayout>
+                    <View android:layout_width="match_parent"
+                          android:background="@color/gray01"
+                          android:layout_marginTop="3dp"
+                          android:layout_height="0.1dp"></View>
+                    <LinearLayout android:layout_width="match_parent"
+                                  android:orientation="horizontal"
+                                  android:padding="8dp"
+                                  android:id="@+id/liner_help_type"
+                                  android:layout_height="wrap_content">
+                        <TextView android:layout_width="wrap_content"
+                                  android:text="服务类型"
+                                  android:layout_weight="1"
+                                  android:padding="4dp"
+                                  android:drawableLeft="@drawable/star"
+                                  android:textColor="@color/text_color"
+                                  android:layout_height="wrap_content"/>
+                        <TextView android:layout_width="wrap_content"
+                                  android:textSize="15sp"
+                                  android:singleLine="true"
+                                  android:text="请选择"
+                                  android:id="@+id/txt_help_type"
+                                  android:drawableRight="@drawable/em_right_arrow_icon"
+                                  android:textColor="@color/text_color"
+                                  android:layout_height="wrap_content"/>
+                    </LinearLayout>
+                    <View android:layout_width="match_parent"
+                          android:background="@color/gray01"
+                          android:layout_marginTop="3dp"
+                          android:layout_height="0.1dp"></View>
+                    <com.Lbins.GuirenApp.widget.NoScrollGridView
+                            android:id="@+id/gridView"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:listSelector="@drawable/selector_pressed_gray"
+                            android:horizontalSpacing="5dip"
+                            android:numColumns="4"
+                            android:padding="10dip"
+                            android:verticalSpacing="5dip"/>
+
+                </LinearLayout>
+            </com.Lbins.GuirenApp.widget.ReboundScrollView>
+
+            <Button android:layout_width="match_parent"
+                    android:text="发布"
+                    android:textSize="16sp"
+                    android:onClick="saveAction"
+                    android:textColor="@color/white"
+                    android:padding="12dp"
+                    android:background="@drawable/ease_btn_blue_selector"
+                    android:layout_alignParentBottom="true"
+                    android:layout_height="wrap_content"/>
+
+        </RelativeLayout>
+
+</LinearLayout>

@@ -51,10 +51,13 @@ public class GuirenApplication extends Application  {
 
     public static Context applicationContext;
 
-//    public static String latStr;
-//    public static String lngStr;
-//    public static String locationAddress;
-//    public static String empName;
+    public static String latStr;
+    public static String lngStr;
+    public static String locationAddress;
+
+    public static String locationProvinceName;
+    public static String locationCityName;
+    public static String locationAreaName;
 
     public static List<HangYeType>  listsTypeHy = new ArrayList<HangYeType>();
     public  static List<ProvinceObj> provinces = new ArrayList<ProvinceObj>();

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:background="@drawable/zhuye_item_select"
+              android:layout_height="wrap_content"
+              android:orientation="vertical">
+
+            <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="180dp"
+                        android:scaleType="centerCrop"
+                        android:id="@+id/pic"
+                        android:src="@drawable/no_data"/>
+                <com.Lbins.GuirenApp.widget.CircleImageView
+                        android:layout_width="30dp"
+                        android:layout_marginTop="8dp"
+                        android:id="@+id/cover"
+                        android:layout_marginLeft="8dp"
+                        android:src="@drawable/ic_launcher"
+                        android:layout_height="30dp"/>
+                <TextView android:layout_width="wrap_content"
+                          android:id="@+id/name"
+                          android:layout_toRightOf="@+id/cover"
+                          android:layout_marginTop="13dp"
+                          android:layout_marginLeft="6dp"
+                          android:textColor="@color/white"
+                          android:textSize="14sp"
+                          android:textStyle="bold"
+                          android:layout_height="wrap_content"/>
+                <TextView android:layout_width="wrap_content"
+                          android:id="@+id/distance"
+                          android:text="一起玩"
+                          android:layout_marginRight="8dp"
+                          android:layout_alignParentRight="true"
+                          android:layout_marginTop="13dp"
+                          android:layout_marginLeft="6dp"
+                          android:textColor="@color/white"
+                          android:textSize="13sp"
+                          android:layout_height="wrap_content"/>
+
+                <TextView android:layout_width="wrap_content"
+                          android:id="@+id/address"
+                          android:text="山东*滨州"
+                          android:layout_marginRight="8dp"
+                          android:layout_alignParentRight="true"
+                          android:layout_marginTop="13dp"
+                          android:layout_marginLeft="6dp"
+                          android:textColor="@color/white"
+                          android:textSize="13sp"
+                          android:layout_alignBottom="@+id/pic"
+                          android:layout_marginBottom="8dp"
+                          android:layout_height="wrap_content"/>
+            </RelativeLayout>
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="3dp"
+                    android:layout_marginLeft="6dp"
+                    android:id="@+id/item_title"
+                    android:textColor="@color/textColor"
+                    android:textSize="16dp"/>
+
+            <TextView
+                    android:id="@+id/item_content"
+                    android:layout_width="match_parent"
+                    android:singleLine="true"
+                    android:layout_marginLeft="8dp"
+                    android:layout_height="wrap_content"
+                    android:padding="3dp"
+                    android:textColor="@color/light_gray"
+                    android:textSize="14sp"/>
+        <TextView android:layout_width="wrap_content"
+                  android:layout_marginLeft="8dp"
+                  android:padding="3dp"
+                  android:id="@+id/item_danwei"
+                  android:textColor="@color/tuizhu_border"
+                  android:layout_height="wrap_content"/>
+
+        <View android:layout_width="match_parent"
+              android:background="@color/gray01"
+              android:layout_height="0.1dp"></View>
+</LinearLayout>

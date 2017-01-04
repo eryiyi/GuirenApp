@@ -29,7 +29,6 @@ import com.Lbins.GuirenApp.module.Emp;
 import com.Lbins.GuirenApp.ui.ProfileActivity;
 import com.easemob.redpacketsdk.constant.RPConstant;
 import com.easemob.redpacketui.utils.RedPacketUtil;
-import com.easemob.redpacketui.widget.ChatRowTransfer;
 import com.hyphenate.chat.*;
 import com.hyphenate.easeui.EaseConstant;
 import com.hyphenate.easeui.ui.EaseChatFragment;

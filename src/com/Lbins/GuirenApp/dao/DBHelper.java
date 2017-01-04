@@ -25,6 +25,7 @@ public class DBHelper {
     private ManagerInfoDao managerInfoDao;
     private AdObjDao adObjDao;
     private MinePicObjDao minePicObjDao;
+    private CityObjDao cityDao;
 
     private DBHelper() {
     }
@@ -35,7 +36,7 @@ public class DBHelper {
             if (mContext == null) {
                 mContext = context;
             }
-            helper = new DaoMaster.DevOpenHelper(context, "guiren_hm_db_t_002", null);
+            helper = new DaoMaster.DevOpenHelper(context, "guiren_hm_db_t_003", null);
             db = helper.getWritableDatabase();
             daoMaster = new DaoMaster(db);
             instance.empDao = daoMaster.newSession().getEmpDao();
@@ -46,6 +47,7 @@ public class DBHelper {
             instance.managerInfoDao = daoMaster.newSession().getManagerInfoDao();
             instance.adObjDao = daoMaster.newSession().getAdObjDao();
             instance.minePicObjDao = daoMaster.newSession().getMinePicObjDao();
+            instance.cityDao = daoMaster.newSession().getCityObjDao();
         }
         return instance;
     }
@@ -334,4 +336,19 @@ public class DBHelper {
     public long saveAdObj(AdObj adObj) {
         return adObjDao.insertOrReplace(adObj);
     }
+
+    //批量插入城市
+    public void saveCityList(List<CityObj> tests) {
+        cityDao.insertOrReplaceInTx(tests);
+    }
+
+    /**
+     * 查询城市列表
+     *
+     * @return
+     */
+    public List<CityObj> getCityList() {
+        return cityDao.loadAll();
+    }
+
 }

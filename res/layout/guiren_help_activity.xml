@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:background="@color/white"
+                android:id="@+id/main"
+                android:layout_height="match_parent">
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:id="@+id/top_header"
+            android:layout_height="@dimen/topbar_height"
+            android:background="@color/mm_main_bg_mine_top"
+            android:gravity="center_vertical"
+            >
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:id="@+id/back"
+                android:paddingLeft="10dp"
+                android:drawableLeft="@drawable/md_return"
+                android:textColor="@color/white"
+                android:gravity="center_vertical"
+                android:paddingRight="10dp"
+                />
+        <EditText
+                android:id="@+id/input_edittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_white_shape"
+                android:layout_toRightOf="@+id/back"
+                android:layout_centerInParent="true"
+                android:hint="搜索"
+                android:textColorHint="@color/darkgrey"
+                android:singleLine="true"
+                android:paddingLeft="8dp"
+                android:padding="12dp"
+                android:layout_toLeftOf="@+id/right_btn"
+                android:textColor="@color/textColortwo"
+                android:textSize="14sp" />
+        <TextView
+                android:id="@+id/right_btn"
+                android:layout_width="55dp"
+                android:textSize="14sp"
+                android:textColor="@color/white"
+                android:layout_height="30dp"
+                android:gravity="center"
+                android:layout_alignParentRight="true"
+                android:paddingRight="5dp"
+                android:text="滨州"
+                android:layout_centerVertical="true"
+                />
+    </RelativeLayout>
+
+    <FrameLayout
+            android:id="@+id/content_frame"
+            android:layout_below="@+id/top_header"
+            android:layout_width="match_parent"
+            android:background="@color/white"
+            android:layout_marginBottom="60dp"
+            android:layout_height="match_parent">
+    </FrameLayout>
+
+    <include
+            android:id="@+id/home_item_photo"
+            android:layout_width="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_height="60dp"
+            layout="@layout/foot_help"/>
+
+    <View android:layout_width="match_parent"
+          android:layout_alignTop="@+id/home_item_photo"
+          android:background="@color/gray_line_color"
+          android:layout_height="0.5dp"></View>
+
+</RelativeLayout>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/topbar_height"
+            android:background="@color/mm_main_bg_mine_top"
+            android:gravity="center_vertical"
+            >
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:id="@+id/back"
+                android:paddingLeft="10dp"
+                android:drawableLeft="@drawable/md_return"
+                android:text="返回"
+                android:textColor="@color/white"
+                android:gravity="center_vertical"
+                android:paddingRight="10dp"
+                />
+        <EditText android:layout_width="match_parent"
+                  android:layout_marginTop="8dp"
+                  android:layout_marginRight="15dp"
+                  android:layout_toRightOf="@+id/back"
+                  android:singleLine="true"
+                  android:id="@+id/keywords"
+                  android:hint="请输入城市名"
+                  android:paddingLeft="8dp"
+                  android:background="@drawable/btn_white_shape"
+                  android:textSize="15sp"
+                  android:layout_centerHorizontal="true"
+                  android:layout_centerVertical="true"
+                  android:drawableRight="@drawable/search_mine"
+                  android:paddingRight="12dp"
+                  android:textColor="@color/textColortwo"
+                  android:layout_height="match_parent"/>
+    </RelativeLayout>
+
+    <FrameLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent">
+        <LinearLayout android:layout_gravity="center"
+                      android:layout_width="fill_parent"
+                      android:layout_height="fill_parent"
+                      android:orientation="vertical"
+                      android:background="@drawable/nav_page">
+            <ListView android:id="@+id/lvContact"
+                      android:layout_width="fill_parent"
+                      android:layout_height="wrap_content"
+                      android:scrollbars="none"
+                      android:cacheColorHint="#00000000"
+                      android:divider="@color/gray_color"
+                      android:dividerHeight="0.1dp"
+                      android:fadingEdge="none"
+                      android:fastScrollEnabled="false"
+                      android:footerDividersEnabled="false"
+                    />
+        </LinearLayout>
+        <com.pinyin.SideBar
+                android:id ="@+id/sideBar"
+                android:layout_height="match_parent"
+                android:layout_width="20dp"
+                android:layout_gravity="right|center"
+                />
+    </FrameLayout>
+</LinearLayout>

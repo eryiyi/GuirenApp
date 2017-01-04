@@ -29,14 +29,15 @@
                   android:layout_height="wrap_content"/>
         <Button
                 android:id="@+id/home_write"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:onClick="onTopMenuPopupButtonClick"
                 android:layout_alignParentRight="true"
-                android:layout_marginRight="15dip"
+                android:layout_marginRight="10dip"
                 android:layout_centerVertical="true"
                 android:background="@drawable/icon_talk"
                 />
+
     </RelativeLayout>
 
     <RelativeLayout android:layout_width="match_parent"

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#e6e6e6"
+    android:orientation="vertical" >
+
+   <LinearLayout android:layout_width="match_parent"
+                 android:background="@null"
+                 android:layout_marginLeft="8dp"
+                 android:layout_marginTop="6dp"
+                 android:orientation="horizontal"
+                 android:layout_gravity="center_vertical"
+                 android:gravity="center_vertical"
+                 android:layout_height="wrap_content">
+       <ImageView android:layout_width="25dp"
+                  android:id="@+id/icon"
+                  android:visibility="gone"
+                  android:layout_marginLeft="8dp"
+                  android:src="@drawable/ic_launcher"
+                  android:layout_height="25dp"/>
+
+       <TextView
+               android:id="@+id/toptype"
+               android:layout_marginLeft="8dp"
+               android:layout_width="wrap_content"
+               android:textColor="@color/text_color"
+               android:layout_height="wrap_content"
+               android:layout_margin="12dp"
+               android:textSize="13sp" />
+   </LinearLayout>
+
+
+    <GridView
+            android:id="@+id/listView"
+            android:layout_marginLeft="6dp"
+            android:layout_marginRight="6dp"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:horizontalSpacing="1dp"
+            android:numColumns="3"
+            android:scrollbars="none"
+            android:verticalSpacing="1dp" />
+</LinearLayout>

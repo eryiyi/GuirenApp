@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           xmlns:tools="http://schemas.android.com/tools"
           package="com.Lbins.GuirenApp"
-          android:versionCode="10"
-          android:versionName="1.0.9">
+          android:versionCode="14"
+          android:versionName="1.1.3">
     <uses-sdk android:minSdkVersion="16"/>
 
 
@@ -206,16 +206,26 @@
         <activity android:name=".ui.PublishTvCommentAcitvity" android:screenOrientation="portrait" android:theme="@style/AppTheme" android:windowSoftInputMode="adjustResize|stateHidden"/>
         <activity android:name=".ui.DetailTvActivity" android:screenOrientation="portrait" android:theme="@style/AppTheme" android:windowSoftInputMode="adjustResize|stateHidden"/>
         <activity android:name=".ui.VideosByTypeActivity" android:screenOrientation="portrait" android:theme="@style/AppTheme" android:windowSoftInputMode="adjustResize|stateHidden"/>
+        <activity android:name=".ui.GuirenHelpActivity" android:screenOrientation="portrait" android:theme="@style/AppTheme" android:windowSoftInputMode="adjustResize|stateHidden"/>
+        <activity android:name=".ui.AddHelpActivity" android:screenOrientation="portrait" android:theme="@style/AppTheme" android:windowSoftInputMode="adjustResize|stateHidden"/>
+        <activity android:name=".ui.SelectHelpTypeActivity" android:screenOrientation="portrait" android:theme="@style/AppTheme" android:windowSoftInputMode="adjustResize|stateHidden"/>
+        <activity android:name=".ui.SelecthelpDanweiActivity" android:screenOrientation="portrait" android:theme="@style/AppTheme" android:windowSoftInputMode="adjustResize|stateHidden"/>
+        <activity android:name=".ui.DetailFuwuActivity" android:screenOrientation="portrait" android:theme="@style/AppTheme" android:windowSoftInputMode="adjustResize|stateHidden"/>
+        <activity android:name=".ui.DetailHelpActivity" android:screenOrientation="portrait" android:theme="@style/AppTheme" android:windowSoftInputMode="adjustResize|stateHidden"/>
+        <activity android:name=".ui.AddFuwuActivity" android:screenOrientation="portrait" android:theme="@style/AppTheme" android:windowSoftInputMode="adjustResize|stateHidden"/>
+        <activity android:name=".ui.SearchMoreClassActivity" android:screenOrientation="portrait" android:theme="@style/AppTheme" android:windowSoftInputMode="adjustResize|stateHidden"/>
+        <activity android:name=".ui.LocationCityActivity" android:screenOrientation="portrait" android:theme="@style/AppTheme" android:windowSoftInputMode="adjustResize|stateHidden"/>
+        <activity android:name=".ui.CityLocationActivity" android:screenOrientation="portrait" android:theme="@style/AppTheme" android:windowSoftInputMode="adjustResize|stateHidden"/>
         <activity android:name=".ui.ZimeitiTypeValActivity" android:screenOrientation="portrait" android:theme="@style/AppTheme" android:windowSoftInputMode="adjustResize|stateHidden"/>
 
         <!--// *****************************高德地图sdk*******************************************-->
-        <!--<meta-data-->
-                <!--android:name="com.amap.api.v2.apikey"-->
-                <!--android:value="8fce261132d5ea7ad5a38717bc2c453e" />-->
+        <meta-data
+                android:name="com.amap.api.v2.apikey"
+                android:value="8fce261132d5ea7ad5a38717bc2c453e" />
 
-        <!--&lt;!&ndash; 定位需要的服务 &ndash;&gt;-->
-        <!--<service android:name="com.amap.api.location.APSService" >-->
-        <!--</service>-->
+        <!-- 定位需要的服务 -->
+        <service android:name="com.amap.api.location.APSService" >
+        </service>
 
         <!-- 设置贵人应用的AppKey -->
         <meta-data android:name="EASEMOB_APPKEY"  android:value="826321978#guiren" />
@@ -631,7 +641,6 @@
                 android:configChanges="keyboardHidden|orientation|screenSize"
                 android:exported="true"
                 android:screenOrientation="portrait" />
-
 
 
         <!--百度地图-->

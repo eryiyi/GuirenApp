@@ -12,12 +12,10 @@ import com.Lbins.GuirenApp.GuirenApplication;
 import com.Lbins.GuirenApp.R;
 import com.Lbins.GuirenApp.module.EmpRelateObj;
 import com.Lbins.GuirenApp.widget.PingYinUtil;
-import com.Lbins.GuirenApp.widget.PinyinComparator;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -30,16 +28,9 @@ public class ContactAdapter  extends BaseAdapter implements SectionIndexer {
     static ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
     static ImageLoader imageLoader = ImageLoader.getInstance();//图片加载类
 
-    @SuppressWarnings("unchecked")
     public ContactAdapter(Context mContext,List<EmpRelateObj> nicks) {
         this.mContext = mContext;
         this.mNicks = nicks;
-        // 排序(实现了中英文混排)
-//        String[] arrays = new String[mNicks.size()];
-//        for(int i=0;i<mNicks.size();i++){
-//            arrays[i]=mNicks.get(i).getMm_emp_nickname();
-//        }
-//        Arrays.sort(mNicks, new PinyinComparator());
     }
 
     @Override
