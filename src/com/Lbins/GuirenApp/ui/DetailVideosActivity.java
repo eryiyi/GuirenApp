@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
@@ -44,9 +45,12 @@ import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.UMShareListener;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.media.UMImage;
+import com.umeng.socialize.shareboard.ShareBoardConfig;
 import com.umeng.socialize.shareboard.SnsPlatform;
+import com.umeng.socialize.utils.Log;
 import com.umeng.socialize.utils.ShareBoardlistener;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -88,6 +92,9 @@ public class DetailVideosActivity extends BaseActivity implements View.OnClickLi
 //    String shareUrl = InternetURL.SHARE_VIDEOS;
     boolean isMobileNet, isWifiNet;
 
+    private UMShareListener mShareListener;
+    private ShareAction mShareAction;
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -97,6 +104,7 @@ public class DetailVideosActivity extends BaseActivity implements View.OnClickLi
         commentContents = new ArrayList<CommentContent>();
         emp_id = getGson().fromJson(getSp().getString("mm_emp_id", ""), String.class);
         initView();
+        mShareListener = new CustomShareListener(DetailVideosActivity.this);
         initData();
 
         //判断是否有网
@@ -239,7 +247,28 @@ public class DetailVideosActivity extends BaseActivity implements View.OnClickLi
                 break;
             case R.id.detail_share://分享按钮
             {
-                share();
+//                share();
+                UMImage image = new UMImage(DetailVideosActivity.this, record.getPicUrl());
+                String title =  getGson().fromJson(getSp().getString("mm_emp_nickname", ""), String.class)+"邀您免费看电影" ;
+                String content = record.getTitle()+record.getContent();
+
+                 /*无自定按钮的分享面板*/
+                mShareAction = new ShareAction(DetailVideosActivity.this).setDisplayList(
+                        SHARE_MEDIA.WEIXIN, SHARE_MEDIA.WEIXIN_CIRCLE, SHARE_MEDIA.WEIXIN_FAVORITE,
+                        SHARE_MEDIA.SINA, SHARE_MEDIA.QQ, SHARE_MEDIA.QZONE,
+                        SHARE_MEDIA.ALIPAY,
+                        SHARE_MEDIA.SMS, SHARE_MEDIA.EMAIL,
+                        SHARE_MEDIA.MORE)
+                        .withText(content)
+                        .withTitle(title)
+                        .withTargetUrl((InternetURL.SHARE_VIDEOS_TV + "?id=" + record.getId()))
+                        .withMedia(image)
+                        .setCallback(mShareListener);
+
+                ShareBoardConfig config = new ShareBoardConfig();
+                config.setShareboardPostion(ShareBoardConfig.SHAREBOARD_POSITION_CENTER);
+                config.setMenuItemBackgroundShape(ShareBoardConfig.BG_SHAPE_CIRCULAR); // 圆角背景
+                mShareAction.open(config);
             }
                 break;
             case R.id.detail_comment_liner://评论
@@ -555,48 +584,122 @@ public class DetailVideosActivity extends BaseActivity implements View.OnClickLi
         unregisterReceiver(mBroadcastReceiver);
     }
 
-    void share() {
-        new ShareAction(DetailVideosActivity.this).setDisplayList(SHARE_MEDIA.QQ, SHARE_MEDIA.QZONE, SHARE_MEDIA.WEIXIN, SHARE_MEDIA.WEIXIN_CIRCLE)
-                .setShareboardclickCallback(shareBoardlistener)
-                .open();
+//    void share() {
+//        new ShareAction(DetailVideosActivity.this).setDisplayList(SHARE_MEDIA.QQ, SHARE_MEDIA.QZONE, SHARE_MEDIA.WEIXIN, SHARE_MEDIA.WEIXIN_CIRCLE)
+//                .setShareboardclickCallback(shareBoardlistener)
+//                .open();
+//    }
+//
+//    private ShareBoardlistener shareBoardlistener = new ShareBoardlistener() {
+//
+//        @Override
+//        public void onclick(SnsPlatform snsPlatform, SHARE_MEDIA share_media) {
+//            UMImage image = new UMImage(DetailVideosActivity.this, record.getPicUrl());
+//            String title =  getGson().fromJson(getSp().getString("mm_emp_nickname", ""), String.class)+"邀您免费看电影" ;
+//            String content = record.getTitle()+record.getContent();
+//            new ShareAction(DetailVideosActivity.this).setPlatform(share_media).setCallback(umShareListener)
+//                    .withText(content)
+//                    .withTitle(title)
+//                    .withTargetUrl((InternetURL.SHARE_VIDEOS + "?id=" + record.getId()))
+//                    .withMedia(image)
+//                    .share();
+//        }
+//    };
+//
+//    private UMShareListener umShareListener = new UMShareListener() {
+//        @Override
+//        public void onResult(SHARE_MEDIA platform) {
+//            Toast.makeText(DetailVideosActivity.this, platform + getResources().getString(R.string.share_success), Toast.LENGTH_SHORT).show();
+//        }
+//
+//        @Override
+//        public void onError(SHARE_MEDIA platform, Throwable t) {
+//            Toast.makeText(DetailVideosActivity.this, platform + getResources().getString(R.string.share_error), Toast.LENGTH_SHORT).show();
+//        }
+//
+//        @Override
+//        public void onCancel(SHARE_MEDIA platform) {
+//            Toast.makeText(DetailVideosActivity.this, platform + getResources().getString(R.string.share_cancel), Toast.LENGTH_SHORT).show();
+//        }
+//    };
+//
+//    @Override
+//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        UMShareAPI.get(DetailVideosActivity.this).onActivityResult(requestCode, resultCode, data);
+//    }
+    private static class CustomShareListener implements UMShareListener {
+
+    private WeakReference<Context> mActivity;
+
+    private CustomShareListener(Context context) {
+        mActivity = new WeakReference(context);
     }
 
-    private ShareBoardlistener shareBoardlistener = new ShareBoardlistener() {
+    @Override
+    public void onResult(SHARE_MEDIA platform) {
 
-        @Override
-        public void onclick(SnsPlatform snsPlatform, SHARE_MEDIA share_media) {
-            UMImage image = new UMImage(DetailVideosActivity.this, record.getPicUrl());
-            String title =  getGson().fromJson(getSp().getString("mm_emp_nickname", ""), String.class)+"邀您免费看电影" ;
-            String content = record.getTitle()+record.getContent();
-            new ShareAction(DetailVideosActivity.this).setPlatform(share_media).setCallback(umShareListener)
-                    .withText(content)
-                    .withTitle(title)
-                    .withTargetUrl((InternetURL.SHARE_VIDEOS + "?id=" + record.getId()))
-                    .withMedia(image)
-                    .share();
-        }
-    };
+        if (platform.name().equals("WEIXIN_FAVORITE")) {
+            Toast.makeText(mActivity.get(), platform + " 收藏成功啦", Toast.LENGTH_SHORT).show();
+        } else {
+            if (platform!= SHARE_MEDIA.MORE&&platform!=SHARE_MEDIA.SMS
+                    &&platform!=SHARE_MEDIA.EMAIL
+                    &&platform!=SHARE_MEDIA.FLICKR
+                    &&platform!=SHARE_MEDIA.FOURSQUARE
+                    &&platform!=SHARE_MEDIA.TUMBLR
+                    &&platform!=SHARE_MEDIA.POCKET
+                    &&platform!=SHARE_MEDIA.PINTEREST
+                    &&platform!=SHARE_MEDIA.LINKEDIN
+                    &&platform!=SHARE_MEDIA.INSTAGRAM
+                    &&platform!=SHARE_MEDIA.GOOGLEPLUS
+                    &&platform!=SHARE_MEDIA.YNOTE
+                    &&platform!=SHARE_MEDIA.EVERNOTE){
+                Toast.makeText(mActivity.get(), platform + " 分享成功啦", Toast.LENGTH_SHORT).show();
+            }
 
-    private UMShareListener umShareListener = new UMShareListener() {
-        @Override
-        public void onResult(SHARE_MEDIA platform) {
-            Toast.makeText(DetailVideosActivity.this, platform + getResources().getString(R.string.share_success), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void onError(SHARE_MEDIA platform, Throwable t) {
+        if (platform!= SHARE_MEDIA.MORE&&platform!=SHARE_MEDIA.SMS
+                &&platform!=SHARE_MEDIA.EMAIL
+                &&platform!=SHARE_MEDIA.FLICKR
+                &&platform!=SHARE_MEDIA.FOURSQUARE
+                &&platform!=SHARE_MEDIA.TUMBLR
+                &&platform!=SHARE_MEDIA.POCKET
+                &&platform!=SHARE_MEDIA.PINTEREST
+                &&platform!=SHARE_MEDIA.LINKEDIN
+                &&platform!=SHARE_MEDIA.INSTAGRAM
+                &&platform!=SHARE_MEDIA.GOOGLEPLUS
+                &&platform!=SHARE_MEDIA.YNOTE
+                &&platform!=SHARE_MEDIA.EVERNOTE){
+            Toast.makeText(mActivity.get(), platform + " 分享失败啦", Toast.LENGTH_SHORT).show();
+            if (t != null) {
+                Log.d("throw", "throw:" + t.getMessage());
+            }
         }
 
-        @Override
-        public void onError(SHARE_MEDIA platform, Throwable t) {
-            Toast.makeText(DetailVideosActivity.this, platform + getResources().getString(R.string.share_error), Toast.LENGTH_SHORT).show();
-        }
+    }
 
-        @Override
-        public void onCancel(SHARE_MEDIA platform) {
-            Toast.makeText(DetailVideosActivity.this, platform + getResources().getString(R.string.share_cancel), Toast.LENGTH_SHORT).show();
-        }
-    };
+    @Override
+    public void onCancel(SHARE_MEDIA platform) {
+    }
+}
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         UMShareAPI.get(DetailVideosActivity.this).onActivityResult(requestCode, resultCode, data);
     }
+
+    /**
+     * 屏幕横竖屏切换时避免出现window leak的问题
+     */
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        mShareAction.close();
+    }
+    
 }

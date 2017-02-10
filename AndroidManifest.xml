@@ -214,9 +214,9 @@
         <activity android:name=".ui.DetailHelpActivity" android:screenOrientation="portrait" android:theme="@style/AppTheme" android:windowSoftInputMode="adjustResize|stateHidden"/>
         <activity android:name=".ui.AddFuwuActivity" android:screenOrientation="portrait" android:theme="@style/AppTheme" android:windowSoftInputMode="adjustResize|stateHidden"/>
         <activity android:name=".ui.SearchMoreClassActivity" android:screenOrientation="portrait" android:theme="@style/AppTheme" android:windowSoftInputMode="adjustResize|stateHidden"/>
-        <activity android:name=".ui.LocationCityActivity" android:screenOrientation="portrait" android:theme="@style/AppTheme" android:windowSoftInputMode="adjustResize|stateHidden"/>
         <activity android:name=".ui.CityLocationActivity" android:screenOrientation="portrait" android:theme="@style/AppTheme" android:windowSoftInputMode="adjustResize|stateHidden"/>
         <activity android:name=".ui.ZimeitiTypeValActivity" android:screenOrientation="portrait" android:theme="@style/AppTheme" android:windowSoftInputMode="adjustResize|stateHidden"/>
+
 
         <!--// *****************************高德地图sdk*******************************************-->
         <meta-data
@@ -709,5 +709,29 @@
         <meta-data
                 android:name="api_key"
                 android:value="UT5s48GsO3ndHecBTyiaQoSn" />
+
+        <uses-library
+                android:name="com.google.android.maps"
+                android:required="false" />
+        <uses-library android:name="android.test.runner" />
+
+        <activity
+                android:name="com.umeng.qq.tencent.AuthActivity"
+                android:launchMode="singleTask"
+                android:noHistory="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="tencent1105717314" />
+            </intent-filter>
+        </activity>
+        <activity
+                android:name="com.umeng.qq.tencent.AssistActivity"
+                android:screenOrientation="portrait"
+                android:theme="@android:style/Theme.Translucent.NoTitleBar"
+                android:configChanges="orientation|keyboardHidden|screenSize"/>
     </application>
 </manifest>

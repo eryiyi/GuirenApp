@@ -6,6 +6,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.format.DateUtils;
@@ -38,9 +39,12 @@ import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.UMShareListener;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.media.UMImage;
+import com.umeng.socialize.shareboard.ShareBoardConfig;
 import com.umeng.socialize.shareboard.SnsPlatform;
+import com.umeng.socialize.utils.Log;
 import com.umeng.socialize.utils.ShareBoardlistener;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -84,6 +88,7 @@ public class VideosFragment extends BaseFragment implements OnClickContentItemLi
                              Bundle savedInstanceState) {
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.news_fragment_lstv, null);
         initView(view);
+        mShareListener = new CustomShareListener(getActivity());
         item_textview.setText(typeName);
         initData();
         return view;
@@ -231,6 +236,8 @@ public class VideosFragment extends BaseFragment implements OnClickContentItemLi
 
     int tmpId = 0;
 
+    private UMShareListener mShareListener;
+    private ShareAction mShareAction;
     @Override
     public void onClickContentItem(int position, int flag, Object object) {
         tmpVideos = newsList.get(position);
@@ -250,7 +257,28 @@ public class VideosFragment extends BaseFragment implements OnClickContentItemLi
             case 2:
                 //分享
             {
-                share();
+//                share();
+                UMImage image = new UMImage(getActivity(), tmpVideos.getPicUrl());
+                String title =  getGson().fromJson(getSp().getString("mm_emp_nickname", ""), String.class)+"邀您免费看电影" ;
+                String content = tmpVideos.getTitle()+tmpVideos.getContent();
+
+                 /*无自定按钮的分享面板*/
+                mShareAction = new ShareAction(getActivity()).setDisplayList(
+                        SHARE_MEDIA.WEIXIN, SHARE_MEDIA.WEIXIN_CIRCLE, SHARE_MEDIA.WEIXIN_FAVORITE,
+                        SHARE_MEDIA.SINA, SHARE_MEDIA.QQ, SHARE_MEDIA.QZONE,
+                        SHARE_MEDIA.ALIPAY,
+                        SHARE_MEDIA.SMS, SHARE_MEDIA.EMAIL,
+                        SHARE_MEDIA.MORE)
+                        .withText(content)
+                        .withTitle(title)
+                        .withTargetUrl((InternetURL.SHARE_VIDEOS_TV + "?id=" + tmpVideos.getId()))
+                        .withMedia(image)
+                        .setCallback(mShareListener);
+
+                ShareBoardConfig config = new ShareBoardConfig();
+                config.setShareboardPostion(ShareBoardConfig.SHAREBOARD_POSITION_CENTER);
+                config.setMenuItemBackgroundShape(ShareBoardConfig.BG_SHAPE_CIRCULAR); // 圆角背景
+                mShareAction.open(config);
             }
             break;
             case 3:
@@ -278,50 +306,125 @@ public class VideosFragment extends BaseFragment implements OnClickContentItemLi
         }
     }
 
-    void share() {
-        new ShareAction(getActivity()).setDisplayList(SHARE_MEDIA.QQ, SHARE_MEDIA.QZONE, SHARE_MEDIA.WEIXIN, SHARE_MEDIA.WEIXIN_CIRCLE)
-                .setShareboardclickCallback(shareBoardlistener)
-                .open();
-    }
+    private static class CustomShareListener implements UMShareListener {
 
-    private ShareBoardlistener shareBoardlistener = new ShareBoardlistener() {
+        private WeakReference<Context> mActivity;
 
-        @Override
-        public void onclick(SnsPlatform snsPlatform, SHARE_MEDIA share_media) {
-            UMImage image = new UMImage(getActivity(), tmpVideos.getPicUrl());
-            String title =  getGson().fromJson(getSp().getString("mm_emp_nickname", ""), String.class)+"邀您免费看电影" ;
-            String content = tmpVideos.getTitle()+tmpVideos.getContent();
-            new ShareAction(getActivity()).setPlatform(share_media).setCallback(umShareListener)
-                    .withText(content)
-                    .withTitle(title)
-                    .withTargetUrl((InternetURL.SHARE_VIDEOS + "?id=" + tmpVideos.getId()))
-                    .withMedia(image)
-                    .share();
+        private CustomShareListener(Context context) {
+            mActivity = new WeakReference(context);
         }
-    };
 
-    private UMShareListener umShareListener = new UMShareListener() {
         @Override
         public void onResult(SHARE_MEDIA platform) {
-            Toast.makeText(getActivity(), platform + getResources().getString(R.string.share_success), Toast.LENGTH_SHORT).show();
+
+            if (platform.name().equals("WEIXIN_FAVORITE")) {
+                Toast.makeText(mActivity.get(), platform + " 收藏成功啦", Toast.LENGTH_SHORT).show();
+            } else {
+                if (platform!= SHARE_MEDIA.MORE&&platform!=SHARE_MEDIA.SMS
+                        &&platform!=SHARE_MEDIA.EMAIL
+                        &&platform!=SHARE_MEDIA.FLICKR
+                        &&platform!=SHARE_MEDIA.FOURSQUARE
+                        &&platform!=SHARE_MEDIA.TUMBLR
+                        &&platform!=SHARE_MEDIA.POCKET
+                        &&platform!=SHARE_MEDIA.PINTEREST
+                        &&platform!=SHARE_MEDIA.LINKEDIN
+                        &&platform!=SHARE_MEDIA.INSTAGRAM
+                        &&platform!=SHARE_MEDIA.GOOGLEPLUS
+                        &&platform!=SHARE_MEDIA.YNOTE
+                        &&platform!=SHARE_MEDIA.EVERNOTE){
+                    Toast.makeText(mActivity.get(), platform + " 分享成功啦", Toast.LENGTH_SHORT).show();
+                }
+
+            }
         }
 
         @Override
         public void onError(SHARE_MEDIA platform, Throwable t) {
-            Toast.makeText(getActivity(), platform + getResources().getString(R.string.share_error), Toast.LENGTH_SHORT).show();
+            if (platform!= SHARE_MEDIA.MORE&&platform!=SHARE_MEDIA.SMS
+                    &&platform!=SHARE_MEDIA.EMAIL
+                    &&platform!=SHARE_MEDIA.FLICKR
+                    &&platform!=SHARE_MEDIA.FOURSQUARE
+                    &&platform!=SHARE_MEDIA.TUMBLR
+                    &&platform!=SHARE_MEDIA.POCKET
+                    &&platform!=SHARE_MEDIA.PINTEREST
+                    &&platform!=SHARE_MEDIA.LINKEDIN
+                    &&platform!=SHARE_MEDIA.INSTAGRAM
+                    &&platform!=SHARE_MEDIA.GOOGLEPLUS
+                    &&platform!=SHARE_MEDIA.YNOTE
+                    &&platform!=SHARE_MEDIA.EVERNOTE){
+                Toast.makeText(mActivity.get(), platform + " 分享失败啦", Toast.LENGTH_SHORT).show();
+                if (t != null) {
+                    Log.d("throw", "throw:" + t.getMessage());
+                }
+            }
+
         }
 
         @Override
         public void onCancel(SHARE_MEDIA platform) {
-            Toast.makeText(getActivity(), platform + getResources().getString(R.string.share_cancel), Toast.LENGTH_SHORT).show();
         }
-    };
+    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         UMShareAPI.get(getActivity()).onActivityResult(requestCode, resultCode, data);
     }
+
+    /**
+     * 屏幕横竖屏切换时避免出现window leak的问题
+     */
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        mShareAction.close();
+    }
+
+
+//    void share() {
+//        new ShareAction(getActivity()).setDisplayList(SHARE_MEDIA.QQ, SHARE_MEDIA.QZONE, SHARE_MEDIA.WEIXIN, SHARE_MEDIA.WEIXIN_CIRCLE)
+//                .setShareboardclickCallback(shareBoardlistener)
+//                .open();
+//    }
+//
+//    private ShareBoardlistener shareBoardlistener = new ShareBoardlistener() {
+//
+//        @Override
+//        public void onclick(SnsPlatform snsPlatform, SHARE_MEDIA share_media) {
+//            UMImage image = new UMImage(getActivity(), tmpVideos.getPicUrl());
+//            String title =  getGson().fromJson(getSp().getString("mm_emp_nickname", ""), String.class)+"邀您免费看电影" ;
+//            String content = tmpVideos.getTitle()+tmpVideos.getContent();
+//            new ShareAction(getActivity()).setPlatform(share_media).setCallback(umShareListener)
+//                    .withText(content)
+//                    .withTitle(title)
+//                    .withTargetUrl((InternetURL.SHARE_VIDEOS + "?id=" + tmpVideos.getId()))
+//                    .withMedia(image)
+//                    .share();
+//        }
+//    };
+//
+//    private UMShareListener umShareListener = new UMShareListener() {
+//        @Override
+//        public void onResult(SHARE_MEDIA platform) {
+//            Toast.makeText(getActivity(), platform + getResources().getString(R.string.share_success), Toast.LENGTH_SHORT).show();
+//        }
+//
+//        @Override
+//        public void onError(SHARE_MEDIA platform, Throwable t) {
+//            Toast.makeText(getActivity(), platform + getResources().getString(R.string.share_error), Toast.LENGTH_SHORT).show();
+//        }
+//
+//        @Override
+//        public void onCancel(SHARE_MEDIA platform) {
+//            Toast.makeText(getActivity(), platform + getResources().getString(R.string.share_cancel), Toast.LENGTH_SHORT).show();
+//        }
+//    };
+//
+//    @Override
+//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        UMShareAPI.get(getActivity()).onActivityResult(requestCode, resultCode, data);
+//    }
 
 
     //赞

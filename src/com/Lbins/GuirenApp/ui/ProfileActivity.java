@@ -166,14 +166,17 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
         lstv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if(recordList.size() >position){
-                    Record record = recordList.get(position - 2);
-                    if(record != null){
-                        Intent detail = new Intent(ProfileActivity.this, DetailPageAcitvity.class);
-                        detail.putExtra(Constants.INFO, record);
-                        startActivity(detail);
+                if(position > 1){
+                    if(recordList.size() >(position-2)){
+                        Record record = recordList.get(position - 2);
+                        if(record != null){
+                            Intent detail = new Intent(ProfileActivity.this, DetailPageAcitvity.class);
+                            detail.putExtra(Constants.INFO, record);
+                            startActivity(detail);
+                        }
                     }
                 }
+
 
             }
         });
