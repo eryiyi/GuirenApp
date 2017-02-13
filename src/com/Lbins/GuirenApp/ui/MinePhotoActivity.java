@@ -113,7 +113,7 @@ public class MinePhotoActivity extends BaseActivity implements View.OnClickListe
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if(position >1){
-                    Record record = recordList.get(position );
+                    Record record = recordList.get(position);
                     if (!record.getMm_msg_type().equals("1")) {
                         Intent detail = new Intent(MinePhotoActivity.this, DetailPageAcitvity.class);
                         detail.putExtra(Constants.INFO, record);

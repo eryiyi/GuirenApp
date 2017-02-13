@@ -50,12 +50,15 @@ public class SelectWorkActivity extends BaseActivity {
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                HangYeType hangYeType = lists.get(position);
-                //发送广播
-                Intent intent1 = new Intent(Constants.SELECT_HANGYE_TYPE_SUCCESS);
-                intent1.putExtra("hangYeType", hangYeType);
-                sendBroadcast(intent1);
-                finish();
+                if(lists.size() > position){
+                    HangYeType hangYeType = lists.get(position);
+                    //发送广播
+                    Intent intent1 = new Intent(Constants.SELECT_HANGYE_TYPE_SUCCESS);
+                    intent1.putExtra("hangYeType", hangYeType);
+                    sendBroadcast(intent1);
+                    finish();
+                }
+
             }
         });
         try {

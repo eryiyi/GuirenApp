@@ -159,10 +159,12 @@ public class TongxunluActivityT extends BaseActivity implements View.OnClickList
         lvContact.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(TongxunluActivityT.this, ProfileActivity.class);
-                EmpRelateObj empRelateObj = nicks.get(position);
-                intent.putExtra("mm_emp_id",empRelateObj.getMm_emp_id2());
-                startActivity(intent);
+                if(nicks.size()>position){
+                    Intent intent = new Intent(TongxunluActivityT.this, ProfileActivity.class);
+                    EmpRelateObj empRelateObj = nicks.get(position);
+                    intent.putExtra("mm_emp_id",empRelateObj.getMm_emp_id2());
+                    startActivity(intent);
+                }
             }
         });
     }

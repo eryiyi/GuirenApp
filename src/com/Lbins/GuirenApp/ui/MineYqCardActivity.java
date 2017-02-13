@@ -118,32 +118,34 @@ public class MineYqCardActivity  extends BaseActivity implements View.OnClickLis
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                record  = recordList.get(position - 1);
-                if("0".equals(record.getIs_use())){
+                if(recordList.size() > (position - 1)){
+                    record  = recordList.get(position - 1);
+                    if("0".equals(record.getIs_use())){
 //                    share();
-                    UMImage image = new UMImage(MineYqCardActivity.this, R.drawable.ic_launcher);
-                    String title =  (record.getMm_emp_nickname()==null?"":record.getMm_emp_nickname()) +"邀请您加入贵人" ;
-                    String content = "邀请码：" + record.getGuiren_card_num();
+                        UMImage image = new UMImage(MineYqCardActivity.this, R.drawable.ic_launcher);
+                        String title =  (record.getMm_emp_nickname()==null?"":record.getMm_emp_nickname()) +"邀请您加入贵人" ;
+                        String content = "邀请码：" + record.getGuiren_card_num();
 
                  /*无自定按钮的分享面板*/
-                    mShareAction = new ShareAction(MineYqCardActivity.this).setDisplayList(
-                            SHARE_MEDIA.WEIXIN, SHARE_MEDIA.WEIXIN_CIRCLE, SHARE_MEDIA.WEIXIN_FAVORITE,
-                            SHARE_MEDIA.SINA, SHARE_MEDIA.QQ, SHARE_MEDIA.QZONE,
-                            SHARE_MEDIA.ALIPAY,
-                            SHARE_MEDIA.SMS, SHARE_MEDIA.EMAIL,
-                            SHARE_MEDIA.MORE)
-                            .withText(content)
-                            .withTitle(title)
-                            .withTargetUrl((InternetURL.SHARE_YAOQING_CARD_URL + "?id=" + record.getGuiren_card_id()))
-                            .withMedia(image)
-                            .setCallback(mShareListener);
+                        mShareAction = new ShareAction(MineYqCardActivity.this).setDisplayList(
+                                SHARE_MEDIA.WEIXIN, SHARE_MEDIA.WEIXIN_CIRCLE, SHARE_MEDIA.WEIXIN_FAVORITE,
+                                SHARE_MEDIA.SINA, SHARE_MEDIA.QQ, SHARE_MEDIA.QZONE,
+                                SHARE_MEDIA.ALIPAY,
+                                SHARE_MEDIA.SMS, SHARE_MEDIA.EMAIL,
+                                SHARE_MEDIA.MORE)
+                                .withText(content)
+                                .withTitle(title)
+                                .withTargetUrl((InternetURL.SHARE_YAOQING_CARD_URL + "?id=" + record.getGuiren_card_id()))
+                                .withMedia(image)
+                                .setCallback(mShareListener);
 
-                    ShareBoardConfig config = new ShareBoardConfig();
-                    config.setShareboardPostion(ShareBoardConfig.SHAREBOARD_POSITION_CENTER);
-                    config.setMenuItemBackgroundShape(ShareBoardConfig.BG_SHAPE_CIRCULAR); // 圆角背景
-                    mShareAction.open(config);
-                }else {
-                    showMsg(MineYqCardActivity.this, "邀请码已经使用！换个试试");
+                        ShareBoardConfig config = new ShareBoardConfig();
+                        config.setShareboardPostion(ShareBoardConfig.SHAREBOARD_POSITION_CENTER);
+                        config.setMenuItemBackgroundShape(ShareBoardConfig.BG_SHAPE_CIRCULAR); // 圆角背景
+                        mShareAction.open(config);
+                    }else {
+                        showMsg(MineYqCardActivity.this, "邀请码已经使用！换个试试");
+                    }
                 }
             }
         });

@@ -139,11 +139,13 @@ public class ZimeitiActivity extends BaseActivity implements View.OnClickListene
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 try {
-                    EmpDianpu dianpu = listgoods.get(position-1);
-                    if (dianpu != null) {
-                        Intent detail = new Intent(ZimeitiActivity.this, ProfileZmtActivity.class);
-                        detail.putExtra("mm_emp_id", dianpu.getMm_emp_id());
-                        startActivity(detail);
+                    if(position > 0){
+                        EmpDianpu dianpu = listgoods.get(position-1);
+                        if (dianpu != null) {
+                            Intent detail = new Intent(ZimeitiActivity.this, ProfileZmtActivity.class);
+                            detail.putExtra("mm_emp_id", dianpu.getMm_emp_id());
+                            startActivity(detail);
+                        }
                     }
                 } catch (Exception e) {
 

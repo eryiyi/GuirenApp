@@ -159,10 +159,12 @@ public class VideosByTypeActivity extends BaseActivity implements View.OnClickLi
         lstv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Videos tmpVideos = list.get(position - 1);
-                Intent detailView = new Intent(VideosByTypeActivity.this, DetailTvActivity.class);
-                detailView.putExtra(Constants.INFO, tmpVideos);
-                startActivity(detailView);
+                if(list.size() > (position-1)){
+                    Videos tmpVideos = list.get(position - 1);
+                    Intent detailView = new Intent(VideosByTypeActivity.this, DetailTvActivity.class);
+                    detailView.putExtra(Constants.INFO, tmpVideos);
+                    startActivity(detailView);
+                }
             }
         });
         this.findViewById(R.id.back).setOnClickListener(this);

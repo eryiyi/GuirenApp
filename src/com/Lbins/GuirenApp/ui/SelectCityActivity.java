@@ -85,11 +85,13 @@ public class SelectCityActivity extends BaseActivity implements View.OnClickList
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                CityObj record = recordList.get(position - 1);
-                Intent detail = new Intent(SelectCityActivity.this, SelectAreaActivity.class);
-                detail.putExtra("city", record);
-                startActivity(detail);
-                finish();
+                if(recordList.size() > (position - 1)){
+                    CityObj record = recordList.get(position - 1);
+                    Intent detail = new Intent(SelectCityActivity.this, SelectAreaActivity.class);
+                    detail.putExtra("city", record);
+                    startActivity(detail);
+                    finish();
+                }
             }
         });
         //判断是否有网

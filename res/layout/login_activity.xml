@@ -5,12 +5,13 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
-    <ImageView android:layout_width="100dp"
+    <com.Lbins.GuirenApp.widget.CircleImageView
+               android:layout_width="80dp"
                android:id="@+id/head"
                android:layout_marginTop="25dp"
                android:layout_centerHorizontal="true"
                android:src="@drawable/ic_launcher"
-               android:layout_height="100dp"/>
+               android:layout_height="80dp"/>
 
     <EditText android:layout_width="match_parent"
               android:textColor="@color/text_color"
@@ -27,6 +28,7 @@
               android:drawableLeft="@drawable/md_user"
               android:id="@+id/mobile"
               android:layout_height="wrap_content"/>
+
     <EditText android:layout_width="match_parent"
               android:textColor="@color/text_color"
               android:textColorHint="@color/textColortwo"
@@ -57,21 +59,30 @@
             android:background="@drawable/btn_green_shape"
             android:layout_height="wrap_content"/>
 
-    <TextView android:layout_width="wrap_content"
-              android:text="注册"
-              android:textColor="@color/text_color"
-              android:textSize="16sp"
-              android:padding="15dp"
-              android:id="@+id/btn_reg"
-              android:layout_alignParentBottom="true"
-              android:layout_height="wrap_content"/>
-    <TextView android:layout_width="wrap_content"
-              android:text="找回密码"
-              android:textColor="@color/text_color"
-              android:textSize="16sp"
-              android:id="@+id/btn_find"
-              android:padding="15dp"
-              android:layout_alignParentRight="true"
-              android:layout_alignParentBottom="true"
-              android:layout_height="wrap_content"/>
+    <LinearLayout android:layout_width="match_parent"
+                  android:padding="15dp"
+                  android:layout_below="@+id/btn_login"
+                  android:layout_height="wrap_content">
+
+        <TextView android:layout_width="0dp"
+                  android:layout_weight="1"
+                  android:layout_gravity="center"
+                  android:gravity="center"
+                  android:text="立即注册"
+                  android:textColor="@color/blue"
+                  android:textSize="16sp"
+                  android:id="@+id/btn_reg"
+                  android:layout_height="wrap_content"/>
+
+        <TextView android:layout_width="0dp"
+                  android:layout_weight="1"
+                  android:layout_gravity="center"
+                  android:gravity="center"
+                  android:text="忘记密码"
+                  android:textColor="@color/blue"
+                  android:textSize="16sp"
+                  android:id="@+id/btn_find"
+                  android:layout_height="wrap_content"/>
+    </LinearLayout>
+
 </RelativeLayout>

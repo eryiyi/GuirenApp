@@ -83,11 +83,13 @@ public class SelectProvinceActivity extends BaseActivity implements View.OnClick
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                ProvinceObj record = recordList.get(position - 1);
-                Intent detail = new Intent(SelectProvinceActivity.this, SelectCityActivity.class);
-                detail.putExtra("province", record);
-                startActivity(detail);
-                finish();
+                if(recordList.size() > (position - 1)){
+                    ProvinceObj record = recordList.get(position - 1);
+                    Intent detail = new Intent(SelectProvinceActivity.this, SelectCityActivity.class);
+                    detail.putExtra("province", record);
+                    startActivity(detail);
+                    finish();
+                }
             }
         });
         try {

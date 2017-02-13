@@ -94,13 +94,14 @@ public class NoticeActivity extends BaseActivity implements View.OnClickListener
         notice_lstv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Notice notice = notices.get(position -1);
-                if(notice != null){
-                    Intent detail = new Intent(NoticeActivity.this, NoticeDetailActivity.class);
-                    detail.putExtra(Constants.NOTICE, notice);
-                    startActivity(detail);
+                if(notices.size() > (position - 1)){
+                    Notice notice = notices.get(position -1);
+                    if(notice != null){
+                        Intent detail = new Intent(NoticeActivity.this, NoticeDetailActivity.class);
+                        detail.putExtra(Constants.NOTICE, notice);
+                        startActivity(detail);
+                    }
                 }
-
             }
         });
     }

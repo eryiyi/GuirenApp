@@ -84,12 +84,14 @@ public class SelectAreaActivity extends BaseActivity implements View.OnClickList
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                CountryObj countryObj = recordList.get(position - 1);
-                //发送广播
-                Intent intent1 = new Intent(Constants.SEND_SELECT_AREA_SUCCESS);
-                intent1.putExtra("countryObj", countryObj);
-                sendBroadcast(intent1);
-                finish();
+                if(recordList.size() > (position - 1)){
+                    CountryObj countryObj = recordList.get(position - 1);
+                    //发送广播
+                    Intent intent1 = new Intent(Constants.SEND_SELECT_AREA_SUCCESS);
+                    intent1.putExtra("countryObj", countryObj);
+                    sendBroadcast(intent1);
+                    finish();
+                }
             }
         });
         //判断是否有网
