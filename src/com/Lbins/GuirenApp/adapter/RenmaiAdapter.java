@@ -77,7 +77,6 @@ public class RenmaiAdapter extends BaseAdapter {
             holder.home_viewed_item_cont.setText( "["+cell.getMm_hangye_name()+"]");
         }
 
-
         holder.home_viewed_item_time.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

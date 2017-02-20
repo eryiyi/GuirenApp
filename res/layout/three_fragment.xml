@@ -8,7 +8,7 @@
                     android:background="@color/mm_main_bg_mine_top"
                     android:layout_height="@dimen/topbar_height">
         <TextView android:layout_width="wrap_content"
-                  android:text="喜讯"
+                  android:text="贵人"
                   android:textColor="@color/white"
                   android:textSize="18sp"
                   android:layout_centerInParent="true"

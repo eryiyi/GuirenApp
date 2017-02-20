@@ -155,8 +155,8 @@
     <color name="black_deep">#FF000000</color>
 
 
-    <color name="mm_top_bg">#2ea7e0</color>
-    <color name="blue">#2ea7e0</color>
+    <color name="mm_top_bg">#3385ff</color>
+    <color name="blue">#3385ff</color>
     <color name="mm_btn_bg">#008be6</color>
 
     <color name="abc_search_url_text_normal">#ff7fa87f</color>
@@ -315,7 +315,7 @@
     <color name="actionsheet_gray">#8F8F8F</color>
     <color name="mm_main_bg">#f4f4f4</color>
     <color name="mm_main_bg_mine">#9f364653</color>
-    <color name="mm_main_bg_mine_top">#ff121f2d</color>
+    <color name="mm_main_bg_mine_top">#3385ff</color>
 
 
     <color name="list_item_secondary_color">#888888</color>

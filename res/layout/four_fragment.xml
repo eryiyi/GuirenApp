@@ -53,13 +53,13 @@
 
             <LinearLayout android:layout_width="match_parent"
                           android:orientation="horizontal"
-                          android:layout_marginTop="20dp"
+                          android:layout_marginTop="0.1dp"
                           android:background="@drawable/btn_dark_shape"
                           android:layout_below="@+id/liner_one"
                           android:id="@+id/liner_help"
                           android:layout_height="50dp">
                 <ImageView android:layout_width="35dp"
-                           android:src="@drawable/afd"
+                           android:src="@drawable/akb"
                            android:layout_gravity="center_vertical"
                            android:layout_marginLeft="8dp"
                            android:layout_height="wrap_content"/>
@@ -75,11 +75,11 @@
             <LinearLayout android:layout_width="match_parent"
                           android:orientation="horizontal"
                           android:id="@+id/liner_find"
-                          android:layout_marginTop="20dp"
+                          android:layout_marginTop="0.1dp"
                           android:background="@drawable/btn_dark_shape"
                           android:layout_height="50dp">
                 <ImageView android:layout_width="35dp"
-                           android:src="@drawable/afd2"
+                           android:src="@drawable/aka"
                            android:layout_marginLeft="8dp"
                            android:layout_gravity="center_vertical"
                            android:layout_height="wrap_content"/>
@@ -133,7 +133,7 @@
             <LinearLayout android:layout_width="match_parent"
                           android:orientation="horizontal"
                           android:id="@+id/liner_movie"
-                          android:layout_marginTop="20dp"
+                          android:layout_marginTop="0.1dp"
                           android:background="@drawable/btn_dark_shape"
                           android:layout_height="50dp">
                 <ImageView android:layout_width="35dp"
@@ -142,7 +142,7 @@
                            android:layout_gravity="center_vertical"
                            android:layout_height="wrap_content"/>
                 <TextView android:layout_width="wrap_content"
-                          android:text="贵人影院"
+                          android:text="在线影院"
                           android:layout_marginLeft="15dp"
                           android:layout_gravity="center_vertical"
                           android:textColor="@color/black"
@@ -152,7 +152,7 @@
             <LinearLayout android:layout_width="match_parent"
                           android:orientation="horizontal"
                           android:id="@+id/liner_tv"
-                          android:layout_marginTop="20dp"
+                          android:layout_marginTop="0.1dp"
                           android:background="@drawable/btn_dark_shape"
                           android:layout_height="50dp">
                 <ImageView android:layout_width="35dp"
@@ -161,7 +161,7 @@
                            android:layout_gravity="center_vertical"
                            android:layout_height="wrap_content"/>
                 <TextView android:layout_width="wrap_content"
-                          android:text="贵人视频"
+                          android:text="精彩短片"
                           android:layout_marginLeft="15dp"
                           android:layout_gravity="center_vertical"
                           android:textColor="@color/black"
@@ -172,7 +172,7 @@
             <LinearLayout android:layout_width="match_parent"
                           android:orientation="horizontal"
                           android:id="@+id/liner_zmt"
-                          android:layout_marginTop="20dp"
+                          android:layout_marginTop="0.1dp"
                           android:background="@drawable/btn_dark_shape"
                           android:layout_height="50dp">
                 <ImageView android:layout_width="35dp"
@@ -181,7 +181,7 @@
                            android:layout_gravity="center_vertical"
                            android:layout_height="wrap_content"/>
                 <TextView android:layout_width="wrap_content"
-                          android:text="自媒体商城"
+                          android:text="自媒体"
                           android:layout_marginLeft="15dp"
                           android:layout_gravity="center_vertical"
                           android:textColor="@color/black"
@@ -189,7 +189,7 @@
                           android:layout_height="wrap_content"/>
             </LinearLayout>
             <RelativeLayout android:layout_width="match_parent"
-                            android:layout_marginTop="20dp"
+                            android:layout_marginTop="0.1dp"
                             android:visibility="gone"
                             android:layout_height="wrap_content">
                 <LinearLayout android:layout_width="match_parent"
@@ -212,7 +212,7 @@
 
             </RelativeLayout>
             <RelativeLayout android:layout_width="match_parent"
-                            android:layout_marginTop="20dp"
+                            android:layout_marginTop="0.1dp"
                             android:visibility="gone"
                             android:layout_height="wrap_content">
                 <LinearLayout android:layout_width="match_parent"
@@ -235,7 +235,7 @@
 
             </RelativeLayout>
             <RelativeLayout android:layout_width="match_parent"
-                            android:layout_marginTop="20dp"
+                            android:layout_marginTop="0.1dp"
                             android:visibility="gone"
                             android:layout_height="wrap_content">
                 <LinearLayout android:layout_width="match_parent"

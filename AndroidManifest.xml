@@ -217,18 +217,17 @@
         <activity android:name=".ui.CityLocationActivity" android:screenOrientation="portrait" android:theme="@style/AppTheme" android:windowSoftInputMode="adjustResize|stateHidden"/>
         <activity android:name=".ui.ZimeitiTypeValActivity" android:screenOrientation="portrait" android:theme="@style/AppTheme" android:windowSoftInputMode="adjustResize|stateHidden"/>
 
-
         <!--// *****************************高德地图sdk*******************************************-->
         <meta-data
                 android:name="com.amap.api.v2.apikey"
-                android:value="8fce261132d5ea7ad5a38717bc2c453e" />
+                android:value="8fce261132d5ea7ad5a38717bc2c453e"/>
 
         <!-- 定位需要的服务 -->
         <service android:name="com.amap.api.location.APSService" >
         </service>
 
         <!-- 设置贵人应用的AppKey -->
-        <meta-data android:name="EASEMOB_APPKEY"  android:value="826321978#guiren" />
+        <meta-data android:name="EASEMOB_APPKEY"  android:value="826321978#guiren"/>
         <!-- 声明SDK所需的service SDK核心功能-->
         <service android:name="com.hyphenate.chat.EMChatService" android:exported="true"/>
         <!-- 声明SDK所需的receiver -->

@@ -14,8 +14,8 @@ import org.json.JSONObject;
 public class AboutActivity extends BaseActivity {
     private static final int PICTURE_COUNT = 3;
 
-    private static final int[] PICTURE_RESOURCES = {R.drawable.bg_login_step1,
-            R.drawable.bg_login_step2, R.drawable.bg_login_step3};
+    private static final int[] PICTURE_RESOURCES = {R.drawable.welcome,
+            R.drawable.welcome, R.drawable.welcome};
 
     private static final String[] PICTURE_TITLE = {"", "", ""};
     private JSONArray jsonArray;

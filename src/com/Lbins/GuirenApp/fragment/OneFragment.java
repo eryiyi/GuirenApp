@@ -22,6 +22,7 @@ import com.Lbins.GuirenApp.library.PullToRefreshBase;
 import com.Lbins.GuirenApp.library.PullToRefreshListView;
 import com.Lbins.GuirenApp.module.*;
 import com.Lbins.GuirenApp.ui.ProfileActivity;
+import com.Lbins.GuirenApp.ui.SearchActivity;
 import com.Lbins.GuirenApp.ui.TuopuActivity;
 import com.Lbins.GuirenApp.util.Constants;
 import com.Lbins.GuirenApp.util.GuirenHttpUtils;
@@ -55,17 +56,17 @@ public class OneFragment extends BaseFragment implements View.OnClickListener ,O
 
     Emp recordtmp;//转换用
 
-    private TextView btn_one;
-    private TextView btn_two;
+//    private TextView btn_one;
+//    private TextView btn_two;
 
-    String keyStr;
+//    String keyStr;
 
-    private EditText input_edittext;
-    private String mm_hangye_id;
-    private String mm_emp_countryId;
-
-    private String mm_hangye_name;
-    private String mm_emp_countryName;
+//    private EditText input_edittext;
+//    private String mm_hangye_id;
+//    private String mm_emp_countryId;
+//
+//    private String mm_hangye_name;
+//    private String mm_emp_countryName;
     boolean isMobileNet, isWifiNet;
 
     @Override
@@ -79,9 +80,9 @@ public class OneFragment extends BaseFragment implements View.OnClickListener ,O
         res = getActivity().getResources();
         registerBoradcastReceiver();
         initView();
-        if(!StringUtil.isNullOrEmpty(keyStr)){
-            input_edittext.setText(keyStr);
-        }
+//        if(!StringUtil.isNullOrEmpty(keyStr)){
+//            input_edittext.setText(keyStr);
+//        }
         //判断是否有网
         try {
             isMobileNet = GuirenHttpUtils.isMobileDataEnable(getActivity());
@@ -98,14 +99,14 @@ public class OneFragment extends BaseFragment implements View.OnClickListener ,O
         } catch (Exception e) {
             e.printStackTrace();
         }
-        if(!StringUtil.isNullOrEmpty(mm_hangye_name)){
-            btn_one.setText(mm_hangye_name);
-        }
-        if(!StringUtil.isNullOrEmpty(mm_emp_countryName)){
-            btn_two.setText(mm_emp_countryName);
-        }
-        btn_one.setOnClickListener(this);
-        btn_two.setOnClickListener(this);
+//        if(!StringUtil.isNullOrEmpty(mm_hangye_name)){
+//            btn_one.setText(mm_hangye_name);
+//        }
+//        if(!StringUtil.isNullOrEmpty(mm_emp_countryName)){
+//            btn_two.setText(mm_emp_countryName);
+//        }
+//        btn_one.setOnClickListener(this);
+//        btn_two.setOnClickListener(this);
         return view;
     }
 
@@ -123,126 +124,126 @@ public class OneFragment extends BaseFragment implements View.OnClickListener ,O
             e.printStackTrace();
         }
         switch (view.getId()){
-            case R.id.btn_one:
-            {
-                View viewDialog = dialogmHy();
-                final MyAlertDialog dialog1 = new MyAlertDialog(getActivity())
-                        .builder()
-                        .setTitle("请选择行业")
-                        .setView(viewDialog)
-                        .setNegativeButton("取消", new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                mm_hangye_id = "";
-                                mm_hangye_name = "点击切换行业";
-                                btn_one.setText(mm_hangye_name);
-                                keyStr = input_edittext.getText().toString();
-                                //判断是否有网
-                                try {
-                                    isMobileNet = GuirenHttpUtils.isMobileDataEnable(getActivity());
-                                    isWifiNet = GuirenHttpUtils.isWifiDataEnable(getActivity());
-                                    if (!isMobileNet && !isWifiNet) {
-                                        Toast.makeText(getActivity(), "请检查您网络链接", Toast.LENGTH_SHORT).show();
-                                    }else {
-                                        progressDialog = new CustomProgressDialog(getActivity(), "正在加载中",R.anim.custom_dialog_frame);
-                                        progressDialog.setCancelable(true);
-                                        progressDialog.setIndeterminate(true);
-                                        progressDialog.show();
-                                        initData();
-                                    }
-                                } catch (Exception e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                        });
-                dialog1.setPositiveButton("确定", new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        btn_one.setText(hangYeType.getMm_hangye_name());
-                        mm_hangye_id = hangYeType.getMm_hangye_id();
-                        mm_hangye_name = hangYeType.getMm_hangye_name();
-                        keyStr = input_edittext.getText().toString();
-                        //判断是否有网
-                        try {
-                            isMobileNet = GuirenHttpUtils.isMobileDataEnable(getActivity());
-                            isWifiNet = GuirenHttpUtils.isWifiDataEnable(getActivity());
-                            if (!isMobileNet && !isWifiNet) {
-                                Toast.makeText(getActivity(), "请检查您网络链接", Toast.LENGTH_SHORT).show();
-                            }else {
-                                progressDialog = new CustomProgressDialog(getActivity(), "正在加载中",R.anim.custom_dialog_frame);
-                                progressDialog.setCancelable(true);
-                                progressDialog.setIndeterminate(true);
-                                progressDialog.show();
-                                initData();
-                            }
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-                });
-                dialog1.show();
-            }
-            break;
-            case R.id.btn_two:
-            {
-                View viewDialog = dialogm();
-                final MyAlertDialog dialog1 = new MyAlertDialog(getActivity())
-                        .builder()
-                        .setTitle("请选择地区")
-                        .setView(viewDialog)
-                        .setNegativeButton("取消", new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                mm_emp_countryId = "";
-                                mm_emp_countryName = "点击切换地区";
-                                btn_two.setText(mm_emp_countryName);
-                                keyStr = input_edittext.getText().toString();
-                                //判断是否有网
-                                try {
-                                    isMobileNet = GuirenHttpUtils.isMobileDataEnable(getActivity());
-                                    isWifiNet = GuirenHttpUtils.isWifiDataEnable(getActivity());
-                                    if (!isMobileNet && !isWifiNet) {
-                                        Toast.makeText(getActivity(), "请检查您网络链接", Toast.LENGTH_SHORT).show();
-                                    }else {
-                                        progressDialog = new CustomProgressDialog(getActivity(), "正在加载中",R.anim.custom_dialog_frame);
-                                        progressDialog.setCancelable(true);
-                                        progressDialog.setIndeterminate(true);
-                                        progressDialog.show();
-                                        initData();
-                                    }
-                                } catch (Exception e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                        });
-                dialog1.setPositiveButton("确定", new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        btn_two.setText(countryObj.getArea());
-                        mm_emp_countryId = countryObj.getAreaID();
-                        mm_emp_countryName = countryObj.getArea();
-                        keyStr = input_edittext.getText().toString();
-                        //判断是否有网
-                        try {
-                            isMobileNet = GuirenHttpUtils.isMobileDataEnable(getActivity());
-                            isWifiNet = GuirenHttpUtils.isWifiDataEnable(getActivity());
-                            if (!isMobileNet && !isWifiNet) {
-                                Toast.makeText(getActivity(), "请检查您网络链接", Toast.LENGTH_SHORT).show();
-                            }else {
-                                progressDialog = new CustomProgressDialog(getActivity(), "正在加载中",R.anim.custom_dialog_frame);
-                                progressDialog.setCancelable(true);
-                                progressDialog.setIndeterminate(true);
-                                progressDialog.show();
-                                initData();
-                            }
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-                });
-                dialog1.show();
-            }
-            break;
+//            case R.id.btn_one:
+//            {
+//                View viewDialog = dialogmHy();
+//                final MyAlertDialog dialog1 = new MyAlertDialog(getActivity())
+//                        .builder()
+//                        .setTitle("请选择行业")
+//                        .setView(viewDialog)
+//                        .setNegativeButton("取消", new View.OnClickListener() {
+//                            @Override
+//                            public void onClick(View v) {
+//                                mm_hangye_id = "";
+//                                mm_hangye_name = "点击切换行业";
+//                                btn_one.setText(mm_hangye_name);
+//                                keyStr = input_edittext.getText().toString();
+//                                //判断是否有网
+//                                try {
+//                                    isMobileNet = GuirenHttpUtils.isMobileDataEnable(getActivity());
+//                                    isWifiNet = GuirenHttpUtils.isWifiDataEnable(getActivity());
+//                                    if (!isMobileNet && !isWifiNet) {
+//                                        Toast.makeText(getActivity(), "请检查您网络链接", Toast.LENGTH_SHORT).show();
+//                                    }else {
+//                                        progressDialog = new CustomProgressDialog(getActivity(), "正在加载中",R.anim.custom_dialog_frame);
+//                                        progressDialog.setCancelable(true);
+//                                        progressDialog.setIndeterminate(true);
+//                                        progressDialog.show();
+//                                        initData();
+//                                    }
+//                                } catch (Exception e) {
+//                                    e.printStackTrace();
+//                                }
+//                            }
+//                        });
+//                dialog1.setPositiveButton("确定", new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        btn_one.setText(hangYeType.getMm_hangye_name());
+//                        mm_hangye_id = hangYeType.getMm_hangye_id();
+//                        mm_hangye_name = hangYeType.getMm_hangye_name();
+//                        keyStr = input_edittext.getText().toString();
+//                        //判断是否有网
+//                        try {
+//                            isMobileNet = GuirenHttpUtils.isMobileDataEnable(getActivity());
+//                            isWifiNet = GuirenHttpUtils.isWifiDataEnable(getActivity());
+//                            if (!isMobileNet && !isWifiNet) {
+//                                Toast.makeText(getActivity(), "请检查您网络链接", Toast.LENGTH_SHORT).show();
+//                            }else {
+//                                progressDialog = new CustomProgressDialog(getActivity(), "正在加载中",R.anim.custom_dialog_frame);
+//                                progressDialog.setCancelable(true);
+//                                progressDialog.setIndeterminate(true);
+//                                progressDialog.show();
+//                                initData();
+//                            }
+//                        } catch (Exception e) {
+//                            e.printStackTrace();
+//                        }
+//                    }
+//                });
+//                dialog1.show();
+//            }
+//            break;
+//            case R.id.btn_two:
+//            {
+//                View viewDialog = dialogm();
+//                final MyAlertDialog dialog1 = new MyAlertDialog(getActivity())
+//                        .builder()
+//                        .setTitle("请选择地区")
+//                        .setView(viewDialog)
+//                        .setNegativeButton("取消", new View.OnClickListener() {
+//                            @Override
+//                            public void onClick(View v) {
+//                                mm_emp_countryId = "";
+//                                mm_emp_countryName = "点击切换地区";
+//                                btn_two.setText(mm_emp_countryName);
+//                                keyStr = input_edittext.getText().toString();
+//                                //判断是否有网
+//                                try {
+//                                    isMobileNet = GuirenHttpUtils.isMobileDataEnable(getActivity());
+//                                    isWifiNet = GuirenHttpUtils.isWifiDataEnable(getActivity());
+//                                    if (!isMobileNet && !isWifiNet) {
+//                                        Toast.makeText(getActivity(), "请检查您网络链接", Toast.LENGTH_SHORT).show();
+//                                    }else {
+//                                        progressDialog = new CustomProgressDialog(getActivity(), "正在加载中",R.anim.custom_dialog_frame);
+//                                        progressDialog.setCancelable(true);
+//                                        progressDialog.setIndeterminate(true);
+//                                        progressDialog.show();
+//                                        initData();
+//                                    }
+//                                } catch (Exception e) {
+//                                    e.printStackTrace();
+//                                }
+//                            }
+//                        });
+//                dialog1.setPositiveButton("确定", new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        btn_two.setText(countryObj.getArea());
+//                        mm_emp_countryId = countryObj.getAreaID();
+//                        mm_emp_countryName = countryObj.getArea();
+//                        keyStr = input_edittext.getText().toString();
+//                        //判断是否有网
+//                        try {
+//                            isMobileNet = GuirenHttpUtils.isMobileDataEnable(getActivity());
+//                            isWifiNet = GuirenHttpUtils.isWifiDataEnable(getActivity());
+//                            if (!isMobileNet && !isWifiNet) {
+//                                Toast.makeText(getActivity(), "请检查您网络链接", Toast.LENGTH_SHORT).show();
+//                            }else {
+//                                progressDialog = new CustomProgressDialog(getActivity(), "正在加载中",R.anim.custom_dialog_frame);
+//                                progressDialog.setCancelable(true);
+//                                progressDialog.setIndeterminate(true);
+//                                progressDialog.show();
+//                                initData();
+//                            }
+//                        } catch (Exception e) {
+//                            e.printStackTrace();
+//                        }
+//                    }
+//                });
+//                dialog1.show();
+//            }
+//            break;
             case R.id.no_record:
                 IS_REFRESH = true;
                 pageIndex = 1;
@@ -264,23 +265,11 @@ public class OneFragment extends BaseFragment implements View.OnClickListener ,O
                 }
                 break;
             case R.id.btn_search:
-                keyStr = input_edittext.getText().toString();
-                //判断是否有网
-                try {
-                    isMobileNet = GuirenHttpUtils.isMobileDataEnable(getActivity());
-                    isWifiNet = GuirenHttpUtils.isWifiDataEnable(getActivity());
-                    if (!isMobileNet && !isWifiNet) {
-                        Toast.makeText(getActivity(), "请检查您网络链接", Toast.LENGTH_SHORT).show();
-                    }else {
-                        progressDialog = new CustomProgressDialog(getActivity(), "正在加载中",R.anim.custom_dialog_frame);
-                        progressDialog.setCancelable(true);
-                        progressDialog.setIndeterminate(true);
-                        progressDialog.show();
-                        initData();
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+            {
+                Intent searchV = new Intent(getActivity(), SearchActivity.class);
+                searchV.putExtra("keyStr", "");
+                startActivity(searchV);
+            }
                 break;
         }
     }
@@ -446,10 +435,10 @@ public class OneFragment extends BaseFragment implements View.OnClickListener ,O
 
     void initView(){
         //初始化
-        btn_one = (TextView) view.findViewById(R.id.btn_one);
-        btn_two = (TextView) view.findViewById(R.id.btn_two);
-        btn_one.setOnClickListener(this);
-        btn_two.setOnClickListener(this);
+//        btn_one = (TextView) view.findViewById(R.id.btn_one);
+//        btn_two = (TextView) view.findViewById(R.id.btn_two);
+//        btn_one.setOnClickListener(this);
+//        btn_two.setOnClickListener(this);
         no_collections = (ImageView) view.findViewById(R.id.no_record);
         no_collections.setOnClickListener(this);
         listView = (PullToRefreshListView) view.findViewById(R.id.lstv);
@@ -511,12 +500,11 @@ public class OneFragment extends BaseFragment implements View.OnClickListener ,O
                 startActivity(detail);
             }
         });
-        input_edittext = (EditText) view.findViewById(R.id.input_edittext);
+//        input_edittext = (EditText) view.findViewById(R.id.input_edittext);
         view.findViewById(R.id.btn_search).setOnClickListener(this);
-        if(!StringUtil.isNullOrEmpty(keyStr)){
-            input_edittext.setText(keyStr);
-        }
-
+//        if(!StringUtil.isNullOrEmpty(keyStr)){
+//            input_edittext.setText(keyStr);
+//        }
     }
 
     private void initData() {
@@ -567,15 +555,15 @@ public class OneFragment extends BaseFragment implements View.OnClickListener ,O
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("page", String.valueOf(pageIndex));
-                if(!StringUtil.isNullOrEmpty(input_edittext.getText().toString())){
-                    params.put("keyword", input_edittext.getText().toString());
-                }
-                if(!StringUtil.isNullOrEmpty(mm_hangye_id)){
-                    params.put("mm_hangye_id", mm_hangye_id);
-                }
-                if(!StringUtil.isNullOrEmpty(mm_emp_countryId)){
-                    params.put("mm_emp_countryId", mm_emp_countryId);
-                }
+//                if(!StringUtil.isNullOrEmpty(input_edittext.getText().toString())){
+//                    params.put("keyword", input_edittext.getText().toString());
+//                }
+//                if(!StringUtil.isNullOrEmpty(mm_hangye_id)){
+//                    params.put("mm_hangye_id", mm_hangye_id);
+//                }
+//                if(!StringUtil.isNullOrEmpty(mm_emp_countryId)){
+//                    params.put("mm_emp_countryId", mm_emp_countryId);
+//                }
                 return params;
             }
 
@@ -621,52 +609,52 @@ public class OneFragment extends BaseFragment implements View.OnClickListener ,O
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
-            if(action.equals(Constants.SELECT_HANGYE_TYPE_SUCCESS)){
-                HangYeType hangYeType = (HangYeType) intent.getExtras().get("hangYeType");
-                mm_hangye_id = hangYeType.getMm_hangye_id();
-                btn_one.setText(hangYeType.getMm_hangye_name() );
-                IS_REFRESH = true;
-                pageIndex = 1;
-                //判断是否有网
-                try {
-                    isMobileNet = GuirenHttpUtils.isMobileDataEnable(getActivity());
-                    isWifiNet = GuirenHttpUtils.isWifiDataEnable(getActivity());
-                    if (!isMobileNet && !isWifiNet) {
-                        Toast.makeText(getActivity(), "请检查您网络链接", Toast.LENGTH_SHORT).show();
-                    }else {
-                        progressDialog = new CustomProgressDialog(getActivity(), "正在加载中",R.anim.custom_dialog_frame);
-                        progressDialog.setCancelable(true);
-                        progressDialog.setIndeterminate(true);
-                        progressDialog.show();
-                        initData();
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-            if(action.equals(Constants.SEND_SELECT_AREA_SUCCESS)){
-                CountryObj hangYeType = (CountryObj) intent.getExtras().get("countryObj");
-                mm_emp_countryId = hangYeType.getAreaID();
-                btn_two.setText(hangYeType.getArea());
-                IS_REFRESH = true;
-                pageIndex = 1;
-                //判断是否有网
-                try {
-                    isMobileNet = GuirenHttpUtils.isMobileDataEnable(getActivity());
-                    isWifiNet = GuirenHttpUtils.isWifiDataEnable(getActivity());
-                    if (!isMobileNet && !isWifiNet) {
-                        Toast.makeText(getActivity(), "请检查您网络链接", Toast.LENGTH_SHORT).show();
-                    }else {
-                        progressDialog = new CustomProgressDialog(getActivity(), "正在加载中",R.anim.custom_dialog_frame);
-                        progressDialog.setCancelable(true);
-                        progressDialog.setIndeterminate(true);
-                        progressDialog.show();
-                        initData();
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
+//            if(action.equals(Constants.SELECT_HANGYE_TYPE_SUCCESS)){
+//                HangYeType hangYeType = (HangYeType) intent.getExtras().get("hangYeType");
+//                mm_hangye_id = hangYeType.getMm_hangye_id();
+//                btn_one.setText(hangYeType.getMm_hangye_name() );
+//                IS_REFRESH = true;
+//                pageIndex = 1;
+//                //判断是否有网
+//                try {
+//                    isMobileNet = GuirenHttpUtils.isMobileDataEnable(getActivity());
+//                    isWifiNet = GuirenHttpUtils.isWifiDataEnable(getActivity());
+//                    if (!isMobileNet && !isWifiNet) {
+//                        Toast.makeText(getActivity(), "请检查您网络链接", Toast.LENGTH_SHORT).show();
+//                    }else {
+//                        progressDialog = new CustomProgressDialog(getActivity(), "正在加载中",R.anim.custom_dialog_frame);
+//                        progressDialog.setCancelable(true);
+//                        progressDialog.setIndeterminate(true);
+//                        progressDialog.show();
+//                        initData();
+//                    }
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//            if(action.equals(Constants.SEND_SELECT_AREA_SUCCESS)){
+//                CountryObj hangYeType = (CountryObj) intent.getExtras().get("countryObj");
+//                mm_emp_countryId = hangYeType.getAreaID();
+//                btn_two.setText(hangYeType.getArea());
+//                IS_REFRESH = true;
+//                pageIndex = 1;
+//                //判断是否有网
+//                try {
+//                    isMobileNet = GuirenHttpUtils.isMobileDataEnable(getActivity());
+//                    isWifiNet = GuirenHttpUtils.isWifiDataEnable(getActivity());
+//                    if (!isMobileNet && !isWifiNet) {
+//                        Toast.makeText(getActivity(), "请检查您网络链接", Toast.LENGTH_SHORT).show();
+//                    }else {
+//                        progressDialog = new CustomProgressDialog(getActivity(), "正在加载中",R.anim.custom_dialog_frame);
+//                        progressDialog.setCancelable(true);
+//                        progressDialog.setIndeterminate(true);
+//                        progressDialog.show();
+//                        initData();
+//                    }
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//            }
 
         }
     };
@@ -674,8 +662,8 @@ public class OneFragment extends BaseFragment implements View.OnClickListener ,O
     //注册广播
     public void registerBoradcastReceiver() {
         IntentFilter myIntentFilter = new IntentFilter();
-        myIntentFilter.addAction(Constants.SELECT_HANGYE_TYPE_SUCCESS);
-        myIntentFilter.addAction(Constants.SEND_SELECT_AREA_SUCCESS);
+//        myIntentFilter.addAction(Constants.SELECT_HANGYE_TYPE_SUCCESS);
+//        myIntentFilter.addAction(Constants.SEND_SELECT_AREA_SUCCESS);
         //注册广播
         getActivity().registerReceiver(mBroadcastReceiver, myIntentFilter);
     }
@@ -687,61 +675,55 @@ public class OneFragment extends BaseFragment implements View.OnClickListener ,O
         getActivity().unregisterReceiver(mBroadcastReceiver);
     };
 
-
-
-    HangYeType hangYeType = null;
-    private View dialogmHy() {
-        View contentView = LayoutInflater.from(getActivity()).inflate(
-                R.layout.wheelhangye_hy_layout, null);
-        final WheelView country = (WheelView) contentView
-                .findViewById(R.id.wheelhy_hy);
-        country.setVisibleItems(3);
-        country.setViewAdapter(new HangyeAdapter(getActivity()));
-
-        country.addChangingListener(new OnWheelChangedListener() {
-            public void onChanged(WheelView wheel, int oldValue, int newValue) {
-                hangYeType = GuirenApplication.listsTypeHy.get(newValue);
-            }
-        });
-
-        country.setCurrentItem(4);
-        return contentView;
-    }
-
-    /**
-     * Adapter for countries
-     */
-    private class HangyeAdapter extends AbstractWheelTextAdapter {
-        // Countries names
-        private List<HangYeType> countries = GuirenApplication.listsTypeHy;
-
-        /**
-         * Constructor
-         */
-        protected HangyeAdapter(Context context) {
-            super(context, R.layout.wheelcity_country_layout, NO_RESOURCE);
-            setItemTextResource(R.id.wheelcity_country_name);
-        }
-
-        @Override
-        public View getItem(int index, View cachedView, ViewGroup parent) {
-            View view = super.getItem(index, cachedView, parent);
-            return view;
-        }
-
-        @Override
-        public int getItemsCount() {
-            return countries.size();
-        }
-
-        @Override
-        protected CharSequence getItemText(int index) {
-            return countries.get(index).getMm_hangye_name();
-        }
-    }
-
-   
-
-
+//    HangYeType hangYeType = null;
+//    private View dialogmHy() {
+//        View contentView = LayoutInflater.from(getActivity()).inflate(
+//                R.layout.wheelhangye_hy_layout, null);
+//        final WheelView country = (WheelView) contentView
+//                .findViewById(R.id.wheelhy_hy);
+//        country.setVisibleItems(3);
+//        country.setViewAdapter(new HangyeAdapter(getActivity()));
+//
+//        country.addChangingListener(new OnWheelChangedListener() {
+//            public void onChanged(WheelView wheel, int oldValue, int newValue) {
+//                hangYeType = GuirenApplication.listsTypeHy.get(newValue);
+//            }
+//        });
+//
+//        country.setCurrentItem(4);
+//        return contentView;
+//    }
+//
+//    /**
+//     * Adapter for countries
+//     */
+//    private class HangyeAdapter extends AbstractWheelTextAdapter {
+//        // Countries names
+//        private List<HangYeType> countries = GuirenApplication.listsTypeHy;
+//
+//        /**
+//         * Constructor
+//         */
+//        protected HangyeAdapter(Context context) {
+//            super(context, R.layout.wheelcity_country_layout, NO_RESOURCE);
+//            setItemTextResource(R.id.wheelcity_country_name);
+//        }
+//
+//        @Override
+//        public View getItem(int index, View cachedView, ViewGroup parent) {
+//            View view = super.getItem(index, cachedView, parent);
+//            return view;
+//        }
+//
+//        @Override
+//        public int getItemsCount() {
+//            return countries.size();
+//        }
+//
+//        @Override
+//        protected CharSequence getItemText(int index) {
+//            return countries.get(index).getMm_hangye_name();
+//        }
+//    }
 
 }

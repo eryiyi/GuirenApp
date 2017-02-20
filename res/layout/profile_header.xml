@@ -2,21 +2,29 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:id="@+id/bg_profile"
-              android:background="@color/white"
+              android:background="#ebebeb"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
+    <LinearLayout android:layout_width="match_parent"
+                  android:orientation="vertical"
+                  android:layout_height="match_parent">
+
     <RelativeLayout android:layout_width="match_parent"
                     android:layout_height="match_parent">
         <RelativeLayout android:layout_width="match_parent"
                         android:id="@+id/liner_header"
                         android:padding="12dp"
+                        android:background="@drawable/mine_bg"
                         android:layout_height="160dp">
-            <ImageView
+
+            <com.Lbins.GuirenApp.widget.CircleImageView
                     android:layout_width="60dp"
+                    android:src="@drawable/ic_launcher"
                     android:id="@+id/head"
                     android:layout_marginLeft="8dp"
                     android:layout_centerVertical="true"
                     android:layout_height="60dp"/>
+
             <TextView android:layout_width="wrap_content"
                       android:singleLine="true"
                       android:text="sdd"
@@ -109,7 +117,7 @@
                 <TextView android:layout_width="wrap_content"
                           android:id="@+id/email"
                           android:layout_marginTop="5dp"
-                          android:textColor="@color/white"
+                          android:textColor="@color/blue"
                           android:layout_height="wrap_content"/>
             </LinearLayout>
             <LinearLayout android:layout_width="match_parent"
@@ -126,7 +134,7 @@
                 <TextView android:layout_width="wrap_content"
                           android:id="@+id/qq"
                           android:layout_marginTop="5dp"
-                          android:textColor="@color/white"
+                          android:textColor="@color/blue"
                           android:layout_height="wrap_content"/>
             </LinearLayout>
             <LinearLayout android:layout_width="match_parent"
@@ -143,7 +151,7 @@
                 <TextView android:layout_width="wrap_content"
                           android:id="@+id/weixin"
                           android:layout_marginTop="5dp"
-                          android:textColor="@color/white"
+                          android:textColor="@color/blue"
                           android:layout_height="wrap_content"/>
             </LinearLayout>
             <LinearLayout android:layout_width="match_parent"
@@ -160,7 +168,7 @@
                 <TextView android:layout_width="wrap_content"
                           android:id="@+id/age"
                           android:layout_marginTop="5dp"
-                          android:textColor="@color/white"
+                          android:textColor="@color/blue"
                           android:layout_height="wrap_content"/>
             </LinearLayout>
             <LinearLayout android:layout_width="match_parent"
@@ -177,7 +185,7 @@
                 <TextView android:layout_width="wrap_content"
                           android:id="@+id/company"
                           android:layout_marginTop="5dp"
-                          android:textColor="@color/white"
+                          android:textColor="@color/blue"
                           android:layout_height="wrap_content"/>
             </LinearLayout>
             <LinearLayout android:layout_width="match_parent"
@@ -194,7 +202,7 @@
                 <TextView android:layout_width="wrap_content"
                           android:id="@+id/techang"
                           android:layout_marginTop="5dp"
-                          android:textColor="@color/white"
+                          android:textColor="@color/blue"
                           android:layout_height="wrap_content"/>
             </LinearLayout>
             <LinearLayout android:layout_width="match_parent"
@@ -211,7 +219,7 @@
                 <TextView android:layout_width="wrap_content"
                           android:id="@+id/aihao"
                           android:layout_marginTop="5dp"
-                          android:textColor="@color/white"
+                          android:textColor="@color/blue"
                           android:layout_height="wrap_content"/>
             </LinearLayout>
             <LinearLayout android:layout_width="match_parent"
@@ -228,7 +236,7 @@
                 <TextView android:layout_width="wrap_content"
                           android:id="@+id/address"
                           android:layout_marginTop="5dp"
-                          android:textColor="@color/white"
+                          android:textColor="@color/blue"
                           android:layout_height="wrap_content"/>
 
             </LinearLayout>
@@ -246,7 +254,7 @@
                 <TextView android:layout_width="wrap_content"
                           android:id="@+id/mm_emp_native"
                           android:layout_marginTop="5dp"
-                          android:textColor="@color/white"
+                          android:textColor="@color/blue"
                           android:layout_height="wrap_content"/>
             </LinearLayout>
 
@@ -264,7 +272,7 @@
                 <TextView android:layout_width="wrap_content"
                           android:id="@+id/jianjie"
                           android:layout_marginTop="5dp"
-                          android:textColor="@color/white"
+                          android:textColor="@color/blue"
                           android:layout_height="wrap_content"/>
             </LinearLayout>
         </LinearLayout>
@@ -301,4 +309,5 @@
         <!--</LinearLayout>-->
     </RelativeLayout>
 
+    </LinearLayout>
 </LinearLayout>

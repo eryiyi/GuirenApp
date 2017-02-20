@@ -65,19 +65,19 @@ public class FiveFragment extends BaseFragment implements View.OnClickListener {
 
     private ImageView head;
     private TextView nickname;
-    private TextView mobile;
+//    private TextView mobile;
     private TextView hangyename;
-    private TextView email;
-    private TextView company;
-    private TextView aihao;
-    private TextView address;
-    private TextView qq;
-    private TextView weixin;
-    private TextView age;
-    private TextView jianjie;
-    private TextView techang;
+//    private TextView email;
+//    private TextView company;
+//    private TextView aihao;
+//    private TextView address;
+//    private TextView qq;
+//    private TextView weixin;
+//    private TextView age;
+//    private TextView jianjie;
+//    private TextView techang;
     private TextView mm_emp_motto;
-    private TextView mm_emp_native;
+//    private TextView mm_emp_native;
     private ImageView sex;
 
 
@@ -90,7 +90,7 @@ public class FiveFragment extends BaseFragment implements View.OnClickListener {
     private SelectPhoPopWindow deleteWindow;
     AsyncHttpClient client = new AsyncHttpClient();
 
-    private LinearLayout img_bg;//背景图
+//    private LinearLayout img_bg;//背景图
 
     private PictureGridview gridView;
     private List<MinePicObj> picLists = new ArrayList<MinePicObj>();
@@ -108,24 +108,24 @@ public class FiveFragment extends BaseFragment implements View.OnClickListener {
         res = getActivity().getResources();
         view.findViewById(R.id.edit).setOnClickListener(this);
         head = (ImageView) view.findViewById(R.id.head);
-        img_bg = (LinearLayout) view.findViewById(R.id.img_bg);
+//        img_bg = (LinearLayout) view.findViewById(R.id.img_bg);
         nickname = (TextView) view.findViewById(R.id.nickname);
         mm_emp_motto = (TextView) view.findViewById(R.id.mm_emp_motto);
-        mm_emp_native = (TextView) view.findViewById(R.id.mm_emp_native);
-        mobile = (TextView) view.findViewById(R.id.mobile);
+//        mm_emp_native = (TextView) view.findViewById(R.id.mm_emp_native);
+//        mobile = (TextView) view.findViewById(R.id.mobile);
         hangyename = (TextView) view.findViewById(R.id.hangyename);
-        email = (TextView) view.findViewById(R.id.email);
-        company = (TextView) view.findViewById(R.id.company);
-        aihao = (TextView) view.findViewById(R.id.aihao);
-        address = (TextView) view.findViewById(R.id.address);
-        qq = (TextView) view.findViewById(R.id.qq);
-        weixin = (TextView) view.findViewById(R.id.weixin);
-        age = (TextView) view.findViewById(R.id.age);
-        jianjie = (TextView) view.findViewById(R.id.jianjie);
-        techang = (TextView) view.findViewById(R.id.techang);
+//        email = (TextView) view.findViewById(R.id.email);
+//        company = (TextView) view.findViewById(R.id.company);
+//        aihao = (TextView) view.findViewById(R.id.aihao);
+//        address = (TextView) view.findViewById(R.id.address);
+//        qq = (TextView) view.findViewById(R.id.qq);
+//        weixin = (TextView) view.findViewById(R.id.weixin);
+//        age = (TextView) view.findViewById(R.id.age);
+//        jianjie = (TextView) view.findViewById(R.id.jianjie);
+//        techang = (TextView) view.findViewById(R.id.techang);
         sex = (ImageView) view.findViewById(R.id.sex);
         view.findViewById(R.id.liner_one).setOnClickListener(this);
-        view.findViewById(R.id.liner_two).setOnClickListener(this);
+//        view.findViewById(R.id.liner_two).setOnClickListener(this);
         view.findViewById(R.id.liner_three).setOnClickListener(this);
         view.findViewById(R.id.liner_four).setOnClickListener(this);
         view.findViewById(R.id.liner_five).setOnClickListener(this);
@@ -192,51 +192,51 @@ public class FiveFragment extends BaseFragment implements View.OnClickListener {
         }else {
             hangyename.setText("暂未填写");
         }
-        if(!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("mm_emp_email", ""), String.class))){
-            email.setText(getGson().fromJson(getSp().getString("mm_emp_email", ""), String.class));
-        }else {
-            email.setText("暂未填写");
-        }
-        if(!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("mm_emp_company", ""), String.class))){
-            company.setText(getGson().fromJson(getSp().getString("mm_emp_company", ""), String.class));
-        }else {
-            company.setText("暂未填写");
-        }
-        if(!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("mm_emp_xingqu", ""), String.class))){
-            aihao.setText(getGson().fromJson(getSp().getString("mm_emp_xingqu", ""), String.class));
-        }else {
-            aihao.setText("暂未填写");
-        }
-        if(!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("provinceName", ""), String.class)) || !StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("cityName", ""), String.class)) || !StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("areaName", ""), String.class))){
-            address.setText(getGson().fromJson(getSp().getString("provinceName", ""), String.class)+getGson().fromJson(getSp().getString("cityName", ""), String.class)+getGson().fromJson(getSp().getString("areaName", ""), String.class));
-        }else {
-            address.setText("暂未填写");
-        }
-        if(!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("mm_emp_qq", ""), String.class))){
-            qq.setText(getGson().fromJson(getSp().getString("mm_emp_qq", ""), String.class));
-        }else {
-            qq.setText("暂未填写");
-        }
-        if(!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("mm_emp_weixin", ""), String.class))){
-            weixin.setText(getGson().fromJson(getSp().getString("mm_emp_weixin", ""), String.class));
-        }else {
-            weixin.setText("暂未填写");
-        }
-        if(!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("mm_emp_age", ""), String.class))){
-            age.setText(getGson().fromJson(getSp().getString("mm_emp_age", ""), String.class));
-        }else {
-            age.setText("暂未填写");
-        }
-        if(!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("mm_emp_detail", ""), String.class))){
-            jianjie.setText(getGson().fromJson(getSp().getString("mm_emp_detail", ""), String.class));
-        }else {
-            jianjie.setText("暂未填写");
-        }
-        if(!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("mm_emp_techang", ""), String.class))){
-            techang.setText(getGson().fromJson(getSp().getString("mm_emp_techang", ""), String.class));
-        }else {
-            techang.setText("暂未填写");
-        }
+//        if(!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("mm_emp_email", ""), String.class))){
+//            email.setText(getGson().fromJson(getSp().getString("mm_emp_email", ""), String.class));
+//        }else {
+//            email.setText("暂未填写");
+//        }
+//        if(!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("mm_emp_company", ""), String.class))){
+//            company.setText(getGson().fromJson(getSp().getString("mm_emp_company", ""), String.class));
+//        }else {
+//            company.setText("暂未填写");
+//        }
+//        if(!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("mm_emp_xingqu", ""), String.class))){
+//            aihao.setText(getGson().fromJson(getSp().getString("mm_emp_xingqu", ""), String.class));
+//        }else {
+//            aihao.setText("暂未填写");
+//        }
+//        if(!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("provinceName", ""), String.class)) || !StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("cityName", ""), String.class)) || !StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("areaName", ""), String.class))){
+//            address.setText(getGson().fromJson(getSp().getString("provinceName", ""), String.class)+getGson().fromJson(getSp().getString("cityName", ""), String.class)+getGson().fromJson(getSp().getString("areaName", ""), String.class));
+//        }else {
+//            address.setText("暂未填写");
+//        }
+//        if(!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("mm_emp_qq", ""), String.class))){
+//            qq.setText(getGson().fromJson(getSp().getString("mm_emp_qq", ""), String.class));
+//        }else {
+//            qq.setText("暂未填写");
+//        }
+//        if(!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("mm_emp_weixin", ""), String.class))){
+//            weixin.setText(getGson().fromJson(getSp().getString("mm_emp_weixin", ""), String.class));
+//        }else {
+//            weixin.setText("暂未填写");
+//        }
+//        if(!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("mm_emp_age", ""), String.class))){
+//            age.setText(getGson().fromJson(getSp().getString("mm_emp_age", ""), String.class));
+//        }else {
+//            age.setText("暂未填写");
+//        }
+//        if(!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("mm_emp_detail", ""), String.class))){
+//            jianjie.setText(getGson().fromJson(getSp().getString("mm_emp_detail", ""), String.class));
+//        }else {
+//            jianjie.setText("暂未填写");
+//        }
+//        if(!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("mm_emp_techang", ""), String.class))){
+//            techang.setText(getGson().fromJson(getSp().getString("mm_emp_techang", ""), String.class));
+//        }else {
+//            techang.setText("暂未填写");
+//        }
         if(!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("mm_emp_sex", ""), String.class))){
             if("1".equals(getGson().fromJson(getSp().getString("mm_emp_sex", ""), String.class))){
                 sex.setImageDrawable(getResources().getDrawable(R.drawable.icon_sex_female));
@@ -250,29 +250,28 @@ public class FiveFragment extends BaseFragment implements View.OnClickListener {
         }else {
             mm_emp_motto.setText("暂无签名信息");
         }
-        if(!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("mm_emp_native", ""), String.class))){
-            mm_emp_native.setText(getGson().fromJson(getSp().getString("mm_emp_native", ""), String.class));
-        }else {
-            mm_emp_native.setText("暂未填写");
-        }
+//        if(!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("mm_emp_native", ""), String.class))){
+//            mm_emp_native.setText(getGson().fromJson(getSp().getString("mm_emp_native", ""), String.class));
+//        }else {
+//            mm_emp_native.setText("暂未填写");
+//        }
 
-        mobile.setText(getGson().fromJson(getSp().getString("mm_emp_mobile", ""), String.class));
+//        mobile.setText(getGson().fromJson(getSp().getString("mm_emp_mobile", ""), String.class));
 
-
-        final ImageView imageView = new ImageView(getActivity());
-        if(!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("mm_emp_bg", ""), String.class))){
-            imageLoader.displayImage(getGson().fromJson(getSp().getString("mm_emp_bg", ""), String.class), imageView, GuirenApplication.options, new AnimateFirstDisplayListener(){
-                @Override
-                public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
-                    super.onLoadingComplete(imageUri, view, loadedImage);
-                    if(imageView != null && imageView.getDrawable() != null && img_bg != null){
-                        img_bg.setBackground(imageView.getDrawable());
-                    }
-                }
-            });
-        }else {
-            img_bg.setBackground(res.getDrawable(R.drawable.bg_one));
-        }
+//        final ImageView imageView = new ImageView(getActivity());
+//        if(!StringUtil.isNullOrEmpty(getGson().fromJson(getSp().getString("mm_emp_bg", ""), String.class))){
+//            imageLoader.displayImage(getGson().fromJson(getSp().getString("mm_emp_bg", ""), String.class), imageView, GuirenApplication.options, new AnimateFirstDisplayListener(){
+//                @Override
+//                public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
+//                    super.onLoadingComplete(imageUri, view, loadedImage);
+//                    if(imageView != null && imageView.getDrawable() != null && img_bg != null){
+//                        img_bg.setBackground(imageView.getDrawable());
+//                    }
+//                }
+//            });
+//        }else {
+//            img_bg.setBackground(res.getDrawable(R.drawable.bg_one));
+//        }
     }
 
     boolean isMobileNet, isWifiNet;
@@ -293,9 +292,8 @@ public class FiveFragment extends BaseFragment implements View.OnClickListener {
        switch (view.getId()){
            case R.id.edit:
            {
-//               Intent intent = new Intent(getActivity(), EditEmpActivity.class);
-//               startActivity(intent);
-               RedPacketUtil.startChangeActivity(getActivity());
+               Intent intent = new Intent(getActivity(), EditEmpActivity.class);
+               startActivity(intent);
            }
                break;
            case R.id.liner_one:
@@ -306,17 +304,17 @@ public class FiveFragment extends BaseFragment implements View.OnClickListener {
                startActivity(intent);
            }
                break;
-           case R.id.liner_two:
-               //主页背景
-           {
-               typeCover = "0";
-               Intent mapstorage = new Intent(Intent.ACTION_PICK, null);
-               mapstorage.setDataAndType(
-                       MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                       "image/*");
-               startActivityForResult(mapstorage, 4);
-           }
-               break;
+//           case R.id.liner_two:
+//               //主页背景
+//           {
+//               typeCover = "0";
+//               Intent mapstorage = new Intent(Intent.ACTION_PICK, null);
+//               mapstorage.setDataAndType(
+//                       MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+//                       "image/*");
+//               startActivityForResult(mapstorage, 4);
+//           }
+//               break;
            case R.id.liner_three:
                //众筹
                Intent zhongchouV = new Intent(getActivity(), ZhongChouMakeActivity.class);
@@ -427,10 +425,10 @@ public class FiveFragment extends BaseFragment implements View.OnClickListener {
             case 4:
             {
                 //背景图更换
-                if (data != null) {
-                    Uri uri = data.getData();
-                    startPhotoZoomBg(uri);
-                }
+//                if (data != null) {
+//                    Uri uri = data.getData();
+//                    startPhotoZoomBg(uri);
+//                }
             }
                 break;
 
@@ -491,11 +489,11 @@ public class FiveFragment extends BaseFragment implements View.OnClickListener {
                     //上传图片到七牛
                     uploadCover();
                 }
-                if("0".equals(typeCover)){
-                    img_bg.setBackground(drawable);
-                    //上传图片到七牛
-                    uploadCover();
-                }
+//                if("0".equals(typeCover)){
+//                    img_bg.setBackground(drawable);
+//                    //上传图片到七牛
+//                    uploadCover();
+//                }
             }
         }
     }
