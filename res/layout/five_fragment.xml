@@ -37,7 +37,7 @@
                     <RelativeLayout android:layout_width="match_parent"
                                     android:id="@+id/liner_header"
                                     android:padding="12dp"
-                                    android:background="@drawable/mine_bg"
+                                    android:background="@drawable/bg_blue_top"
                                     android:layout_height="115dp">
                         <ImageView
                                 android:layout_width="60dp"

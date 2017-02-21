@@ -14,7 +14,7 @@
         <RelativeLayout android:layout_width="match_parent"
                         android:id="@+id/liner_header"
                         android:padding="12dp"
-                        android:background="@drawable/mine_bg"
+                        android:background="@drawable/bg_blue_top"
                         android:layout_height="160dp">
 
             <com.Lbins.GuirenApp.widget.CircleImageView
@@ -27,7 +27,6 @@
 
             <TextView android:layout_width="wrap_content"
                       android:singleLine="true"
-                      android:text="sdd"
                       android:textSize="16sp"
                       android:textColor="@color/white"
                       android:layout_centerVertical="true"
@@ -42,7 +41,6 @@
                       android:textSize="15sp"
                       android:textColor="@color/white"
                       android:layout_marginTop="5dp"
-                     android:text="sdfdsafd"
                       android:layout_below="@+id/nickname"
                       android:id="@+id/hangyename"
                       android:layout_height="wrap_content"/>
@@ -59,7 +57,6 @@
                       android:layout_marginLeft="8dp"
                       android:textSize="15sp"
                       android:textColor="@color/white"
-                      android:text="sfasdfsfdsaf"
                       android:layout_marginTop="5dp"
                       android:layout_alignParentBottom="true"
                       android:id="@+id/mm_emp_motto"
