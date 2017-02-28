@@ -26,7 +26,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="8dip"
-                        android:text="告示"
+                        android:text="通知详情"
                         android:id="@+id/notice_detail_title"
                         android:textColor="@color/white"
                         android:textSize="18sp"/>

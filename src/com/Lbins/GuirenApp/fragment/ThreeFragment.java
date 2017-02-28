@@ -197,8 +197,8 @@ public class ThreeFragment extends BaseFragment implements View.OnClickListener 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if(list.size()>(position - 1)){
-                    Videos tmpVideos = list.get(position - 1);
+                if(list.size()>(position - 2)){
+                    Videos tmpVideos = list.get(position - 2 );
                     Intent detailView = new Intent(getActivity(), DetailTvActivity.class);
                     detailView.putExtra(Constants.INFO, tmpVideos);
                     startActivity(detailView);

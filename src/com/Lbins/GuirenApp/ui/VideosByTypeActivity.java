@@ -315,7 +315,7 @@ public class VideosByTypeActivity extends BaseActivity implements View.OnClickLi
             {
 //                share();
                 UMImage image = new UMImage(VideosByTypeActivity.this, tmpVideos.getPicUrl());
-                String title =  getGson().fromJson(getSp().getString("mm_emp_nickname", ""), String.class)+"邀您免费看电影" ;
+                String title =  getGson().fromJson(getSp().getString("mm_emp_nickname", ""), String.class)+"邀您免费看好玩儿的视频" ;
                 String content = tmpVideos.getTitle()+tmpVideos.getContent();
 
                  /*无自定按钮的分享面板*/
